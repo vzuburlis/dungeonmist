@@ -1,0 +1,23 @@
+{
+"b":{
+  "name": "flying creature"
+},
+"i":{
+  "name": "insect"
+},
+"h":{
+  "name": "humanoid"
+},
+"r":{
+  "name": "rodent"
+},
+"s":{
+  "name": "snake"
+},
+"z":{
+  "name": "undead"
+},
+"o":{
+  "name": "orc"
+}
+}

@@ -1,0 +1,299 @@
+[
+{
+  "sprite": ["door0", 0, 0], "name": "Door",
+  "block": true, "blocksight": true, "open_to": "Opened Door", "kick_to": "Opened Door"
+},
+{
+  "sprite": ["door0", 0, 1], "name": "Iron Door",
+  "block": true, "blocksight": true, "open_to": "Opened Iron Door"
+},
+{
+  "sprite": ["door0", 0, 3], "name": "Gate",
+  "block": true, "switch_to": "Opened Gate"
+},
+{
+  "sprite": ["pit0", 4, 2], "name": "Secret Door",
+  "block": true, "blocksight": true, "reveal_to": "Door", "tile":"#"
+},
+{
+  "sprite": ["door0", 0, 2], "name": "Iron Bars",
+  "block": true, "open_to": "Opened Iron Bars"
+},
+{
+  "sprite": ["door0", 0, 3], "name": "Gold Bars",
+  "block": true, "open_to": "Opened Gold Bars"
+},
+{
+  "sprite": ["chest0", 0, 0], "name": "Small Chest",
+  "block": true, "open_to": "Opened Small Chest"
+},
+{
+  "sprite": ["chest0", 1, 0], "name": "Chest",
+  "block": true, "open_to": "Opened Chest"
+},
+{
+  "sprite": ["chest0", 3, 0], "name": "Metal Box",
+  "block": true, "open_to": "Opened Metal Box"
+},
+{
+  "sprite": ["chest0", 4, 0], "name": "Metal Vault",
+  "block": true, "open_to": "Opened Metal Vault"
+},
+{
+  "sprite": ["chest0", 0, 1], "name": "Barrel",
+  "block": true, "open_to": "Opened Barrel", "kick_to": "Broken Barrel"
+},
+{
+  "sprite": ["chest0", 1, 1], "name": "Elf Barrel",
+  "block": true, "open_to": "Opened Elf Barrel", "kick_to": "Broken Elf Barrel"
+},
+{
+  "sprite": ["door1", 0, 0], "name": "Opened Door"
+},
+{
+  "sprite": ["door1", 0, 1], "name": "Opened Iron Door",
+  "close_to": "Iron Door"
+},
+{
+  "sprite": ["door1", 0, 2], "name": "Opened Iron Bars",
+  "close_to": "Iron Bars"
+},
+{
+  "sprite": ["door1", 0, 2], "name": "Opened Iron Bars",
+  "close_to": "Iron Bars"
+},
+{
+  "sprite": ["door1", 0, 3], "name": "Opened Gate"
+},
+{
+  "sprite": ["door1", 0, 3], "name": "Opened Gold Bars",
+  "close_to": "Gold Bars"
+},
+{
+  "sprite": ["chest1", 0, 0], "name": "Opened Small Chest",
+  "block": true, "close_to": "Small Chest"
+},
+{
+  "sprite": ["chest1", 1, 0], "name": "Opened Chest",
+  "block": true, "close_to": "Chest"
+},
+{
+  "sprite": ["chest1", 3, 0], "name": "Opened Metal Box",
+  "block": true, "close_to": "Metal Box"
+},
+{
+  "sprite": ["chest1", 4, 0], "name": "Opened Metal Vault",
+  "block": true, "close_to": "Metal Vault"
+},
+{
+  "sprite": ["chest1", 0, 1], "name": "Opened Barrel",
+  "block": true, "close_to": "Barrel", "kick_to": "Broken Barrel"
+},
+{
+  "sprite": ["chest1", 1, 1], "name": "Opened Elf Barrel",
+  "block": true, "close_to": "Elf Barrel", "kick_to": "Broken Elf Barrel"
+},
+{
+  "sprite": ["chest0", 2, 1], "name": "Broken Barrel",
+  "block": true
+},
+{
+  "sprite": ["chest0", 3, 1], "name": "Broken Elf Barrel",
+  "block": true
+},
+{
+  "sprite": ["door0", 2, 0], "name": "Locked Door",
+  "block": true, "blocksight": true, "unlock_to": "Opened Door"
+},
+{
+  "sprite": ["door0", 2, 2], "name": "Locked Bars",
+  "block": true, "unlock_to": "Opened Iron Bars"
+},
+{
+  "sprite": ["pit0", 0, 4], "name": "Locked Chest",
+  "block": true, "chest_unlock_to": "Opened Chest"
+},
+{
+  "sprite": ["trap", 1, 3], "name": "Spikes Trap (Armed)",
+  "activate_to": "Spikes Trap", "hidden": true
+},
+{
+  "sprite": ["trap", 0, 3], "name": "Spikes Trap",
+  "trap_to": "Spikes Trap (Armed)"
+},
+{
+  "sprite": ["dungeon", 0, 1], "name": "Switch",
+  "block": true, "open_to": "Switch (On)"
+},
+{
+  "sprite": ["dungeon", 1, 1], "name": "Switch (On)",
+  "block": true
+},
+{
+  "sprite": ["pit", 1, 3], "name": "Firecamp",
+  "animated": true, "illuminate": 10
+},
+{
+  "sprite": ["door", 0, 0], "name": "Hidden Door",
+  "hidden": true
+},
+{
+  "sprite": ["decor0", 0, 2], "name": "Rune #1"
+},
+{
+  "sprite": ["decor0", 1, 2], "name": "Rune #2"
+},
+{
+  "sprite": ["decor0", 2, 2], "name": "Rune #3"
+},
+{
+  "sprite": ["decor0", 3, 2], "name": "Rune #4"
+},
+{
+  "sprite": ["ground0", 0, 5], "name": "Blood #1"
+},
+{
+  "sprite": ["ground0", 1, 5], "name": "Blood #2"
+},
+{
+  "sprite": ["ground0", 0, 0], "name": "Ground #1", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 1, 0], "name": "Ground #2", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 2, 0], "name": "Ground #3", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 3, 0], "name": "Ground #4", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 0, 1], "name": "Ground #5", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 1, 1], "name": "Ground #6", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 2, 1], "name": "Ground #7", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 3, 1], "name": "Ground #8", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 4, 0], "name": "Rocks #1", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 5, 0], "name": "Rocks #2", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 6, 0], "name": "Rocks #3", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 7, 0], "name": "Rocks #4", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 4, 1], "name": "Rocks #5", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 5, 1], "name": "Rocks #6", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 6, 1], "name": "Rocks #7", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 7, 1], "name": "Rocks #8", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 0, 2], "name": "Floors #1", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 1, 2], "name": "Floors #2", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 2, 2], "name": "Floors #3", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 3, 2], "name": "Floors #4", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 4, 2], "name": "Floors #5", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 5, 2], "name": "Floors #6", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 6, 2], "name": "Floors #7", "group": "Forest Ground"
+},
+{
+  "sprite": ["ground0", 7, 2], "name": "Floors #8", "group": "Forest Ground"
+},
+{
+  "sprite": ["decor0", 0, 12], "name": "Skull #1"
+},
+{
+  "sprite": ["decor0", 0, 13], "name": "Skull #2"
+},
+{
+  "sprite": ["decor0", 1, 12], "name": "Bones #1"
+},
+{
+  "sprite": ["decor0", 1, 13], "name": "Bones #2"
+},
+{
+  "sprite": ["decor0", 2, 12], "name": "Skull #3"
+},
+{
+  "sprite": ["decor0", 2, 13], "name": "Skull #4"
+},
+{
+  "sprite": ["decor0", 3, 12], "name": "Bones #3"
+},
+{
+  "sprite": ["decor0", 3, 13], "name": "Bones #4"
+},
+{
+  "sprite": ["decor", 4, 12], "name": "Skull #5", "animated":true, "illuminate": 2
+},
+{
+  "sprite": ["decor", 4, 13], "name": "Skull #6", "animated":true, "illuminate": 2
+},
+{
+  "sprite": ["decor", 5, 12], "name": "Bones #5", "animated":true, "illuminate": 2
+},
+{
+  "sprite": ["decor", 5, 13], "name": "Bones #6", "animated":true, "illuminate": 2
+},
+{
+  "sprite": ["obj", 0, 0], "name": "Firelogs"
+},
+{
+  "sprite": ["obj", 2, 3], "name": "Object1"
+},
+{
+  "sprite": ["obj", 2, 4], "name": "Object2"
+},
+{
+  "sprite": ["obj", 3, 3], "name": "Object3"
+},
+{
+  "sprite": ["obj", 3, 4], "name": "Object4"
+},
+{
+  "sprite": ["obj", 5, 0], "name": "Blood1"
+},
+{
+  "sprite": ["obj", 6, 0], "name": "Blood2"
+},
+{
+  "sprite": ["obj", 5, 1], "name": "Blood3"
+},
+{
+  "sprite": ["obj", 6, 1], "name": "Blood4"
+},
+{
+  "sprite": ["pest", 0, 0], "name": "bug", "animated":true
+},
+{
+  "sprite": ["pest", 2, 0], "name": "rice bug", "animated":true
+}
+]

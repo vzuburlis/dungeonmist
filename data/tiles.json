@@ -1,0 +1,28 @@
+{
+  "=": {
+    "name": "water",
+    "movement": "swim"
+  },
+  ".": {
+    "name": "ground",
+    "movement": "walk"
+  },
+  ":": {
+    "name": "void",
+    "movement": "walk",
+    "block": "true",
+    "blockMsg": "You are careful not to step into the void."
+  },
+  "#": {
+    "name": "wall",
+    "movement": "walk",
+    "block": "true",
+    "blockMsg": "The wall blocks your way.",
+    "blocksight": "true"
+  },
+  "l": {
+    "name": "lava",
+    "movement": "walk",
+    "stepMsg": "The lava burns your feet!",
+  }
+}

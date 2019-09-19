@@ -1,0 +1,311 @@
+[{
+    "sprite": ["potion", 0, 0],
+    "type":"potion", "name": "Potion of Healing", "lorem": "Red Potion",
+    "effect": "heal"
+},
+{
+  "sprite": ["potion", 3, 3],
+  "type":"potion", "name": "Potion of Holy Water", "lorem": "Golden Potion",
+  "effect": "bless",
+  "effect_time": 48
+},
+{
+  "sprite": ["potion", 2, 0],
+  "type":"potion", "name": "Potion of Strength", "lorem": "Orange Potion",
+  "effect": "strength",
+  "effect_time": 24
+},
+{
+  "sprite": ["potion", 1, 0],
+  "type":"potion", "name": "Potion of Speed", "lorem": "Pink Potion",
+  "effect": "speed",
+  "effect_time": 24
+},
+{
+  "sprite": ["potion", 3, 0],
+  "type":"potion", "name": "Potion of Antidote", "lorem": "Yellow Potion",
+  "effect": "stop-poison"
+},
+{
+  "sprite": ["potion", 3, 1],
+  "type":"potion", "name": "Potion of Invisiblity", "lorem": "Peach Color Potion",
+  "effect": "invisible",
+  "target": "self",
+  "effect_time": 16
+},
+{
+  "sprite": ["potion", 4, 0],
+  "type":"potion", "name": "Potion of Blink", "lorem": "Green Potion",
+  "effect": "teleport",
+  "target": "self"
+},
+{
+  "sprite": ["light", 0, 0],
+  "name": "Candle",
+  "effect": "light",
+  "effect_time": 150
+},
+{
+  "sprite": ["shortwep", 0, 0],
+  "name": "Short Sword",
+  "type": "weapon", "hp":20,
+  "effect": "+attack"
+},
+{
+  "sprite": ["shortwep", 1, 0],
+  "name": "Black Sword",
+  "type": "weapon", "hp":20,
+  "effect": "+attack"
+},
+{
+  "sprite": ["shortwep", 2, 0],
+  "name": "Glow Sword",
+  "type": "weapon", "hp":20,
+  "effect": "+attack"
+},
+{
+  "sprite": ["shortwep", 3, 0],
+  "name": "Glass Knife",
+  "type": "weapon", "hp":20,
+  "effect": "+attack"
+},
+{
+    "sprite": ["shortwep", 1, 1],
+    "name": "Dagger",
+    "type": "weapon", "hp":20,
+    "effect": "+dexterity"
+},
+{
+    "sprite": ["shortwep", 7, 0],
+    "name": "Elf Sword",
+    "type": "weapon", "hp":20,
+    "effect": "+attack"
+},
+{
+  "sprite": ["shortwep", 0, 1],
+  "name": "Sword",
+  "type": "weapon", "hp":20,
+  "effect": "+attack"
+},
+{
+  "sprite": ["shortwep", 0, 4],
+  "name": "Mace",
+  "type": "weapon", "hp":20,
+  "effect": "+attack"
+},
+{
+  "sprite": ["shortwep", 1, 4],
+  "name": "Chain Mace",
+  "type": "weapon", "hp":20,
+  "effect": "+attack"
+},
+{
+  "sprite": ["staff", 0, 0],
+  "name": "Staff of Light",
+  "type": "weapon", "hp":20,
+  "effect": "+attack"
+},
+{
+  "sprite": ["staff", 1, 0],
+  "name": "Staff of Red Gem",
+  "type": "weapon", "hp":20,
+  "effect": "+attack"
+},
+{
+  "sprite": ["staff", 2, 0],
+  "name": "Wizzard Scepter",
+  "type": "weapon", "hp":20,
+  "effect": "+attack"
+},
+{
+  "sprite": ["staff", 3, 0],
+  "name": "Staff of Blue Eye",
+  "type": "weapon", "hp":20,
+  "effect": "+attack"
+},
+{
+  "sprite": ["staff", 4, 0],
+  "name": "Green Magic Staff",
+  "type": "weapon", "hp":20,
+  "effect": "+attack"
+},
+{
+  "sprite": ["staff", 0, 1],
+  "name": "Staff of Balance",
+  "type": "weapon", "hp":20,
+  "effect": "+attack"
+},
+{
+  "sprite": ["staff", 1, 1],
+  "name": "Gold Wizzard Scepter",
+  "type": "weapon", "hp":20,
+  "effect": "+attack"
+},
+{
+  "sprite": ["armor", 0, 0],
+  "name": "Armor",
+  "type": "armor", "hp":20,
+  "effect": "+armor"
+},
+{
+  "sprite": ["armor", 0, 1],
+  "name": "Scale Armor",
+  "type": "armor", "hp":20,
+  "effect": "+armor"
+},
+{
+  "sprite": ["armor", 1, 0],
+  "name": "Bronze Armor",
+  "type": "armor", "hp":20,
+  "effect": "+armor"
+},
+{
+  "sprite": ["key", 0, 0],
+  "name": "Key",
+  "autopick": true,
+  "mapItem": "key"
+},
+{
+  "sprite": ["key", 1, 0],
+  "name": "Chest Key",
+  "autopick": true,
+  "mapItem": "chest_key"
+},
+{
+  "sprite": ["shield", 6, 0],
+  "name": "Shield Repair",
+  "autopick": true,
+  "effect": "+shield"
+},
+{
+  "sprite": ["book", 0, 0],
+  "name": "Confuze Enemies",
+  "type": "spellbook", "hp":10,
+  "effect": "confuze",
+  "target": "enemies",
+  "effect_time": 10
+},
+{
+  "sprite": ["book", 1, 0],
+  "name": "Blink",
+  "type": "spellbook", "hp":10,
+  "effect": "teleport",
+  "target": "select"
+},
+{
+  "sprite": ["book", 2, 0],
+  "name": "Magic Missile",
+  "type": "spellbook", "hp":10,
+  "effect": "arrow",
+  "target": "select"
+},
+{
+  "sprite": ["book", 3, 0],
+  "name": "Lightning",
+  "type": "spellbook", "hp":10,
+  "effect": "lightning-strike",
+  "target": "enemies"
+},
+{
+  "sprite": ["book", 4, 0],
+  "name": "Invisibility",
+  "type": "spellbook", "hp":10,
+  "effect": "invisible",
+  "target": "self",
+  "effect_time": 24
+},
+{
+  "sprite": ["book", 5, 0],
+  "name": "Healing Wounds",
+  "type": "spellbook", "hp":10,
+  "target": "self",
+  "effect": "heal"
+},
+{
+  "sprite": ["scroll", 0, 0],
+  "name": "Scroll of Map",
+  "effect": "map-reveal"
+},
+{
+    "sprite": ["scroll", 1, 0],
+    "name": "Scroll of Invisibility",
+    "effect": "invisible",
+    "target": "self",
+    "effect_time": 24
+},
+{
+    "sprite": ["scroll", 2, 0],
+    "name": "Scroll of Sucrifice",
+    "effect": "sucrifice-rnd"
+},
+{
+    "sprite": ["scroll", 3, 0],
+    "name": "Scroll of Tracking",
+    "effect": "track-all",
+    "effect_time": 100
+},
+{
+  "sprite": ["scroll", 4, 0],
+  "name": "Scroll of Holy Words",
+  "effect": "damage",
+  "target": "enemies",
+  "class": "z"
+},
+{
+  "sprite": ["scroll", 4, 0],
+  "name": "Scroll of Bless",
+  "effect": "bless",
+  "target": "self",
+  "effect_time": 100
+},
+{
+    "sprite": ["scroll", 5, 0],
+    "name": "Scroll of Curse",
+    "effect": "curse",
+    "target": "enemies",
+    "effect_time": 48
+},
+{
+    "sprite": ["scroll", 5, 0],
+    "name": "Scroll of Confuze",
+    "effect": "confuze",
+    "target": "enemies",
+    "effect_time": 10
+},
+{
+    "sprite": ["scroll", 6, 0],
+    "name": "Scroll of Healing",
+    "target": "self",
+    "effect": "heal"
+},
+{
+  "sprite": ["scroll", 0, 2],
+  "name": "Scroll of Blink",
+  "effect": "teleport",
+  "target": "select"
+},
+{
+    "sprite": ["gauze", 0, 0],
+    "name": "Gauze",
+    "effect": "stop-bleed"
+},
+{
+  "sprite": ["scroll", 6, 0],
+  "name": "Scroll of Lightning",
+  "effect": "lightning-strike",
+  "target": "enemies"
+},
+{
+  "sprite": ["scroll", 4, 2],
+  "name": "Magic Missile",
+  "autopick": true,
+  "effect": "arrow",
+  "target": "select"
+},
+{
+  "sprite": ["ammo", 5, 2],
+  "name": "Arrow",
+  "autopick": true,
+  "effect": "+arrows"
+}
+]

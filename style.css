@@ -1,0 +1,180 @@
+body{
+    font-family: courier new;
+    text-align: center;
+    color: white;
+}
+
+#controls {
+    overflow: visible;
+    position:absolute;
+    left:1em;
+    bottom:1em;
+    /*border: 1px solid grey;
+    border-radius: 50%;*/
+}
+#controls td>div {
+  height:100%;
+  width:100%;
+}
+.dir-btn {
+    width:2.5em; height:2.5em;
+    display:block;
+}
+.response-btn {
+  font-size: 1em;
+  cursor:pointer;
+  pointer-events:all;
+}
+#commands {
+    overflow: visible;
+    position:absolute;
+    right:1em;
+    bottom:1em;
+    display: flex;
+    flex-direction: column-reverse;
+}
+.com-btn {
+  filter:greyscale(100%); width:3.5em; height:3.5em;
+  border: 1px solid grey;
+  border-radius: 50%;
+  margin: 3px;
+  image-rendering: crisp-edges;
+}
+.com-down{display:none}
+#msgBox, #statBox {
+    position:absolute;
+    text-align: center;
+    right:0;
+    left:0;
+}
+#msgBox{ top:32px;}
+#msgBox, #minimap{
+    pointer-events : none;
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+#show-u-command{display:none}
+#statBox {
+    font-family: 'Berkshire Swash', cursive; font-size:24px;
+    margin:4px; text-align:left; /*display:grid; grid-template-columns: 1fr 1fr 1fr 1fr;*/
+}
+#statBox div {display:inline-block}
+#statBox img { width: 32px; height:32px; vertical-align:middle}
+#statBox span { padding: 4px; }
+#pKey, #pChestKey{display:none}
+#map,#use-menu,#action-menu,#equip-menu{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+}
+#minimap{
+  position:absolute;
+  right:3em;
+  top:3em;
+}
+#use-menu,#action-menu,#equip-menu {
+    background:rgba(0,0,0,0.85);
+    visibility:hidden;
+    border: 2px solid #613214;
+    padding: 8px;
+    max-height:100%;
+}
+button{
+    font-size: 3em;
+}
+#play-btn-container{
+    display:none;
+    position: absolute;
+    top:55%;
+    left:0;
+    right:0;
+    text-align:center;
+}
+.play-btn {
+    text-transform: uppercase;
+    padding:1em 2em;
+    font-size:1.5em;
+    font-weight:bold;
+    border-radius:0.5em;
+    border: 2px solid #ecc148;
+    color: #ecc148;
+    text-decoration: none;
+    margin-bottom:2em;
+}
+.play-btn:hover {
+    color: white;
+    background: #ecc148;
+}
+#use-menu--title, #equip-menu--title, #action-menu--title{
+    font-family: 'Berkshire Swash', cursive;
+    font-size: 2em;
+    text-align:center;
+    min-width:300px;
+}
+#use-menu--list, #equip-menu--list, #action-menu--list {
+    text-align:left;
+}
+#use-menu .close img,#equip-menu .close img,#action-menu .close img {
+  cursor: pointer;
+  width:1em;
+  vertical-align: middle;
+  float: right;
+  opacity:0.3;
+}
+#use-menu .close img:hover, #equip-menu .close img:hover, #action-menu .close img:hover {
+  opacity:1;
+}
+.menu-item {
+  cursor: pointer;
+  padding: 0.4em;
+  margin: 0.4em 0;
+  border: 1px solid #151515;
+}
+.menu-item:hover {
+  border: 1px solid lightgrey;
+}
+
+.item-img{
+  width: 16px;
+  height: 16px;
+  transform: scale(2);
+  display:inline-block;
+  vertical-align: middle;
+  image-rendering: crisp-edges;
+}
+.item-name{
+  font-size: 1.3em;
+}
+@media screen and (min-width: 680px) {
+  #show-u-command {
+    display: inline-block;
+  }
+  #statBox {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+@media screen and (min-width: 1100px) {
+    #controls {
+        display:none;
+    }
+}
+
+.div-com {
+  position: relative;
+}
+.com-btn:hover {
+  border: 1px solid lightgrey;
+  cursor: pointer; 
+}
+#pArrows, .pSpan {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+}
+
+
+.green {
+    color:green
+}

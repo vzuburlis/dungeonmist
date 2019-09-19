@@ -1,0 +1,48 @@
+[
+  [
+    {
+      "name": "chest",
+      "block_object":["Small Chest","Chest"],
+      "object_item":["Scroll of Map", "Gauze", "Arrow", "Scroll of Blink","Scroll of Sucrifice","Scroll of Curse"]
+    },
+    {
+      "spawn":1
+    }
+  ],
+  [
+    {
+      "name": "barrel",
+      "block_object":["Barrel","Elf Barrel"],
+      "object_item":["Arrow", null]
+    }
+  ],
+  [
+    {
+      "name": "undead",
+      "item":["Scroll of Holy Words", "Potion of Bless"]
+    },
+    {
+      "spawnBy": {"class":"z"}
+    }
+  ],
+  [
+    {
+      "name": "vampire",
+      "item":["Gauze"]
+    },
+    {
+      "spawnBy": {"attackType":"bleeding"}
+    }
+  ],
+  [
+    {
+      "name": "avoidMonster",
+      "_item":["Potion of Invisibility","Potion of Speed"]
+    },
+    {
+      "_roomSize":25,
+      "_spawn":1,
+      "_monster":{"level+":2}
+    }
+  ]
+]

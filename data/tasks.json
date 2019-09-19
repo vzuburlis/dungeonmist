@@ -1,0 +1,167 @@
+[
+  [
+    {
+      "name": "keyDoor",
+      "item":"Key"
+    },
+    {
+      "door_object": "Locked Door"
+    }
+  ],
+  [
+    {
+      "name": "switch",
+      "block_object": "Switch",
+      "open_object": null 
+    },
+    {
+      "door_object": "Gate",
+      "open_from": "previous_object"
+    }
+  ],
+  [
+    {
+      "name": "door",
+      "door_object": "Door"
+    }
+  ],
+  [
+    {
+      "name": "secretDoor",
+      "door1_object": "Secret Door"
+    }
+  ],
+  [
+    {
+      "name": "doors",
+      "door_object": "Door"
+    },
+    {
+      "door_object": "Door"
+    },
+    {
+      "door_object": "Door"
+    },
+    {
+      "door_object": "Door"
+    }
+  ],
+  [
+    {
+      "name": "ironbars",
+      "door_object": "Iron Bars"
+    },
+    {
+      "door_object": "Iron Bars"
+    },
+    {
+      "door_object": "Iron Bars"
+    },
+    {
+      "door_object": "Iron Bars"
+    }
+  ],
+  [
+    {
+      "name": "iron_door",
+      "door_object": "Iron Door"
+    }
+  ],
+  [
+    {
+      "name": "keyChest",
+      "item":"Chest Key"
+    },
+    {
+      "block_object":"Locked Chest",
+      "object_item":["Scroll of Lighting", "Potion of Strength", "Arrow", "Scroll of Blink"]
+    }
+  ],
+  [
+    {
+      "name": "chest",
+      "block_object":["Small Chest","Chest"],
+      "object_item":["Scroll of Map", "Scroll of Blink","Scroll of Sucrifice","Scroll of Curse"]
+    },
+    {
+      "spawn":1
+    }
+  ],
+  [
+    {
+      "name": "barrel",
+      "block_object":["Barrel","Elf Barrel"],
+      "object_item":["Arrow", null]
+    }
+  ],
+  [
+    {
+      "name": "jumpvoid",
+      "step_tile":" "
+    }
+  ],
+  [
+    {
+      "name": "firecamp",
+      "block_object":["Firecamp"]
+    }
+  ],
+  [
+    {
+      "name": "rocks",
+      "room_object": "Rocks #3"
+    }
+  ],
+  [
+    {
+      "name": "rocks4",
+      "room_object": "Rocks #4"
+    }
+  ],
+  [
+    {
+      "name": "grass",
+      "room_tile":","
+    }
+  ],
+  [
+    {
+      "name": "antsand",
+      "room_tile":";"
+    }
+  ],
+  [
+    {
+      "name": "greenwaters",
+      "room_tile":"-"
+    }
+  ],
+  [
+    {
+      "name": "water",
+      "room_tile":"="
+    }
+  ],
+  [
+    {
+      "name": "lava",
+      "room_tile":"l"
+    }
+  ],
+  [
+    {
+      "name": "blood",
+      "ground_objects": ["Blood1","Blood2","Blood3","Blood4"],
+      "room_desc": "You sniff the smell of the fresh blood.",
+      "chance": 10
+    }
+  ],
+  [
+    {
+      "name": "trap",
+      "room_object": "Spikes Trap (Armed)",
+      "room_desc": "You sense a danger in your way.",
+      "chance": 50
+    }
+  ]
+]
