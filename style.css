@@ -2,6 +2,7 @@ body{
     font-family: courier new;
     text-align: center;
     color: white;
+    touch-action: manipulation;
 }
 
 #controls {

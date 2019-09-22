@@ -64,7 +64,7 @@ class MapController extends controller
               usleep(300000);
           }
 
-          $this->level = session::key('level') ?? 1;
+          $this->level = $_COOKIE['level'] ?? 1;
           $this->steps += $this->level*10;
           $ext = $this->level<10 ? $this->level : 10;
           $this->rows += $ext;
@@ -116,6 +116,7 @@ class MapController extends controller
         $entryType = $_REQUEST['entryType'] ?? $entryType ?? 'upstairs';
         session::key('entryType', $entryType); // useful for the existing maps
         session::key('level', $newLevel);
+        setcookie('level', $newLevel, time() + (86400 * 30), "/");
         Game::moveLevel($this->gameId, $newLevel, $playerData['gameTurn']);
         $file = $this->gamePath().'level'.$this->level.'.json';
         //$this->saveGame($_REQUEST['levelMap'], json_encode($playerData));
@@ -183,7 +184,7 @@ class MapController extends controller
 
     function playAction ($gameId=null)
     {
-      $this->gameId = session::key('gameId');
+      $this->gameId = $_COOKIE['gameId'];//session::key('gameId');
       if($this->gameId === null) {
         view::renderFile('index.php',GPACKAGE);
         return;
@@ -252,7 +253,8 @@ class MapController extends controller
       $gameId = Game::create($_REQUEST['name'], $_REQUEST['classId']);
       session::key('gameId', $gameId);
       session::key('level', 1);
-      //session::unsetKey('player');
+      setcookie('level', 1, time() + (86400 * 30), "/");
+      setcookie('gameId', $gameId, time() + (86400 * 30), "/");
     }
 
     function dungeon()

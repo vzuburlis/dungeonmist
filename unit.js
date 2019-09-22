@@ -147,7 +147,15 @@ function unitClass (options) {
 
         obj = getObject(that.x+dx,that.y+dy)
         if(obj!=null) {
-            objType = objectType[obj.type]
+          objType = objectType[obj.type]
+          if(objType.block==true && typeof playerWalk!='undefined'
+            && (targetx!=that.x+dx || targety!=that.y+dy)) {
+            setGameStatus('play')
+            targetx=null
+            targety=null
+            renderMap();
+            return false;
+          }
             if(typeof objType.open_to!='undefined') {
                 obj.type = findObjectType(objType.open_to, obj.type);
                 opendoorAudio.play()
@@ -215,7 +223,9 @@ function unitClass (options) {
               opendoorAudio.play()
               logMsg("You close the "+objectType[obj.type].name.toLowerCase());
             }
-
+            setGameStatus('play')
+            targetx=null
+            targety=null
             renderMap();
             return false;
           }

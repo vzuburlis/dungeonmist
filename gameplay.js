@@ -948,14 +948,18 @@ function startPlayerWalk() {
     dx=spaceship(targetx, player.x)
     dy=spaceship(targety, player.y)
     if(Math.abs(dy)>Math.abs(dx)) {
-        if(dy==0 || player.move(0,dy)==false) if(player.move(dx,0)==false) {
-          setGameStatus('play')
-          clearInterval(playerWalk)
+        if(dy==0 || player.move(0,dy)==false) {
+          if(gameStatus == 'wait') if(player.move(dx,0)==false) {
+            setGameStatus('play')
+            clearInterval(playerWalk)
+          }
         }
     } else {
-        if(dx==0 || player.move(dx,0)==false) if(player.move(0,dy)==false) {
-          setGameStatus('play')
-          clearInterval(playerWalk)
+        if(dx==0 || player.move(dx,0)==false) {
+          if(gameStatus == 'wait') if(player.move(0,dy)==false) {
+            setGameStatus('play')
+            clearInterval(playerWalk)
+          }
         }
     }
     if(player.x==_x && player.y==_y) {
