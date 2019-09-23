@@ -148,7 +148,7 @@ function unitClass (options) {
         obj = getObject(that.x+dx,that.y+dy)
         if(obj!=null) {
           objType = objectType[obj.type]
-          if(objType.block==true && typeof playerWalk!='undefined'
+          if(objType.block==true && gameStatus=='wait'
             && (targetx!=that.x+dx || targety!=that.y+dy)) {
             setGameStatus('play')
             targetx=null
@@ -551,7 +551,6 @@ function unitClass (options) {
           document.body.style.cursor = 'crosshair'
           targetx=player.x
           targety=player.y
-          //drawSelectRect()
           renderMap()
           logMsg('Select a target to fire');
           selectTarget.action = function() {

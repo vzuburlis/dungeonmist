@@ -41,7 +41,7 @@ class MapController extends controller
     {
       include_once __DIR__."/models/Game.php";
         //self::admin();
-        $this->gameId = session::key('gameId');
+        $this->gameId = $_COOKIE['gameId'] ?? null;
 
         if($this->gameId!==null) {
 
@@ -115,11 +115,11 @@ class MapController extends controller
         if($this->level > $newLevel) $entryType = 'downstairs';
         $entryType = $_REQUEST['entryType'] ?? $entryType ?? 'upstairs';
         session::key('entryType', $entryType); // useful for the existing maps
-        session::key('level', $newLevel);
+        //session::key('level', $newLevel);
         setcookie('level', $newLevel, time() + (86400 * 30), "/");
         Game::moveLevel($this->gameId, $newLevel, $playerData['gameTurn']);
         $file = $this->gamePath().'level'.$this->level.'.json';
-        //$this->saveGame($_REQUEST['levelMap'], json_encode($playerData));
+
         file_put_contents($file, $_REQUEST['levelMap']);
         file_put_contents($this->gamePath().'@.json', json_encode($playerData));
         usleep(100000);
@@ -141,9 +141,9 @@ class MapController extends controller
     function permadeathAction()
     {
       $this->updateAction();
-      Game::endgame(session::key('gameId'));
+      Game::endgame($_COOKIE['gameId']);
 
-      session::key('finishedGame', session::key('gameId'));
+      session::key('finishedGame', $_COOKIE['gameId']);
       session::unsetkey('gameId');
       session::unsetKey('player');
     }
@@ -184,7 +184,7 @@ class MapController extends controller
 
     function playAction ($gameId=null)
     {
-      $this->gameId = $_COOKIE['gameId'];//session::key('gameId');
+      $this->gameId = $_COOKIE['gameId'];
       if($this->gameId === null) {
         view::renderFile('index.php',GPACKAGE);
         return;
@@ -229,7 +229,7 @@ class MapController extends controller
             $this->map[$i][$j] = $levelMap['mapString'][$i*$levelMap['mapSize'][0] + $j];
         }
       }
-      //$this->map = $levelMap['map'];
+
       $this->mapRev = $levelMap['mapRev'];
       $this->monsters = $levelMap['monsters'];
       $this->items = $levelMap['items'];
@@ -251,8 +251,8 @@ class MapController extends controller
     {
       include_once __DIR__."/models/Game.php";
       $gameId = Game::create($_REQUEST['name'], $_REQUEST['classId']);
-      session::key('gameId', $gameId);
-      session::key('level', 1);
+      //session::key('gameId', $gameId);
+      //session::key('level', 1);
       setcookie('level', 1, time() + (86400 * 30), "/");
       setcookie('gameId', $gameId, time() + (86400 * 30), "/");
     }

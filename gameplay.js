@@ -102,7 +102,6 @@ function renderMap() {
     y = groundObjects[i].y
     if(inMap(x,y)) if(mapRev[x][y]>0) {
       context.globalAlpha = globalAlphaByMapRev(x,y)
-        //if(mapRev[x][y]>1) context.globalAlpha = 1; else context.globalAlpha = 0.4;
         if(typeof objectType[groundObjects[i].type]!='undefined') {
             _t = objectType[groundObjects[i].type].sprite
         }
@@ -471,8 +470,10 @@ function logMsg(msg, block=false) {
 function setGameStatus(v) {
     gameStatus=v;
     btnCancel.style.display = 'none'
+    btnCancelD.style.display = 'none'
     btnCheck.style.display = 'none'
     useMenu=document.getElementById("use-menu")
+    equipMenu=document.getElementById("equip-menu")
     actionMenu=document.getElementById("action-menu")
     useMenu.style.display = 'inline-block'
     actionMenu.style.display = 'inline-block'
@@ -480,10 +481,11 @@ function setGameStatus(v) {
         btnCancel.style.display = 'inline-block'
         btnCheck.style.display = 'inline-block'
         useMenu.style.display = 'none'
+        equipMenu.style.display = 'none'
         actionMenu.style.display = 'none'
     }
     if(v=='select-direction') {
-        btnCancel.style.display = 'inline-block'
+        btnCancelD.style.display = 'inline-block'
     }
 }
 
@@ -694,7 +696,13 @@ var selectDirection = null
 function keypressDirection (code) {
   if(gameStatus != 'select-direction') return;
 
-  if (code == '38' || code == '87') { // up arrow
+  else if (code == '27') { // esc
+    targetx=null
+    targety=null
+    renderMap();
+    setGameStatus('play');
+  }
+  else if (code == '38' || code == '87') { // up arrow
     selectDirection=0;
   }
   else if (code == '40' || code == '83') { // down arrow
@@ -793,7 +801,7 @@ function keypressPlay (code) {
       } while (player.turnsToRest>0 && gameStatus == "rest") // || new message
       setGameStatus('play');
       if(player.turnsToRest<1) logMsg('You are rested and ready to go on')
-      x = Math.floor(turns_rested/20)
+      x = Math.floor(turns_rested/2)
       player.addHP(x)
       renderMap();
     }
@@ -883,7 +891,7 @@ function keypressPlay (code) {
         } else hp=''
         _enc = null
         if(typeof player.inventory[i].enchantment!='undefined') _enc = player.inventory[i].enchantment
-        list.innerHTML += '<div class="menu-item" onclick="keypressUse('+(com)+')">&#'+(com+32)+'; <div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div> <span class="item-name'+itemClass+'">'+getItemFullName(_itemType,_enc)+hp+'</span></div>'
+        list.innerHTML += '<div class="menu-item" onclick="keypressEquip('+(com)+')">&#'+(com+32)+'; <div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div> <span class="item-name'+itemClass+'">'+getItemFullName(_itemType,_enc)+hp+'</span></div>'
         com++;
       }
       popup.style.visibility = "visible"

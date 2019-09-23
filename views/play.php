@@ -48,8 +48,8 @@ function moveLevel(direction=null) {
       url: '<?=gila::base_url()?><?=$update_url?>',
       data: fm,
       method: 'post',
-      fn: function(){
-        window.location.href = '<?=$play_url?>' // &entryType=random|fallen?
+      fn: function() {
+        window.location.href = '<?=$play_url?>'
       }
   })
 }
@@ -84,7 +84,6 @@ function permaDeath() {
       data: dataToUpdate(),
       method: 'post',
       fn: function(){
-        //gameStatus = 'game-over'
         document.getElementById('play-btn-container').style.display = "block"
       }
   })

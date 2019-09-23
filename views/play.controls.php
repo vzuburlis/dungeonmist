@@ -66,6 +66,9 @@
     <div class="div-com com-btn" id="btnCancel" style="background:red;display:none" onclick="keypressTarget(27)">
       <img src="<?=$tile_folder?>../images/close.svg" style="width:100%">
     </div>
+    <div class="div-com com-btn" id="btnCancelD" style="background:red;display:none" onclick="keypressDirection(27)">
+      <img src="<?=$tile_folder?>../images/close.svg" style="width:100%">
+    </div>
     <img src="<?=$tile_folder?>potion.png" class="com-btn" onclick="keypressPlay(85)">
     <img src="<?=$status_folder?>speed.png" class="com-btn" onclick="keypressPlay(220)">
     <div class="div-com" id="btnArrows">

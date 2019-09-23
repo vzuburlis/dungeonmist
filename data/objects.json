@@ -122,11 +122,11 @@
   "trap_to": "Spikes Trap (Armed)"
 },
 {
-  "sprite": ["dungeon", 0, 1], "name": "Switch",
+  "sprite": ["pit0", 1, 4], "name": "Switch",
   "block": true, "open_to": "Switch (On)"
 },
 {
-  "sprite": ["dungeon", 1, 1], "name": "Switch (On)",
+  "sprite": ["pit0", 2, 4], "name": "Switch (On)",
   "block": true
 },
 {

@@ -56,7 +56,7 @@ button{
 
 <body>
     <div id="main">
-      <div id="game-title">Dungeon Roguelike</div>
+      <div id="game-title">Dungeon Mist</div>
       <a href="<?=$newgame_url?>" class="play-btn">Play</a>
       <div id="about-game">
         <p></p>
@@ -66,6 +66,8 @@ button{
         <strong>[u]</strong> Use an item<br>
         <strong>[e]</strong> Equip weapon/armor<br>
         <strong>[f]</strong> Fire arrow<br>
+        <strong>[j]</strong> Jump<br>
+        <strong>[r]</strong> Rest<br>
         <h3>Credits</h3>
         <p>Tileset: DawnLike (<a target="_blank" href="https://twitter.com/DragonDePlatino">DragonDePlatino</a>)</p>
         <p>
