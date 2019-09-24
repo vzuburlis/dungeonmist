@@ -1,6 +1,9 @@
 <?php
+$ppath = gila::base_url().'src/'.GPACKAGE.'/';
+$playgame_url = GPACKAGE.'/play';
 $newgame_url = GPACKAGE.'/new';
 ?>
+<link href="<?=$ppath?>style.css?v=6" rel="stylesheet">
 <style>
 body{
     font-family: courier new;
@@ -10,14 +13,12 @@ body{
     background-color: black;
     background-size: cover;
 }
-
+#game-title, h1, h2 ,h3 {
+  font-family: 'Berkshire Swash', cursive;
+}
 #game-title{
-    font-family: 'Berkshire Swash', cursive;
     font-size: 4em;
     padding: 80px 0;
-}
-#about-game{
-    padding: 4em 0;
 }
 
 #main {
@@ -29,18 +30,26 @@ body{
 #statBox img { width: 32px; height:32px;}
 #statBox span { padding: 4px; }
 .play-btn {
-    text-transform: uppercase;
-    padding:1em 2em;
-    font-size:1.5em;
-    font-weight:bold;
-    border-radius:0.5em;
-    border: 2px solid #ecc148;
-    color: #ecc148;
+  background: #579ca2;
+  border-color:#579ca2;
 }
 .play-btn:hover {
     color: white;
-    background: #ecc148;
+    background: #579ca2;/*#ecc148;*/
 }
+.com-table, .hof-table {
+  margin:auto; max-width:200px;
+  border-collapse: collapse;
+}
+.hof-table td {
+  text-align: center;
+}
+.com-table th, .com-table td, .hof-table td {
+  min-width: 160px;
+  border-top: 1px solid grey;
+  padding: 8px 0;
+}
+
 button{
     font-size: 3em;
 }
@@ -57,25 +66,53 @@ button{
 <body>
     <div id="main">
       <div id="game-title">Dungeon Mist</div>
-      <a href="<?=$newgame_url?>" class="play-btn">Play</a>
-      <div id="about-game">
-        <p></p>
-        <h3>Instructions</h3>
-        <strong>[Directional Keys]</strong> Move one tile. If step on a monster your character hits it.<br>
-        <strong>[space]</strong> Go to next floor by stairs<br>
-        <strong>[u]</strong> Use an item<br>
-        <strong>[e]</strong> Equip weapon/armor<br>
-        <strong>[f]</strong> Fire arrow<br>
-        <strong>[j]</strong> Jump<br>
-        <strong>[r]</strong> Rest<br>
-        <h3>Credits</h3>
-        <p>Tileset: DawnLike (<a target="_blank" href="https://twitter.com/DragonDePlatino">DragonDePlatino</a>)</p>
+      <div v-if="!guiview">
+        <?=($gameId ? '<a href="'.$playgame_url.'" class="play-btn">Continue</a><br>' : '')?>
+        <a href="<?=$newgame_url?>" class="play-btn">New Game</a><br>
+        <span @click="guiview='hof'" class="play-btn">Hall of Fame</span><br>
+        <span @click="guiview='commands'" class="play-btn">Commands</span><br>
+        <span @click="guiview='credits'" class="play-btn">Credits</span><br>
+      </div>
+      <div v-if="guiview=='hof'">
+        <h2>Hall of Fame</h2>
+        <?php 
+        global $db;
+        $gameT = new gTable('game');
+        $res = $gameT->getRows(null, [
+          'select'=>['name', 'level', 'game_time'],
+          'limit'=>5,
+          'orderby'=>['level'=>'desc','id'=>'desc']
+        ]);
+        ?>
+        <table class="hof-table">
+          <tr><th>Name<th>Level<th>Game Time (min)
+          <?php foreach($res as $game) {
+            echo "<tr><td>{$game['name']}<td>{$game['level']}<td>{$game['game_time']}</tr>";
+          } ?>
+        </table>
+      </div>
+      <div v-if="guiview=='commands'">
+        <h2>Instructions</h2>
+        <table class="com-table">
+          <tr><th>arrow keys<br>w, a, s, d</th>
+            <td> Move one tile. If step on a monster your character hits it.<td></tr>
+          <tr><th>[space]</th><td> Go to next floor by stairs<td></tr>
+          <tr><th>e</th><td> Equip weapon/armor<td></tr>
+          <tr><th>u</th><td> Use an item<td></tr>
+          <tr><th>j</th><td> Jump<td></tr>
+          <tr><th>f</th><td> Fire arrow<td></tr>
+          <tr><th>r</th><td> Rest<td></tr>
+        </table>
+      </div>
+      <div v-if="guiview=='credits'">
+        <h2>Credits</h2>
+        <p>Development: Vasilis Zoumpourlis (<a target="_blank" href="https://twitter.com/zuburlis">twitter</a>)</p>
+        <p>Tileset: DawnLike by DragonDePlatino (<a target="_blank" href="https://twitter.com/DragonDePlatino">twitter</a>)</p>
         <p>
-          If you enjoy this game, follow me on <a target="_blank" href="https://twitter.com/zuburlis">twitter</a> to get notified for new releases of roguelikes.
+          If you enjoy this game, follow me on <a target="_blank" href="https://twitter.com/zuburlis">twitter</a> to get notified for new releases.
         </p>
 
       </div>
-      <a href="<?=$newgame_url?>?v=2" class="play-btn">Play</a>
       <br>
       <br>
       <br>
@@ -90,19 +127,23 @@ button{
         <img src="<?=gila::base_url()?>src/<?=GPACKAGE?>/DawnLike/Items/Potion.png">
         <img src="<?=gila::base_url()?>src/<?=GPACKAGE?>/DawnLike/Items/Armor.png">
       </div>
+      <div v-if="guiview">
+        <span @click="guiview=null" class="play-btn">Menu</span>
+        <a href="<?=$newgame_url?>" class="play-btn">New Game</a>
+      </div>
     </div>
 </body>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130027935-1"></script>
+<?=view::script("src/dungeonrl/vue.min.js")?>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+var app = new Vue({
+  el: '#main',
+  data: {
+    guiview: null
+  }
+});
 
-  gtag('config', 'UA-130027935-1');
-</script>
-<script>
 var itemImg = [];
 itemImgPath = [
     ['player0','Characters/Player0.png'],
@@ -137,4 +178,12 @@ g.get('<?=$ppath?>data/objects.json', function(data){
   objectType = JSON.parse(data);
 })
 
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130027935-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-130027935-1');
 </script>

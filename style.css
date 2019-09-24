@@ -98,14 +98,18 @@ button{
 }
 .play-btn {
     text-transform: uppercase;
-    padding:1em 2em;
-    font-size:1.5em;
-    font-weight:bold;
+    padding: 0.5em;
+    font-size: 1.2em;
+    font-weight: bold;
     border-radius:0.5em;
     border: 2px solid #ecc148;
-    color: #ecc148;
+    background: #ecc148;
+    color: white;
     text-decoration: none;
-    margin-bottom:2em;
+    margin-bottom: 1em;
+    cursor: pointer;
+    display: inline-block;
+    min-width: 200px;
 }
 .play-btn:hover {
     color: white;

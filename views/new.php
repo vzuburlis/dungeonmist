@@ -84,15 +84,7 @@ body{
   </div>
 </body>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-    <?=view::script("src/dungeonrl/vue.min.js")?>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-130027935-1');
-</script>
+<?=view::script("src/dungeonrl/vue.min.js")?>
 <script>
 var nameFr = [
   ['An','Al','B','C','D','G','In','L','M','P','Q','R','S','W','Z'],
@@ -135,4 +127,12 @@ var app = new Vue({
   }
 });
 
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130027935-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-130027935-1');
 </script>

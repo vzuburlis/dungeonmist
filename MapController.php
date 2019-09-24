@@ -114,15 +114,14 @@ class MapController extends controller
         }
         if($this->level > $newLevel) $entryType = 'downstairs';
         $entryType = $_REQUEST['entryType'] ?? $entryType ?? 'upstairs';
-        session::key('entryType', $entryType); // useful for the existing maps
-        //session::key('level', $newLevel);
+        setcookie('entryType', $entryType, time() + (86400 * 30), "/");
         setcookie('level', $newLevel, time() + (86400 * 30), "/");
         Game::moveLevel($this->gameId, $newLevel, $playerData['gameTurn']);
         $file = $this->gamePath().'level'.$this->level.'.json';
 
         file_put_contents($file, $_REQUEST['levelMap']);
         file_put_contents($this->gamePath().'@.json', json_encode($playerData));
-        usleep(100000);
+        //usleep(100000);
         echo '{"msg":"ok","level":"'.$newLevel.'"}'; 
       }
     }
@@ -142,10 +141,9 @@ class MapController extends controller
     {
       $this->updateAction();
       Game::endgame($_COOKIE['gameId']);
-
-      session::key('finishedGame', $_COOKIE['gameId']);
-      session::unsetkey('gameId');
-      session::unsetKey('player');
+      setcookie('finishedGame', $_COOKIE['gameId'], time() + (86400 * 30), "/");
+      setcookie('gameId',null, time() -1000, "/");
+      setcookie('player',null, time() -1000, "/");
     }
 
     function gameAction($gameId = null)
@@ -165,7 +163,7 @@ class MapController extends controller
     }
 
     function feedbackAction($gameId = null) {
-      if($gameId==session::key('finishedGame') &&
+      if($gameId==$_COOKIE['finishedGame'] &&
         gForm::verifyToken('feedback',$_REQUEST['token'])) {
           include __DIR__."/models/Game.php";
           Game::feedback($gameId, $_REQUEST['feedback']);
@@ -179,6 +177,7 @@ class MapController extends controller
 
     function indexAction ()
     {
+      view::set('gameId', $this->gameId);
       view::renderFile('index.php',GPACKAGE);
     }
 
@@ -238,7 +237,7 @@ class MapController extends controller
       $this->groundObjects = $levelMap['groundObjects'];
       $this->mapItems = $levelMap['mapItems'] ?? [];
       
-      $this->startPos = $this->entryPos(session::key('entryType'));
+      $this->startPos = $this->entryPos($_COOKIE['entryType']);
       return true;
     }
 
@@ -251,8 +250,6 @@ class MapController extends controller
     {
       include_once __DIR__."/models/Game.php";
       $gameId = Game::create($_REQUEST['name'], $_REQUEST['classId']);
-      //session::key('gameId', $gameId);
-      //session::key('level', 1);
       setcookie('level', 1, time() + (86400 * 30), "/");
       setcookie('gameId', $gameId, time() + (86400 * 30), "/");
     }
