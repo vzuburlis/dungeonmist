@@ -476,6 +476,7 @@ function setGameStatus(v) {
     equipMenu=document.getElementById("equip-menu")
     actionMenu=document.getElementById("action-menu")
     useMenu.style.display = 'inline-block'
+    equipMenu.style.display = 'inline-block'
     actionMenu.style.display = 'inline-block'
     if(v=='target' || v=='select-target') {
         btnCancel.style.display = 'inline-block'

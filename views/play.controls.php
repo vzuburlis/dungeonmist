@@ -17,17 +17,17 @@
 
   <table style="width:100%;height:100%;position:absolute;top:0;left:0">
   <tr>
-    <td>
+    <td><div onclick="event.preventDefault()"></div>
     <td><div onclick="keyPress(38)"></div>
-    <td>
+    <td><div onclick="event.preventDefault()"></div>
   <tr>
     <td><div onclick="keyPress(37)"></div>
     <td><div onclick="keyPress(90)"></div>
     <td><div onclick="keyPress(39)"></div>
   <tr>
-    <td>
+    <td><div onclick="event.preventDefault()"></div>
     <td><div onclick="keyPress(40)"></div>
-    <td>
+    <td><div onclick="event.preventDefault()"></div>
   </table>
 </div>
 

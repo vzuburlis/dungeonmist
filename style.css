@@ -18,7 +18,7 @@ body{
   width:100%;
 }
 .dir-btn {
-    width:2.5em; height:2.5em;
+    width: 3em; height:3em;
     display:block;
 }
 .response-btn {
@@ -38,7 +38,7 @@ body{
   margin: 3px 12px;
 }
 .com-btn {
-  filter:greyscale(100%); width:3.5em; height:3.5em;
+  filter:greyscale(100%); width:4em; height:4em;
   border: 1px solid grey;
   border-radius: 50%;
   margin: 3px;
@@ -111,10 +111,14 @@ button{
     display: inline-block;
     min-width: 200px;
 }
+.play-btn {
+  background: #579ca2;
+  border-color:#579ca2;
+}
 .play-btn:hover {
     color: white;
-    background: #ecc148;
-}
+    background: #579ca2;
+  }
 #use-menu--title, #equip-menu--title, #action-menu--title{
     font-family: 'Berkshire Swash', cursive;
     font-size: 2em;

@@ -1,14 +1,15 @@
 <?php
+$ppath = gila::base_url().'src/'.GPACKAGE.'/';
 $play_url = GPACKAGE.'/play';
 $pnk = new gTable('playerclass');
 $classes = $pnk->getRows();
 ?>
+<link href="<?=$ppath?>style.css?v=6" rel="stylesheet">
 <style>
 body{
     font-family: courier new;
     text-align: center;
     color: white;
-    /*background: url(<?=gila::base_url()?>src/<?=GPACKAGE?>/images/bg.png) no-repeat center center fixed;*/
     background-color: black;
     background-size: cover;
 }
@@ -62,7 +63,7 @@ body{
   <div id="main">
     <div id="game-title">Character Creation</div>
     <div class="row">
-      <div class="gm-9" style="padding:0 2em">
+      <div class="gm-8" style="padding:0 2em">
         <div id="class-selection" style="text-align:center">
           <div v-for="(playerclass,index) in classes" :class="[selectedClass==index ? 'class-selected' : '', 'class-card']" @click="selectedClass=index">
             <div class="class-avatar" :style="classImgStyle(playerclass)"></div>
@@ -74,10 +75,13 @@ body{
         </div>
       </div>
       
-      <div class="gm-3">
+      <div class="gm-4">
         <label class="g-form form-label">Character name:</label>
         <input class="g-input" v-model="name"><br><br>
-        <button @click="startgame()" class="g-btn fullwidth" :disabled="name==''"><b>Start Game</b></button>
+        <button @click="rollName()" class="play-btn"><b>Roll Name</b></button>
+        <br><br><br>
+        <a href="<?=gila::url('dungeonrl')?>" class="play-btn">Main Menu</a>
+        <button @click="startgame()" class="play-btn" :disabled="name==''"><b>Start Game</b></button>
       </div>
 
     </div>
@@ -87,9 +91,9 @@ body{
 <?=view::script("src/dungeonrl/vue.min.js")?>
 <script>
 var nameFr = [
-  ['An','Al','B','C','D','G','In','L','M','P','Q','R','S','W','Z'],
-  ['a','e','i','o','u','au','asi','arian','eldo','ou'],
-  ['ra','ren','la','len','lus','us','rel','kus','gusa','na','nos','ll']
+  ['An','Al','B','C','D','Ch','Dr','En','El','G','In','L','M','Os','P','Q','Ur','R','S','W','Z'],
+  ['a','e','i','o','u','au','asi','arian','eldo','ou','anier','ogyr','elia','elon'],
+  ['ra','ren','la','len','lus','us','rel','kus','gusa','na','nos','ll','th','nir']
 ]
 
 var app = new Vue({
@@ -115,8 +119,10 @@ var app = new Vue({
     },
     roll: function() {
       this.selectedClass = Math.floor(Math.random()*this.classes.length)
+      this.rollName()
+    },
+    rollName: function() {
       this.name = ''
-
       for(i in nameFr) {
         this.name += nameFr[i][Math.floor(Math.random()*nameFr[i].length)]
       }
