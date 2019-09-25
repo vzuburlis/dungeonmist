@@ -101,20 +101,18 @@ class MapController extends controller
     function updateAction()
     {
       include_once __DIR__."/models/Game.php";
-      //echo $this->gameId.' '.var_export($_REQUEST['player']);
       if(isset($_REQUEST['player']) && $this->gameId!=null) {
-        $newLevel = $_REQUEST['level'];
+        $newLevel = $_REQUEST['level'] ?? $this->level;
         $playerData = json_decode($_REQUEST['player'],true);
         // find the start position from using the previous level
-        // Game::load()
-        if($this->level < $newLevel) {
-          $entryType = 'upstairs';
-          $playerData['hp']+=4;
-          if($playerData['hp']>$playerData['maxhp']) $playerData['hp']=$playerData['maxhp'];
+        if($this->level != $newLevel) {
+          if($this->level < $newLevel) $entryType = 'upstairs';
+          if($this->level > $newLevel) $entryType = 'downstairs';
+          $entryType = $_REQUEST['entryType'] ?? $entryType ?? 'upstairs';
+          setcookie('entryType', $entryType, time() + (86400 * 30), "/");
+        } else {
+          setcookie('entryType', null, time() -1000, "/");
         }
-        if($this->level > $newLevel) $entryType = 'downstairs';
-        $entryType = $_REQUEST['entryType'] ?? $entryType ?? 'upstairs';
-        setcookie('entryType', $entryType, time() + (86400 * 30), "/");
         setcookie('level', $newLevel, time() + (86400 * 30), "/");
         Game::moveLevel($this->gameId, $newLevel, $playerData['gameTurn']);
         $file = $this->gamePath().'level'.$this->level.'.json';
@@ -158,7 +156,6 @@ class MapController extends controller
       $file = LOG_PATH.'/games/'.$gameId.'/@.json';
       $this->player = json_decode(file_get_contents($file),true);
       $this->player["sprite"] = ['player', (int)$class['spriteX'], (int)$class['spriteY']];
-
       view::renderFile('game.php',GPACKAGE);
     }
 
@@ -199,6 +196,8 @@ class MapController extends controller
 
       if(!$this->loadLevel()) {
         $this->dungeon ();
+        $this->player['x'] = $this->startPos[0];
+        $this->player['y'] = $this->startPos[1];
       }
       //$this->cave ();
       view::renderFile('play.php',GPACKAGE);
@@ -236,8 +235,11 @@ class MapController extends controller
       $this->levelTurns = $levelMap['turns'];
       $this->groundObjects = $levelMap['groundObjects'];
       $this->mapItems = $levelMap['mapItems'] ?? [];
-      
-      $this->startPos = $this->entryPos($_COOKIE['entryType']);
+      if($_COOKIE['entryType']) {
+        $this->startPos = $this->entryPos($_COOKIE['entryType']);
+        $this->player['x'] = $this->startPos[0];
+        $this->player['y'] = $this->startPos[1];
+      }
       return true;
     }
 

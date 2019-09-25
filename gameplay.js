@@ -516,6 +516,7 @@ document.onkeydown = function (e) {
 
 function keyPress (code) {
   value = gameStatus;
+  activeGame = true;
   if (value == 'play') keypressPlay(code);
   if (value == 'target') keypressTarget(code);
   if (value == 'use-menu') keypressUse(code);
@@ -802,7 +803,7 @@ function keypressPlay (code) {
       } while (player.turnsToRest>0 && gameStatus == "rest") // || new message
       setGameStatus('play');
       if(player.turnsToRest<1) logMsg('You are rested and ready to go on')
-      x = Math.floor(turns_rested/2)
+      x = Math.floor(turns_rested/3)
       player.addHP(x)
       renderMap();
     }
@@ -1023,6 +1024,13 @@ setInterval(function() {
     window.location.href = gameOverLocation;
   }
 }, 500);
+
+autoSave()
+setInterval(function() {
+  if(activeGame==true) {
+    autoSave()
+  }
+}, 5000);
 
 
 function moveAnimation(dx,dy) {

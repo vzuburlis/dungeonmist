@@ -100,7 +100,9 @@ button{
           <tr><th>e</th><td> Equip weapon/armor<td></tr>
           <tr><th>u</th><td> Use an item<td></tr>
           <tr><th>j</th><td> Jump<td></tr>
+          <tr><th>k</th><td> Kick a small monster<td></tr>
           <tr><th>f</th><td> Fire arrow<td></tr>
+          <tr><th>z</th><td> Pass your turn<td></tr>
           <tr><th>r</th><td> Rest<td></tr>
         </table>
       </div>

@@ -44,6 +44,7 @@ function moveLevel(direction=null) {
     fm.append('level', <?=$c->level?>-direction[2]);
   }
 
+  setGameStatus('wait')
   g.ajax({
       url: '<?=gila::base_url()?><?=$update_url?>',
       data: fm,
@@ -54,14 +55,29 @@ function moveLevel(direction=null) {
   })
 }
 
+function autoSave() {
+  fm = dataToUpdate()
+
+  g.ajax({
+      url: '<?=gila::base_url()?><?=$update_url?>',
+      data: fm,
+      method: 'post',
+      fn: function() {
+        setTimeout(function(){
+          activeGame = false;
+        }, 5000)
+      }
+  })
+}
+
 function dataToUpdate() {
   let fm=new FormData()
   fm.append('player', JSON.stringify(player));
   fm.append('level', <?=$c->level?>);
   mapString = ''
   for(i=0;i<mapWidth;i++) for(j=0;j<mapHeight;j++) mapString += map[i][j]
-  mapSize = [mapWidth, mapHeight] 
-  setGameStatus('wait')
+  mapSize = [mapWidth, mapHeight]
+
   fm.append('levelMap', JSON.stringify({
     //map: map,
     mapString: mapString,
@@ -78,14 +94,14 @@ function dataToUpdate() {
 }
 
 function permaDeath() {
-    setGameStatus('wait')
+  setGameStatus('wait')
   g.ajax({
-      url: '<?=gila::base_url()?><?=$permadeath_url?>',
-      data: dataToUpdate(),
-      method: 'post',
-      fn: function(){
-        document.getElementById('play-btn-container').style.display = "block"
-      }
+    url: '<?=gila::base_url()?><?=$permadeath_url?>',
+    data: dataToUpdate(),
+    method: 'post',
+    fn: function(){
+      document.getElementById('play-btn-container').style.display = "block"
+    }
   })
 }
 
