@@ -38,7 +38,7 @@ body{
     background: #579ca2;/*#ecc148;*/
 }
 .com-table, .hof-table {
-  margin:auto; max-width:200px;
+  margin:auto; max-width:400px;
   border-collapse: collapse;
 }
 .hof-table td {
@@ -95,15 +95,16 @@ button{
         <h2>Instructions</h2>
         <table class="com-table">
           <tr><th>arrow keys<br>w, a, s, d</th>
-            <td> Move one tile. If step on a monster your character hits it.<td></tr>
-          <tr><th>[space]</th><td> Go to next floor by stairs<td></tr>
-          <tr><th>e</th><td> Equip weapon/armor<td></tr>
-          <tr><th>u</th><td> Use an item<td></tr>
-          <tr><th>j</th><td> Jump<td></tr>
-          <tr><th>k</th><td> Kick a small monster<td></tr>
-          <tr><th>f</th><td> Fire arrow<td></tr>
-          <tr><th>z</th><td> Pass your turn<td></tr>
-          <tr><th>r</th><td> Rest<td></tr>
+            <td> Move one tile. If step on a monster your character hits it.</td></tr>
+          <tr><th>[space]</th><td> Go to next floor by stairs</td></tr>
+          <tr><th>e</th><td> Equip weapon/armor</td></tr>
+          <tr><th>u</th><td> Use an item</td></tr>
+          <tr><th>h</th><td> Search for hidden doors/traps</td></tr>
+          <tr><th>j</th><td> Jump over a tile or a small monster</td></tr>
+          <tr><th>k</th><td> Kick a small monster or an object</td></tr>
+          <tr><th>f</th><td> Fire arrow</td></tr>
+          <tr><th>z</th><td> Pass your turn</td></tr>
+          <tr><th>r</th><td> Rest</td></tr>
         </table>
       </div>
       <div v-if="guiview=='credits'">

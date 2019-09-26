@@ -686,9 +686,11 @@ function keypressTarget (code) {
 
 function revealTile(x,y) {
   if(obj = getObject(x,y)) {
-    if(typeof objectType[obj.type].reveal_to!='undefined') if(typeof obj.detected=='undefined') {
+    if(typeof obj.detected=='undefined') {
       obj.detected=true
-      obj.type = findObjectType(objectType[obj.type].reveal_to, obj.type);
+      if(typeof objectType[obj.type].reveal_to!='undefined') {
+        obj.type = findObjectType(objectType[obj.type].reveal_to, obj.type);
+      }
       logMsg("You find a "+objectType[obj.type].name);
     }
   }
@@ -870,6 +872,18 @@ function keypressPlay (code) {
       }
       popup.style.visibility = "visible"
       setGameStatus('use-menu')
+    }
+    else if (code == '72') { // h
+      logMsg('You are searching around.')
+      for(x=player.x-4; x<player.y+5; x++) {
+        for(y=player.y-4; y<player.y+5; y++) {
+          if(inMap(x,y) && mapRev[x][y]>1) {
+            found = revealTile(x,y)
+          }
+        }
+      }
+      renderMap()
+      runTurn()
     }
     else if (code == '69') { // e
       popup = document.getElementById("equip-menu")
