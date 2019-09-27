@@ -59,12 +59,16 @@ body{
     user-select: none;
 }
 #show-u-command{display:none}
-#statBox {
+#playerName, #levelBox {
     font-family: 'Berkshire Swash', cursive; font-size:24px;
-    margin:4px; text-align:left; /*display:grid; grid-template-columns: 1fr 1fr 1fr 1fr;*/
 }
-#statBox div {display:inline-block}
-#statBox img { width: 32px; height:32px; vertical-align:middle}
+#statBox {
+  display:inline-block;
+  margin:4px;
+  text-align:left; /*display:grid; grid-template-columns: 1fr 1fr 1fr 1fr;*/
+}
+#statBox div { display:inline-block; margin: 4px 0px;}
+#statBox img, #levelBox img { width: 32px; height:32px; vertical-align:middle}
 #statBox span { padding: 4px; }
 #pKey, #pChestKey{display:none}
 #map,#use-menu,#action-menu,#equip-menu{

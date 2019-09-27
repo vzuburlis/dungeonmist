@@ -47,6 +47,8 @@ function unitClass (options) {
     that.los = 5;
     that.audio = [];
     that.status = [];
+    that.attack = 0;
+    that.armor = 0;
 
     for(i in options) {
       that[i] = options[i]

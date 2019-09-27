@@ -119,12 +119,15 @@ function toggleMinimap() {
 
 function updateStats() {
   if(player.weapon!=null) {
-    pAttack.innerHTML = player.attack;
+    e = player.inventory[player.weapon]
+    pAttack.innerHTML = player.attack+' '+e.hp+'/'+itemType[e.itemType].hp;
+    if(player.attack>0) pAttack.innerHTML = '+'+pAttack.innerHTML
     eWeapon.style.display = 'inline-block';
   } else eWeapon.style.display = 'none';
 
   if(player.eArmor!=null) {
-    pArmor.innerHTML = player.armor;
+    e = player.inventory[player.armor]
+    pArmor.innerHTML = '['+player.armor+' '+e.hp+'/'+itemType[e.itemType].hp;
     eArmor.style.display = 'inline-block';
   } else eArmor.style.display = 'none';
 
