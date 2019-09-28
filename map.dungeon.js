@@ -56,7 +56,6 @@ function mapClass (options) {
       var sx=lx;
       var sy=ly;
       var length=that.dice(3)+that.dice(3)
-      //console.log('length: '+length)
       var w = that.dir[d][0]*length + (that.dir[d][0]==0?1:0);
     
       var h = that.dir[d][1]*length + (that.dir[d][1]==0?1:0);

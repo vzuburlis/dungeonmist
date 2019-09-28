@@ -33,80 +33,82 @@
 
 
 <p id="msgBox"></p>
-  <div id="statBox">
-    <div class="com-btn" style="background: rgba(0, 0, 0, 0)
-    url('src/dungeonrl/DawnLike/Characters/Player0.png') repeat scroll
-    -<?=$c->player['sprite'][1]*16?>px -<?=$c->player['sprite'][2]*16?>px;
-    width: 16px; height: 16px; transform: scale(2); vertical-align:middle"
-    onclick="keypressPlay(69)" style="vertical-align:middle"></div>
-    <div id="playerName"><?=$c->player['name']?></div>
-    <br><div id="eWeapon"><img src="<?=$tile_folder?>attack.png"><span id="pAttack">0<span></div>
-    <br><div id="eArmor"><img src="<?=$tile_folder?>armor.png"><span id="pArmor">0<span></div>
-    <div>
-      <img src="<?=$tile_folder?>key.png" id="pKey">
-      <img src="<?=$tile_folder?>chest_key.png" id="pChestKey">
-    </div>
-  </div>
-  <div id="levelBox" style="float:right">
-    Level <?=$c->level?>
-    <!--img class="com-btn" src="<?=$tile_folder?>../map.svg" onclick="toggleMinimap()" style="vertical-align:middle"-->
-    <img class="com-btn" src="<?=$tile_folder?>minimap.png" onclick="toggleMinimap()" style="vertical-align:middle">
-  </div>
 
-  <div id="play-btn-container">
-    <a href="<?=$new_url?>" class="play-btn">Play Again</a>
-    <br><br><br>
-    <p>Enjoyed the game? Follow me on <a target="_blank" href="https://twitter.com/zuburlis">twitter</a> and get notified for new releases and game features.</p>
+<div id="statBox">
+  <div class="com-btn" style="background: rgba(0, 0, 0, 0)
+  url('src/dungeonrl/DawnLike/Characters/Player0.png') repeat scroll
+  -<?=$c->player['sprite'][1]*16?>px -<?=$c->player['sprite'][2]*16?>px;
+  width: 16px; height: 16px; transform: scale(2); vertical-align:middle"
+  onclick="keypressPlay(69)" style="vertical-align:middle"></div>
+  <div id="playerName"><?=$c->player['name']?></div>
+  <br><div id="eWeapon"><img src="<?=$tile_folder?>attack.png"><span id="pAttack">0<span></div>
+  <br><div id="eArmor"><img src="<?=$tile_folder?>armor.png"><span id="pArmor">0<span></div>
+  <div>
+    <img src="<?=$tile_folder?>key.png" id="pKey">
+    <img src="<?=$tile_folder?>chest_key.png" id="pChestKey">
   </div>
+</div>
+<div id="levelBox" style="float:right">
+  Level <?=$c->level?>
+  <!--img class="com-btn" src="<?=$tile_folder?>../map.svg" onclick="toggleMinimap()" style="vertical-align:middle"-->
+  <img class="com-btn" src="<?=$tile_folder?>minimap.png" onclick="toggleMinimap()" style="vertical-align:middle">
+</div>
 
-  <div id="commands">
-    <div class="div-com com-btn" id="btnCheck" style="background:lightgreen;display:none" onclick="keypressTarget(32)">
-      <img src="<?=$tile_folder?>../images/check-mark.svg" style="width:100%">
-    </div>
-    <div class="div-com com-btn" id="btnCancel" style="background:red;display:none" onclick="keypressTarget(27)">
-      <img src="<?=$tile_folder?>../images/close.svg" style="width:100%">
-    </div>
-    <div class="div-com com-btn" id="btnCancelD" style="background:red;display:none" onclick="keypressDirection(27)">
-      <img src="<?=$tile_folder?>../images/close.svg" style="width:100%">
-    </div>
-    <img src="<?=$tile_folder?>potion.png" class="com-btn" onclick="keypressPlay(85)">
-    <img src="<?=$status_folder?>speed.png" class="com-btn" onclick="keypressPlay(220)">
-    <div class="div-com" id="btnArrows">
-      <img src="<?=$tile_folder?>arrow.png" class="com-btn" onclick="throwArrow()">
-      <span id="pArrows" class="pSpan"><span>
-    </div>
-    <div class="div-com" id="btnShield">
-      <img src="<?=$tile_folder?>shield.png" class="com-btn">
-      <span id="pShield" class="pSpan"><span>
-    </div>
-    <img src="<?=$tile_folder?>downstairs.png" class="com-btn com-down" onclick="keypressPlay(32)">
-  </div>
+<div id="play-btn-container">
+  <a href="<?=$new_url?>" class="play-btn">Play Again</a>
+  <br><br><br>
+  <p>Enjoyed the game? Follow me on <a target="_blank" href="https://twitter.com/zuburlis">twitter</a> and get notified for new releases and game features.</p>
+</div>
 
-  <div id="use-menu">
-    <div id="use-menu--title">Use Item <span onclick="keypressUse(27)" class="close">
-      <img src="<?=$tile_folder?>../images/close.svg">
-    </span></div>
-    <div id="use-menu--list"></div>
+<div id="commands">
+  <div class="div-com com-btn" id="btnCheck" style="background:lightgreen;display:none" onclick="keypressTarget(32)">
+    <img src="<?=$tile_folder?>../images/check-mark.svg" style="width:100%">
   </div>
+  <div class="div-com com-btn" id="btnCancel" style="background:red;display:none" onclick="keypressTarget(27)">
+    <img src="<?=$tile_folder?>../images/close.svg" style="width:100%">
+  </div>
+  <div class="div-com com-btn" id="btnCancelD" style="background:red;display:none" onclick="keypressDirection(27)">
+    <img src="<?=$tile_folder?>../images/close.svg" style="width:100%">
+  </div>
+  <img src="<?=$tile_folder?>potion.png" class="com-btn" onclick="keypressPlay(85)">
+  <img src="<?=$status_folder?>speed.png" class="com-btn" onclick="keypressPlay(220)">
+  <div class="div-com" id="btnArrows">
+    <img src="<?=$tile_folder?>arrow.png" class="com-btn" onclick="throwArrow()">
+    <span id="pArrows" class="pSpan"><span>
+  </div>
+  <div class="div-com" id="btnShield">
+    <img src="<?=$tile_folder?>shield.png" class="com-btn">
+    <span id="pShield" class="pSpan"><span>
+  </div>
+  <img src="<?=$tile_folder?>downstairs.png" class="com-btn com-down" onclick="keypressPlay(32)">
+</div>
 
-  <div id="equip-menu">
-    <div id="equip-menu--title">Equipment <span onclick="keypressEquip(27)" class="close">
-      <img src="<?=$tile_folder?>../images/close.svg">
-    </span></div>
-    <div id="equip-menu--list"></div>
-  </div>
+<div id="use-menu">
+  <div id="use-menu--title">Use Item <span onclick="keypressUse(27)" class="close">
+    <img src="<?=$tile_folder?>../images/close.svg">
+  </span></div>
+  <div id="use-menu--list"></div>
+</div>
 
-  <div id="action-menu">
-    <div id="action-menu--title">Actions <span onclick="closeActionMenu();" class="close">
-      <img src="<?=$tile_folder?>../images/close.svg">
-    </span></div>
-    <div id="action-menu--list">
-    <div class="menu-item" onclick="keypressPlay(74)">j <span class="item-name">Jump</span></div>
-    <div class="menu-item" onclick="keypressPlay(75)">k <span class="item-name">Kick</span></div>
-    <div class="menu-item" onclick="keypressPlay(82)">r <span class="item-name">Rest</span></div>
-    <div class="menu-item" onclick="keypressPlay(84)">t <span class="item-name">Target</span></div>
-    </div>
+<div id="equip-menu">
+  <div id="equip-menu--title">Equipment <span onclick="keypressEquip(27)" class="close">
+    <img src="<?=$tile_folder?>../images/close.svg">
+  </span></div>
+  <div id="equip-menu--list"></div>
+</div>
+
+<div id="action-menu">
+  <div id="action-menu--title">Actions <span onclick="closeActionMenu();" class="close">
+    <img src="<?=$tile_folder?>../images/close.svg">
+  </span></div>
+  <div id="action-menu--list">
+  <div class="menu-item" onclick="keypressPlay(72)">h <span class="item-name">Search</span></div>
+  <div class="menu-item" onclick="keypressPlay(74)">j <span class="item-name">Jump</span></div>
+  <div class="menu-item" onclick="keypressPlay(75)">k <span class="item-name">Kick</span></div>
+  <div class="menu-item" onclick="keypressPlay(82)">r <span class="item-name">Rest</span></div>
+  <div class="menu-item" onclick="keypressPlay(84)">t <span class="item-name">Target</span></div>
   </div>
+</div>
 
 <?php
 

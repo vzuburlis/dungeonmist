@@ -1,5 +1,4 @@
 <script>
-console.log(<?=json_encode($c->levelTask)?>)
 var gameStatus = 'loading'
 g.get('<?=$gamedata_url?>/<?=$c->gameId?>/monsters.json', function(data){
   monsterType = JSON.parse(data);

@@ -864,7 +864,6 @@ function keypressPlay (code) {
         comToItem[com] = i
 
         if(typeof _type.hp!='undefined') {
-          console.log(player.inventory[i].hp)
           hp=' '+player.inventory[i].hp+'/'+_type.hp
         } else hp=''
         list.innerHTML += '<div class="menu-item" onclick="keypressUse('+(com)+')">&#'+(com+32)+'; <div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div> <span class="item-name">'+getItemName(_itemType)+hp+'</span></div>'
@@ -875,7 +874,7 @@ function keypressPlay (code) {
     }
     else if (code == '72') { // h
       logMsg('You are searching around.')
-      for(x=player.x-4; x<player.y+5; x++) {
+      for(x=player.x-4; x<player.x+5; x++) {
         for(y=player.y-4; y<player.y+5; y++) {
           if(inMap(x,y) && mapRev[x][y]>1) {
             found = revealTile(x,y)
@@ -902,7 +901,6 @@ function keypressPlay (code) {
 
         if(player.weapon==i || player.eArmor==i) itemClass=' green'; else itemClass='';
         if(typeof _type.hp!='undefined') {
-          console.log(player.inventory[i].hp)
           hp=' '+player.inventory[i].hp+'/'+_type.hp+''
         } else hp=''
         _enc = null
@@ -1039,6 +1037,7 @@ setInterval(function() {
   }
 }, 500);
 
+activeGame = true;
 autoSave()
 setInterval(function() {
   if(activeGame==true) {

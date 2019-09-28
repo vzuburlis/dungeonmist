@@ -4,7 +4,7 @@ $play_url = GPACKAGE.'/play';
 $pnk = new gTable('playerclass');
 $classes = $pnk->getRows();
 ?>
-<link href="<?=$ppath?>style.css?v=6" rel="stylesheet">
+<link href="<?=$style_css_path?>" rel="stylesheet">
 <style>
 body{
     font-family: courier new;

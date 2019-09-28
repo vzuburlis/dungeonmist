@@ -6,6 +6,7 @@ return [
   'id'=>'id',
   'tools'=>['add','csv'],
   'commands'=> ['edit','delete'],
+  'pagination'=>25,
   'permissions'=>[
     'create'=>['admin'],
     'update'=>['admin'],

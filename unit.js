@@ -120,11 +120,11 @@ function unitClass (options) {
           return false;
         }
         if(map[that.x+dx][that.y+dy]==' ') {
-          logMsg("You dont wat to fall in the void");
+          logMsg("You dont want to fall in the void");
           return false;
         }
         if(map[that.x+dx][that.y+dy]=='l') {
-          logMsg("The lava is burning our feet!");
+          logMsg("The lava is burning your feet!");
           if(!that.hasAttr('flying') && !that.hasAttr('resist','fire')) that.addHP(-1);
         }
         if(map[that.x+dx][that.y+dy]==':') {
@@ -494,7 +494,6 @@ function unitClass (options) {
           visibleMonsterIds = visibleMonsters();
           for(mi of visibleMonsterIds) {
             mtype = monsterType[monsters[mi].type]
-            console.log(mtype.name,mtype.class,_type.class);
             if(typeof _type.class!='undefined')
             if(typeof mtype.class=='undefined' || mtype.class!=_type.class) continue;
             monsters[mi].hp -= 5+that.intelligence
@@ -647,7 +646,6 @@ function unitClass (options) {
 
     that.jump = function() {
       dir = [[0,-1],[1,0],[0,1],[-1,0]]
-      console.log(selectDirection)
       dx = dir[selectDirection][0]
       dy = dir[selectDirection][1]
       msg = 'You jump two steps'

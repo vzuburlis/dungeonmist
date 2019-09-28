@@ -70,16 +70,16 @@
   "effect": "+attack"
 },
 {
-    "sprite": ["shortwep", 1, 1],
-    "name": "Dagger",
-    "type": "weapon", "hp":20,
-    "effect": "+dexterity"
+  "sprite": ["shortwep", 1, 1],
+  "name": "Dagger",
+  "type": "weapon", "hp":20,
+  "effect": "+dexterity"
 },
 {
-    "sprite": ["shortwep", 7, 0],
-    "name": "Elf Sword",
-    "type": "weapon", "hp":20,
-    "effect": "+attack"
+  "sprite": ["shortwep", 7, 0],
+  "name": "Elf Sword",
+  "type": "weapon", "hp":20,
+  "effect": "+attack"
 },
 {
   "sprite": ["shortwep", 0, 1],
@@ -287,7 +287,7 @@
 {
     "sprite": ["gauze", 0, 0],
     "name": "Gauze",
-    "effect": "stop-bleed"
+    "effect": "stop-bleeding"
 },
 {
   "sprite": ["scroll", 6, 0],

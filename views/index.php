@@ -3,7 +3,7 @@ $ppath = gila::base_url().'src/'.GPACKAGE.'/';
 $playgame_url = GPACKAGE.'/play';
 $newgame_url = GPACKAGE.'/new';
 ?>
-<link href="<?=$ppath?>style.css?v=6" rel="stylesheet">
+<link href="<?=$style_css_path?>" rel="stylesheet">
 <style>
 body{
     font-family: courier new;

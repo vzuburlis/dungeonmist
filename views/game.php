@@ -80,7 +80,7 @@ button{
 
     <?=view::css("lib/gila.min.css")?>
     <?=view::script("lib/gila.min.js")?>
-    <?=view::script($ppath."unit.js?v=6")?>
+    <?=view::script($unit_js_path)?>
     <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
 </head>
 
@@ -141,4 +141,4 @@ function sendFeedback(feedback, token) {
 </script>
 <?php //include __DIR__.'/loadData.php'?>
 
-<?=view::script($ppath."gameplay.js?v=6")?>
+<?=view::script($game_js_path)?>

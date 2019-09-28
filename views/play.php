@@ -20,10 +20,10 @@ $permadeath_url = GPACKAGE.'/permadeath';
     <meta property="og:description" content="A free roguelike browser game" />
     <meta property="og:image"       content="https://caveofcenbeald.com/src/dungeonrl/images/bg.png" />
     <?=view::script("lib/gila.min.js")?>
-    <?=view::script($ppath."unit.js?v=6")?>
+    <?=view::script($unit_js_path)?>
     <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
-    <link href="<?=$ppath?>style.css?v=6" rel="stylesheet">
+    <link href="<?=$style_css_path?>" rel="stylesheet">
 </head>
 
 <body style="background:#000;overflow: hidden;">
@@ -142,4 +142,4 @@ updateStats();
 
 </script>
 
-<?=view::script($ppath."gameplay.js?v=9")?>
+<?=view::script($game_js_path)?>

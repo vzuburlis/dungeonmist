@@ -45,7 +45,7 @@ body{
   image-rendering: crisp-edges;
 }
 .com-down{display:none}
-#msgBox, #statBox {
+#msgBox {
     position:absolute;
     text-align: center;
     right:0;
@@ -66,6 +66,7 @@ body{
   display:inline-block;
   margin:4px;
   text-align:left; /*display:grid; grid-template-columns: 1fr 1fr 1fr 1fr;*/
+  float: left;
 }
 #statBox div { display:inline-block; margin: 4px 0px;}
 #statBox img, #levelBox img { width: 32px; height:32px; vertical-align:middle}
