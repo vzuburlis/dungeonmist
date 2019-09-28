@@ -867,16 +867,17 @@ class MapController extends controller
 
       //$i = $playerclass['item'] ? explode(',',$playerclass['item']) : []; 
       //for($j=0;$j<2;$j++) if(isset($i[$j])) {
-      //  $type=$this->findItemByName($i);
+      //  $type=$this->findItemByName('Candle');
       //  if(($eff = $this->itemType[$type]['effect'] ?? null) && $eff[0]=='+') {
       //    @$stat[substr($eff,1)]++;
       //  } else {
       //    $stat['inventory'][] = ['itemType'=>$type, 'stock'=>1];
       //  }
       //}
+      $stat['arrows'] = 6;
       
       if($playerclass['name']=='Hobbit') {
-          $stat['attack']-=1;
+          $stat['strength']-=1;
           $stat['hp']-=4;
           $stat['maxhp']-=4;
           $stat['dexterity']+=2;
@@ -887,20 +888,20 @@ class MapController extends controller
         $stat['arrows'] = 6;
       }
       if($playerclass['name']=='Orc') {
-        $stat['attack']++;
+        $stat['strength']++;
         $stat['intelligence']--;
         $stat['abilities'][] = "Darkvision";
         $stat['resist'][] = "poison";
         $stat['resist'][] = "disease";
       }
       if($playerclass['name']=='Dwarf') {
-        $stat['attack']++;
+        $stat['strength']++;
         $stat['dexterity']--;
         $stat['abilities'][] = "Darkvision";
         $stat['resist'][] = "poison";
       }
       if($playerclass['name']=='Sorcerer') {
-          $stat['attack']--;
+          $stat['strength']--;
           $stat['intelligence']++;
       }
       return $stat;

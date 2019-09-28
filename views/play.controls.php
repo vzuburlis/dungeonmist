@@ -43,15 +43,15 @@
   <div id="playerName"><?=$c->player['name']?></div>
   <br><div id="eWeapon"><img src="<?=$tile_folder?>attack.png"><span id="pAttack">0<span></div>
   <br><div id="eArmor"><img src="<?=$tile_folder?>armor.png"><span id="pArmor">0<span></div>
-  <div>
-    <img src="<?=$tile_folder?>key.png" id="pKey">
-    <img src="<?=$tile_folder?>chest_key.png" id="pChestKey">
-  </div>
 </div>
 <div id="levelBox" style="float:right">
   Level <?=$c->level?>
   <!--img class="com-btn" src="<?=$tile_folder?>../map.svg" onclick="toggleMinimap()" style="vertical-align:middle"-->
   <img class="com-btn" src="<?=$tile_folder?>minimap.png" onclick="toggleMinimap()" style="vertical-align:middle">
+  <br><div>
+    <img src="<?=$tile_folder?>key.png" id="pKey">
+    <img src="<?=$tile_folder?>chest_key.png" id="pChestKey">
+  </div>
 </div>
 
 <div id="play-btn-container">

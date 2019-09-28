@@ -575,10 +575,6 @@ function keypressEquip (code) {
                 logMsg("You wear the " + getItemName(_itemType));
               }
             }
-            // else {
-            //  logMsg("You use the " + getItemName(_itemType));
-            //  player.addEffect(_type.effect)
-            //}
 
             updateStats()
             popup = document.getElementById("equip-menu")
@@ -596,7 +592,7 @@ function keypressUse (code) {
         return
     }
     if(code>64 && code<81) {
-        i = comToItem[code]
+        let i = comToItem[code]
         if(i < player.inventory.length) {
             setGameStatus('play');
             _itemType = player.inventory[i].itemType
@@ -612,19 +608,23 @@ function keypressUse (code) {
               if(_type.effect_time>0) player.addStatus(_type.effect, _type.effect_time)
               player.addEffect(_type.effect)
             } else if(_type.sprite[0]=='book') {
-              logMsg("You spell the " + getItemName(_itemType));
-              if(_type.effect_time>0 && _type.target=='self') {
-                player.addStatus(_type.effect, _type.effect_time)
-                player.addEffect(_type.effect)
+              if(player.intelligence<1
+                  && Math.floor(Math.random()*(3-player.intelligence))<1) {
+                logMsg("You fail to spell the " + getItemName(_itemType), true);
+              } else {
+                logMsg("You spell the " + getItemName(_itemType));
+                if(_type.effect_time>0 && _type.target=='self') {
+                  player.addStatus(_type.effect, _type.effect_time)
+                  player.addEffect(_type.effect)
+                }
+                player.spellEffect(_type.effect, _type)
               }
-              player.spellEffect(_type.effect, _type)
               player.inventory[i].hp--
               if(player.inventory[i].hp==0) player.inventory[i].stock--
               if(player.inventory[i].stock==0) player.deleteFromInv(i);
             } else if(_type.sprite[0]=='light') {
               logMsg("You light the " + getItemName(_itemType));
               if(_type.effect_time>0) player.addStatus(_type.effect, _type.effect_time)
-              player.addEffect(_type.effect)
             } else if(_type.sprite[0]=='scroll'){
               player.identify('items',_itemType)
               logMsg("You read the " + getItemName(_itemType));

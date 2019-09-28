@@ -11,3 +11,11 @@ $pnk->update();
 
 $pnk = new gTable('src/dungeonrl/tables/game.php');
 $pnk->update();
+
+/*
+
+1.0.3
+Fix bug with spellbooks
+Weapons(swords,stuff) use damage modifiers
+
+*/

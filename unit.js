@@ -234,7 +234,7 @@ function unitClass (options) {
         }
         mi = getMonster(that.x+dx,that.y+dy);
         if(mi > -1) {
-          attack_points = 6 + Math.floor(Math.random() * 5) + that.attack;
+          attack_points = 6 + Math.floor(Math.random() * 5) + that.meleeDamage();
             if(attack_points<0) attack_points = 0
             if(typeof monsters[mi].armor!='undefined') {
               attack_points -= monsters[mi].armor
@@ -297,6 +297,19 @@ function unitClass (options) {
 
         turnPlayed = true;
         return true
+    }
+
+
+    that.meleeDamage = function () {
+      extra = 0
+      if(that.weapon!==null) {
+        _type = that.inventory[that.weapon].itemType
+        if(typeof itemType[_type].attackMod!='undefined') {
+          mod = itemType[_type].attackMod
+          extra += that[mod]
+        }
+      }
+      return that.attack+extra;
     }
 
     that.diceAttack = function () {
@@ -585,8 +598,10 @@ function unitClass (options) {
               } else {
                 // create an arrow
               }
-              renderMap()
+              //if(!that.hasAbility('Archery')) player.turnTime -= 100
               setGameStatus('play')
+              runTurn()
+              renderMap()
             }, 60*d);
           }
         }

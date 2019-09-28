@@ -120,8 +120,9 @@ function toggleMinimap() {
 function updateStats() {
   if(player.weapon!=null) {
     e = player.inventory[player.weapon]
-    pAttack.innerHTML = player.attack+' '+e.hp+'/'+itemType[e.itemType].hp;
-    if(player.attack>0) pAttack.innerHTML = '+'+pAttack.innerHTML
+    damage = player.meleeDamage()
+    pAttack.innerHTML = damage+' '+e.hp+'/'+itemType[e.itemType].hp;
+    if(damage>0) pAttack.innerHTML = '+'+pAttack.innerHTML
     eWeapon.style.display = 'inline-block';
   } else eWeapon.style.display = 'none';
 

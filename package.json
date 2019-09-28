@@ -1,6 +1,6 @@
 {
 	"name": "Dungeon RL",
-	"version":"1.0.2",
+	"version":"1.0.3",
 	"description":"A turn based roguelite game.",
   "url":"gilacms.com",
   "assets": ["DawnLike","tile"]
