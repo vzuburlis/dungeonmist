@@ -336,6 +336,7 @@ function unitClass (options) {
           that.deleteFromInv(i)
         }
       }
+      updateStats()
     }
 
     that.removeItem = function(i) {

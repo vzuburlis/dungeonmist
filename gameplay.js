@@ -687,11 +687,12 @@ function keypressTarget (code) {
 function revealTile(x,y) {
   if(obj = getObject(x,y)) {
     if(typeof obj.detected=='undefined') {
-      obj.detected=true
-      if(typeof objectType[obj.type].reveal_to!='undefined') {
+      if(typeof objectType[obj.type].reveal_to!='undefined'
+      || typeof objectType[obj.type].hidden!='undefined') {
+        obj.detected=true
         obj.type = findObjectType(objectType[obj.type].reveal_to, obj.type);
+        logMsg("You find a "+objectType[obj.type].name);
       }
-      logMsg("You find a "+objectType[obj.type].name);
     }
   }
 }
@@ -873,6 +874,7 @@ function keypressPlay (code) {
       setGameStatus('use-menu')
     }
     else if (code == '72') { // h
+      closeActionMenu();
       logMsg('You are searching around.')
       for(x=player.x-4; x<player.x+5; x++) {
         for(y=player.y-4; y<player.y+5; y++) {
