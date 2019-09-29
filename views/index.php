@@ -108,16 +108,15 @@ button{
         </table>
       </div>
       <div v-if="guiview=='credits'">
-        <h2>Credits</h2>
-        <p>Development: Vasilis Zoumpourlis (<a target="_blank" href="https://twitter.com/zuburlis">twitter</a>)</p>
-        <p>Tileset: DawnLike by DragonDePlatino (<a target="_blank" href="https://twitter.com/DragonDePlatino">twitter</a>)</p>
+        <h2>Development</h2>
+        <p>Vasilis Zoumpourlis (<a target="_blank" href="https://twitter.com/zuburlis">twitter</a>)</p>
+        <h2>Graphics</h2>
+        <p>Tileset DawnLike by DragonDePlatino (<a target="_blank" href="https://twitter.com/DragonDePlatino">twitter</a>)</p>
+        <br>
         <p>
-          If you enjoy this game, follow me on <a target="_blank" href="https://twitter.com/zuburlis">twitter</a> to get notified for new releases.
+          If you enjoy this game, join <a target="_blank" href="https://www.facebook.com/dungeonmist">facebook page</a> to get notified for new releases.
         </p>
-
       </div>
-      <br>
-      <br>
       <br>
       <br>
       <div style="display:none">

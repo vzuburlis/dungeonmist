@@ -419,6 +419,7 @@ function unitClass (options) {
     }
 
     that.addEffect = function (_effect) {
+      if(_effect==null) return
       if(_effect[0]=="+") {
         that[_effect.substring(1)]++
         if(_effect=='+arrows') that.arrows+=5
@@ -448,6 +449,7 @@ function unitClass (options) {
     }
 
     that.removeEffect = function (_effect) {
+      if(_effect==null) return
       if(_effect[0]=="+") {
         that[_effect.substring(1)]--
       }

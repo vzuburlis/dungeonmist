@@ -127,7 +127,7 @@ function updateStats() {
   } else eWeapon.style.display = 'none';
 
   if(player.eArmor!=null) {
-    e = player.inventory[player.armor]
+    e = player.inventory[player.eArmor]
     pArmor.innerHTML = '['+player.armor+' '+e.hp+'/'+itemType[e.itemType].hp;
     eArmor.style.display = 'inline-block';
   } else eArmor.style.display = 'none';

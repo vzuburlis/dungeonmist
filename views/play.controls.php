@@ -56,21 +56,20 @@
 
 <div id="play-btn-container">
   <a href="<?=$new_url?>" class="play-btn">Play Again</a>
-  <br><br><br>
-  <p>Enjoyed the game? Follow me on <a target="_blank" href="https://twitter.com/zuburlis">twitter</a> and get notified for new releases and game features.</p>
+  <br>
+  <a target="_blank" href="https://www.facebook.com/dungeonmist" class="g-btn">Facebook Page</a>
 </div>
 
 <div id="commands">
-  <div class="div-com com-btn" id="btnCheck" style="background:lightgreen;display:none" onclick="keypressTarget(32)">
-    <img src="<?=$tile_folder?>../images/check-mark.svg" style="width:100%">
-  </div>
   <div class="div-com com-btn" id="btnCancel" style="background:red;display:none" onclick="keypressTarget(27)">
     <img src="<?=$tile_folder?>../images/close.svg" style="width:100%">
   </div>
   <div class="div-com com-btn" id="btnCancelD" style="background:red;display:none" onclick="keypressDirection(27)">
     <img src="<?=$tile_folder?>../images/close.svg" style="width:100%">
   </div>
-  <img src="<?=$tile_folder?>potion.png" class="com-btn" onclick="keypressPlay(85)">
+  <div>
+    <img src="<?=$tile_folder?>potion.png" class="com-btn" onclick="keypressPlay(85)">
+  </div>
   <img src="<?=$status_folder?>speed.png" class="com-btn" onclick="keypressPlay(220)">
   <div class="div-com" id="btnArrows">
     <img src="<?=$tile_folder?>arrow.png" class="com-btn" onclick="throwArrow()">
@@ -80,7 +79,14 @@
     <img src="<?=$tile_folder?>shield.png" class="com-btn">
     <span id="pShield" class="pSpan"><span>
   </div>
-  <img src="<?=$tile_folder?>downstairs.png" class="com-btn com-down" onclick="keypressPlay(32)">
+</div>
+
+<img src="<?=$tile_folder?>downstairs.png" class="com-btn com-down"
+  style="display: block; position: absolute; right: 6em; bottom: 1em;"
+  onclick="keypressPlay(32)">
+<div class="div-com com-btn" onclick="keypressTarget(32)"
+  id="btnCheck" style="display: block; position: absolute; right: 6em; bottom: 1em; background:lightgreen;display:none">
+  <img src="<?=$tile_folder?>../images/check-mark.svg" style="width:100%">
 </div>
 
 <div id="use-menu">
