@@ -48,56 +48,86 @@
 {
   "sprite": ["shortwep", 0, 0],
   "name": "Short Sword",
-  "type": "weapon", "hp":20,
+  "type": "weapon", "hp":32,
   "effect": "+attack"
 },
 {
   "sprite": ["shortwep", 1, 0],
   "name": "Black Sword",
-  "type": "weapon", "hp":20,
+  "type": "weapon", "hp":32,
   "effect": "+attack"
 },
 {
   "sprite": ["shortwep", 2, 0],
   "name": "Glow Sword",
-  "type": "weapon", "hp":20,
+  "type": "weapon", "hp":32,
   "effect": "+attack"
 },
 {
   "sprite": ["shortwep", 3, 0],
   "name": "Glass Knife",
-  "type": "weapon", "hp":20,
+  "type": "weapon", "hp":32,
   "effect": "+dexterity", "attackMod": "dexterity"
 },
 {
   "sprite": ["shortwep", 1, 1],
   "name": "Dagger",
-  "type": "weapon", "hp":20,
+  "type": "weapon", "hp":32,
   "effect": "+dexterity", "attackMod": "dexterity"
 },
 {
   "sprite": ["shortwep", 7, 0],
-  "name": "Elf Sword",
-  "type": "weapon", "hp":20,
-  "effect": "+attack"
+  "name": "Elven Dagger",
+  "type": "weapon", "hp":32,
+  "effect": "+attack", "attackMod": "dexterity"
 },
 {
   "sprite": ["shortwep", 0, 1],
   "name": "Sword",
-  "type": "weapon", "hp":20,
+  "type": "weapon", "hp":32,
   "effect": "+attack"
 },
 {
   "sprite": ["shortwep", 0, 4],
   "name": "Mace",
-  "type": "weapon", "hp":20,
+  "type": "weapon", "hp":32,
   "effect": "+attack"
 },
 {
   "sprite": ["shortwep", 1, 4],
   "name": "Chain Mace",
-  "type": "weapon", "hp":20,
+  "type": "weapon", "hp":32,
   "effect": "+attack"
+},
+{
+  "sprite": ["shield", 0, 0],
+  "name": "Shield",
+  "type": "shield", "hp":3,
+  "effect": "+block"
+},
+{
+  "sprite": ["shield", 1, 0],
+  "name": "Shield",
+  "type": "shield", "hp":4,
+  "effect": "+block"
+},
+{
+  "sprite": ["shield", 2, 0],
+  "name": "Shield",
+  "type": "shield", "hp":5,
+  "effect": "+block"
+},
+{
+  "sprite": ["shield", 3, 0],
+  "name": "Shield",
+  "type": "shield", "hp":6,
+  "effect": "+block"
+},
+{
+  "sprite": ["shield", 4, 0],
+  "name": "Shield",
+  "type": "shield", "hp":7,
+  "effect": "+block"
 },
 {
   "sprite": ["staff", 0, 0],
@@ -144,19 +174,19 @@
 {
   "sprite": ["armor", 0, 0],
   "name": "Armor",
-  "type": "armor", "hp":20,
+  "type": "armor", "hp":2,
   "effect": "+armor"
 },
 {
   "sprite": ["armor", 0, 1],
   "name": "Scale Armor",
-  "type": "armor", "hp":20,
+  "type": "armor", "hp":40,
   "effect": "+armor"
 },
 {
   "sprite": ["armor", 1, 0],
   "name": "Bronze Armor",
-  "type": "armor", "hp":20,
+  "type": "armor", "hp":32,
   "effect": "+armor"
 },
 {
@@ -170,12 +200,6 @@
   "name": "Chest Key",
   "autopick": true,
   "mapItem": "chest_key"
-},
-{
-  "sprite": ["shield", 6, 0],
-  "name": "Shield Repair",
-  "autopick": true,
-  "effect": "+shield"
 },
 {
   "sprite": ["book", 0, 0],

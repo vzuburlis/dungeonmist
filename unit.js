@@ -22,7 +22,7 @@ var effectUserStats = {
   "strength": {"attack":2, "armor":2},
   "bless": {"attack":1, "armor":1},
   "curse": {"attack":-1, "armor":-1},
-  "poison": {"speed":-2, "maxhp":-6}
+  "poison": {"speed":-2, "maxhp":-8}
 }
 var effectUserStatus = {
     "bless": {"curse":0},
@@ -44,6 +44,7 @@ function unitClass (options) {
     that.direction = -1;
     that.weapon = null;
     that.eArmor = null;
+    that.eShield = null
     that.los = 5;
     that.audio = [];
     that.status = [];
@@ -312,6 +313,10 @@ function unitClass (options) {
       return that.attack+extra;
     }
 
+    that.arrowDamage = function () {
+      return 5+Math.floor(Math.random() * 9)
+    }
+
     that.diceAttack = function () {
         wa=0
         if(that.weapon!==null) {
@@ -320,28 +325,13 @@ function unitClass (options) {
         return 6 + Math.floor(Math.random() * 5) + that.attack +wa;
     }
 
-    that.addWeaponHP = function (x) {
-      if(that.weapon!=null) {
-        that.inventory[that.weapon].hp +=x
-        item = that.inventory[that.weapon]
-        if(itemType[item.itemType].hp<item.hp) {
-          that.inventory[that.weapon] = itemType[item.itemType].hp
-        }
-        if(0>item.hp) {
-          i = that.weapon
-          logMsg("Your "+getItemName(item.itemType)+" breaks!",true)
-          that.removeWeapon()
-          that.deleteFromInv(i)
-        }
-      }
-    }
 
     that.addItemHP = function (i, x) {
       if(i!=null) {
         that.inventory[i].hp +=x
         item = that.inventory[i]
         if(itemType[item.itemType].hp < item.hp) {
-          that.inventory[i] = itemType[item.itemType].hp
+          that.inventory[i].hp = itemType[item.itemType].hp
         }
         if(0 > item.hp) {
           logMsg("Your "+getItemName(item.itemType)+" breaks!",true)
@@ -354,40 +344,48 @@ function unitClass (options) {
 
     that.removeItem = function(i) {
       if(i!=null) {
-        item = that.inventory[that.weapon]
+        item = that.inventory[i]
         that.removeEffect(itemType[item.itemType].effect)
         if(that.weapon==i) that.weapon = null
         if(that.eArmor==i) that.eArmor = null
-      }
-    }
-    that.removeWeapon = function() {
-      if(that.weapon!=null) {
-        item = that.inventory[that.weapon]
-        that.removeEffect(itemType[item.itemType].effect)
-        that.weapon = null
+        if(that.eShield==i) that.eShield = null
       }
     }
 
-    that.wieldWeapon = function (i) {
-      that.removeWeapon()
-      that.weapon = i
+    that.wield = function(spot, i) {
+      that.unwield(spot)
+      that[spot] = i
       item = that.inventory[i]
       that.addEffect(itemType[item.itemType].effect)
     }
-    that.removeArmor = function() {
-      if(that.eArmor!=null) {
-        item = that.inventory[that.eArmor]
+    that.unwield = function(spot) {
+      if(that[spot]!=null) {
+        item = that.inventory[that[spot]]
         that.removeEffect(itemType[item.itemType].effect)
-        that.eArmor = null
+        that[spot] = null
       }
     }
 
-    that.equipArmor = function (i) {
-      that.removeArmor()
-      that.eArmor = i
-      item = that.inventory[i]
-      that.addEffect(itemType[item.itemType].effect)
-    }
+//    that.wieldWeapon = function (i) {
+//      that.removeWeapon()
+//      that.weapon = i
+//      item = that.inventory[i]
+//      that.addEffect(itemType[item.itemType].effect)
+//    }
+//    that.removeArmor = function() {
+//      if(that.eArmor!=null) {
+//        item = that.inventory[that.eArmor]
+//        that.removeEffect(itemType[item.itemType].effect)
+//        that.eArmor = null
+//      }
+//    }
+//
+//    that.equipArmor = function (i) {
+//      that.removeArmor()
+//      that.eArmor = i
+//      item = that.inventory[i]
+//      that.addEffect(itemType[item.itemType].effect)
+//    }
 
     that.pickItem = function (iti) {
       let _type = items[iti][2]
@@ -422,10 +420,12 @@ function unitClass (options) {
       if(_effect==null) return
       if(_effect[0]=="+") {
         that[_effect.substring(1)]++
-        if(_effect=='+arrows') that.arrows+=5
+        if(_effect=='+arrows' && that.hasAbility('Archery')) {
+          that.arrows+=5
+        }
       }
       if(_effect=="heal") {
-        that.addHP(16)
+        that.addHP(20)
       }
 
       if(typeof effectUserStats[_effect]!='undefined') {
@@ -440,7 +440,7 @@ function unitClass (options) {
       }
 
       if(_effect=="bless") {
-        that.addHP(24)
+        that.addHP(32)
       }
 
       if(that.hp>that.maxhp) that.hp=that.maxhp
@@ -596,7 +596,7 @@ function unitClass (options) {
                 }
               }
               if(monster !== null) {
-                monster.hp -= 5+Math.floor(Math.random() * 6)
+                monster.hp -= that.arrowDamage()
               } else {
                 // create an arrow
               }
@@ -781,11 +781,13 @@ function unitClass (options) {
 
             if(attack_points<0) attack_points = 0;
 
-            if(player.shield>0) {
-              if(Math.floor(Math.random() * (10-player.shield))<1) {
-                player.shield = player.shield-1
+            if(typeof player.eShield!=null) {
+              if(Math.floor(Math.random() * 8) == 0) {
+                if(attack_points>1) {
+                  player.addItemHP(player.eShield, -1)
+                  updateStats()
+                }
                 logMsg("You block the attack of "+that.typeName());
-                updateStats()
                 return
               }
             }

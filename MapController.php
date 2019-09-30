@@ -1,5 +1,6 @@
 <?php
 define("GPACKAGE",'dungeonrl');
+define("MAX_HP",32);
 
 class MapController extends controller
 {
@@ -40,9 +41,9 @@ class MapController extends controller
     function __construct ()
     {
       include_once __DIR__."/models/Game.php";
-      view::set('style_css_path', gila::base_url().'src/'.GPACKAGE.'/style.css?v=103');
-      view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=103');
-      view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=103');
+      view::set('style_css_path', gila::base_url().'src/'.GPACKAGE.'/style.css?v=104');
+      view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=104');
+      view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=104');
 
         //self::admin();
         $this->gameId = $_COOKIE['gameId'] ?? null;
@@ -429,6 +430,9 @@ class MapController extends controller
 
     function canAddTaskAtRoom($taskIndex, $roomIndex, $roomN) {
       $stepRoomX = [];
+      if(isset($this->taskType[$taskIndex]['level'])) {
+        if($this->taskType[$taskIndex]['level']>$this->level) return false;
+      }
       $_tasks = count($this->taskType[$taskIndex]);
       
       foreach($this->taskType[$taskIndex] as $j=>$taskStep) {
@@ -625,7 +629,7 @@ class MapController extends controller
     }
     function newMonster($pos, $type) {
       $level = $this->monsterType[$type]['level'] ?? 5;
-      $maxhp = $level<8 ? 16+$level : 24;
+      $maxhp = $level<8 ? 16+$level*2 : MAX_HP;
       return [
           "x"=>$pos[0],"y"=>$pos[1],"type"=>$type,
           "hp"=>$maxhp,"maxhp"=>$maxhp,"turnTime"=>0
@@ -849,8 +853,8 @@ class MapController extends controller
       $stat = [
         "name"=> $game['name'],
         "className"=> $playerclass['name'],
-          "hp" => 24,
-          "maxhp" => 24,
+          "hp" => MAX_HP,
+          "maxhp" => MAX_HP,
           "attack" => 0,
           "strength"=> 0,
           "dexterity"=> 0,
@@ -867,25 +871,25 @@ class MapController extends controller
 
       //$i = $playerclass['item'] ? explode(',',$playerclass['item']) : []; 
       //for($j=0;$j<2;$j++) if(isset($i[$j])) {
-      //  $type=$this->findItemByName('Candle');
-      //  if(($eff = $this->itemType[$type]['effect'] ?? null) && $eff[0]=='+') {
+//        $type=$this->findItemByName('Shield');
+        //  if(($eff = $this->itemType[$type]['effect'] ?? null) && $eff[0]=='+') {
       //    @$stat[substr($eff,1)]++;
       //  } else {
-      //    $stat['inventory'][] = ['itemType'=>$type, 'stock'=>1];
-      //  }
+//        $stat['inventory'][] = ['itemType'=>$type, 'hp'=>3, 'stock'=>1];
+        //  }
       //}
-      $stat['arrows'] = 6;
       
       if($playerclass['name']=='Hobbit') {
           $stat['strength']-=1;
-          $stat['hp']-=4;
-          $stat['maxhp']-=4;
+          $stat['hp']-=6;
+          $stat['maxhp']-=6;
           $stat['dexterity']+=2;
           $stat['abilities'][] = "DetectTraps";
           //$stat['abilities'][] = "LockPick";
       }
       if($playerclass['name']=='Ranger') {
         $stat['arrows'] = 6;
+        $stat['abilities'][] = 'Archery';
       }
       if($playerclass['name']=='Orc') {
         $stat['strength']++;

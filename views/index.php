@@ -105,6 +105,7 @@ button{
           <tr><th>f</th><td> Fire arrow</td></tr>
           <tr><th>z</th><td> Pass your turn</td></tr>
           <tr><th>r</th><td> Rest</td></tr>
+          <tr><th>z</th><td> Pass your turn</td></tr>
         </table>
       </div>
       <div v-if="guiview=='credits'">

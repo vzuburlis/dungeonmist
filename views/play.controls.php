@@ -42,11 +42,11 @@
   onclick="keypressPlay(69)" style="vertical-align:middle"></div>
   <div id="playerName"><?=$c->player['name']?></div>
   <br><div id="eWeapon"><img src="<?=$tile_folder?>attack.png"><span id="pAttack">0<span></div>
+  <br><div id="eShield"><img src="<?=$tile_folder?>shield.png"><span id="pShield">0<span></div>
   <br><div id="eArmor"><img src="<?=$tile_folder?>armor.png"><span id="pArmor">0<span></div>
 </div>
 <div id="levelBox" style="float:right">
   Level <?=$c->level?>
-  <!--img class="com-btn" src="<?=$tile_folder?>../map.svg" onclick="toggleMinimap()" style="vertical-align:middle"-->
   <img class="com-btn" src="<?=$tile_folder?>minimap.png" onclick="toggleMinimap()" style="vertical-align:middle">
   <br><div>
     <img src="<?=$tile_folder?>key.png" id="pKey">
@@ -57,7 +57,8 @@
 <div id="play-btn-container">
   <a href="<?=$new_url?>" class="play-btn">Play Again</a>
   <br>
-  <a target="_blank" href="https://www.facebook.com/dungeonmist" class="g-btn">Facebook Page</a>
+  <a target="_blank" href="https://www.facebook.com/dungeonmist"
+   class="play-btn" style="background:#4080ff;border-color:#4080ff;">Facebook Page</a>
 </div>
 
 <div id="commands">
@@ -75,17 +76,13 @@
     <img src="<?=$tile_folder?>arrow.png" class="com-btn" onclick="throwArrow()">
     <span id="pArrows" class="pSpan"><span>
   </div>
-  <div class="div-com" id="btnShield">
-    <img src="<?=$tile_folder?>shield.png" class="com-btn">
-    <span id="pShield" class="pSpan"><span>
-  </div>
 </div>
 
 <img src="<?=$tile_folder?>downstairs.png" class="com-btn com-down"
   style="display: block; position: absolute; right: 6em; bottom: 1em;"
   onclick="keypressPlay(32)">
 <div class="div-com com-btn" onclick="keypressTarget(32)"
-  id="btnCheck" style="display: block; position: absolute; right: 6em; bottom: 1em; background:lightgreen;display:none">
+  id="btnCheck" style="display: none; position: absolute; right: 6em; bottom: 1em; background:lightgreen;display:none">
   <img src="<?=$tile_folder?>../images/check-mark.svg" style="width:100%">
 </div>
 

@@ -553,26 +553,34 @@ function keypressEquip (code) {
             setGameStatus('play');
             _itemType = player.inventory[i].itemType
             _type = itemType[_itemType]
-            if(_type.type!='weapon' && _type.type!='armor' && _type.type!='spellbook') {
+            if(_type.type!='weapon' && _type.type!='armor' && _type.type!='shield' && _type.type!='spellbook') {
               player.inventory[i].stock--
               if(player.inventory[i].stock==0) player.deleteFromInv(i);
             }
 
             if(_type.type=='weapon') {
               if(i==player.weapon) {
-                player.removeWeapon()
+                player.unwield('weapon')//removeWeapon()
                 logMsg("You hand the " + getItemName(_itemType));
               } else {
-                player.wieldWeapon(i)
+                player.wield('weapon', i)//Weapon(i)
                 logMsg("You wield the " + getItemName(_itemType));
               }
             } else if(_type.type=='armor') {
               if(i==player.eArmor) {
-                player.removeArmor()
+                player.unwield('eArmor')//removeArmor()
                 logMsg("You take off the " + getItemName(_itemType));
               } else {
-                player.equipArmor(i)
+                player.wield('eArmor', i)//equipArmor(i)
                 logMsg("You wear the " + getItemName(_itemType));
+              }
+            } else if(_type.type=='shield') {
+              if(i==player.eShield) {
+                player.unwield('eShield')
+                logMsg("You hide the " + getItemName(_itemType));
+              } else {
+                player.wield('eShield', i)
+                logMsg("You wield the " + getItemName(_itemType));
               }
             }
 
@@ -597,7 +605,7 @@ function keypressUse (code) {
             setGameStatus('play');
             _itemType = player.inventory[i].itemType
             _type = itemType[_itemType]
-            if(_type.type!='weapon' && _type.type!='armor' && _type.type!='spellbook') {
+            if(_type.type!='weapon' && _type.type!='shield' && _type.type!='armor' && _type.type!='spellbook') {
               player.inventory[i].stock--
               if(player.inventory[i].stock==0) player.deleteFromInv(i);
             }
@@ -798,7 +806,7 @@ function keypressPlay (code) {
       closeActionMenu();
       setGameStatus('rest')
       let turns_rested=0
-      if(player.turnsToRest>1600) player.turnsToRest = 1600
+      if(player.turnsToRest>2100) player.turnsToRest = 1600
       do {
           runTurn();
           player.turnsToRest-=50 //rest 5 times faster
@@ -856,12 +864,14 @@ function keypressPlay (code) {
       com = 65
       comToItem = []
       for(i=0; i<player.inventory.length; i++) {
+        if(typeof player.inventory[i].itemType=='undefined') continue
         _itemType = player.inventory[i].itemType
+        if(typeof itemType[_itemType]=='undefined') continue
         _type = itemType[_itemType]
         src = itemImg[_type.sprite[0]].src
         sx = _type.sprite[1]*16+'px'
         sy = _type.sprite[2]*16+'px'
-        if(_type.type=='weapon' || _type.type=='armor') continue;
+        if(_type.type=='weapon' || _type.type=='armor' || _type.type=='shield') continue;
         comToItem[com] = i
 
         if(typeof _type.hp!='undefined') {
@@ -893,15 +903,17 @@ function keypressPlay (code) {
       com = 65;
       comToItem = [];
       for(i=0; i<player.inventory.length; i++) {
+        if(typeof player.inventory[i].itemType=='undefined') continue
         _itemType = player.inventory[i].itemType
+        if(typeof itemType[_itemType]=='undefined') continue
         _type = itemType[_itemType]
         src = itemImg[_type.sprite[0]].src
         sx = _type.sprite[1]*16+'px'
         sy = _type.sprite[2]*16+'px'
-        if(_type.type!='weapon' && _type.type!='armor') continue;
+        if(_type.type!='weapon' && _type.type!='armor' && _type.type!='shield') continue;
         comToItem[com] = i
 
-        if(player.weapon==i || player.eArmor==i) itemClass=' green'; else itemClass='';
+        if(player.weapon==i || player.eArmor==i || player.eShield==i) itemClass=' green'; else itemClass='';
         if(typeof _type.hp!='undefined') {
           hp=' '+player.inventory[i].hp+'/'+_type.hp+''
         } else hp=''

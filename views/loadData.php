@@ -167,6 +167,7 @@ player = unitClass({
     sprite: <?=json_encode($c->player['sprite'])?>,
     weapon: <?=$c->player['weapon'] ?? 'null'?>,
     eArmor: <?=$c->player['eArmor'] ?? 'null'?>,
+    eShield: <?=$c->player['eShield'] ?? 'null'?>,
     lore: <?=json_encode($c->player['lore'] ?? ['items'=>[]])?>,
     gameTurn: <?=$c->player['gameTurn'] ?? '0'?>,
     name: '<?=$c->player['name'] ?>',

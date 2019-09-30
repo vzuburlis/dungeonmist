@@ -28,7 +28,8 @@
   [
     {
       "name": "secretDoor",
-      "door1_object": "Secret Door"
+      "door1_object": "Secret Door",
+      "level": 2
     }
   ],
   [
@@ -89,6 +90,14 @@
   ],
   [
     {
+      "name": "scroll_of_map",
+      "block_object":"Small Chest",
+      "object_item":["Scroll of Map", "Potion of Health"],
+      "level":3
+    }
+  ],
+  [
+    {
       "name": "barrel",
       "block_object":["Barrel","Elf Barrel"],
       "object_item":["Arrow", null]
@@ -103,7 +112,8 @@
   [
     {
       "name": "firecamp",
-      "block_object":["Firecamp"]
+      "block_object":["Firecamp"],
+      "level":3
     }
   ],
   [
@@ -133,7 +143,8 @@
   [
     {
       "name": "greenwaters",
-      "room_tile":"-"
+      "room_tile":"-",
+      "level":2
     }
   ],
   [
@@ -145,7 +156,8 @@
   [
     {
       "name": "lava",
-      "room_tile":"l"
+      "room_tile":"l",
+      "level":2
     }
   ],
   [
@@ -153,7 +165,8 @@
       "name": "blood",
       "ground_objects": ["Blood1","Blood2","Blood3","Blood4"],
       "room_desc": "You sniff the smell of the fresh blood.",
-      "chance": 10
+      "chance": 10,
+      "level":2
     }
   ],
   [
@@ -161,7 +174,8 @@
       "name": "trap",
       "room_object": "Spikes Trap (Armed)",
       "room_desc": "You sense a danger in your way.",
-      "chance": 50
+      "chance": 50,
+      "level":3
     }
   ]
 ]

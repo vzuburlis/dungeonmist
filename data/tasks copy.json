@@ -22,7 +22,7 @@
       "item":["Scroll of Holy Words", "Potion of Bless"]
     },
     {
-      "spawnBy": {"class":"z"}
+      "monsters": ["Skeleton", "Skeleton", "Skeleton"]
     }
   ],
   [

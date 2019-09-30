@@ -4,6 +4,7 @@ class MapDungeon
 {
   public $mapHeight = 36;
   public $mapWidth = 36;
+  public $level = 36;
   public $map = [];
   public $mapRev = [];
   public $room = [];
@@ -17,9 +18,10 @@ class MapDungeon
   public $voronoi = [];
   public $dir = [[0,-1],[1,0],[0,1],[-1,0]]; // up right down left
 
-    function __construct($w, $h) {
+    function __construct($w, $h, $level = 1) {
       $this->mapHeight = (int)$h;
       $this->mapWidth = (int)$w;
+      $this->level = (int)$level;
     }
 
     function createDungeon()

@@ -132,8 +132,14 @@ function updateStats() {
     eArmor.style.display = 'inline-block';
   } else eArmor.style.display = 'none';
 
-  pShield.innerHTML = player.shield;
-  if(player.shield>0) btnShield.style.display='inline-block'; else btnShield.style.display='none';
+  if(player.eShield!=null) {
+    e = player.inventory[player.eShield]
+    pShield.innerHTML = '( '+e.hp+'/'+itemType[e.itemType].hp;
+    eShield.style.display = 'inline-block';
+  } else eShield.style.display = 'none';
+
+  //pShield.innerHTML = player.shield;
+  //if(player.shield>0) btnShield.style.display='inline-block'; else btnShield.style.display='none';
   pArrows.innerHTML = player.arrows;
   if(player.arrows>0) btnArrows.style.display='inline-block'; else btnArrows.style.display='none';
   if(mapItems.includes('key')) document.getElementById("pKey").style.display = 'inline-block'
