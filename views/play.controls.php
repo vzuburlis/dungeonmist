@@ -79,7 +79,7 @@
 </div>
 
 <img src="<?=$tile_folder?>downstairs.png" class="com-btn com-down"
-  style="display: block; position: absolute; right: 6em; bottom: 1em;"
+  style="display: none; position: absolute; right: 6em; bottom: 1em;"
   onclick="keypressPlay(32)">
 <div class="div-com com-btn" onclick="keypressTarget(32)"
   id="btnCheck" style="display: none; position: absolute; right: 6em; bottom: 1em; background:lightgreen;display:none">

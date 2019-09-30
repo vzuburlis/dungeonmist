@@ -813,7 +813,7 @@ function keypressPlay (code) {
           turns_rested++
       } while (player.turnsToRest>0 && gameStatus == "rest") // || new message
       setGameStatus('play');
-      if(player.turnsToRest<1) logMsg('You are rested and ready to go on')
+      if(player.turnsToRest<1) logMsg('You are rested and ready to continue')
       x = Math.floor(turns_rested/3)
       player.addHP(x)
       renderMap();

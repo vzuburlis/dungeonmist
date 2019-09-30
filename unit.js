@@ -616,6 +616,7 @@ function unitClass (options) {
     that.deleteFromInv = function (i) {
         if(that.weapon!=null && that.weapon>i) that.weapon--
         if(that.eArmor!=null && that.eArmor>i) that.eArmor--
+        if(that.eShield!=null && that.eShield>i) that.eShield--
         that.inventory.splice(i,1)
     }
 

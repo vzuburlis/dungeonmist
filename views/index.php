@@ -78,9 +78,11 @@ button{
         <?php 
         global $db;
         $gameT = new gTable('game');
-        $res = $gameT->getRows(null, [
+        $res = $gameT->getRows([
+          'end_time'=>['gt'=>0]
+        ], [
           'select'=>['name', 'level', 'game_time'],
-          'limit'=>5,
+          'limit'=>8,
           'orderby'=>['level'=>'desc','id'=>'desc']
         ]);
         ?>
