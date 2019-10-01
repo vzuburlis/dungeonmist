@@ -1,9 +1,12 @@
 
+*1.0.5*
+Traps and other stuff are added progressively.
+Added medium weapons
+
 *1.0.4*
 Ranger can have extra arrows.
-Shields are items that can be wielded.
+Shields now are items that can be wielded.
 Increase hit points of player 30%.
-Traps and other stuff are added progressively.
 
 *1.0.1*
 New Class: Dwarf Warrior

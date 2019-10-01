@@ -430,8 +430,8 @@ class MapController extends controller
 
     function canAddTaskAtRoom($taskIndex, $roomIndex, $roomN) {
       $stepRoomX = [];
-      if(isset($this->taskType[$taskIndex]['level'])) {
-        if($this->taskType[$taskIndex]['level']>$this->level) return false;
+      if(isset($this->taskType[$taskIndex][0]['level'])) {
+        if($this->taskType[$taskIndex][0]['level']>$this->level) return false;
       }
       $_tasks = count($this->taskType[$taskIndex]);
       
@@ -778,7 +778,9 @@ class MapController extends controller
     function randomItemType() {
       do {
         $rtype = rand(0, $this->itemTypeN-1);
-      } while($this->itemType[$rtype]['name'][0]=='+');
+      } while($this->itemType[$rtype]['name'][0]=='+' ||
+        (isset($this->itemType[$type]['level']) 
+          && $this->itemType[$type]['level']>$this->level));
       return $rtype;
     }
     function addGroundObject($pos, $name) {
@@ -795,10 +797,7 @@ class MapController extends controller
       $this->groundObjects[] = ['x'=>$pos[0], 'y'=>$pos[1], 'type'=>$type];
     }
     function randItem($pos) {
-        //do{
-            $type = rand(0,$this->itemTypeN-1);
-        //}while(abs($this->monsterType[$type]['level'] - $this->level)>1);
-        $this->addItem($pos, $type);
+        $this->addItem($pos, randomItemType());
     }
     function roomVoronoiTile($pos, $t) {
       $sx=$pos[0];$sy=$pos[1];$w=$pos[2];$h=$pos[3];
