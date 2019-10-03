@@ -249,6 +249,13 @@
   "target": "select"
 },
 {
+  "sprite": ["book", 4, 1],
+  "name": "Burning Hands",
+  "type": "spellbook", "hp":12,
+  "effect": "burn",
+  "target": "direction"
+},
+{
   "sprite": ["book", 3, 0],
   "name": "Lightning",
   "type": "spellbook", "hp":10,
@@ -361,10 +368,16 @@
 },
 {
   "sprite": ["scroll", 4, 2],
-  "name": "Magic Missile",
+  "name": "Scroll of Magic Missile",
   "autopick": true,
   "effect": "arrow",
   "target": "select"
+},
+{
+  "sprite": ["scroll", 4, 2],
+  "name": "Scroll of Burning Hands",
+  "effect": "burn",
+  "target": "direction"
 },
 {
   "sprite": ["ammo", 5, 2],

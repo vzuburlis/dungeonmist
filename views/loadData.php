@@ -113,6 +113,7 @@ itemImgPath = [
     ['decor0','Objects/Decor0.png'],
     ['decor1','Objects/Decor1.png'],
     ['ground0','Objects/Ground0.png'],
+    ['effect0','Objects/Effect0.png'],
     ['key','Items/Key.png'],
     ['gauze','../tile/gauze.png'],
     ['light','Items/Light.png'],

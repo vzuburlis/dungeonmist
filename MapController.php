@@ -870,11 +870,11 @@ class MapController extends controller
 
       //$i = $playerclass['item'] ? explode(',',$playerclass['item']) : []; 
       //for($j=0;$j<2;$j++) if(isset($i[$j])) {
-//        $type=$this->findItemByName('Shield');
+//        $type=$this->findItemByName('Burning Hands');
         //  if(($eff = $this->itemType[$type]['effect'] ?? null) && $eff[0]=='+') {
       //    @$stat[substr($eff,1)]++;
       //  } else {
-//        $stat['inventory'][] = ['itemType'=>$type, 'hp'=>3, 'stock'=>1];
+//        $stat['inventory'][] = ['itemType'=>$type, 'hp'=>10, 'stock'=>1];
         //  }
       //}
       

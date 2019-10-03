@@ -246,6 +246,7 @@ function unitClass (options) {
             if(monsters[mi].hp<0) monsters[mi].hp==0;
             _logMsg = "You hit the "+monsters[mi].typeName()+' dealing '+attack_points+' damage'
             logMsg(_logMsg);
+            animateEffect(that.x+dx, that.y+dy, itemImg['effect0'], 4, 21, 2);
 
             if(that.weapon!=null) if(typeof that.inventory[that.weapon].enchantment!='undefined') {
               if(Math.floor(Math.random()*4)==0) {
@@ -495,6 +496,23 @@ function unitClass (options) {
                 }
             }
         }
+        if(_effect=="burn") {
+          setGameStatus('select-direction')
+          renderMap()
+          logMsg('Select a direction');
+          selectTarget.action = function() {
+            dir = [[0,-1],[1,0],[0,1],[-1,0]]
+            dx = dir[selectDirection][0]
+            dy = dir[selectDirection][1]
+            //z = Math.floor(Math.random()*4)*2
+            //zz = Math.floor(Math.random()*3)
+            animateEffect(that.x+dx, that.y+dy, itemImg['effect0'], 0, 21, 2);
+            mi = getMonster(that.x+dx,that.y+dy);
+            if(mi > -1) {
+              monsters[mi].hp -= 7+Math.floor(Math.random()*5)+that.intelligence
+            }
+          }
+        }
         if(_effect=="damage") {
           visibleMonsterIds = visibleMonsters();
           for(mi of visibleMonsterIds) {
@@ -618,9 +636,6 @@ function unitClass (options) {
       obj = getObject(that.x+dx,that.y+dy)
       if(obj!=null) {
         objType = objectType[obj.type]
-        //if(typeof objType.switch_to!='undefined') {
-        //  logMsg("You cannot open the gate. There must be a switch somewhere.");
-        //}
         logMsg('You kick the '+objType.name)
         if(typeof objType.kick_to!='undefined') {
             obj.type = findObjectType(objType.kick_to, obj.type);
@@ -629,13 +644,14 @@ function unitClass (options) {
       }
       mi = getMonster(that.x+dx,that.y+dy);
       if(mi > -1) {
-        attack_points = 6 + Math.floor(Math.random() * 5) + that.attack;
+        attack_points = 4 + Math.floor(Math.random() * 4) + that.strength;
           if(attack_points<0) attack_points = 0
           monsters[mi].hp-=attack_points;
           if(monsters[mi].hp<0) monsters[mi].hp==0;
           logMsg("You kick the "+monsters[mi].typeName()+' dealing '+attack_points+' damage');
           that.removeStatus('invisible')
           swingAudio.play();
+          if(!monsters[mi].hasAttr('flying'))
           if(!isBlocked(monsters[mi].x+dx, monsters[mi].y+dy)) {
             monsters[mi].x +=dx
             monsters[mi].y +=dy
@@ -645,17 +661,20 @@ function unitClass (options) {
               monsters.splice(mi,1)
             }
           }
+          that.turnTime -= 50;
           turnPlayed = true;
+      }
+      else {
+        logMsg('You kick on the air')
       }
 
       setGameStatus('play')
-      logMsg('You kick on the air')
     }
 
     that.jump = function() {
       dir = [[0,-1],[1,0],[0,1],[-1,0]]
-      dx = dir[selectDirection][0]
-      dy = dir[selectDirection][1]
+      let dx = dir[selectDirection][0]
+      let dy = dir[selectDirection][1]
       msg = 'You jump two steps'
       if(map[that.x+dx][that.y+dy]=='#' || map[that.x+dx][that.y+dy]=='C') {
         logMsg('You cannot jump to this direction')
@@ -674,6 +693,7 @@ function unitClass (options) {
         return false
       }
 
+      runTurn()
       setGameStatus('play')
       logMsg(msg)
       that.x +=dx+dx
@@ -982,6 +1002,24 @@ function drawArrow(sx, sy, ex, ey, step) {
   context.moveTo((mx+dx*step)*32+16, (my+dy*step)*32+16);
   context.lineTo((mx+dx*step+stepx)*32+16, (my+dy*step+stepy)*32+16);
   context.stroke(); 
+}
+
+function animateEffect(x, y, img, sx, sy, f, step=100) {
+  let _x = x
+  let _y = y
+  let _img = img
+  setGameStatus('wait')
+  for(let i=0;i<f;i++) {
+    setTimeout(function() {
+      renderMap()
+      drawSprite(_x, _y, _img, sx+i, sy)
+    }, i*step);
+  }
+  setTimeout(function() {
+    logMsg('fire')
+    renderMap()
+    setGameStatus('play')
+  }, f*step);
 }
 
 function isBlocked(x, y) {

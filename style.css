@@ -51,8 +51,9 @@ body{
     right:0;
     left:0;
     top:20px;
+    font-size:80%;
 }
-#msgBox>span{ background: black; font-size:80%;}
+#msgBox>span{ background: black; }
 #msgBox, #minimap{
     pointer-events : none;
     -moz-user-select: none; /* Firefox */

@@ -1,4 +1,8 @@
 
+*1.0.7*
+Delay player's turn on kick and jump
+New spell: Burning Hands
+
 *1.0.6*
 Reduced the font size from messages
 Weapons from level 5 may be enchanted
