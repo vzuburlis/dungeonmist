@@ -1,6 +1,6 @@
 <script>
 var gameStatus = 'loading'
-g.get('<?=$gamedata_url?>/<?=$c->gameId?>/monsters.json', function(data){
+g.get('<?=$gamedata_url?>/<?=$c->gameId?>/monsters.json?v=107', function(data){
   monsterType = JSON.parse(data);
   assetLoaded('monsters');
 })
@@ -8,11 +8,11 @@ itemType = <?=json_encode($c->itemType)?>;
 g.get('<?=$gamedata_url?>/<?=$c->gameId?>/items.json', function(data){
   assetLoaded('items');
 })
-g.get('<?=$ppath?>data/itemEnchantments.json?v=9', function(data){
+g.get('<?=$ppath?>data/itemEnchantments.json?v=107', function(data){
   itemEnchantment = JSON.parse(data);
   assetLoaded('itemEnchantments');
 })
-g.get('<?=$ppath?>data/objects.json?v=9', function(data){
+g.get('<?=$ppath?>data/objects.json?v=107', function(data){
   objectType = JSON.parse(data);
   assetLoaded('objects');
 })

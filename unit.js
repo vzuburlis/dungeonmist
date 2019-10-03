@@ -246,7 +246,7 @@ function unitClass (options) {
             if(monsters[mi].hp<0) monsters[mi].hp==0;
             _logMsg = "You hit the "+monsters[mi].typeName()+' dealing '+attack_points+' damage'
             logMsg(_logMsg);
-            animateEffect(that.x+dx, that.y+dy, itemImg['effect0'], 4, 21, 2);
+            //animateEffect(that.x+dx, that.y+dy, itemImg['effect0'], 4, 21, 2);
 
             if(that.weapon!=null) if(typeof that.inventory[that.weapon].enchantment!='undefined') {
               if(Math.floor(Math.random()*4)==0) {
