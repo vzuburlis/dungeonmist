@@ -9,6 +9,7 @@ g.get('<?=$gamedata_url?>/<?=$c->gameId?>/items.json', function(data){
   assetLoaded('items');
 })
 g.get('<?=$ppath?>data/itemEnchantments.json?v=9', function(data){
+  itemEnchantment = JSON.parse(data);
   assetLoaded('itemEnchantments');
 })
 g.get('<?=$ppath?>data/objects.json?v=9', function(data){

@@ -32,8 +32,6 @@
 </div>
 
 
-<p id="msgBox"></p>
-
 <div id="statBox">
   <div class="com-btn" style="background: rgba(0, 0, 0, 0)
   url('src/dungeonrl/DawnLike/Characters/Player0.png') repeat scroll
@@ -53,6 +51,7 @@
     <img src="<?=$tile_folder?>chest_key.png" id="pChestKey">
   </div>
 </div>
+<p id="msgBox"></p>
 
 <div id="play-btn-container">
   <a href="<?=$new_url?>" class="play-btn">Play Again</a>

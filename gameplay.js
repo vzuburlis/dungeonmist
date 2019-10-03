@@ -461,10 +461,10 @@ function getItem(x,y) {
 function logMsg(msg, block=false) {
   if(block) {
     msg = '<span style="color:yellow">'+msg+'</span>';
-  } else msg += '<br>';
+  } else msg = '<span>'+msg+'</span>';
   if(gameStatus=='rest') gameStatus='play';
   logMessages.push([player.gameTurn, msg, block])
-  document.getElementById("msgBox").innerHTML += msg;
+  document.getElementById("msgBox").innerHTML += '<br>'+msg;
 }
 
 function setGameStatus(v) {
@@ -762,7 +762,7 @@ function drawSelectRect() {
       case '=': x='Water';break;
       case ';': x='Ant sand';break;
     }
-    document.getElementById("msgBox").innerHTML = x;
+    document.getElementById("msgBox").innerHTML = '<span>'+x+'</span>';
   }
   x = targetx-player.x+renderWidth
   y = targety-player.y+renderHeight

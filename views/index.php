@@ -185,6 +185,7 @@ g.get('<?=$ppath?>data/objects.json', function(data){
 
 </script>
 
+<?php if(gila::base_url()!='http://localhost/gilacms/') { ?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130027935-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -192,3 +193,4 @@ g.get('<?=$ppath?>data/objects.json', function(data){
   gtag('js', new Date());
   gtag('config', 'UA-130027935-1');
 </script>
+<?php } ?>

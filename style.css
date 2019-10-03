@@ -50,8 +50,9 @@ body{
     text-align: center;
     right:0;
     left:0;
+    top:20px;
 }
-#msgBox{ top:32px;}
+#msgBox>span{ background: black; font-size:80%;}
 #msgBox, #minimap{
     pointer-events : none;
     -moz-user-select: none; /* Firefox */
@@ -65,7 +66,7 @@ body{
 }
 #statBox {
   display:inline-block;
-  margin:4px;
+  margin:0;
   text-align:left; /*display:grid; grid-template-columns: 1fr 1fr 1fr 1fr;*/
   float: left;
 }

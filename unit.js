@@ -244,17 +244,24 @@ function unitClass (options) {
 
             monsters[mi].hp-=attack_points;
             if(monsters[mi].hp<0) monsters[mi].hp==0;
-            logMsg("You hit the "+monsters[mi].typeName()+' dealing '+attack_points+' damage');
+            _logMsg = "You hit the "+monsters[mi].typeName()+' dealing '+attack_points+' damage'
+            logMsg(_logMsg);
 
             if(that.weapon!=null) if(typeof that.inventory[that.weapon].enchantment!='undefined') {
-              if(Math.floor(Math.random()*1)==0) {
+              if(Math.floor(Math.random()*4)==0) {
                 _i = that.inventory[that.weapon].enchantment
                 _en = itemEnchantment[_i]
                 if(typeof _en[1]!='undefined') {
-                  if(_en[0]=='critical') attack_points = attack_points*2
+                  if(_en[1]=='critical') attack_points = Math.floor(attack_points*1.5)
+                  if(_en[1]=='curse') monsters[mi].addStatus("curse", 12)
+                  if(_en[1]=='confuze') monsters[mi].addStatus("confuze", 6)
+                  if(_en[1]=='draw-life') that.addHP(4)
+                  if(_en[1]=='holy' && monsters[mi].hasAttr("class", "z")) attack_points += 8
 
-                  if(!player.identified('enchantment',_i)) if(typeof _en[2]!='undefined') {
-                    logMsg(_en[2], true)
+                  if(!player.identified('enchantment',_i)) {
+                    if(typeof _en[2]!='undefined') {
+                      logMsg(_en[2], true)
+                    }
                     player.identify('enchantment',_i)
                   }
                 }
@@ -366,27 +373,6 @@ function unitClass (options) {
       }
     }
 
-//    that.wieldWeapon = function (i) {
-//      that.removeWeapon()
-//      that.weapon = i
-//      item = that.inventory[i]
-//      that.addEffect(itemType[item.itemType].effect)
-//    }
-//    that.removeArmor = function() {
-//      if(that.eArmor!=null) {
-//        item = that.inventory[that.eArmor]
-//        that.removeEffect(itemType[item.itemType].effect)
-//        that.eArmor = null
-//      }
-//    }
-//
-//    that.equipArmor = function (i) {
-//      that.removeArmor()
-//      that.eArmor = i
-//      item = that.inventory[i]
-//      that.addEffect(itemType[item.itemType].effect)
-//    }
-
     that.pickItem = function (iti) {
       let _type = items[iti][2]
       _name = itemType[_type].name
@@ -402,6 +388,9 @@ function unitClass (options) {
           that.addEffect(itemType[_type].effect)
         }
       } else {
+        if(gameLevel>4) if(Math.floor(Math.random()*8)==0) {
+          _data.enchantment = Math.floor(Math.random()*itemEnchantment.length)
+        }
         that.inventory.push(_data)
       }
       items.splice(iti, 1);
@@ -689,12 +678,6 @@ function unitClass (options) {
       logMsg(msg)
       that.x +=dx+dx
       that.y +=dy+dy
-
-      //gameStatus='wait'
-      //setTimeout(function(){
-      //  renderMap()
-      //  gameStatus='play'
-      //}, 60*d);
 
       return true
     }

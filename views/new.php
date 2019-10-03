@@ -135,6 +135,7 @@ var app = new Vue({
 
 </script>
 
+<?php if(gila::base_url()!='http://localhost/gilacms/') { ?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130027935-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -142,3 +143,4 @@ var app = new Vue({
   gtag('js', new Date());
   gtag('config', 'UA-130027935-1');
 </script>
+<?php } ?>

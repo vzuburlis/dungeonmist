@@ -115,13 +115,7 @@ button{
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'UA-130027935-1');
-</script>
 <script>
 function sendFeedback(feedback, token) {
   let fm=new FormData()
@@ -139,6 +133,14 @@ function sendFeedback(feedback, token) {
 }
 
 </script>
-<?php //include __DIR__.'/loadData.php'?>
-
 <?=view::script($game_js_path)?>
+
+<?php if(gila::base_url()!='http://localhost/gilacms/') { ?>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130027935-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-130027935-1');
+</script>
+<?php } ?>
