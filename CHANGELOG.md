@@ -1,4 +1,8 @@
 
+*1.0.8*
+Added sound for fire and shock attack
+New spell: Shocking Grasp
+
 *1.0.7*
 Delay player's turn on kick and jump
 New spell: Burning Hands
