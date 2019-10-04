@@ -2,6 +2,8 @@ var swingAudio = new Audio('src/dungeonrl/sfx/swing2.wav');
 var blastAudio = new Audio('src/dungeonrl/sfx/blast.mp3');
 var opendoorAudio = new Audio('src/dungeonrl/sfx/open_door.mp3');
 var arrowAudio = new Audio('src/dungeonrl/sfx/arrow.mp3');
+var fireballAudio = new Audio('src/dungeonrl/sfx/fireball.mp3');
+
 //var bgAudio = new Audio('src/dungeonrl/loop.mp3');
 //bgAudio.loop=true
 //bgAudio.volume=0.1
@@ -506,10 +508,28 @@ function unitClass (options) {
             dy = dir[selectDirection][1]
             //z = Math.floor(Math.random()*4)*2
             //zz = Math.floor(Math.random()*3)
+            fireballAudio.play()
             animateEffect(that.x+dx, that.y+dy, itemImg['effect0'], 0, 21, 2);
             mi = getMonster(that.x+dx,that.y+dy);
             if(mi > -1) {
-              monsters[mi].hp -= 7+Math.floor(Math.random()*5)+that.intelligence
+              monsters[mi].hp -= 7+Math.floor(Math.random()*7)+that.intelligence
+            }
+          }
+        }
+        if(_effect=="shock") {
+          setGameStatus('select-direction')
+          renderMap()
+          logMsg('Select a direction');
+          selectTarget.action = function() {
+            dir = [[0,-1],[1,0],[0,1],[-1,0]]
+            dx = dir[selectDirection][0]
+            dy = dir[selectDirection][1]
+            fireballAudio.play()
+            animateEffect(that.x+dx, that.y+dy, itemImg['effect0'], 6, 21, 2);
+            mi = getMonster(that.x+dx,that.y+dy);
+            if(mi > -1) {
+              monsters[mi].hp -= 5+Math.floor(Math.random()*(5+that.intelligence))
+              monsters[mi].turnTime -= 50
             }
           }
         }
@@ -936,7 +956,9 @@ function unitClass (options) {
 
     that.identify = function (category, i) {
       if(typeof that.lore[category]=='undefined') that.lore[category]=[];
+      if(that.lore[category].includes(i)) return false
       that.lore[category].push(i)
+      return true
     }
 
     that.identified = function (category, i) {
@@ -1016,7 +1038,6 @@ function animateEffect(x, y, img, sx, sy, f, step=100) {
     }, i*step);
   }
   setTimeout(function() {
-    logMsg('fire')
     renderMap()
     setGameStatus('play')
   }, f*step);

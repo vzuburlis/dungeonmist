@@ -611,8 +611,8 @@ function keypressUse (code) {
             }
 
             if(_type.sprite[0]=='potion') {
-              player.identify('items',_itemType)
-              logMsg("You drink the " + getItemName(_itemType));
+              _idf = player.identify('items',_itemType)
+              logMsg("You drink the " + getItemName(_itemType), _idf);
               if(_type.effect_time>0) player.addStatus(_type.effect, _type.effect_time)
               player.addEffect(_type.effect)
             } else if(_type.sprite[0]=='book') {
@@ -634,8 +634,8 @@ function keypressUse (code) {
               logMsg("You light the " + getItemName(_itemType));
               if(_type.effect_time>0) player.addStatus(_type.effect, _type.effect_time)
             } else if(_type.sprite[0]=='scroll'){
-              player.identify('items',_itemType)
-              logMsg("You read the " + getItemName(_itemType));
+              _idf = player.identify('items',_itemType)
+              logMsg("You read the " + getItemName(_itemType), _idf);
               if(_type.effect_time>0 && _type.target=='self') {
                 player.addStatus(_type.effect, _type.effect_time)
                 player.addEffect(_type.effect)

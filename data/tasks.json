@@ -105,8 +105,15 @@
   ],
   [
     {
+      "name": "broken_barrel",
+      "block_object":["Broken Barrel","Broken Barrel"]
+    }
+  ],
+  [
+    {
       "name": "jumpvoid",
-      "step_tile":" "
+      "step_tile":" ",
+      "level":2
     }
   ],
   [

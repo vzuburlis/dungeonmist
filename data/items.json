@@ -251,8 +251,15 @@
 {
   "sprite": ["book", 4, 1],
   "name": "Burning Hands",
-  "type": "spellbook", "hp":12,
+  "type": "spellbook", "hp":8,
   "effect": "burn",
+  "target": "direction"
+},
+{
+  "sprite": ["book", 4, 1],
+  "name": "Shocking Grasp",
+  "type": "spellbook", "hp":9,
+  "effect": "shock",
   "target": "direction"
 },
 {
@@ -374,9 +381,15 @@
   "target": "select"
 },
 {
-  "sprite": ["scroll", 4, 2],
+  "sprite": ["scroll", 6, 2],
   "name": "Scroll of Burning Hands",
   "effect": "burn",
+  "target": "direction"
+},
+{
+  "sprite": ["scroll", 6, 3],
+  "name": "Scroll of Shocking Grasp",
+  "effect": "shock",
   "target": "direction"
 },
 {
