@@ -41,6 +41,7 @@
 },
 {
   "sprite": ["light", 0, 0],
+  "stock": true,
   "name": "Candle",
   "effect": "light",
   "effect_time": 150
@@ -48,6 +49,7 @@
 {
   "level":5,
   "sprite": ["light", 3, 0],
+  "stock": true,
   "name": "Lamp",
   "effect": "light",
   "effect_time": 250
@@ -66,7 +68,7 @@
 },
 {
   "sprite": ["shortwep", 2, 0],
-  "name": "Glow Sword",
+  "name": "Glow Knife",
   "type": "weapon", "hp":18,
   "effect": "+attack"
 },
@@ -85,7 +87,7 @@
 {
   "level":3,
   "sprite": ["shortwep", 3, 0],
-  "name": "Glass Knife",
+  "name": "Glass Dagger",
   "type": "weapon", "hp":32,
   "effect": "+dexterity", "attackMod": "dexterity"
 },

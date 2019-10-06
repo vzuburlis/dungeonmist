@@ -1,6 +1,6 @@
 <script>
 var gameStatus = 'loading'
-g.get('<?=$gamedata_url?>/<?=$c->gameId?>/monsters.json?v=107', function(data){
+g.get('<?=$gamedata_url?>/<?=$c->gameId?>/monsters.json', function(data){
   monsterType = JSON.parse(data);
   assetLoaded('monsters');
 })
@@ -8,11 +8,11 @@ itemType = <?=json_encode($c->itemType)?>;
 g.get('<?=$gamedata_url?>/<?=$c->gameId?>/items.json', function(data){
   assetLoaded('items');
 })
-g.get('<?=$ppath?>data/itemEnchantments.json?v=107', function(data){
+g.get('<?=$ppath?>data/itemEnchantments.json?v=108', function(data){
   itemEnchantment = JSON.parse(data);
   assetLoaded('itemEnchantments');
 })
-g.get('<?=$ppath?>data/objects.json?v=107', function(data){
+g.get('<?=$ppath?>data/objects.json?v=108', function(data){
   objectType = JSON.parse(data);
   assetLoaded('objects');
 })
@@ -114,6 +114,7 @@ itemImgPath = [
     ['decor1','Objects/Decor1.png'],
     ['ground0','Objects/Ground0.png'],
     ['effect0','Objects/Effect0.png'],
+    ['effect1','Objects/Effect1.png'],
     ['key','Items/Key.png'],
     ['gauze','../tile/gauze.png'],
     ['light','Items/Light.png'],

@@ -2,6 +2,9 @@
 *1.0.8*
 Added sound for fire and shock attack
 New spell: Shocking Grasp
+Added the list of commands dialog
+Show cancel button for menus in mobile
+Items can be stocked in inventory
 
 *1.0.7*
 Delay player's turn on kick and jump

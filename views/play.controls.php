@@ -18,26 +18,30 @@
   <table style="width:100%;height:100%;position:absolute;top:0;left:0">
   <tr>
     <td><div onclick="event.preventDefault()"></div>
-    <td><div onclick="keyPress(38)"></div>
+    <td><div onclick="keyPress(38)" ontouch="keyPress(38)"></div>
     <td><div onclick="event.preventDefault()"></div>
   <tr>
-    <td><div onclick="keyPress(37)"></div>
-    <td><div onclick="keyPress(90)"></div>
-    <td><div onclick="keyPress(39)"></div>
+    <td><div onclick="keyPress(37)" ontouch="keyPress(37)"></div>
+    <td><div onclick="keyPress(90)" ontouch="keyPress(90)"></div>
+    <td><div onclick="keyPress(39)" ontouch="keyPress(39)"></div>
   <tr>
     <td><div onclick="event.preventDefault()"></div>
-    <td><div onclick="keyPress(40)"></div>
+    <td><div onclick="keyPress(40)" ontouch="keyPress(40)"></div>
     <td><div onclick="event.preventDefault()"></div>
   </table>
 </div>
+<div id="controls-commands">
+  e Equip &nbsp;&nbsp;u Use&nbsp;&nbsp;? Help
+</div>
 
 
+<p id="msgBox"></p>
 <div id="statBox">
   <div class="com-btn" style="background: rgba(0, 0, 0, 0)
   url('src/dungeonrl/DawnLike/Characters/Player0.png') repeat scroll
   -<?=$c->player['sprite'][1]*16?>px -<?=$c->player['sprite'][2]*16?>px;
   width: 16px; height: 16px; transform: scale(2); vertical-align:middle"
-  onclick="keypressPlay(69)" style="vertical-align:middle"></div>
+  onclick="keypressPlay('e')" style="vertical-align:middle"></div>
   <div id="playerName"><?=$c->player['name']?></div>
   <br><div id="eWeapon"><img src="<?=$tile_folder?>attack.png"><span id="pAttack">0<span></div>
   <br><div id="eShield"><img src="<?=$tile_folder?>shield.png"><span id="pShield">0<span></div>
@@ -51,7 +55,6 @@
     <img src="<?=$tile_folder?>chest_key.png" id="pChestKey">
   </div>
 </div>
-<p id="msgBox"></p>
 
 <div id="play-btn-container">
   <a href="<?=$new_url?>" class="play-btn">Play Again</a>
@@ -61,17 +64,24 @@
 </div>
 
 <div id="commands">
-  <div class="div-com com-btn" id="btnCancel" style="background:red;display:none" onclick="keypressTarget(27)">
+  <div class="mobi-btn">
+  <div class="div-com com-btn mobi-btn" id="btnCancelM" style="background:red;display:none" onclick="keyPress(27)">
     <img src="<?=$tile_folder?>../images/close.svg" style="width:100%">
   </div>
-  <div class="div-com com-btn" id="btnCancelD" style="background:red;display:none" onclick="keypressDirection(27)">
+  <div class="div-com com-btn mobi-btn" id="btnCancel" style="background:red;display:none" onclick="keypressTarget(27)">
     <img src="<?=$tile_folder?>../images/close.svg" style="width:100%">
   </div>
-  <div>
-    <img src="<?=$tile_folder?>potion.png" class="com-btn" onclick="keypressPlay(85)">
+  <div class="div-com com-btn mobi-btn" id="btnCancelD" style="background:red;display:none" onclick="keypressDirection(27)">
+    <img src="<?=$tile_folder?>../images/close.svg" style="width:100%">
   </div>
-  <img src="<?=$status_folder?>speed.png" class="com-btn" onclick="keypressPlay(220)">
-  <div class="div-com" id="btnArrows">
+  </div>
+  <div id="btnUse">
+    <img src="<?=$tile_folder?>potion.png" class="com-btn" onclick="keypressPlay('u')">
+  </div>
+  <div id="btnAction">
+    <img src="<?=$status_folder?>speed.png" class="com-btn" onclick="keypressPlay('\\')">
+  </div>
+    <div class="div-com" id="btnArrows">
     <img src="<?=$tile_folder?>arrow.png" class="com-btn" onclick="throwArrow()">
     <span id="pArrows" class="pSpan"><span>
   </div>
@@ -79,7 +89,7 @@
 
 <img src="<?=$tile_folder?>downstairs.png" class="com-btn com-down"
   style="display: none; position: absolute; right: 6em; bottom: 1em;"
-  onclick="keypressPlay(32)">
+  onclick="keypressPlay(' ')">
 <div class="div-com com-btn" onclick="keypressTarget(32)"
   id="btnCheck" style="display: none; position: absolute; right: 6em; bottom: 1em; background:lightgreen;display:none">
   <img src="<?=$tile_folder?>../images/check-mark.svg" style="width:100%">
@@ -104,11 +114,32 @@
     <img src="<?=$tile_folder?>../images/close.svg">
   </span></div>
   <div id="action-menu--list">
-  <div class="menu-item" onclick="keypressPlay(72)">h <span class="item-name">Search</span></div>
-  <div class="menu-item" onclick="keypressPlay(74)">j <span class="item-name">Jump</span></div>
-  <div class="menu-item" onclick="keypressPlay(75)">k <span class="item-name">Kick</span></div>
-  <div class="menu-item" onclick="keypressPlay(82)">r <span class="item-name">Rest</span></div>
-  <div class="menu-item" onclick="keypressPlay(84)">t <span class="item-name">Target</span></div>
+  <div class="menu-item" onclick="keypressPlay('h')">h <span class="item-name">Search</span></div>
+  <div class="menu-item" onclick="keypressPlay('Z')">Z <span class="item-name">Rest</span></div>
+  <div class="menu-item" onclick="keypressPlay('j')">j <span class="item-name">Jump</span></div>
+  <div class="menu-item" onclick="keypressPlay('k')">k <span class="item-name">Kick</span></div>
+  <div class="menu-item" onclick="keypressPlay('t')">t <span class="item-name">Target</span></div>
+  </div>
+</div>
+
+<div id="help-menu">
+  <div id="help-menu--title">Commands <span onclick="closeHelpMenu();" class="close">
+    <img src="<?=$tile_folder?>../images/close.svg">
+  </span></div>
+  <div id="help-menu--list">
+    <table>
+      <tr><td>e&nbsp;<td>Equip weapon/armor
+      <tr><td>u&nbsp;<td>Use item
+      <tr><td>z&nbsp;<td>Wait for one turn
+      <tr><td>Z&nbsp;<td>Rest and regenerate some health
+      <tr><td>h&nbsp;<td>Search for hidden doors or traps
+      <tr><td>j&nbsp;<td>Jump
+      <tr><td>k&nbsp;<td>Kick
+      <tr><td>f&nbsp;<td>Fire arrow
+    </table>
+  </div>
+  <div class="menu--title">Game Tips</div>
+    <p>Find your way to the next level, you dont have to fight every monster. Use candle or lamp to light the path in the darkest levels.</p>
   </div>
 </div>
 

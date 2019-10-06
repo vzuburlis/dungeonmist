@@ -259,7 +259,36 @@ function unitClass (options) {
                   if(_en[1]=='curse') monsters[mi].addStatus("curse", 12)
                   if(_en[1]=='confuze') monsters[mi].addStatus("confuze", 6)
                   if(_en[1]=='draw-life') that.addHP(4)
-                  if(_en[1]=='holy' && monsters[mi].hasAttr("class", "z")) attack_points += 8
+                  if(_en[1]=='fire') {
+                    animateEffect(monsters[mi].x, monsters[mi].y, itemImg['effect0'], 0, 21, 2);
+                    attack_points += 4
+                    if(monsters[mi].hasAttr('resist','fire')) {
+                      logMsg('The '+monsters[mi].typeName()+' resists to fire')
+                      attack_points = Math.floor(attack_points/2)
+                    }
+                    if(monsters[mi].hasAttr('weak','fire')) {
+                      logMsg('The '+monsters[mi].typeName()+' is vulnerable to fire')
+                      attack_points = Math.floor(attack_points*2)
+                    }
+                  }
+                  if(_en[1]=='shock') {
+                    animateEffect(monsters[mi].x, monsters[mi].y, itemImg['effect0'], 6, 21, 2);
+                    attack_points += 2
+                    monsters[mi].turnTime -= 50;
+                    if(monsters[mi].hasAttr('resist','shock')) {
+                      logMsg('The '+monsters[mi].typeName()+' resists to shock')
+                      attack_points = Math.floor(attack_points/2)
+                      monsters[mi].turnTime += 50;
+                    }
+                    if(monsters[mi].hasAttr('weak','shock')) {
+                      logMsg('The '+monsters[mi].typeName()+' is vulnerable to shock')
+                      attack_points = Math.floor(attack_points*2)
+                    }
+                  }
+                  if(_en[1]=='holy' && monsters[mi].hasAttr("class", "z")) {
+                    animateEffect(monsters[mi].x, monsters[mi].y, itemImg['effect0'], 6, 22, 2);
+                    attack_points += 8
+                  }
 
                   if(!player.identified('enchantment',_i)) {
                     if(typeof _en[2]!='undefined') {
@@ -380,6 +409,7 @@ function unitClass (options) {
       let _type = items[iti][2]
       _name = itemType[_type].name
       _data = {itemType:_type,stock:1}
+      __type = itemType[_type].type
       if(typeof items[iti][3]!='undefined') _data.hp = items[iti][3]
       logMsg("You pick up the "+getItemName(_type));
       if(typeof itemType[_type].autopick!='undefined') {
@@ -391,10 +421,21 @@ function unitClass (options) {
           that.addEffect(itemType[_type].effect)
         }
       } else {
-        if(gameLevel>4) if(Math.floor(Math.random()*8)==0) {
-          _data.enchantment = Math.floor(Math.random()*itemEnchantment.length)
+        if(__type=='potion'||__type=='scroll'|| typeof itemType[_type].stock!='undefined') {
+          for(i in that.inventory) if(that.inventory[i].itemType==_type && that.inventory[i].stock<5) {
+            that.inventory[i].stock++
+            _data = null
+          }
+        } else {
+          if(gameLevel>4) if(__type=='weapon'||__type=='armor'||__type=='shield') {
+            if(Math.floor(Math.random()*8)==0) {
+              _data.enchantment = Math.floor(Math.random()*itemEnchantment.length)
+            }
+          }
         }
-        that.inventory.push(_data)
+        if(_data!==null) {
+          that.inventory.push(_data)
+        }
       }
       items.splice(iti, 1);
     }
@@ -412,9 +453,6 @@ function unitClass (options) {
       if(_effect==null) return
       if(_effect[0]=="+") {
         that[_effect.substring(1)]++
-        if(_effect=='+arrows' && that.hasAbility('Archery')) {
-          that.arrows+=5
-        }
       }
       if(_effect=="heal") {
         that.addHP(20)
@@ -512,7 +550,16 @@ function unitClass (options) {
             animateEffect(that.x+dx, that.y+dy, itemImg['effect0'], 0, 21, 2);
             mi = getMonster(that.x+dx,that.y+dy);
             if(mi > -1) {
-              monsters[mi].hp -= 7+Math.floor(Math.random()*7)+that.intelligence
+              damage = 7+Math.floor(Math.random()*7)+that.intelligence
+              if(monsters[mi].hasAttr('resist','fire')) {
+                logMsg('The '+monsters[mi].typeName()+' resists to fire')
+                damage -= 6
+              }
+              if(monsters[mi].hasAttr('weak','fire')) {
+                damage += 6
+                logMsg('The '+monsters[mi].typeName()+' is vulnerable to fire')
+              }
+              monsters[mi].hp -= damage
             }
           }
         }
@@ -528,7 +575,16 @@ function unitClass (options) {
             animateEffect(that.x+dx, that.y+dy, itemImg['effect0'], 6, 21, 2);
             mi = getMonster(that.x+dx,that.y+dy);
             if(mi > -1) {
-              monsters[mi].hp -= 5+Math.floor(Math.random()*(5+that.intelligence))
+              damage = 5+Math.floor(Math.random()*(5+that.intelligence))
+              if(monsters[mi].hasAttr('resist','shock')) {
+                logMsg('The '+monsters[mi].typeName()+' is resists to shock')
+                damage -= 5
+              }
+              if(monsters[mi].hasAttr('weak','shock')) {
+                damage += 5
+                logMsg('The '+monsters[mi].typeName()+' is vulnerable to shock')
+              }
+              monsters[mi].hp -= damage
               monsters[mi].turnTime -= 50
             }
           }
@@ -625,7 +681,13 @@ function unitClass (options) {
               if(monster !== null) {
                 monster.hp -= that.arrowDamage()
               } else {
-                // create an arrow
+                if(player.hasAbility('Archery') && player.arrows<12) {
+                  if(map[targetx][targety]=='#' || map[targetx][targety]=='C' || Math.floor(Math.random()*6)==0) {
+                    logMsg('The arrow breaks')
+                  } else {
+                    items.push([targetx,targety,findItemType('Arrow')]);
+                  }
+                }
               }
               //if(!that.hasAbility('Archery')) player.turnTime -= 100
               setGameStatus('play')
@@ -782,7 +844,7 @@ function unitClass (options) {
         if(isBlocked(_x,_y)) return;
 
         if(typeof monsterType[that.type].flying=='undefined') {
-          if(map[that.x+dx][that.y+dy]=='l') {
+          if(map[that.x+dx][that.y+dy]=='l' && !that.hasAttr('resist','fire')) {
             that.hp -=1;
           }
         }
@@ -805,18 +867,20 @@ function unitClass (options) {
 
             if(attack_points<0) attack_points = 0;
 
-            if(typeof player.eShield!=null) {
+            if(player.eShield!=null) {
               if(Math.floor(Math.random() * 8) == 0) {
                 if(attack_points>1) {
                   player.addItemHP(player.eShield, -1)
                   updateStats()
                 }
-                logMsg("You block the attack of "+that.typeName());
-                return
+                if(player.hasAbility('Shield') || Math.floor(Math.random()*3)==0) {
+                  logMsg("You block the attack of "+that.typeName());
+                  return
+                }
               }
             }
 
-            if(typeof player.eArmor!=null) {
+            if(player.eArmor!=null) {
               if(attack_points>player.armor) {
                 player.addItemHP(player.eArmor, -player.armor)
               } else player.addItemHP(player.eArmor, -1)
@@ -1019,7 +1083,7 @@ function drawArrow(sx, sy, ex, ey, step) {
   stepy = dy/d
   mx = sx-player.x+renderWidth
   my = sy-player.y+renderHeight
-  context.strokeStyle='#ae6529';
+  context.strokeStyle='#452434';//ae6529
   context.beginPath();
   context.moveTo((mx+dx*step)*32+16, (my+dy*step)*32+16);
   context.lineTo((mx+dx*step+stepx)*32+16, (my+dy*step+stepy)*32+16);
@@ -1030,7 +1094,6 @@ function animateEffect(x, y, img, sx, sy, f, step=100) {
   let _x = x
   let _y = y
   let _img = img
-  setGameStatus('wait')
   for(let i=0;i<f;i++) {
     setTimeout(function() {
       renderMap()

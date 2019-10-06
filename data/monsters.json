@@ -3,8 +3,7 @@
   "name": "squirrel",
   "sprite": ["rodent", 0, 0],
   "level": 1,
-  "size": 1,
-  "specialAttack": "confuze"
+  "size": 1
 },
 {
   "name": "squirrel",
@@ -20,13 +19,6 @@
   "level": 1
 },
 {
-  "name": "kobold zombie",
-  "sprite": ["undead", 0, 0],
-  "class":"z",
-  "level": 2,
-  "specialAttack": "confuze"
-},
-{
   "name": "small bat",
   "sprite": ["bird", 0, 11],
   "flying": true,
@@ -37,20 +29,22 @@
   "name": "beetle",
   "sprite": ["pest", 1, 0],
   "size": 1,
-  "level": 1
+  "level": 1,
+  "resist": ["fire","shock"]
 },
 {
   "name": "earth beetle",
   "sprite": ["pest", 3, 0],
   "size": 1,
-  "level": 2
+  "level": 2,
+  "resist": ["fire","shock"]
 },
 {
-  "name": "bat",
-  "sprite": ["bird", 1, 11],
-  "flying": true,
-  "level": 3,
-  "specialAttack": "bleeding"
+  "name": "kobold zombie",
+  "sprite": ["undead", 0, 0],
+  "class":"z",
+  "level": 2,
+  "specialAttack": "confuze"
 },
 {
   "name": "craw",
@@ -58,13 +52,6 @@
   "flying": true,
   "level": 2,
   "specialAttack": "curse"
-},
-{
-  "name": "ice craw",
-  "sprite": ["bird", 0, 2],
-  "flying": true,
-  "level": 4,
-  "specialAttack": "blind"
 },
 {
   "name": "skeleton",
@@ -75,9 +62,39 @@
   "sounds":["clicking sounds"]
 },
 {
+  "name": "bat",
+  "sprite": ["bird", 1, 11],
+  "flying": true,
+  "level": 3,
+  "specialAttack": "bleeding"
+},
+{
+  "name": "dragonfly",
+  "sprite": ["bird", 1, 1],
+  "flying": true,
+  "level": 3,
+  "weak": ["shock"]
+},
+{
+  "name": "giant ant",
+  "sprite": ["pest", 0, 4],
+  "flying": true,
+  "level": 3,
+  "weak": ["shock"]
+},
+{
   "name": "kobold mummy",
   "sprite": ["undead", 0, 1],
-  "level": 3
+  "level": 3,
+  "weak": ["fire"]
+},
+{
+  "name": "ice craw",
+  "sprite": ["bird", 0, 2],
+  "flying": true,
+  "level": 4,
+  "specialAttack": "blind",
+  "weak": ["fire"]
 },
 {
   "name": "rat",
@@ -99,11 +116,10 @@
   "level": 4
 },
 {
-  "name": "dark craw",
-  "sprite": ["bird", 1, 1],
-  "flying": true,
-  "level": 5,
-  "specialAttack": "blind"
+  "name": "small fire larva",
+  "sprite": ["pest", 3, 3],
+  "level": 4,
+  "resist": ["fire"]
 },
 {
   "name": "venom spider",
@@ -112,10 +128,11 @@
   "specialAttack": "poison"
 },
 {
-  "name": "cave owl",
-  "sprite": ["bird", 1, 10],
-  "level": 7,
-  "specialAttack": "critical"
+  "name": "giant bee",
+  "sprite": ["pest", 3, 1],
+  "level": 5,
+  "flying": true,
+  "specialAttack": "confuze"
 },
 {
   "name": "larva",
@@ -124,14 +141,23 @@
   "specialAttack": "confuze"
 },
 {
-  "name": "small fire larva",
-  "sprite": ["pest", 3, 3],
-  "level": 4
+  "name": "dark craw",
+  "sprite": ["bird", 1, 1],
+  "flying": true,
+  "level": 5,
+  "specialAttack": "blind"
+},
+{
+  "name": "scorpion",
+  "sprite": ["pest", 3, 2],
+  "level": 6,
+  "specialAttack": "poison"
 },
 {
   "name": "fire larva",
   "sprite": ["pest", 4, 3],
-  "level": 6
+  "level": 6,
+  "resist": ["fire"]
 },
 {
   "name": "rathound",
@@ -169,11 +195,10 @@
   "sounds":["clicking sounds"]
 },
 {
-  "name": "dragonfly",
-  "sprite": ["pest", 0, 2],
-  "level": 5,
-  "flying": true,
-  "specialAttack": "confuze"
+  "name": "cave owl",
+  "sprite": ["bird", 1, 10],
+  "level": 7,
+  "specialAttack": "critical"
 },
 {
   "name": "orc fighter",
@@ -205,7 +230,8 @@
   "sprite": ["undead", 5, 1],
   "class": "z",
   "level": 8,
-  "special-attack": "curse"
+  "special-attack": "curse",
+  "weak": ["fire"]
 },
 {
   "name": "orc mummy",

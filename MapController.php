@@ -41,9 +41,9 @@ class MapController extends controller
     function __construct ()
     {
       include_once __DIR__."/models/Game.php";
-      view::set('style_css_path', gila::base_url().'src/'.GPACKAGE.'/style.css?v=107');
-      view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=107');
-      view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=107');
+      view::set('style_css_path', gila::base_url().'src/'.GPACKAGE.'/style.css?v=108');
+      view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=108');
+      view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=108');
 
         //self::admin();
         $this->gameId = $_COOKIE['gameId'] ?? null;
@@ -868,13 +868,23 @@ class MapController extends controller
           "gameTurn" => 0
       ];
 
-      //$i = $playerclass['item'] ? explode(',',$playerclass['item']) : []; 
+//      $playerItems = $playerclass['item'] ? explode(',',$playerclass['item']) : [];
+//      if(count($playerItems)>0) {
+//        $playerItem = $playerItems[rand(0, count($playerItems)-1)];
+//        $type=$this->findItemByName(trim($playerItem));
+//        $itemData = array_merge(
+//          $this->itemType[$type],
+//          ['itemType'=>$type, 'stock'=>1]
+//        );
+//        $stat['inventory'][] = $itemData;
+//      }
       //for($j=0;$j<2;$j++) if(isset($i[$j])) {
 //        $type=$this->findItemByName('Shocking Grasp');
         //  if(($eff = $this->itemType[$type]['effect'] ?? null) && $eff[0]=='+') {
       //    @$stat[substr($eff,1)]++;
       //  } else {
-//        $stat['inventory'][] = ['itemType'=>$type, 'hp'=>10, 'stock'=>1];
+//$stat['inventory'][] = ['itemType'=>$this->findItemByName('Knife'), 'hp'=>10, 'stock'=>1, 'enchantment'=>7];
+//$stat['inventory'][] = ['itemType'=>$this->findItemByName('Knife'), 'hp'=>10, 'stock'=>1, 'enchantment'=>8];
         //  }
       //}
       
@@ -890,22 +900,29 @@ class MapController extends controller
         $stat['arrows'] = 6;
         $stat['abilities'][] = 'Archery';
       }
+      if($playerclass['name']=='Soldier') {
+        $stat['arrows'] = 6;
+        $stat['abilities'][] = 'Shield';
+        $stat['abilities'][] = 'Archery';
+      }
       if($playerclass['name']=='Orc') {
         $stat['strength']++;
         $stat['intelligence']--;
         $stat['abilities'][] = "Darkvision";
         $stat['resist'][] = "poison";
         $stat['resist'][] = "disease";
+        $stat['abilities'][] = 'Shield';
       }
       if($playerclass['name']=='Dwarf') {
         $stat['strength']++;
         $stat['dexterity']--;
         $stat['abilities'][] = "Darkvision";
         $stat['resist'][] = "poison";
+        $stat['abilities'][] = 'Shield';
       }
       if($playerclass['name']=='Sorcerer') {
-          $stat['strength']--;
-          $stat['intelligence']++;
+        $stat['strength']--;
+        $stat['intelligence']++;
       }
       return $stat;
     }

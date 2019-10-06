@@ -5,5 +5,8 @@
   ["of Confuzion", "confuze", "The enemy looks confuzed"],
   ["of Blessed", "holy", "A light repels the undead"],
   ["of the Living", "holy", "A light repels the undead"],
+  ["of Fire", "fire"],
+  ["of Flames", "fire"],
+  ["of Shocks", "shock"],
   ["of the Vampire", "draw-life", "You draw the life from enemy"]
 ]

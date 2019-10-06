@@ -13,6 +13,9 @@ body{
     /*border: 1px solid grey;
     border-radius: 50%;*/
 }
+#controls-commands {
+  display:none;
+}
 #controls td>div {
   height:100%;
   width:100%;
@@ -66,7 +69,6 @@ body{
     text-align: right;
 }
 #statBox {
-  display:inline-block;
   margin:0;
   text-align:left; /*display:grid; grid-template-columns: 1fr 1fr 1fr 1fr;*/
   float: left;
@@ -75,7 +77,7 @@ body{
 #statBox img, #levelBox img { width: 32px; height:32px; vertical-align:middle}
 #statBox span { padding: 4px; }
 #pKey, #pChestKey{display:none}
-#map,#use-menu,#action-menu,#equip-menu{
+#map,#use-menu,#action-menu,#equip-menu,#help-menu{
     position:absolute;
     top:50%;
     left:50%;
@@ -86,12 +88,14 @@ body{
   right:3em;
   top:3em;
 }
-#use-menu,#action-menu,#equip-menu {
+#use-menu,#action-menu,#equip-menu,#help-menu,.menu {
     background:rgba(0,0,0,0.85);
     visibility:hidden;
     border: 2px solid #613214;
     padding: 8px;
     max-height:100%;
+    max-height: 100vh;
+    overflow-y: scroll;
 }
 button{
     font-size: 3em;
@@ -127,23 +131,23 @@ button{
     color: white;
     background: #579ca2;
   }
-#use-menu--title, #equip-menu--title, #action-menu--title{
+#use-menu--title, #equip-menu--title, #action-menu--title, #help-menu--title, .menu--title{
     font-family: 'Berkshire Swash', cursive;
     font-size: 2em;
     text-align:center;
     min-width:300px;
 }
-#use-menu--list, #equip-menu--list, #action-menu--list {
+#use-menu--list, #equip-menu--list, #action-menu--list, #help-menu--list, .menu--list {
     text-align:left;
 }
-#use-menu .close img,#equip-menu .close img,#action-menu .close img {
+#use-menu .close img,#equip-menu .close img,#action-menu .close img, #help-menu .close img, .menu .close img {
   cursor: pointer;
   width:1em;
   vertical-align: middle;
   float: right;
   opacity:0.3;
 }
-#use-menu .close img:hover, #equip-menu .close img:hover, #action-menu .close img:hover {
+#use-menu .close img:hover, #equip-menu .close img:hover, #action-menu .close img:hover, #help-menu .close img:hover {
   opacity:1;
 }
 .menu-item {
@@ -176,9 +180,19 @@ button{
   }
 }
 @media screen and (min-width: 1100px) {
-    #controls {
-        display:none;
-    }
+  #controls {
+    display:none;
+  }
+  .mobi-btn {
+    display:none;
+  }
+  #controls-commands {
+    display:inline-block;
+    overflow: visible;
+    position:absolute;
+    left:1em;
+    bottom:1em;
+  }
 }
 
 .div-com {

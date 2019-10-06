@@ -425,17 +425,17 @@ function blockTiles(sx,sy,w,h,tile) {
   return true
 }
 function getObject(x,y) {
-    for(oi=0;oi<objects.length;oi++) {
-        if(objects[oi].x==x && objects[oi].y==y) return objects[oi];
-    }
-    return null;
+  for(oi=0;oi<objects.length;oi++) {
+      if(objects[oi].x==x && objects[oi].y==y) return objects[oi];
+  }
+  return null;
 }
 function findObjectType(name,d=null) {
-    for(let i=0;i<objectType.length;i++) {
-        if(objectType[i].name==name) return i;
-    }
-    console.error("Could not find objectType "+name);
-    return d;
+  for(let i=0;i<objectType.length;i++) {
+      if(objectType[i].name==name) return i;
+  }
+  console.error("Could not find objectType "+name);
+  return d;
 }
 function revealMap() {
   for (let i=0; i<mapHeight; i++) {
@@ -457,11 +457,18 @@ function getItem(x,y) {
     }
     return -1;
 }
+function findItemType(name,d=null) {
+  for(let i=0;i<itemType.length;i++) {
+      if(itemType[i].name==name) return i;
+  }
+  console.error("Could not find itemType "+name);
+  return d;
+}
 
 function logMsg(msg, block=false) {
   if(block) {
     msg = '<span style="color:yellow">'+msg+'</span>';
-  } else msg = '<span>'+msg+'</span>';
+  } //else msg = '<span>'+msg+'</span>';
   if(gameStatus=='rest') gameStatus='play';
   logMessages.push([player.gameTurn, msg, block])
   document.getElementById("msgBox").innerHTML += '<br>'+msg;
@@ -471,22 +478,37 @@ function setGameStatus(v) {
     gameStatus=v;
     btnCancel.style.display = 'none'
     btnCancelD.style.display = 'none'
+    btnCancelM.style.display = 'none'
     btnCheck.style.display = 'none'
+    btnAction.style.display = 'none'
+    btnUse.style.display = 'none'
+    btnArrows.style.display = 'none'
     useMenu=document.getElementById("use-menu")
     equipMenu=document.getElementById("equip-menu")
     actionMenu=document.getElementById("action-menu")
-    useMenu.style.display = 'inline-block'
-    equipMenu.style.display = 'inline-block'
-    actionMenu.style.display = 'inline-block'
+    helpMenu=document.getElementById("help-menu")
+    //useMenu.style.display = 'inline-block'
+    //equipMenu.style.display = 'inline-block'
+    //actionMenu.style.display = 'inline-block'
+    //helpMenu.style.display = 'inline-block'
+    if(v=='play') {
+      btnAction.style.display = 'inline-block'
+      btnUse.style.display = 'inline-block'
+      if(player.arrows>0) btnArrows.style.display='inline-block';
+    }
     if(v=='target' || v=='select-target') {
         btnCancel.style.display = 'inline-block'
         btnCheck.style.display = 'inline-block'
         useMenu.style.display = 'none'
         equipMenu.style.display = 'none'
         actionMenu.style.display = 'none'
+        helpMenu.style.display = 'none'
     }
     if(v=='select-direction') {
-        btnCancelD.style.display = 'inline-block'
+      btnCancelD.style.display = 'inline-block'
+    }
+    if(v=='help-menu'||v=='equip-menu'||v=='action-menu'||v=='use-menu') {
+      btnCancelM.style.display = 'inline-block'
     }
 }
 
@@ -511,22 +533,32 @@ document.dblclick = function(e) {
 document.onkeydown = function (e) {
     turnPlayed = false
     e = e || window.event;
-    keyPress(e.keyCode);
+    keyPress(e);
 }
 
-function keyPress (code) {
+function keyPress (e) {
+  if(Number.isInteger(e)==false) {
+    code = e.keyCode
+  } else code = e
   value = gameStatus;
   activeGame = true;
-  if (value == 'play') keypressPlay(code);
+  if (value == 'play') keypressPlay(e.key);
   if (value == 'target') keypressTarget(code);
   if (value == 'use-menu') keypressUse(code);
   if (value == 'equip-menu') keypressEquip(code);
-  //if (value == 'action-menu') keypressAction(code);
+  if (value == 'action-menu') keypressAction(e.key);
   if (value == 'select-target') keypressTarget(code);
   if (value == 'select-direction') keypressDirection(code);
   if (value == 'pause' && code == '32') {
     setGameStatus('play');
     document.getElementById("msgBox").innerHTML='';
+  }
+  if (value == 'help-menu') {
+    if(code==27 || code==88) {
+      popup = document.getElementById("help-menu")
+      popup.style.visibility = 'hidden'
+      setGameStatus('play');
+    }
   }
 
   if(turnPlayed == true) {
@@ -538,6 +570,12 @@ function keyPress (code) {
 function closeActionMenu() {
   popup = document.getElementById("action-menu")
   popup.style.visibility = 'hidden'
+  if(gameStatus=='action-menu') setGameStatus('play')
+}
+function closeHelpMenu() {
+  popup = document.getElementById("help-menu")
+  popup.style.visibility = 'hidden'
+  setGameStatus('play')
 }
 
 function keypressEquip (code) {
@@ -615,6 +653,7 @@ function keypressUse (code) {
               logMsg("You drink the " + getItemName(_itemType), _idf);
               if(_type.effect_time>0) player.addStatus(_type.effect, _type.effect_time)
               player.addEffect(_type.effect)
+              player.spellEffect(_type.effect, _type)
             } else if(_type.sprite[0]=='book') {
               if(player.intelligence<1
                   && Math.floor(Math.random()*(3-player.intelligence))<1) {
@@ -762,7 +801,7 @@ function drawSelectRect() {
       case '=': x='Water';break;
       case ';': x='Ant sand';break;
     }
-    document.getElementById("msgBox").innerHTML = '<span>'+x+'</span>';
+    document.getElementById("msgBox").innerHTML = x//'<span>'+x+'</span>';
   }
   x = targetx-player.x+renderWidth
   y = targety-player.y+renderHeight
@@ -779,34 +818,48 @@ function moveTarget(dx, dy) {
   targety+=dy;
 }
 
+function keypressAction (code) {
+  if(code==27 || code==88 || code=='Escape') {
+    popup = document.getElementById("action-menu")
+    popup.style.visibility = 'hidden'
+    setGameStatus('play')
+    return
+  }
+  if(code=='h'||code=='j'||code=='k'||code=='t'||code=='r'||code=='Z') {
+    keypressPlay (code)
+  }
+}
+
 function keypressPlay (code) {
-    if(player.hp<0) return;
-    if(gameStatus != 'play') return;
-    if(typeof playerWalk!='undefined') clearInterval(playerWalk);
-    targetx=null;
-    targety=null;
+  if(player.hp<0) return;
+  if(gameStatus != 'play' && gameStatus != 'action-menu') return;
+  if(typeof playerWalk!='undefined') clearInterval(playerWalk);
+  targetx=null;
+  targety=null;
 
 
-    if (code == '38' || code == '87') { // up arrow
+    if (code == 'ArrowUp' || code == '38' || code == '87') { // up arrow
         player.move(0,-1);
     }
-    else if (code == '40' || code == '83') { // down arrow
+    else if (code == 'ArrowDown' || code == '40' || code == '83') { // down arrow
         player.move(0,1);
     }
-    else if (code == '37' || code == '65') { // left arrow
+    else if (code == 'ArrowLeft' || code == '37' || code == '65') { // left arrow
        player.move(-1,0);
     }
-    else if (code == '39' || code == '68') { // right arrow
+    else if (code == 'ArrowRight' || code == '39' || code == '68') { // right arrow
        player.move(1,0);
     }
-    else if (code == '90') { // z
-      player.move(0,0);
-    }
-    else if (code == '82') { // r
+    else if (code == '82' || code=='Z' || code=='r') { // rest
       closeActionMenu();
       setGameStatus('rest')
       let turns_rested=0
-      if(player.turnsToRest>2100) player.turnsToRest = 1600
+      if(player.turnsToRest<800) {
+        logMsg('You dont feel tired');
+        renderMap();
+        return;
+      }
+      if(player.turnsToRest>2400) player.turnsToRest = 2400
       do {
           runTurn();
           player.turnsToRest-=50 //rest 5 times faster
@@ -818,7 +871,10 @@ function keypressPlay (code) {
       player.addHP(x)
       renderMap();
     }
-    else if (code == '74') { // j
+    else if (code=='z') { // z
+      player.move(0,0);
+    }
+    else if (code==74 || code == 'j') { // j
       closeActionMenu();
       setGameStatus('select-direction');
       if(targetx==null) {
@@ -829,7 +885,7 @@ function keypressPlay (code) {
       selectTarget.action = player.jump;
       renderMap()
     }
-    else if (code == '75') { // k
+    else if (code == '75' || code=='k') { // k
       closeActionMenu();
       setGameStatus("select-direction")
       if(targetx==null) {
@@ -838,9 +894,10 @@ function keypressPlay (code) {
       }
       logMsg('Select a direction to kick');
       selectTarget.action = player.kick;
+      setGameStatus('play')
       renderMap()
     }
-    else if (code == '84') { // t
+    else if (code == '84' || code=='t') { // t
       closeActionMenu();
       setGameStatus('target');
       if(targetx==null) {
@@ -850,13 +907,13 @@ function keypressPlay (code) {
       logMsg('Select target');
       renderMap()
     }
-    else if (code == '70') { // f
+    else if (code == 'f' || code == '70') { // f
       throwArrow();
     }
-    else if (code == '32') { // space
+    else if (code == ' ' || code == '32') { // space
        player.moveLevel();
     }
-    else if (code == '85') { // u
+    else if (code == '85' || code=='u') { // u
       // i 73
       popup = document.getElementById("use-menu")
       list = document.getElementById("use-menu--list")
@@ -877,13 +934,18 @@ function keypressPlay (code) {
         if(typeof _type.hp!='undefined') {
           hp=' '+player.inventory[i].hp+'/'+_type.hp
         } else hp=''
-        list.innerHTML += '<div class="menu-item" onclick="keypressUse('+(com)+')">&#'+(com+32)+'; <div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div> <span class="item-name">'+getItemName(_itemType)+hp+'</span></div>'
+        _nx = ''
+        if(typeof player.inventory[i].stock!='undefined') {
+          if(player.inventory[i].stock>1) _nx = ' x'+player.inventory[i].stock
+        }
+        if(_nx!='' && hp!='') console.error(getItemName(_itemType)+' uses hp and stock')
+        list.innerHTML += '<div class="menu-item" onclick="keypressUse('+(com)+')">&#'+(com+32)+'; <div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div> <span class="item-name">'+getItemName(_itemType)+hp+_nx+'</span></div>'
         com++
       }
       popup.style.visibility = "visible"
       setGameStatus('use-menu')
     }
-    else if (code == '72') { // h
+    else if (code == '72' || code == 'h') { // h
       closeActionMenu();
       logMsg('You are searching around.')
       for(x=player.x-4; x<player.x+5; x++) {
@@ -896,7 +958,7 @@ function keypressPlay (code) {
       renderMap()
       runTurn()
     }
-    else if (code == '69') { // e
+    else if (code == '69' || code=='e') { // e
       popup = document.getElementById("equip-menu")
       list = document.getElementById("equip-menu--list")
       list.innerHTML = ""
@@ -925,9 +987,15 @@ function keypressPlay (code) {
       popup.style.visibility = "visible"
       setGameStatus('equip-menu')
     }
-    else if (code == '220') { // \
-       popup = document.getElementById("action-menu")
-       popup.style.visibility = "visible"
+    else if (code == '220' || code=='\\') { // \
+      popup = document.getElementById("action-menu")
+      popup.style.visibility = "visible"
+      setGameStatus('action-menu')
+    }
+    else if (code == '191' || code == '?') { // ? help
+      popup = document.getElementById("help-menu")
+      popup.style.visibility = "visible"
+      setGameStatus('help-menu')
     }
 
 }
