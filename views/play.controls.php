@@ -18,15 +18,15 @@
   <table style="width:100%;height:100%;position:absolute;top:0;left:0">
   <tr>
     <td><div onclick="event.preventDefault()"></div>
-    <td><div onclick="keyPress(38)" ontouch="keyPress(38)"></div>
+    <td><div onclick="keypressPlay(38)" ontouch="keypressPlay(38)"></div>
     <td><div onclick="event.preventDefault()"></div>
   <tr>
-    <td><div onclick="keyPress(37)" ontouch="keyPress(37)"></div>
-    <td><div onclick="keyPress(90)" ontouch="keyPress(90)"></div>
-    <td><div onclick="keyPress(39)" ontouch="keyPress(39)"></div>
+    <td><div onclick="keypressPlay(37)" ontouch="keypressPlay(37)"></div>
+    <td><div onclick="keypressPlay(90)" ontouch="keypressPlay(90)"></div>
+    <td><div onclick="keypressPlay(39)" ontouch="keypressPlay(39)"></div>
   <tr>
     <td><div onclick="event.preventDefault()"></div>
-    <td><div onclick="keyPress(40)" ontouch="keyPress(40)"></div>
+    <td><div onclick="keypressPlay(40)" ontouch="keypressPlay(40)"></div>
     <td><div onclick="event.preventDefault()"></div>
   </table>
 </div>
