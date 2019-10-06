@@ -487,10 +487,10 @@ function setGameStatus(v) {
     equipMenu=document.getElementById("equip-menu")
     actionMenu=document.getElementById("action-menu")
     helpMenu=document.getElementById("help-menu")
-    //useMenu.style.display = 'inline-block'
-    //equipMenu.style.display = 'inline-block'
+    useMenu.style.display = 'inline-block'
+    equipMenu.style.display = 'inline-block'
     actionMenu.style.display = 'inline-block'
-    //helpMenu.style.display = 'inline-block'
+    helpMenu.style.display = 'inline-block'
     if(v=='play') {
       btnAction.style.display = 'inline-block'
       btnUse.style.display = 'inline-block'
