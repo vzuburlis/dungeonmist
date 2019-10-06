@@ -537,16 +537,19 @@ document.onkeydown = function (e) {
 }
 
 function keyPress (e) {
+  value = gameStatus;
   if(Number.isInteger(e)==false) {
     code = e.keyCode
+    if(value == 'play' || value == 'action-menu') {
+      code = e.key
+    }
   } else code = e
-  value = gameStatus;
   activeGame = true;
-  if (value == 'play') keypressPlay(e.key);
+  if (value == 'play') keypressPlay(code);
   if (value == 'target') keypressTarget(code);
   if (value == 'use-menu') keypressUse(code);
   if (value == 'equip-menu') keypressEquip(code);
-  if (value == 'action-menu') keypressAction(e.key);
+  if (value == 'action-menu') keypressAction(code);
   if (value == 'select-target') keypressTarget(code);
   if (value == 'select-direction') keypressDirection(code);
   if (value == 'pause' && code == '32') {
@@ -751,8 +754,9 @@ function keypressDirection (code) {
   else if (code == '27') { // esc
     targetx=null
     targety=null
-    renderMap();
     setGameStatus('play');
+    renderMap();
+    return
   }
   else if (code == '38' || code == '87') { // up arrow
     selectDirection=0;

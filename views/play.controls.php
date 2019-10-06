@@ -15,18 +15,19 @@
   </svg>
 
 
-  <table style="width:100%;height:100%;position:absolute;top:0;left:0">
+  <table style="width:100%;height:100%;position:absolute;top:0;left:0"
+    onclick="event.preventDefault()">
   <tr>
     <td><div onclick="event.preventDefault()"></div>
-    <td><div onclick="keypressPlay(38)" ontouch="keypressPlay(38)"></div>
+    <td><div ontouchstart="keyPress(38)"></div>
     <td><div onclick="event.preventDefault()"></div>
   <tr>
-    <td><div onclick="keypressPlay(37)" ontouch="keypressPlay(37)"></div>
-    <td><div onclick="keypressPlay(90)" ontouch="keypressPlay(90)"></div>
-    <td><div onclick="keypressPlay(39)" ontouch="keypressPlay(39)"></div>
+    <td><div ontouchstart="keyPress(37)"></div>
+    <td><div ontouchstart="keyPress(90)"></div>
+    <td><div ontouchstart="keyPress(39)"></div>
   <tr>
     <td><div onclick="event.preventDefault()"></div>
-    <td><div onclick="keypressPlay(40)" ontouch="keypressPlay(40)"></div>
+    <td><div ontouchstart="keyPress(40)"></div>
     <td><div onclick="event.preventDefault()"></div>
   </table>
 </div>
