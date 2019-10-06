@@ -489,7 +489,7 @@ function setGameStatus(v) {
     helpMenu=document.getElementById("help-menu")
     //useMenu.style.display = 'inline-block'
     //equipMenu.style.display = 'inline-block'
-    //actionMenu.style.display = 'inline-block'
+    actionMenu.style.display = 'inline-block'
     //helpMenu.style.display = 'inline-block'
     if(v=='play') {
       btnAction.style.display = 'inline-block'
@@ -858,8 +858,9 @@ function keypressPlay (code) {
       closeActionMenu();
       setGameStatus('rest')
       let turns_rested=0
-      if(player.turnsToRest<800) {
+      if(player.turnsToRest<400) {
         logMsg('You dont feel tired');
+        setGameStatus('play');
         renderMap();
         return;
       }
