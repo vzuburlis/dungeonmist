@@ -91,3 +91,35 @@
   ["of Pain", "extra damage"],
   ["of Pain", "extra damage"],
 ]
+
+,
+{
+  "sprite": ["gold", 0, 3],
+  "name": "Gold",
+  "autopick": true,
+  "effect": "+arrows"
+},
+{
+  "sprite": ["gold", 0, 4],
+  "name": "Gold",
+  "autopick": true,
+  "effect": "+arrows"
+},
+{
+  "sprite": ["gold", 0, 5],
+  "name": "Gold",
+  "autopick": true,
+  "effect": "+arrows"
+},
+{
+  "sprite": ["gold", 0, 6],
+  "name": "Gold",
+  "autopick": true,
+  "effect": "+arrows"
+},
+{
+  "sprite": ["gold", 0, 7],
+  "name": "Gold",
+  "autopick": true,
+  "effect": "+arrows"
+}

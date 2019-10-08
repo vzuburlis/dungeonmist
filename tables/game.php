@@ -37,7 +37,7 @@ return [
     ],
     'start_time'=>[
       'qtype'=>'INT DEFAULT NULL',
-      'list'=>false
+      'edit'=>false
     ],
     'end_time'=>[
       'qtype'=>'INT DEFAULT NULL',

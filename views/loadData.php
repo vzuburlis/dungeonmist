@@ -8,11 +8,11 @@ itemType = <?=json_encode($c->itemType)?>;
 g.get('<?=$gamedata_url?>/<?=$c->gameId?>/items.json', function(data){
   assetLoaded('items');
 })
-g.get('<?=$ppath?>data/itemEnchantments.json?v=108', function(data){
+g.get('<?=$ppath?>data/itemEnchantments.json?v=109', function(data){
   itemEnchantment = JSON.parse(data);
   assetLoaded('itemEnchantments');
 })
-g.get('<?=$ppath?>data/objects.json?v=108', function(data){
+g.get('<?=$ppath?>data/objects.json?v=109', function(data){
   objectType = JSON.parse(data);
   assetLoaded('objects');
 })
@@ -124,6 +124,7 @@ itemImgPath = [
     ['book','Items/Book.png'],
     ['pit0','Pit0.png'],
     ['pit1','Pit1.png'],
+    ['gold','gold.png'],
 ]
 for(let i=0;i<itemImgPath.length;i++) {
     itemImg[itemImgPath[i][0]] = new Image();
@@ -158,6 +159,8 @@ player = unitClass({
     y: <?=$c->player['y']?>,
     hp: <?=$c->player['hp']?>,
     maxhp: <?=$c->player['maxhp']?>,
+    xp: <?=($c->player['xp'] ?? 0)?>,
+    gold: <?=($c->player['gold'] ?? 0)?>,
     attack: <?=$c->player['attack']?>,
     armor: <?=$c->player['armor']?>,
     arrows: <?=$c->player['arrows']?>,
@@ -175,6 +178,7 @@ player = unitClass({
     eShield: <?=$c->player['eShield'] ?? 'null'?>,
     lore: <?=json_encode($c->player['lore'] ?? ['items'=>[]])?>,
     gameTurn: <?=$c->player['gameTurn'] ?? '0'?>,
+    turnsToRest: <?=$c->player['turnsToRest'] ?? '0'?>,
     name: '<?=$c->player['name'] ?>',
     className: '<?=$c->player['className'] ?>'
 });

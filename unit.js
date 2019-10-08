@@ -37,6 +37,7 @@ function unitClass (options) {
     var that = {};
 
     that.turnsToRest =0;
+    that.turnsToHeal =0;
     that.type = options.type;
     that.turnTime = 0;
     that.speed = 0;
@@ -76,6 +77,11 @@ function unitClass (options) {
           }
       }
       that.turnsToRest++
+      that.turnsToHeal++
+      if(that.turnsToHeal>300) {
+        that.turnsToHeal=1
+        that.addHP(1)
+      }
       that.gameTurn++
     };
 
@@ -213,7 +219,7 @@ function unitClass (options) {
               obj.type = findObjectType(objType.activate_to, obj.type);
               swingAudio.play()
               logMsg("You step in the "+objType.activate_to);
-              that.addHP(-8);
+              if(that.hp>8) that.addHP(-8); else that.addHP(-4);
             }
           }
           if(typeof objType.reveal_to!='undefined') if(typeof obj.detected=='undefined') {
@@ -395,12 +401,28 @@ function unitClass (options) {
       that.unwield(spot)
       that[spot] = i
       item = that.inventory[i]
-      that.addEffect(itemType[item.itemType].effect)
+      if(typeof itemType[item.itemType].effect!='undefined') {
+        that.addEffect(itemType[item.itemType].effect)
+      }
+      if(typeof item.armor!='undefined') {
+        that.armor += item.armor
+      }
+      if(typeof item.attack!='undefined') {
+        that.attack += item.attack
+      }
     }
     that.unwield = function(spot) {
       if(that[spot]!=null) {
         item = that.inventory[that[spot]]
-        that.removeEffect(itemType[item.itemType].effect)
+        if(typeof itemType[item.itemType].effect!='undefined') {
+          that.removeEffect(itemType[item.itemType].effect)
+        }
+        if(typeof itemType[item.itemType].armor!='undefined') {
+          that.armor -= itemType[item.itemType].armor
+        }
+        if(typeof itemType[item.itemType].attack!='undefined') {
+          that.attack -= itemType[item.itemType].attack
+        }
         that[spot] = null
       }
     }
@@ -411,10 +433,16 @@ function unitClass (options) {
       _data = {itemType:_type,stock:1}
       __type = itemType[_type].type
       if(typeof items[iti][3]!='undefined') _data.hp = items[iti][3]
+      if(typeof items[iti].attack!='undefined') _data.attack = items[iti].attack
+      if(typeof items[iti].armor!='undefined') _data.armor = items[iti].armor
       logMsg("You pick up the "+getItemName(_type));
       if(typeof itemType[_type].autopick!='undefined') {
         if(typeof itemType[_type].mapItem!='undefined') {
           mapItems.push(itemType[_type].mapItem)
+          updateStats()
+        }
+        else if(itemType[_type].effect=='+gold') {
+          that.gold += itemType[_type].gold
           updateStats()
         }
         else if(itemType[_type].effect[0]=='+') {

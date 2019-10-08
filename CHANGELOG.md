@@ -1,4 +1,10 @@
 
+*1.0.9*
+Made bigger the user and minimap buttons
+Added initial items
+Player can regenerate hp all the time
+Gold pick
+
 *1.0.8*
 Added sound for fire and shock attack
 New spell: Shocking Grasp

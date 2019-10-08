@@ -41,9 +41,9 @@ class MapController extends controller
     function __construct ()
     {
       include_once __DIR__."/models/Game.php";
-      view::set('style_css_path', gila::base_url().'src/'.GPACKAGE.'/style.css?v=108');
-      view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=108');
-      view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=108');
+      view::set('style_css_path', gila::base_url().'src/'.GPACKAGE.'/style.css?v=109');
+      view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=109');
+      view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=109');
 
         //self::admin();
         $this->gameId = $_COOKIE['gameId'] ?? null;
@@ -328,8 +328,11 @@ class MapController extends controller
       for($i=0;$i<$_i;$i++) $this->spawnMonster($this->randPos());
 
       if($this->level>4) $this->addItemByName($this->randPos(), 'Candle');
-      if($this->level==1) $this->addItemByType($this->randPos(), explode(',',$this->playerItem)[0]);
-      if($this->level%3==0) $this->addItemByType($this->randPos(), $this->playerItem);
+      //if($this->level==1) $this->addItemByType($this->randPos(), explode(',',$this->playerItem)[0]);
+      $this->addItemByName($this->randPos(), ['Gold','3 Gold','5 Gold']);
+      $this->addItemByName($this->randPos(), ['Gold','3 Gold','5 Gold']);
+      $this->addItemByName($this->randPos(), ['Gold','3 Gold','5 Gold']);
+      $this->addItemByName($this->randPos(), ['Gold','3 Gold','5 Gold']);
 
       for($i=0;$i<3-$this->levelTask['spawnedItems'];$i++) if(count($this->player['inventory'])<5) {
         $this->addRandomItem();
@@ -737,9 +740,24 @@ class MapController extends controller
       return null;
     }
     function addItem($pos, $type) {
-      $data = [$pos[0], $pos[1], $type];
-      if(isset($this->itemType[$type]['hp'])) $data[] = $this->itemType[$type]['hp'];
+      $data = array_merge([$pos[0], $pos[1], $type], $this->createItem($type));
       $this->items[] = $data;
+    }
+    function createItem($type) {
+      $data=[];
+      if(isset($this->itemType[$type]['hp'])) $data[] = $this->itemType[$type]['hp'];
+      if(isset($this->itemType[$type]['armor'])) {
+        $_a = $this->itemType[$type]['armor'];
+        $data['armor'] = rand($_a[0], $_a[1]);
+        if($this->level<$data['armor']*2) $data['armor']=$_a[0];
+      }
+      if(isset($this->itemType[$type]['attack'])) {
+        $_a = $this->itemType[$type]['attack'];
+        $data['attack'] = rand($_a[0], $_a[1]);
+        if($this->level<$data['attack']*2) $data['attack']=$_a[0];
+      }
+      if(isset($this->itemType[$type]['hp'])) $data[] = $this->itemType[$type]['hp'];
+      return $data;
     }
     function addItemByName($pos,$name) {
       $type = $this->findItemByName($name);
@@ -868,16 +886,23 @@ class MapController extends controller
           "gameTurn" => 0
       ];
 
-//      $playerItems = $playerclass['item'] ? explode(',',$playerclass['item']) : [];
-//      if(count($playerItems)>0) {
-//        $playerItem = $playerItems[rand(0, count($playerItems)-1)];
-//        $type=$this->findItemByName(trim($playerItem));
-//        $itemData = array_merge(
-//          $this->itemType[$type],
-//          ['itemType'=>$type, 'stock'=>1]
-//        );
-//        $stat['inventory'][] = $itemData;
-//      }
+      $playerItems = $playerclass['item'] ? explode(',',$playerclass['item']) : [];
+      if(count($playerItems)>0) {
+        $playerItem = $playerItems[rand(0, count($playerItems)-1)];
+        $type=$this->findItemByName(trim($playerItem));
+        $itemData = array_merge(
+          $this->itemType[$type],
+          ['itemType'=>$type, 'stock'=>1],
+          $this->createItem($type)
+        );
+//        if(isset($itemData['type'])) {
+//          $i = count($stat['inventory']);
+//          if($itemData['type'] == 'weapon') $stat['weapon']==$i;
+//          if($itemData['type'] == 'shield') $stat['eShield']==$i;
+//          if($itemData['type'] == 'armor') $stat['eArmor']==$i;
+//        }
+        $stat['inventory'][] = $itemData;
+      }
       //for($j=0;$j<2;$j++) if(isset($i[$j])) {
 //        $type=$this->findItemByName('Shocking Grasp');
         //  if(($eff = $this->itemType[$type]['effect'] ?? null) && $eff[0]=='+') {

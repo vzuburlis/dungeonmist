@@ -38,22 +38,40 @@
 
 <p id="msgBox"></p>
 <div id="statBox">
+ <div style="display:inline-flex">
   <div class="com-btn" style="background: rgba(0, 0, 0, 0)
   url('src/dungeonrl/DawnLike/Characters/Player0.png') repeat scroll
   -<?=$c->player['sprite'][1]*16?>px -<?=$c->player['sprite'][2]*16?>px;
-  width: 16px; height: 16px; transform: scale(2); vertical-align:middle"
-  onclick="keypressPlay('e')" style="vertical-align:middle"></div>
-  <div id="playerName"><?=$c->player['name']?></div>
-  <br><div id="eWeapon"><img src="<?=$tile_folder?>attack.png"><span id="pAttack">0<span></div>
-  <br><div id="eShield"><img src="<?=$tile_folder?>shield.png"><span id="pShield">0<span></div>
-  <br><div id="eArmor"><img src="<?=$tile_folder?>armor.png"><span id="pArmor">0<span></div>
+  width: 16px; height: 16px; transform: scale(3); vertical-align:middle;
+  margin: 16px 32px 32px 16px"
+  onclick="keypressPlay('e')"></div>
+  <div id="playerName">
+    <?=$c->player['name']?>
+  </div>
+ </div>
+ <br><div style="display:flex; flex-direction:column;">
+  <div><div style="background: rgba(0, 0, 0, 0)
+        url('src/dungeonrl/DawnLike/gold.png') repeat scroll -0px -0px;
+        width: 16px; height: 16px; transform: scale(2); vertical-align:middle;"
+        style="vertical-align:middle"></div> <span id="pGold"></span></div>
+  <div id="eWeapon"><img src="<?=$tile_folder?>attack.png"><span id="pAttack">0<span></div>
+  <div id="eShield"><img src="<?=$tile_folder?>shield.png"><span id="pShield">0<span></div>
+  <div id="eArmor"><img src="<?=$tile_folder?>armor.png"><span id="pArmor">0<span></div>
+ </div>
 </div>
-<div id="levelBox" style="float:right">
-  Level <?=$c->level?>
-  <img class="com-btn" src="<?=$tile_folder?>minimap.png" onclick="toggleMinimap()" style="vertical-align:middle">
-  <br><div>
+
+<div id="levelBox" style="position:absolute; right:0;">
+ <div style="display:inline-flex">
+  <div>Level <?=$c->level?></div>
+  <div class="com-btn" style="background: rgba(0, 0, 0, 0)
+  url('src/dungeonrl/tile/minimap.png') repeat scroll
+  -0px -0px; margin: 16px 24px 32px 32px;
+  width: 16px; height: 16px; transform: scale(3); vertical-align:middle"
+  onclick="keypressPlay('e')" style="vertical-align:middle"></div>
+ </div>
+  <div style="text-align: right;">
     <img src="<?=$tile_folder?>key.png" id="pKey">
-    <img src="<?=$tile_folder?>chest_key.png" id="pChestKey">
+    <br><img src="<?=$tile_folder?>chest_key.png" id="pChestKey">
   </div>
 </div>
 
@@ -140,7 +158,7 @@
     </table>
   </div>
   <div class="menu--title">Game Tips</div>
-    <p>Find your way to the next level, you dont have to fight every monster. Use candle or lamp to light the path in the darkest levels.</p>
+    <p>Find your way to the next level, you dont have to fight every monster. On deadends search for hidden doors. Use candle or lamp to light the path in the darkest levels.</p>
   </div>
 </div>
 

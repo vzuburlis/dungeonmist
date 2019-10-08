@@ -106,8 +106,8 @@ button{
           <tr><th>k</th><td> Kick a small monster or an object</td></tr>
           <tr><th>f</th><td> Fire arrow</td></tr>
           <tr><th>z</th><td> Pass your turn</td></tr>
-          <tr><th>r</th><td> Rest</td></tr>
-          <tr><th>z</th><td> Pass your turn</td></tr>
+          <tr><th>Z</th><td> Rest</td></tr>
+          <tr><th>\</th><td> Actions menu</td></tr>
         </table>
       </div>
       <div v-if="guiview=='credits'">

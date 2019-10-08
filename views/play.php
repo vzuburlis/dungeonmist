@@ -140,6 +140,7 @@ function updateStats() {
   } else eShield.style.display = 'none';
 
   pArrows.innerHTML = player.arrows;
+  pGold.innerHTML = player.gold;
   if(player.arrows>0) btnArrows.style.display='inline-block'; else btnArrows.style.display='none';
   if(mapItems.includes('key')) document.getElementById("pKey").style.display = 'inline-block'
   if(mapItems.includes('chest_key')) document.getElementById("pChestKey").style.display = 'inline-block'

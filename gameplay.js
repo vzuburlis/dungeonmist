@@ -858,7 +858,7 @@ function keypressPlay (code) {
       closeActionMenu();
       setGameStatus('rest')
       let turns_rested=0
-      if(player.turnsToRest<400) {
+      if(player.turnsToRest<50) {
         logMsg('You dont feel tired');
         setGameStatus('play');
         renderMap();
@@ -872,7 +872,7 @@ function keypressPlay (code) {
       } while (player.turnsToRest>0 && gameStatus == "rest") // || new message
       setGameStatus('play');
       if(player.turnsToRest<1) logMsg('You are rested and ready to continue')
-      x = Math.floor(turns_rested/3)
+      x = Math.floor(turns_rested/6)
       player.addHP(x)
       renderMap();
     }
@@ -899,7 +899,7 @@ function keypressPlay (code) {
       }
       logMsg('Select a direction to kick');
       selectTarget.action = player.kick;
-      setGameStatus('play')
+      //setGameStatus('play')
       renderMap()
     }
     else if (code == '84' || code=='t') { // t
