@@ -10,7 +10,7 @@ $classes = $pnk->getRows();
 $text = "R.I.P. {$game['name']} you wil alwayws be remember. A true hero that fought the ";
 $this_url = "https://dungeonmist.com/dungeonrl/game/".$game['id'];
 
-$description = $game['name']." reached level ".$game['level']." in the dungenos.";
+$description = $game['name']." reached level ".$game['level']." in the dungeons.";
 if($deathCause) {
   $description = $game['name']." died from ".$deathCause." at level ".$game['level'].".";
 }
@@ -86,7 +86,7 @@ button{
     <meta property="og:type"        content="website" />
     <meta property="og:title"       content="Dungeon Mist" />
     <meta property="og:description" content="<?=$description?>" />
-    <meta property="og:image"       content="https://dungeonmist.com/src/dungeonrl/images/dwarf.png" />
+    <meta property="og:image"       content="https://dungeonmist.com/assets/dwarf.png" />
 
     <?=view::css("lib/gila.min.css")?>
     <?=view::script("lib/gila.min.js")?>
