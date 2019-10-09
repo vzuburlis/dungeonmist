@@ -134,7 +134,7 @@ function unitClass (options) {
         }
         if(map[that.x+dx][that.y+dy]=='l') {
           logMsg("The lava is burning your feet!");
-          if(!that.hasAttr('flying') && !that.hasAttr('resist','fire')) that.addHP(-1);
+          if(!that.hasAttr('flying') && !that.hasAttr('resist','fire')) that.addHP(-1, 'lava');
         }
         if(map[that.x+dx][that.y+dy]==':') {
           logMsg("It is very dark in here and hard to see in the distance");
@@ -149,7 +149,12 @@ function unitClass (options) {
             if(Math.floor(Math.random() * 40)==0) {
               log_msg = "You vomit in the waters";
               log_alert = true;
-              if(that.hp>12) that.addHP(-4, log_msg); else that.addStatus('confuze',6);
+              if(that.hp>12) {
+                logMsg(log_msg)
+                that.addHP(-4, "vomiting");
+              } else {
+                that.addStatus('confuze',6);
+              }
             }
             logMsg(log_msg, log_alert);
           }
@@ -218,8 +223,9 @@ function unitClass (options) {
             } else {
               obj.type = findObjectType(objType.activate_to, obj.type);
               swingAudio.play()
+              _trap = objType.activate_to
               logMsg("You step in the "+objType.activate_to);
-              if(that.hp>8) that.addHP(-8); else that.addHP(-4);
+              if(that.hp>8) that.addHP(-8,_trap); else that.addHP(-4,_trap);
             }
           }
           if(typeof objType.reveal_to!='undefined') if(typeof obj.detected=='undefined') {
@@ -417,11 +423,11 @@ function unitClass (options) {
         if(typeof itemType[item.itemType].effect!='undefined') {
           that.removeEffect(itemType[item.itemType].effect)
         }
-        if(typeof itemType[item.itemType].armor!='undefined') {
-          that.armor -= itemType[item.itemType].armor
+        if(typeof item.armor!='undefined') {
+          that.armor -= item.armor
         }
-        if(typeof itemType[item.itemType].attack!='undefined') {
-          that.attack -= itemType[item.itemType].attack
+        if(typeof item.attack!='undefined') {
+          that.attack -= item.attack
         }
         that[spot] = null
       }
@@ -468,11 +474,12 @@ function unitClass (options) {
       items.splice(iti, 1);
     }
 
-    that.addHP = function (x, msg="You die") {
+    that.addHP = function (x, cause="", msg="You die") {
       that.hp += x
       if(that.hp > that.maxhp) that.hp = that.maxhp
       if(that.hp<1) {
         logMsg("<span style='color:red'>"+msg+"</span>", true);
+        that.deathCause = cause
         permaDeath()
       }
     }
@@ -922,7 +929,7 @@ function unitClass (options) {
 
             log_msg = "The "+that.typeName()+' hits you for '+attack_points+' damage'
             dmsg = "<span style='color:red'>The "+that.typeName()+' kills you</span>'
-            player.addHP(-attack_points, dmsg);
+            player.addHP(-attack_points, that.typeName(), dmsg);
             if(player.hp>0) {
               if(Math.floor(Math.random() * 8)==0) {
                 if(typeof _mt['specialAttack']!='undefined') {
@@ -938,7 +945,7 @@ function unitClass (options) {
                 if(typeof _mt['specialAttack']!='undefined') {
                   if(_mt['specialAttack']=='critical') {
                     log_msg = "The "+that.typeName()+' hits you with critical attack'
-                    player.addHP(-attack_points, dmsg);
+                    player.addHP(-attack_points, that.typeName(), dmsg);
                   }
                 }
               }

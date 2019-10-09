@@ -52,7 +52,8 @@
  <br><div style="display:flex; flex-direction:column;">
   <div><div style="background: rgba(0, 0, 0, 0)
         url('src/dungeonrl/DawnLike/gold.png') repeat scroll -0px -0px;
-        width: 16px; height: 16px; transform: scale(2); vertical-align:middle;"
+        width: 16px; height: 16px; transform: scale(2); vertical-align:middle;
+        margin-left: 8px"
         style="vertical-align:middle"></div> <span id="pGold"></span></div>
   <div id="eWeapon"><img src="<?=$tile_folder?>attack.png"><span id="pAttack">0<span></div>
   <div id="eShield"><img src="<?=$tile_folder?>shield.png"><span id="pShield">0<span></div>
@@ -67,7 +68,7 @@
   url('src/dungeonrl/tile/minimap.png') repeat scroll
   -0px -0px; margin: 16px 24px 32px 32px;
   width: 16px; height: 16px; transform: scale(3); vertical-align:middle"
-  onclick="keypressPlay('e')" style="vertical-align:middle"></div>
+  onclick="toggleMinimap()" style="vertical-align:middle"></div>
  </div>
   <div style="text-align: right;">
     <img src="<?=$tile_folder?>key.png" id="pKey">
@@ -76,10 +77,7 @@
 </div>
 
 <div id="play-btn-container">
-  <a href="<?=$new_url?>" class="play-btn">Play Again</a>
-  <br>
-  <a target="_blank" href="https://www.facebook.com/dungeonmist"
-   class="play-btn" style="background:#4080ff;border-color:#4080ff;">Facebook Page</a>
+  <a href="<?=$game_url?>/<?=$c->gameId?>" class="play-btn">Continue</a>
 </div>
 
 <div id="commands">

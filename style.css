@@ -72,7 +72,7 @@ body{
   text-align:left; /*display:grid; grid-template-columns: 1fr 1fr 1fr 1fr;*/
   float: left;
 }
-#statBox div { display:inline-block; margin: 4px 0px;}
+#statBox div { display:inline-block;}
 #statBox img, #levelBox img { width: 32px; height:32px; vertical-align:middle}
 #statBox span { padding: 4px; }
 #pKey, #pChestKey{display:none}

@@ -7,7 +7,15 @@ $feedback_url = GPACKAGE.'/feedback';
 $pnk = new gTable('playerclass');
 $classes = $pnk->getRows();
 $text = "R.I.P. {$game['name']} you wil alwayws be remember. A true hero that fought the ";
+$this_url = "https://dungeonmist.com/dungeonrl/game/".$game['id'];
+
+$description = $game['name']." reached level ".$game['level']." in the dungenos.";
+if($deathCause) {
+  $description = $game['name']." dies from ".$deathCause." at level ".$game['level'].".";
+}
 ?>
+
+<link href="<?=$style_css_path?>" rel="stylesheet">
 <style>
 body{
     font-family: courier new;
@@ -19,12 +27,12 @@ body{
 }
 #game-title{
     font-family: 'Berkshire Swash', cursive;
-    font-size: 3em;
+    font-size: 3.5em;
     padding: 30px 0;
 }
 .form-label {
-  font-family: 'Berkshire Swash', cursive;
-  font-size: 1.5em;
+  /*font-family: 'Berkshire Swash', cursive;*/
+  font-size: 1.3em;
 }
 #about-game{
     padding: 4em 0;
@@ -35,7 +43,7 @@ body{
     max-width:1000px;
     margin: auto;
 }
-.play-btn {
+/*.play-btn {
     text-transform: uppercase;
     padding:1em 2em;
     font-size:1.5em;
@@ -47,7 +55,7 @@ body{
 .play-btn:hover {
     color: white;
     background: #ecc148;
-}
+}*/
 button{
     font-size: 3em;
 }
@@ -68,17 +76,19 @@ button{
   transform: scale(3);
   margin: 15px;
 }
+.g-btn.bw{background:black;border:1px solid white;}
 </style>
 <head>
     <base href="<?=gila::base_url()?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:url"         content="https://caveofcenbeald.com/dungeonrl/game/" />
+    <meta property="og:url"         content="<?=$this_url?>" />
     <meta property="og:type"        content="website" />
-    <meta property="og:title"       content="Dungeon Roguelike" />
-    <meta property="og:description" content="<?=$game['name']?> reached level <?=$game['level']?> in the dungeos." />
-    <meta property="og:image"       content="https://caveofcenbeald.com/src/dungeonrl/images/bg.png" />
+    <meta property="og:title"       content="Dungeon Mist" />
+    <meta property="og:description" content="<?=$description?>" />
+    <meta property="og:image"       content="https://dungeonmist.com/src/dungeonrl/images/dwarf.png" />
 
     <?=view::css("lib/gila.min.css")?>
+    <?=view::script("lib/gila.min.js")?>
     <?=view::script("lib/gila.min.js")?>
     <?=view::script($unit_js_path)?>
     <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
@@ -87,14 +97,21 @@ button{
 
 <body>
   <div id="main">
-    <div id="game-title"><?=$game['name']?></div>
-    <div class="form-label">Level <?=$game['level']?> <?=$playerclass['name']?></div>
+    <div id="game-title">R.I.P.</div>
+    <div class="form-label"><?=$description?></div>
     <div class="form-label">Turns Played: <?=floor($game['game_turns']/10)?></div>
+    <div class="form-label">Gold found: <?=$gold?></div>
 
     <br>
-    <a href="#" class="g-btn">Share on Facebook</a>
-    <a href="#" class="g-btn">Share on Twitter</a>
-    <br>
+    <a href="https://www.facebook.com/sharer.php?u=<?=$this_url?>" class="g-btn bw">Share on Facebook</a>
+    <a href="http://twitter.com/intent/tweet/?url=<?=$this_url?>" class="g-btn bw">Share on Twitter</a>
+    <br><br><br>
+    <div id="">
+      <a href="<?=$new_url?>" class="play-btn">New Game</a>
+      <br>
+      <a href="<?=gila::base_url(GPACKAGE)?>" class="play-btn">Main Menu</a>
+    </div>
+
 
     <?php
     if(session::key('finishedGame')==$game['id']) {
@@ -108,7 +125,6 @@ button{
     }
     ?>
 
-<br><br><br><br><br><a href="<?=GPACKAGE.'/new'?>" class="play-btn">New Game</a>
 <!--canvas id="map"></canvas>
 <canvas id="minimap"></canvas-->
 </body>

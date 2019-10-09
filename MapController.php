@@ -160,6 +160,8 @@ class MapController extends controller
       $this->loadLevel($gameId, $game['level']);
       $file = LOG_PATH.'/games/'.$gameId.'/@.json';
       $this->player = json_decode(file_get_contents($file),true);
+      view::set('gold', $this->player['gold']);
+      view::set('deathCause', $this->player['deathCause']??null);
       $this->player["sprite"] = ['player', (int)$class['spriteX'], (int)$class['spriteY']];
       view::renderFile('game.php',GPACKAGE);
     }
@@ -327,9 +329,8 @@ class MapController extends controller
       $_i = rand(3,4+$ex)-$this->levelTask['spawnedMonsters']+$ex;
       for($i=0;$i<$_i;$i++) $this->spawnMonster($this->randPos());
 
-      if($this->level>4) $this->addItemByName($this->randPos(), 'Candle');
+      if($this->level>4) $this->addItemByName($this->randPos(), ['Candle','Lamp']);
       //if($this->level==1) $this->addItemByType($this->randPos(), explode(',',$this->playerItem)[0]);
-      $this->addItemByName($this->randPos(), ['Gold','3 Gold','5 Gold']);
       $this->addItemByName($this->randPos(), ['Gold','3 Gold','5 Gold']);
       $this->addItemByName($this->randPos(), ['Gold','3 Gold','5 Gold']);
       $this->addItemByName($this->randPos(), ['Gold','3 Gold','5 Gold']);
