@@ -3,6 +3,7 @@ $ppath = gila::base_url().'src/'.GPACKAGE.'/';
 $tile_folder = gila::base_url()."src/".GPACKAGE."/tile/";
 $dl_folder = gila::base_url()."src/".GPACKAGE."/DawnLike/";
 $play_url = GPACKAGE.'/play';
+$new_url = gila::base_url(GPACKAGE).'/new';
 $feedback_url = GPACKAGE.'/feedback';
 $pnk = new gTable('playerclass');
 $classes = $pnk->getRows();
@@ -11,7 +12,7 @@ $this_url = "https://dungeonmist.com/dungeonrl/game/".$game['id'];
 
 $description = $game['name']." reached level ".$game['level']." in the dungenos.";
 if($deathCause) {
-  $description = $game['name']." dies from ".$deathCause." at level ".$game['level'].".";
+  $description = $game['name']." died from ".$deathCause." at level ".$game['level'].".";
 }
 ?>
 
