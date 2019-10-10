@@ -78,7 +78,6 @@
 {
   "name": "giant ant",
   "sprite": ["pest", 0, 4],
-  "flying": true,
   "level": 3,
   "weak": ["shock"]
 },

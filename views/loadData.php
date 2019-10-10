@@ -8,11 +8,11 @@ itemType = <?=json_encode($c->itemType)?>;
 g.get('<?=$gamedata_url?>/<?=$c->gameId?>/items.json', function(data){
   assetLoaded('items');
 })
-g.get('<?=$ppath?>data/itemEnchantments.json?v=109', function(data){
+g.get('<?=$ppath?>data/itemEnchantments.json?v=1010', function(data){
   itemEnchantment = JSON.parse(data);
   assetLoaded('itemEnchantments');
 })
-g.get('<?=$ppath?>data/objects.json?v=109', function(data){
+g.get('<?=$ppath?>data/objects.json?v=1010', function(data){
   objectType = JSON.parse(data);
   assetLoaded('objects');
 })

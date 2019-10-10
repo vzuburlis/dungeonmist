@@ -1,4 +1,7 @@
 
+*1.0.10*
+Screenshot is saved after end game
+
 *1.0.9*
 Made bigger the user and minimap buttons
 Added initial items
