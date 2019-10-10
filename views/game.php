@@ -10,7 +10,7 @@ $classes = $pnk->getRows();
 $text = "R.I.P. {$game['name']} you wil alwayws be remember. A true hero that fought the ";
 $this_url = "https://dungeonmist.com/dungeonrl/game/".$game['id'];
 $shot = "https://dungeonmist.com/assets/dwarf.png";
-if(file_exists(SITE_PATH.'assets/endshot'.$game['id'].'png')) {
+if(file_exists(SITE_PATH.'assets/endshot'.$game['id'].'.png')) {
   $shot = "https://dungeonmist.com/assets/endshot/".$game['id'].".png";
 }
 
