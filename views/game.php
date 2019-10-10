@@ -9,7 +9,7 @@ $pnk = new gTable('playerclass');
 $classes = $pnk->getRows();
 $text = "R.I.P. {$game['name']} you wil alwayws be remember. A true hero that fought the ";
 $this_url = "https://dungeonmist.com/dungeonrl/game/".$game['id'];
-$shot = "https://dungeonmist.com/assets/dwarf/.png";
+$shot = "https://dungeonmist.com/assets/dwarf.png";
 if(file_exists(SITE_PATH.'assets/endshot'.$game['id'].'png')) {
   $shot = "https://dungeonmist.com/assets/endshot/".$game['id'].".png";
 }
@@ -79,7 +79,7 @@ button{
     <meta property="og:image"       content="<?=$shot?>" />
 
     <meta property="twitter:description" content="<?=$description?>" />
-    <meta property="twitter:card" content="Large Image" />
+    <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:image:src" content="<?=$shot?>" />
 
     <?=view::css("lib/gila.min.css")?>
@@ -123,9 +123,6 @@ button{
       echo '</div>';
     }
     ?>
-
-<!--canvas id="map"></canvas>
-<canvas id="minimap"></canvas-->
 </body>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -144,7 +141,7 @@ function sendFeedback(feedback, token) {
         window.location.href = '<?=$play_url?>?level=<?=$c->level+1?>' // &entryType=random|fallen?
       }
   })
-  //g.post()
+
 }
 
 itemType = <?=json_encode($c->itemType)?>;

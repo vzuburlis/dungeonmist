@@ -877,6 +877,7 @@ class MapController extends controller
           "attack" => 0,
           "strength"=> 0,
           "dexterity"=> 0,
+          "gold"=> 0,
           "intelligence"=> 0,
           "armor" => 0,
           "arrows" => 0,
