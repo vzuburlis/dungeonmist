@@ -157,6 +157,7 @@ class MapController extends controller
       $playerclass = $pnk->getRow(['id'=>$game['class_id']]);
       view::set('game', $game);
       view::set('playerclass', $playerclass);
+      $this->itemType = json_decode(file_get_contents($this->gamePath($gameId).'items.json'),true);
       $this->loadLevel($gameId, $game['level']);
       $file = LOG_PATH.'/games/'.$gameId.'/@.json';
       $this->player = json_decode(file_get_contents($file),true);
@@ -951,6 +952,15 @@ class MapController extends controller
         $stat['intelligence']++;
       }
       return $stat;
+    }
+
+    function saveBase64Action($gameId) {
+      $fileName = 'assets/endshot/'.$gameId.'.png';
+      $img = $_POST['imgBase64'];
+      $img = str_replace('data:image/png;base64,', '', $img);
+      $img = str_replace(' ', '+', $img);
+      $fileData = base64_decode($img);
+      file_put_contents($fileName, $fileData);
     }
 
 }

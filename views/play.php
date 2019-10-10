@@ -102,6 +102,14 @@ function permaDeath() {
     method: 'post',
     fn: function(){
       document.getElementById('play-btn-container').style.display = "block"
+      var dataURL = canvas.toDataURL();
+      let fm=new FormData()
+      fm.append('imgBase64', dataURL);
+      g.ajax({
+        url: "<?=gila::base_url()?>dungeonrl/saveBase64/<?=$c->gameId?>",
+        data: fm,
+        method: 'post'
+      })
     }
   })
 }

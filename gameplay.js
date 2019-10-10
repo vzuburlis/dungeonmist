@@ -55,7 +55,10 @@ function renderMap2() {
     renderMap()
 }
 function renderMap() {
-  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.globalAlpha = 1;
+  context.fillStyle="#000000";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  //context.clearRect(0, 0, canvas.width, canvas.height);
   for (i=0; i< mapHeight; i++) {
     for (j=0; j< mapWidth; j++) {
       if (mapRev[j][i]>1) {
@@ -140,7 +143,10 @@ function renderMap() {
           typeof objects[i].detected=='undefined') continue;
           _t = objectType[objects[i].type].sprite
           if(typeof objectType[objects[i].type].tile!='undefined') {
-            context.clearRect((x-player.x+renderWidth)*32, (y-player.y+renderHeight)*32, 32, 32);
+            context.globalAlpha = 1;
+            context.fillStyle="#000000";
+            context.fillRect((x-player.x+renderWidth)*32, (y-player.y+renderHeight)*32, 32, 32);
+            //context.clearRect((x-player.x+renderWidth)*32, (y-player.y+renderHeight)*32, 32, 32);
           }
         }
         context.globalAlpha = globalAlphaByMapRev(x,y)

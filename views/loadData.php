@@ -70,15 +70,17 @@ var clientWidth = window.innerWidth
 || document.body.clientWidth;
 if(clientWidth<500) renderWidth = 10;
 
-canvas.width = 32*renderWidth*2+32;
-canvas.height = 32*renderHeight*2+32;
-minicanvas.width = mapWidth*8;
-minicanvas.height = mapHeight*8;
-context = canvas.getContext("2d");
-context.imageSmoothingEnabled = false;
-ctxMini = minicanvas.getContext("2d");
-//context.translate(0.5, 0.5);
-//context.scale(2,2);
+if(canvas!==null) {
+  canvas.width = 32*renderWidth*2+32;
+  canvas.height = 32*renderHeight*2+32;
+  minicanvas.width = mapWidth*8;
+  minicanvas.height = mapHeight*8;
+  context = canvas.getContext("2d");
+  context.imageSmoothingEnabled = false;
+  ctxMini = minicanvas.getContext("2d");
+  //context.translate(0.5, 0.5);
+  //context.scale(2,2);
+}
 
 itemImgPath = [
     ['obj','objects.png'],

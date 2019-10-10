@@ -47,7 +47,7 @@
   "specialAttack": "confuze"
 },
 {
-  "name": "craw",
+  "name": "crow",
   "sprite": ["bird", 0, 1],
   "flying": true,
   "level": 2,
@@ -70,7 +70,7 @@
 },
 {
   "name": "dragonfly",
-  "sprite": ["bird", 1, 1],
+  "sprite": ["pest", 1, 1],
   "flying": true,
   "level": 3,
   "weak": ["shock"]
@@ -89,7 +89,7 @@
   "weak": ["fire"]
 },
 {
-  "name": "ice craw",
+  "name": "ice crow",
   "sprite": ["bird", 0, 2],
   "flying": true,
   "level": 4,
@@ -141,7 +141,7 @@
   "specialAttack": "confuze"
 },
 {
-  "name": "dark craw",
+  "name": "dark crow",
   "sprite": ["bird", 1, 1],
   "flying": true,
   "level": 5,

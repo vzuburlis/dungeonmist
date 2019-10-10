@@ -40,7 +40,6 @@ body{
 }
 #main {
     padding: 10px;
-    background: rgba(0,0,0,0.5);
     max-width:1000px;
     margin: auto;
 }
@@ -78,6 +77,7 @@ button{
   margin: 15px;
 }
 .g-btn.bw{background:black;border:1px solid white;}
+#equip-menu--list,#use-menu--list{max-width:450px; margin:auto}
 </style>
 <head>
     <base href="<?=gila::base_url()?>">
@@ -86,10 +86,12 @@ button{
     <meta property="og:type"        content="website" />
     <meta property="og:title"       content="Dungeon Mist" />
     <meta property="og:description" content="<?=$description?>" />
-    <meta property="og:image"       content="https://dungeonmist.com/assets/dwarf.png" />
+    <meta property="og:image"       content="https://dungeonmist.com/assets/endshot/<?=$game['id']?>.png" />
+
+    <meta property="twitter:description" content="<?=$description?>" />
+    <meta property="twitter:card" content="Large Image" />
 
     <?=view::css("lib/gila.min.css")?>
-    <?=view::script("lib/gila.min.js")?>
     <?=view::script("lib/gila.min.js")?>
     <?=view::script($unit_js_path)?>
     <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
@@ -112,7 +114,12 @@ button{
       <br>
       <a href="<?=gila::base_url(GPACKAGE)?>" class="play-btn">Main Menu</a>
     </div>
-
+    <img src="assets/endshot/<?=$game['id']?>.png" style="margin:auto">
+    <h3>Equipment</h3>
+    <div id="equip-menu--list"></div>
+    <h3>Inventory</h3>
+    <div id="use-menu--list"></div>
+    <br><br><br>
 
     <?php
     if(session::key('finishedGame')==$game['id']) {
@@ -149,8 +156,125 @@ function sendFeedback(feedback, token) {
   //g.post()
 }
 
+itemType = <?=json_encode($c->itemType)?>;
+itemEnchantment = <?=json_encode(file_get_contents($ppath."data/itemEnchantments.json"))?>;
+
+itemImg=[];
+itemImgPath = [
+    ['obj','objects.png'],
+    ['dungeon','dungeon.png'],
+    ['shortwep','Items/ShortWep.png'],
+    ['medwep','Items/MedWep.png'],
+    ['rock','Items/Rock.png'],
+    ['armor','Items/Armor.png'],
+    ['potion','Items/Potion.png'],
+    ['scroll','Items/Scroll.png'],
+    ['door0','Objects/Door0.png'],
+    ['door1','Objects/Door1.png'],
+    ['trap','Objects/Trap1.png'],
+    ['chest0','Items/Chest0.png'],
+    ['chest1','Items/Chest1.png'],
+    //['tree','Objects/Tree0.png'],
+    ['floor','Objects/Floor.png'],
+    //['hills','Objects/Hill0.png'],
+    ['tile','Objects/Tile.png'],
+    ['undead0','Characters/Undead0.png'],
+    ['undead1','Characters/Undead1.png'],
+    ['player0','Characters/Player0.png'],
+    ['player1','Characters/Player1.png'],
+    ['playerR0','Characters/PlayerR0.png'],
+    ['playerR1','Characters/PlayerR1.png'],
+    ['rodent0','Characters/Rodent0.png'],
+    ['rodent1','Characters/Rodent1.png'],
+    ['pest0','Characters/Pest0.png'],
+    ['pest1','Characters/Pest1.png'],
+    ['bird0','Characters/Avian0.png'],
+    ['bird1','Characters/Avian1.png'],
+    ['decor0','Objects/Decor0.png'],
+    ['decor1','Objects/Decor1.png'],
+    ['ground0','Objects/Ground0.png'],
+    ['effect0','Objects/Effect0.png'],
+    ['effect1','Objects/Effect1.png'],
+    ['key','Items/Key.png'],
+    ['gauze','../tile/gauze.png'],
+    ['light','Items/Light.png'],
+    ['shield','Items/Shield.png'],
+    ['ammo','Items/Ammo.png'],
+    ['staff','staff.png'],
+    ['book','Items/Book.png'],
+    ['pit0','Pit0.png'],
+    ['pit1','Pit1.png'],
+    ['gold','gold.png'],
+]
+for(let i=0;i<itemImgPath.length;i++) {
+    itemImg[itemImgPath[i][0]] = new Image();
+    itemImg[itemImgPath[i][0]].src = "<?=$dl_folder?>"+itemImgPath[i][1];
+}
+
+var player = <?=json_encode($c->player)?>;
+list = document.getElementById("use-menu--list")
+list.innerHTML = ""
+com = 65
+comToItem = []
+for(i=0; i<player.inventory.length; i++) {
+  if(typeof player.inventory[i].itemType=='undefined') continue
+  _itemType = player.inventory[i].itemType
+  if(typeof itemType[_itemType]=='undefined') continue
+  _type = itemType[_itemType]
+  src = itemImg[_type.sprite[0]].src
+  sx = _type.sprite[1]*16+'px'
+  sy = _type.sprite[2]*16+'px'
+  if(_type.type=='weapon' || _type.type=='armor' || _type.type=='shield') continue;
+  comToItem[com] = i
+  if(typeof _type.hp!='undefined') {
+    hp=' '+player.inventory[i].hp+'/'+_type.hp
+  } else hp=''
+  _nx = ''
+  if(typeof player.inventory[i].stock!='undefined') {
+    if(player.inventory[i].stock>1) _nx = ' x'+player.inventory[i].stock
+  }
+  if(_nx!='' && hp!='') console.error(getItemName(_itemType)+' uses hp and stock')
+  list.innerHTML += '<div class="menu-item"><div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div> &nbsp;&nbsp;<span class="item-name">'+getItemName(_itemType)+hp+_nx+'</span></div>'
+  com++
+}
+
+list = document.getElementById("equip-menu--list")
+list.innerHTML = ""
+com = 65;
+comToItem = [];
+for(i=0; i<player.inventory.length; i++) {
+  if(typeof player.inventory[i].itemType=='undefined') continue
+  _itemType = player.inventory[i].itemType
+  if(typeof itemType[_itemType]=='undefined') continue
+  _type = itemType[_itemType]
+  src = itemImg[_type.sprite[0]].src
+  sx = _type.sprite[1]*16+'px'
+  sy = _type.sprite[2]*16+'px'
+  if(_type.type!='weapon' && _type.type!='armor' && _type.type!='shield') continue;
+  comToItem[com] = i
+
+  if(player.weapon==i || player.eArmor==i || player.eShield==i) itemClass=' green'; else itemClass='';
+  if(typeof _type.hp!='undefined') {
+    hp=' '+player.inventory[i].hp+'/'+_type.hp+''
+  } else hp=''
+  _enc = null
+  if(typeof player.inventory[i].enchantment!='undefined') _enc = player.inventory[i].enchantment
+  list.innerHTML += '<div class="menu-item" ><div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div>  &nbsp;&nbsp;<span class="item-name'+itemClass+'">'+getItemFullName(_itemType,_enc)+hp+'</span></div>'
+  com++;
+}
+
+function getItemName(_itemType) {
+  _type = itemType[_itemType]
+  return _type.name
+}
+function getItemFullName(_itemType, enchantment) {
+  name = getItemName(_itemType)
+  if(typeof enchantment!='undefined') if(typeof itemEnchantment[enchantment]!='undefined') {
+    return name+' '+itemEnchantment[enchantment][0];
+  }
+  return name
+}
 </script>
-<?=view::script($game_js_path)?>
 
 <?php if(gila::base_url()!='http://localhost/gilacms/') { ?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130027935-1"></script>
