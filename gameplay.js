@@ -474,7 +474,7 @@ function findItemType(name,d=null) {
 function logMsg(msg, block=false) {
   if(block) {
     msg = '<span style="color:yellow">'+msg+'</span>';
-  } //else msg = '<span>'+msg+'</span>';
+  } else if(msg.includes('<span')==false) msg = '<span>'+msg+'</span>';
   if(gameStatus=='rest') gameStatus='play';
   logMessages.push([player.gameTurn, msg, block])
   document.getElementById("msgBox").innerHTML += '<br>'+msg;
@@ -519,7 +519,7 @@ function setGameStatus(v) {
 }
 
 function btnContinue() {
-    setGameStatus('play');
+  setGameStatus('play');
   document.getElementById("msgBox").innerHTML='';
   renderMap()
 }

@@ -28,7 +28,9 @@ $permadeath_url = GPACKAGE.'/permadeath';
 
 <body style="background:#000;overflow: hidden;">
   <div id="main">
-    <canvas id="map" onmousemove="mousemoveOnMap(event,this)" ontouch="clickOnMap(event,this)" onclick="clickOnMap(event,this)"></canvas>
+    <canvas id="map" onmousemove="mousemoveOnMap(event,this)"
+     ontouch="clickOnMap(event,this)" style="z-index:-1"
+     onclick="clickOnMap(event,this)"></canvas>
     <canvas id="minimap"></canvas>
     <?php include_once(__DIR__.'/play.controls.php')?>
   </div>

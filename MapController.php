@@ -45,48 +45,45 @@ class MapController extends controller
       view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=1010');
       view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=1010');
 
-        //self::admin();
-        $this->gameId = $_COOKIE['gameId'] ?? null;
+      //self::admin();
+      $this->gameId = $_COOKIE['gameId'] ?? null;
 
-        if($this->gameId!==null) {
-
-          for ($i=0; $i<$this->rows; $i++) {
-              for ($j=0; $j<$this->columns; $j++) {
-                  $this->setTile($j,$i,'#');
-                  $this->mapRev[$j][$i] = 0;
-              }
-          }
-          $this->monsterType = json_decode(file_get_contents($this->gamePath().'monsters.json'),true);
-          $this->itemType = json_decode(file_get_contents($this->gamePath().'items.json'),true);
-          $this->monsterTypeN = count($this->monsterType);
-          $this->itemTypeN = count($this->itemType);
-          $this->objectType = json_decode(file_get_contents('src/'.GPACKAGE.'/data/objects.json'),true);
-          $this->objectTypeN = count($this->objectType);
-          $this->taskType = json_decode(file_get_contents('src/'.GPACKAGE.'/data/tasks.json'),true);
-          $this->taskTypeN = count($this->taskType);
-
-          if(isset($_REQUEST['level'])) {
-              usleep(300000);
-          }
-
-          $this->level = $_COOKIE['level'] ?? 1;
-          $this->steps += $this->level*10;
-          $ext = $this->level<10 ? $this->level : 10;
-          $this->rows += $ext;
-          $this->columns += $ext;
-
-          $file = LOG_PATH.'/games/'.$this->gameId.'/@.json';
-          if(file_exists($file)) {
-            $this->player = json_decode(file_get_contents($file),true);
-          }
+      if($this->gameId!==null) {
+        for ($i=0; $i<$this->rows; $i++) {
+            for ($j=0; $j<$this->columns; $j++) {
+                $this->setTile($j,$i,'#');
+                $this->mapRev[$j][$i] = 0;
+            }
         }
-  
-        if($this->player == null && $this->gameId!==null) {
-          $this->player = $this->newPlayer($this->gameId);
+        $this->monsterType = json_decode(file_get_contents($this->gamePath().'monsters.json'),true);
+        $this->itemType = json_decode(file_get_contents($this->gamePath().'items.json'),true);
+        $this->monsterTypeN = count($this->monsterType);
+        $this->itemTypeN = count($this->itemType);
+        $this->objectType = json_decode(file_get_contents('src/'.GPACKAGE.'/data/objects.json'),true);
+        $this->objectTypeN = count($this->objectType);
+        $this->taskType = json_decode(file_get_contents('src/'.GPACKAGE.'/data/tasks.json'),true);
+        $this->taskTypeN = count($this->taskType);
+
+        if(isset($_REQUEST['level'])) {
+            usleep(300000);
         }
-        if($this->player['hp']>$this->player['maxhp']) $this->player['hp']=$this->player['maxhp'];
-        //session::unsetKey('player');
-        //session::unsetKey('level');
+
+        $this->level = $_COOKIE['level'] ?? 1;
+        $this->steps += $this->level*10;
+        $ext = $this->level<10 ? $this->level : 10;
+        $this->rows += $ext;
+        $this->columns += $ext;
+
+        $file = LOG_PATH.'/games/'.$this->gameId.'/@.json';
+        if(file_exists($file)) {
+          $this->player = json_decode(file_get_contents($file),true);
+        }
+      }
+
+      if($this->player == null && $this->gameId!==null) {
+        $this->player = $this->newPlayer($this->gameId);
+      }
+      if($this->player['hp']>$this->player['maxhp']) $this->player['hp']=$this->player['maxhp'];
     }
 
     function share()
@@ -124,7 +121,6 @@ class MapController extends controller
 
         file_put_contents($file, $_REQUEST['levelMap']);
         file_put_contents($this->gamePath().'@.json', json_encode($playerData));
-        //usleep(100000);
         echo '{"msg":"ok","level":"'.$newLevel.'"}'; 
       }
     }
@@ -807,7 +803,7 @@ class MapController extends controller
       $type = 0;
       if(is_array($name)) {
         $d = count($name)-1;
-        if($d-5>$this->level) $d = $this->level+5;
+        if($d-6>$this->level) $d = $this->level+6;
         $i = rand(0,$d);
         $name = $name[$i];
       }
@@ -853,8 +849,6 @@ class MapController extends controller
       $n = 0;
       for ($x = -1; $x < $w+1; $x++) {
         for ($y = -1; $y < $h+1; $y++) {
-          //if($sx+$x<0 || $sx+$x>=$this->map_width) return 100;
-          //if($sy+$y<0 || $sy+$y>=$this->map_height) return 100;
           if(!in_array($this->map[$sx+$x][$sy+$y], ['C','#',' '])){
             $n++;
           }
@@ -898,23 +892,8 @@ class MapController extends controller
           ['itemType'=>$type, 'stock'=>1],
           $this->createItem($type)
         );
-//        if(isset($itemData['type'])) {
-//          $i = count($stat['inventory']);
-//          if($itemData['type'] == 'weapon') $stat['weapon']==$i;
-//          if($itemData['type'] == 'shield') $stat['eShield']==$i;
-//          if($itemData['type'] == 'armor') $stat['eArmor']==$i;
-//        }
         $stat['inventory'][] = $itemData;
       }
-      //for($j=0;$j<2;$j++) if(isset($i[$j])) {
-//        $type=$this->findItemByName('Shocking Grasp');
-        //  if(($eff = $this->itemType[$type]['effect'] ?? null) && $eff[0]=='+') {
-      //    @$stat[substr($eff,1)]++;
-      //  } else {
-//$stat['inventory'][] = ['itemType'=>$this->findItemByName('Knife'), 'hp'=>10, 'stock'=>1, 'enchantment'=>7];
-//$stat['inventory'][] = ['itemType'=>$this->findItemByName('Knife'), 'hp'=>10, 'stock'=>1, 'enchantment'=>8];
-        //  }
-      //}
       
       if($playerclass['name']=='Hobbit') {
           $stat['strength']-=1;
