@@ -9,6 +9,10 @@ $pnk = new gTable('playerclass');
 $classes = $pnk->getRows();
 $text = "R.I.P. {$game['name']} you wil alwayws be remember. A true hero that fought the ";
 $this_url = "https://dungeonmist.com/dungeonrl/game/".$game['id'];
+$shot = "https://dungeonmist.com/assets/dwarf/.png";
+if(file_exists(SITE_PATH.'assets/endshot'.$game['id'].'png')) {
+  $shot = "https://dungeonmist.com/assets/endshot/".$game['id'].".png";
+}
 
 $description = $game['name']." reached level ".$game['level']." in the dungeons.";
 if($deathCause) {
@@ -22,7 +26,6 @@ body{
     font-family: courier new;
     text-align: center;
     color: white;
-    /*background: url(<?=gila::base_url()?>src/<?=GPACKAGE?>/images/bg.png) no-repeat center center fixed;*/
     background-color: black;
     background-size: cover;
 }
@@ -43,19 +46,6 @@ body{
     max-width:1000px;
     margin: auto;
 }
-/*.play-btn {
-    text-transform: uppercase;
-    padding:1em 2em;
-    font-size:1.5em;
-    font-weight:bold;
-    border-radius:0.5em;
-    border: 2px solid #ecc148;
-    color: #ecc148;
-}
-.play-btn:hover {
-    color: white;
-    background: #ecc148;
-}*/
 button{
     font-size: 3em;
 }
@@ -86,10 +76,11 @@ button{
     <meta property="og:type"        content="website" />
     <meta property="og:title"       content="Dungeon Mist" />
     <meta property="og:description" content="<?=$description?>" />
-    <meta property="og:image"       content="https://dungeonmist.com/assets/endshot/<?=$game['id']?>.png" />
+    <meta property="og:image"       content="<?=$shot?>" />
 
     <meta property="twitter:description" content="<?=$description?>" />
     <meta property="twitter:card" content="Large Image" />
+    <meta property="twitter:image:src" content="<?=$shot?>" />
 
     <?=view::css("lib/gila.min.css")?>
     <?=view::script("lib/gila.min.js")?>
@@ -174,27 +165,7 @@ itemImgPath = [
     ['trap','Objects/Trap1.png'],
     ['chest0','Items/Chest0.png'],
     ['chest1','Items/Chest1.png'],
-    //['tree','Objects/Tree0.png'],
-    ['floor','Objects/Floor.png'],
-    //['hills','Objects/Hill0.png'],
     ['tile','Objects/Tile.png'],
-    ['undead0','Characters/Undead0.png'],
-    ['undead1','Characters/Undead1.png'],
-    ['player0','Characters/Player0.png'],
-    ['player1','Characters/Player1.png'],
-    ['playerR0','Characters/PlayerR0.png'],
-    ['playerR1','Characters/PlayerR1.png'],
-    ['rodent0','Characters/Rodent0.png'],
-    ['rodent1','Characters/Rodent1.png'],
-    ['pest0','Characters/Pest0.png'],
-    ['pest1','Characters/Pest1.png'],
-    ['bird0','Characters/Avian0.png'],
-    ['bird1','Characters/Avian1.png'],
-    ['decor0','Objects/Decor0.png'],
-    ['decor1','Objects/Decor1.png'],
-    ['ground0','Objects/Ground0.png'],
-    ['effect0','Objects/Effect0.png'],
-    ['effect1','Objects/Effect1.png'],
     ['key','Items/Key.png'],
     ['gauze','../tile/gauze.png'],
     ['light','Items/Light.png'],
