@@ -82,7 +82,7 @@ if(canvas!==null) {
   //context.scale(2,2);
 }
 
-itemImgPath = [
+var itemImgPath = [
     ['obj','objects.png'],
     ['dungeon','dungeon.png'],
     ['shortwep','Items/ShortWep.png'],

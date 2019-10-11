@@ -60,13 +60,7 @@
   ],
   [
     {
-      "name": "doors",
-      "door_object": "Door"
-    },
-    {
-      "door_object": "Door"
-    },
-    {
+      "name": "2doors",
       "door_object": "Door"
     },
     {
@@ -75,17 +69,17 @@
   ],
   [
     {
-      "name": "ironbars",
-      "door_object": "Iron Bars"
+      "name": "4doors",
+      "door_object": "Door"
     },
     {
-      "door_object": "Iron Bars"
+      "door_object": "Door"
     },
     {
-      "door_object": "Iron Bars"
+      "door_object": "Door"
     },
     {
-      "door_object": "Iron Bars"
+      "door_object": "Door"
     }
   ],
   [

@@ -135,6 +135,11 @@ function updateStats() {
     pAttack.innerHTML = damage+' '+e.hp+'/'+itemType[e.itemType].hp;
     if(damage>0) pAttack.innerHTML = '+'+pAttack.innerHTML
     eWeapon.style.display = 'inline-block';
+    url = itemImg[itemType[e.itemType].sprite[0]].src
+    console.log(url)
+    px = itemType[e.itemType].sprite[1]*16
+    py = itemType[e.itemType].sprite[2]*16
+    //eWeapon.style.background = "background: rgba(0, 0, 0, 0) url('"+url+"') repeat scroll -"+px+"px -"+py+"px"
   } else eWeapon.style.display = 'none';
 
   if(player.eArmor!=null) {

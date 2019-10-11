@@ -55,21 +55,25 @@
         width: 16px; height: 16px; transform: scale(2); vertical-align:middle;
         margin-left: 8px"
         style="vertical-align:middle"></div> <span id="pGold"></span></div>
-  <div id="eWeapon"><img src="<?=$tile_folder?>attack.png"><span id="pAttack">0<span></div>
+  <div id="eWeapon">
+    <img src="<?=$tile_folder?>attack.png">
+    <span id="pAttack">0<span>
+  </div>
   <div id="eShield"><img src="<?=$tile_folder?>shield.png"><span id="pShield">0<span></div>
   <div id="eArmor"><img src="<?=$tile_folder?>armor.png"><span id="pArmor">0<span></div>
  </div>
 </div>
 
-<div id="levelBox" style="position:absolute; right:0;">
- <div style="display:inline-flex">
-  <div>Level <?=$c->level?></div>
-  <div class="com-btn" style="background: rgba(0, 0, 0, 0)
-  url('src/dungeonrl/tile/minimap.png') repeat scroll
-  -0px -0px; margin: 16px 24px 32px 32px;
-  width: 16px; height: 16px; transform: scale(3); vertical-align:middle"
-  onclick="toggleMinimap()" style="vertical-align:middle"></div>
- </div>
+<div id="levelBox" style="position:absolute; right:0; text-align:right">
+  <div style="display:inline-flex">
+   <div>Level <?=$c->level?></div>
+   <div class="com-btn" style="background: rgba(0, 0, 0, 0)
+   url('src/dungeonrl/tile/minimap.png') repeat scroll
+   -0px -0px; margin: 16px 24px 32px 32px;
+   width: 16px; height: 16px; transform: scale(3); vertical-align:middle"
+   onclick="toggleMinimap()" style="vertical-align:middle"></div>
+  </div>
+  <br>
   <div style="text-align: right;">
     <img src="<?=$tile_folder?>key.png" id="pKey">
     <br><img src="<?=$tile_folder?>chest_key.png" id="pChestKey">
