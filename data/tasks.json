@@ -21,6 +21,32 @@
   ],
   [
     {
+      "name": "wall_switch",
+      "wall_object": "Switch",
+      "open_object": null,
+      "level": 7
+    },
+    {
+      "door_object": "Gate",
+      "open_from": "previous_object"
+    }
+  ],
+  [
+    {
+      "name": "wall_candles",
+      "wall_object": "Wall Candles",
+      "level":4
+    }
+  ],
+  [
+    {
+      "name": "wall_candles",
+      "wall_object": "Wall Candle",
+      "level":4
+    }
+  ],
+  [
+    {
       "name": "door",
       "door_object": "Door"
     }

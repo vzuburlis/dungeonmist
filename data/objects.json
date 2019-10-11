@@ -134,6 +134,17 @@
   "animated": true, "illuminate": 10
 },
 {
+  "sprite": ["decor", 0, 8], "name": "Wall Candle",
+  "animated": true, "illuminate": 5
+},
+{
+  "sprite": ["decor", 1, 8], "name": "Wall Candles",
+  "animated": true, "illuminate": 10
+},
+{
+  "sprite": ["decor0", 0, 3], "name": "Wall Cracks"
+},
+{
   "sprite": ["door", 0, 0], "name": "Hidden Door",
   "hidden": true
 },

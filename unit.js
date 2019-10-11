@@ -124,42 +124,6 @@ function unitClass (options) {
         }
 
         mapRev[that.x+dx][that.y+dy]=1;
-        if(map[that.x+dx][that.y+dy]=='#' || map[that.x+dx][that.y+dy]=='C') {
-          logMsg("The wall blocks your way");
-          return false;
-        }
-        if(map[that.x+dx][that.y+dy]==' ') {
-          logMsg("You dont want to fall in the void");
-          return false;
-        }
-        if(map[that.x+dx][that.y+dy]=='l') {
-          logMsg("The lava is burning your feet!");
-          if(!that.hasAttr('flying') && !that.hasAttr('resist','fire')) that.addHP(-1, 'lava');
-        }
-        if(map[that.x+dx][that.y+dy]==':') {
-          logMsg("It is very dark in here and hard to see in the distance");
-        }
-        if(map[that.x+dx][that.y+dy]=='=' || map[that.x+dx][that.y+dy]=='-') if(!that.hasAttr('flying')) {
-          that.turnTime -= 50;
-        }
-        if(map[that.x+dx][that.y+dy]=='-') {
-          if(!that.hasAttr('resist','disease')) {
-            log_msg = "You cannot bear the smell of these waters"
-            log_alert = false;
-            if(Math.floor(Math.random() * 40)==0) {
-              log_msg = "You vomit in the waters";
-              log_alert = true;
-              if(that.hp>12) {
-                logMsg(log_msg)
-                that.addHP(-4, "vomiting");
-              } else {
-                that.addStatus('confuze',6);
-              }
-            }
-            logMsg(log_msg, log_alert);
-          }
-        }
-
 
         obj = getObject(that.x+dx,that.y+dy)
         if(obj!=null) {
@@ -178,6 +142,7 @@ function unitClass (options) {
 
                 logMsg("You open the "+objType.name.toLowerCase());
                 if(typeof obj.item!='undefined') if(obj.item!==null) {
+                  logMsg('You find a '+getItemName(obj.item))
                   items.push([that.x, that.y, obj.item]);
                   that.pickItem(items.length-1)
                   obj.item=null;
@@ -247,6 +212,7 @@ function unitClass (options) {
             return false;
           }
         }
+
         mi = getMonster(that.x+dx,that.y+dy);
         if(mi > -1) {
           attack_points = 6 + Math.floor(Math.random() * 5) + that.meleeDamage();
@@ -321,6 +287,43 @@ function unitClass (options) {
         if(iti>-1) {
           that.pickItem(iti)
         }
+
+        if(map[that.x+dx][that.y+dy]=='#' || map[that.x+dx][that.y+dy]=='C') {
+          logMsg("The wall blocks your way");
+          return false;
+        }
+        if(map[that.x+dx][that.y+dy]==' ') {
+          logMsg("You dont want to fall in the void");
+          return false;
+        }
+        if(map[that.x+dx][that.y+dy]=='l') {
+          logMsg("The lava is burning your feet!");
+          if(!that.hasAttr('flying') && !that.hasAttr('resist','fire')) that.addHP(-1, 'lava');
+        }
+        if(map[that.x+dx][that.y+dy]==':') {
+          logMsg("It is very dark in here and hard to see in the distance");
+        }
+        if(map[that.x+dx][that.y+dy]=='=' || map[that.x+dx][that.y+dy]=='-') if(!that.hasAttr('flying')) {
+          that.turnTime -= 50;
+        }
+        if(map[that.x+dx][that.y+dy]=='-') {
+          if(!that.hasAttr('resist','disease')) {
+            log_msg = "You cannot bear the smell of these waters"
+            log_alert = false;
+            if(Math.floor(Math.random() * 40)==0) {
+              log_msg = "You vomit in the waters";
+              log_alert = true;
+              if(that.hp>12) {
+                logMsg(log_msg)
+                that.addHP(-4, "vomiting");
+              } else {
+                that.addStatus('confuze',6);
+              }
+            }
+            logMsg(log_msg, log_alert);
+          }
+        }
+
 
         that.x += dx;
         that.y += dy;

@@ -318,7 +318,7 @@ class MapController extends controller
         do{
           $taskIndex = rand(0, $this->taskTypeN-1);
           $steps = $this->canAddTaskAtRoom($taskIndex, $i, $roomN);
-        }while($steps===false);
+        } while($steps===false);
         $this->addTask($taskIndex, $steps);
       }
 
@@ -415,6 +415,20 @@ class MapController extends controller
             }
           }
           $res = $this->addBlockObject($room, $objType, $args);
+          if($res==false) return; // cancel if switch is not added
+        }
+        if(isset($step['wall_object'])) {
+          $objName = $this->fromList($step['wall_object']);
+          $objType = $this->findObjectType($objName);
+          $args = [];
+          if(isset($step['object_item'])) {
+            if($itemName = $this->fromList($step['object_item'])) if(count($this->player['inventory'])<5) {
+              //$this->levelTask['spawnedItems']++;
+              $args = ['item'=>$itemName];
+            }
+          }
+          $res = $this->addWallObject($room, $objType, $args);
+          if($res==false) return; // cancel if switch is not added
         }
         if(isset($step['room_desc'])) {
           $this->region[] = ['box'=>$room, 'description'=>$step['room_desc']];
@@ -435,7 +449,7 @@ class MapController extends controller
         if($this->taskType[$taskIndex][0]['level']>$this->level) return false;
       }
       $_tasks = count($this->taskType[$taskIndex]);
-      
+
       foreach($this->taskType[$taskIndex] as $j=>$taskStep) {
         if($stepRoomX[$j-1]==$roomN-1) return false;
         if($j>0) {
@@ -453,7 +467,6 @@ class MapController extends controller
             }
           }
         }
-        
       }
 
       foreach($stepRoomX as $i=>$roomIndex) {
@@ -583,13 +596,13 @@ class MapController extends controller
     }
 
     function countTiles($start,$end,$tile) {
-        $n = 0;
-        for($x=$start[0]; $x<$end[0]+1; $x++) {
-            for($y=$start[1]; $y<$end[1]+1; $y++) {
-                if($this->getTile($x,$y)==$tile) $n++;
-            }
+      $n = 0;
+      for($x=$start[0]; $x<$end[0]+1; $x++) {
+        for($y=$start[1]; $y<$end[1]+1; $y++) {
+          if($this->getTile($x,$y)==$tile) $n++;
         }
-        return $n;
+      }
+      return $n;
     }
 
     function inMap($point) {
@@ -714,6 +727,28 @@ class MapController extends controller
       }
 
       return false;
+    }
+
+    function addWallObject($room, $type, $args = []) {
+      $tries=0;
+      do{
+        $fit=true;
+        $tries++;
+        if($tries==30) return false;
+        $direction = rand(0,0);
+        if($direction==0) {
+          $x=rand($room[0], $room[0]+$room[2]-1);
+          $y=$room[1]-1;
+          if($this->countTiles([$x-1,$y-1],[$x+1,$y],'#')<6) $fit=false;
+        }
+      }while($fit==false);
+
+      $newobj = ["x"=>$x, "y"=>$y, "type"=>$type];
+      if(isset($args['item'])) {
+        $newobj['item'] = $this->findItemType($args['item']);
+      }
+      $this->objects[] = $newobj;
+      return true;
     }
 
     function findObjectType($name) {
