@@ -10,6 +10,7 @@ body{
     font-family: courier new;
     text-align: center;
     color: white;
+    background: url(<?=gila::base_url()?>src/<?=GPACKAGE?>/images/dm-guerrero.jpg) no-repeat center center fixed;
     background-color: black;
     background-size: cover;
 }
@@ -27,8 +28,7 @@ body{
 }
 #main {
     padding: 10px;
-    background: rgba(0,0,0,0.5);
-    max-width:1000px;
+    max-width: 1000px;
     margin: auto;
     height:100%;
 }
@@ -42,12 +42,18 @@ body{
   height: 64px;
 }
 .class-selected {
-  border: 2px solid aliceblue;
+  border: 2px solid #579ca2;
 }
 .class-avatar {
   transform: scale(3);
   margin: 15px;
   image-rendering: crisp-edges;
+}
+.class-panel {
+  padding:0 2em;
+  background: black;
+  border-radius:0.5em;
+  border: 2px solid #1b2d3b;
 }
 </style>
 <head>
@@ -63,7 +69,7 @@ body{
   <div id="main">
     <div id="game-title">Character Creation</div>
     <div class="row">
-      <div class="gm-8" style="padding:0 2em">
+      <div class="gm-8 class-panel">
         <div id="class-selection" style="text-align:center">
           <div v-for="(playerclass,index) in classes" :class="[selectedClass==index ? 'class-selected' : '', 'class-card']" @click="selectedClass=index">
             <div class="class-avatar" :style="classImgStyle(playerclass)"></div>

@@ -73,54 +73,56 @@
   "attack": [1]
 },
 {
+  "level":4,
   "sprite": ["shortwep", 0, 4],
   "name": "Mace",
   "type": "weapon", "hp":24,
   "attack": [1,3]
 },
 {
+  "level":4,
   "sprite": ["shortwep", 1, 4],
   "name": "Chain Mace",
   "type": "weapon", "hp":24,
   "attack": [1,3]
 },
 {
-  "level":3,
+  "level":2,
   "sprite": ["shortwep", 3, 0],
   "name": "Glass Dagger",
   "type": "weapon", "hp":32,
   "attack": [1,2], "attackMod": "dexterity"
 },
 {
-  "level":3,
+  "level":2,
   "sprite": ["shortwep", 1, 1],
   "name": "Dagger",
   "type": "weapon", "hp":32,
   "attack": [1,2], "attackMod": "dexterity"
 },
 {
-  "level":3,
+  "level":2,
   "sprite": ["shortwep", 7, 0],
   "name": "Elven Dagger",
   "type": "weapon", "hp":32,
   "attack": [1,2], "attackMod": "dexterity"
 },
 {
-  "level":3,
+  "level":2,
   "sprite": ["medwep", 0, 0],
   "name": "Sword",
   "type": "weapon", "hp":32,
   "attack": [2,3], "attackMod": "strength"
 },
 {
-  "level":3,
+  "level":2,
   "sprite": ["medwep", 0, 1],
   "name": "Axe",
   "type": "weapon", "hp":32,
   "attack": [2,3], "attackMod": "strength"
 },
 {
-  "level":3,
+  "level":2,
   "sprite": ["medwep", 1, 1],
   "name": "Double Axe",
   "type": "weapon", "hp":32,
@@ -131,52 +133,52 @@
   "sprite": ["shield", 0, 0],
   "name": "Shield",
   "type": "shield", "hp":2,
-  "effect": "+block"
+  "effect": "+block", "skill": "Shield"
 },
 {
   "level":4,
   "sprite": ["shield", 1, 0],
   "name": "Shield",
   "type": "shield", "hp":3,
-  "effect": "+block"
+  "effect": "+block", "skill": "Shield"
 },
 {
   "level":6,
   "sprite": ["shield", 2, 0],
   "name": "Shield",
   "type": "shield", "hp":4,
-  "effect": "+block"
+  "effect": "+block", "skill": "Shield"
 },
 {
   "level":8,
   "sprite": ["shield", 3, 0],
   "name": "Shield",
   "type": "shield", "hp":5,
-  "effect": "+block"
+  "effect": "+block", "skill": "Shield"
 },
 {
   "level":10,
   "sprite": ["shield", 4, 0],
   "name": "Shield",
   "type": "shield", "hp":6,
-  "effect": "+block"
+  "effect": "+block", "skill": "Shield"
 },
 {
-  "level":3,
+  "level":2,
   "sprite": ["staff", 0, 1],
   "name": "Staff",
   "type": "weapon", "hp":20,
   "effect": "+attack", "attackMod": "intelligence"
 },
 {
-  "level":3,
+  "level":2,
   "sprite": ["staff", 2, 0],
   "name": "Wizzard Scepter",
   "type": "weapon", "hp":15,
   "effect": "+attack", "attackMod": "intelligence"
 },
 {
-  "level":3,
+  "level":2,
   "sprite": ["staff", 4, 0],
   "name": "Green Staff",
   "type": "weapon", "hp":20,
@@ -218,35 +220,35 @@
 {
   "sprite": ["book", 2, 0],
   "name": "Magic Missile",
-  "type": "spellbook", "hp":10,
+  "type": "spellbook", "hp":10, "skill": "Spellcast",
   "effect": "arrow",
   "target": "select"
 },
 {
   "sprite": ["book", 4, 1],
   "name": "Burning Hands",
-  "type": "spellbook", "hp":8,
+  "type": "spellbook", "hp":10, "skill": "Spellcast",
   "effect": "burn",
   "target": "direction"
 },
 {
   "sprite": ["book", 4, 1],
   "name": "Shocking Grasp",
-  "type": "spellbook", "hp":9,
+  "type": "spellbook", "hp":10, "skill": "Spellcast",
   "effect": "shock",
   "target": "direction"
 },
 {
   "sprite": ["book", 3, 0],
   "name": "Lightning",
-  "type": "spellbook", "hp":10,
+  "type": "spellbook", "hp":10, "skill": "Spellcast",
   "effect": "lightning-strike",
   "target": "enemies"
 },
 {
   "sprite": ["book", 0, 0],
   "name": "Confuze Enemies",
-  "type": "spellbook", "hp":10,
+  "type": "spellbook", "hp":10, "skill": "Spellcast",
   "effect": "confuze",
   "target": "enemies",
   "effect_time": 10
@@ -254,14 +256,14 @@
 {
   "sprite": ["book", 1, 0],
   "name": "Blink",
-  "type": "spellbook", "hp":10,
+  "type": "spellbook", "hp":10, "skill": "Spellcast",
   "effect": "teleport",
   "target": "select"
 },
 {
   "sprite": ["book", 4, 0],
   "name": "Invisibility",
-  "type": "spellbook", "hp":10,
+  "type": "spellbook", "hp":10, "skill": "Spellcast",
   "effect": "invisible",
   "target": "self",
   "effect_time": 24
@@ -269,7 +271,7 @@
 {
   "sprite": ["book", 5, 0],
   "name": "Healing Wounds",
-  "type": "spellbook", "hp":10,
+  "type": "spellbook", "hp":10, "skill": "Spellcast",
   "target": "self",
   "effect": "heal"
 },
@@ -370,7 +372,8 @@
   "sprite": ["ammo", 5, 2],
   "name": "Arrow",
   "autopick": true,
-  "effect": "+arrows"
+  "effect": "+arrows",
+  "skill": "Archery"
 },
 {
   "sprite": ["gold", 0, 2],

@@ -8,12 +8,12 @@ function updateIlluminateMap() {
   }
   for (i=0; i<groundObjects.length; i++) {
     if(typeof objectType[groundObjects[i].type].illuminate!='undefined') {
-      illuminateMap(i+10, groundObjects[i].x, groundObjects[i].y, objectType[groundObjects[i].type].illuminate);
+      illuminateMap(i+10, groundObjects[i].x, groundObjects[i].y, objectType[groundObjects[i].type].illuminate, true);
     }
   }
   for (i=0; i<objects.length; i++) {
     if(typeof objectType[objects[i].type].illuminate!='undefined') {
-      illuminateMap(i+10, objects[i].x, objects[i].y, objectType[objects[i].type].illuminate);
+      illuminateMap(i+10, objects[i].x, objects[i].y, objectType[objects[i].type].illuminate, true);
     }
   }
 }
@@ -26,7 +26,7 @@ var tiles = {
     ';': {'sprite':['pit0',1,1]},
     ',': {'sprite':['pit0',0,2]},
     ':': {'sprite':['pit0',1,2]},
-    'l': {'sprite':['pit0',2,0],'sprite2':['pit1',2,0]},
+    'l': {'sprite':['pit0',2,0],'sprite2':['pit0',3,3]},
     'g': {'sprite':['pit0',0,0],'sprite2':['pit1',0,0]},
     'b': {'sprite':['pit0',1,0],'sprite2':['pit1',1,0]},
     '=': {'sprite':['pit0',3,0],'sprite2':['pit1',3,0]},
@@ -36,12 +36,12 @@ var tiles = {
     //'N': {'sprite':['pit0',2,2],'spriteOver':['pit1',3,1]} // tileImg['sign']
 }
 
-function illuminateMap(n, x, y, d) {
+function illuminateMap(n, x, y, d, source=false) {
   if(d==0) return;
   if(!inMap(x,y)) return;
   if(n>9 && lightmap[x][y]==n) return;
   lightmap[x][y]=n;
-  if(map[x][y]=='#') return;
+  if(map[x][y]=='#' && source==false) return;
   illuminateMap(n, x+1, y, d-1);
   illuminateMap(n, x, y+1, d-1);
   illuminateMap(n, x-1, y, d-1);
@@ -72,30 +72,33 @@ function renderMap() {
 
   for (i=player.y-renderHeight; i<=player.y+renderHeight; i++) {
     for (j=player.x-renderWidth; j<=player.x+renderWidth; j++) {
-        if (inMap(j,i)) if (mapRev[j][i]>0) {
-          context.globalAlpha = globalAlphaByMapRev(j,i)
+      if (inMap(j,i)) if (mapRev[j][i]>0) {
+        context.globalAlpha = globalAlphaByMapRev(j,i)
 
-            t = map[j][i]
-            if(typeof tiles[t]!='undefined') {
-                if(typeof tiles[t].sprite2!='undefined' && timeBit==1) {
-                    drawSprite(j,i, itemImg[tiles[t].sprite2[0]], tiles[t].sprite2[1], tiles[t].sprite2[2]);
-                } else {
-                    drawSprite(j,i, itemImg[tiles[t].sprite[0]], tiles[t].sprite[1], tiles[t].sprite[2]);
-                }
-            }
-
-            if (map[j][i]=='<') {
-              drawImage(j,i, tileImg['wall']);
-              drawImage(j,i, tileImg['ups']);
-            }
-            if (map[j][i]=='N' || map[j][i]=='S') {
-              drawImage(j,i, tileImg['path']);
-              drawImage(j,i, tileImg['sign']);
-            }
-            if (map[j][i]=='>') { drawImage(j,i, tileImg['downs']); }
+        t = map[j][i]
+        if(typeof tiles[t]!='undefined') {
+          randBit = Math.floor(Math.random()*2)
+          if(typeof tiles[t].sprite2!='undefined' && randBit==1) {
+              drawSprite(j,i, itemImg[tiles[t].sprite2[0]], tiles[t].sprite2[1], tiles[t].sprite2[2]);
+          } else {
+              drawSprite(j,i, itemImg[tiles[t].sprite[0]], tiles[t].sprite[1], tiles[t].sprite[2]);
+          }
         }
+
+        if (map[j][i]=='<') {
+          drawImage(j,i, tileImg['wall']);
+          drawImage(j,i, tileImg['ups']);
+        }
+        if (map[j][i]=='N' || map[j][i]=='S') {
+          drawImage(j,i, tileImg['path']);
+          drawImage(j,i, tileImg['sign']);
+        }
+        if (map[j][i]=='>') { drawImage(j,i, tileImg['downs']); }
+
+      }
     }
   }
+
   context.globalAlpha = 1;
 
   renderGroundObjects();
@@ -161,8 +164,8 @@ function renderMap() {
         }
     }
   }
-  context.globalAlpha = 1;
 
+  context.globalAlpha = 1;
   visibleMonsterIds = visibleMonsters();
 
   for (i of visibleMonsterIds) {
@@ -200,7 +203,16 @@ function renderMap() {
       drawSprite(x,y, itemImg[_sprite+'1'], _x, _y);
     }
   }
-
+/*
+  context.globalAlpha = 0.2
+  for (i=player.y-renderHeight; i<=player.y+renderHeight; i++) {
+    for (j=player.x-renderWidth; j<=player.x+renderWidth; j++) {
+      if (inMap(j,i)) if (mapRev[j][i]>1) {
+        drawSprite(j, i, itemImg['pit0'], 4, 4);
+      }
+    }
+  }
+*/
   context.globalAlpha = 1;
   player.render();
   if (map[player.x][player.y]=='=') drawImageB(player.x,player.y, itemImg['pit0'], 3, 0);
@@ -213,9 +225,8 @@ function renderMap() {
 
   drawStatus(player);
 
-  //if(gameStatus=='select-target') {
-    drawSelectRect();
-  //}
+  drawSelectRect();
+
   if(showMinimap==true) {
     renderMiniMap();
   }

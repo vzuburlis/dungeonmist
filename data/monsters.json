@@ -79,7 +79,8 @@
   "name": "giant ant",
   "sprite": ["pest", 0, 4],
   "level": 3,
-  "weak": ["shock"]
+  "weak": ["shock"],
+  "abilities": ["regenerate"]
 },
 {
   "name": "kobold mummy",
@@ -216,7 +217,8 @@
   "sprite": ["undead", 0, 3],
   "level": 7,
   "class": "z",
-  "special-attack": "bleeding"
+  "special-attack": "bleeding",
+  "abilities": ["regenerate"]
 },
 {
   "name": "orc swordman",

@@ -81,6 +81,7 @@ function unitClass (options) {
       if(that.turnsToHeal>300) {
         that.turnsToHeal=1
         that.addHP(1)
+        if(that.hassAttr('regenerate')) that.addHP(1)
       }
       that.gameTurn++
     };
@@ -823,25 +824,28 @@ function unitClass (options) {
     }
 
     that.addStatus = function (_effect, _effect_time) {
-        //if(_effect=='curse' || _effect=='confuze') if(that.hasStatus('bless')) return;
-        if(that.hasAttr('resist',_effect)) _effect_time = _effect_time/2
+      if(that.hasAttr('resist',_effect)) _effect_time = _effect_time/2
 
-	    for(let i=0; i<that.status.length; i++) {
-	    	if(that.status[i].effect == _effect) {
-  		    	if(that.status[i].timeleft<_effect_time*100) {
-  		    	  that.status[i].timeleft = _effect_time*100
-  		    	}
-  		    	return;
-	    	}
-	    }
+      for(let i=0; i<that.status.length; i++) {
+      	if(that.status[i].effect == _effect) {
+          if(that.status[i].timeleft<_effect_time*100) {
+            that.status[i].timeleft = _effect_time*100
+          }
+          return;
+        }
+      }
         that.addEffect(_effect)
         that.status.push({timeleft:_effect_time*100,effect:_effect})
     }
+
     that.hasAttr = function (attr, v=true) {
-        if(typeof monsterType[that.type]!='undefined') if(typeof monsterType[that.type][attr]!='undefined') {
-            if(monsterType[that.type][attr]===v || monsterType[that.type][attr].includes(v)) return true;
-        }
-        return false;
+      if(typeof that[attr]!='undefined') {
+        if(that[attr].includes(v)) return true;
+      }
+      if(typeof monsterType[that.type]!='undefined') if(typeof monsterType[that.type][attr]!='undefined') {
+          if(monsterType[that.type][attr]===v || monsterType[that.type][attr].includes(v)) return true;
+      }
+      return false;
     }
     that.hasAbility = function (ability) {
       if(typeof that.abilities!='undefined') {
@@ -928,7 +932,6 @@ function unitClass (options) {
               logMsg("The "+that.typeName()+' misses you');
               return
             }
-
 
             log_msg = "The "+that.typeName()+' hits you for '+attack_points+' damage'
             dmsg = "<span style='color:red'>The "+that.typeName()+' kills you</span>'

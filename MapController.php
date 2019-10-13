@@ -199,7 +199,7 @@ class MapController extends controller
       $this->player["gameTurn"] = $game['game_turns'];
 
       if(!$this->loadLevel()) {
-        $this->dungeon ();
+        $this->dungeon();
         $this->player['x'] = $this->startPos[0];
         $this->player['y'] = $this->startPos[1];
       }
@@ -830,8 +830,10 @@ class MapController extends controller
       do {
         $rtype = rand(0, $this->itemTypeN-1);
       } while($this->itemType[$rtype]['name'][0]=='+' ||
-        (isset($this->itemType[$type]['level']) 
-          && $this->itemType[$type]['level']>$this->level));
+        (isset($this->itemType[$rtype]['level']) 
+          && $this->itemType[$rtype]['level']>$this->level) ||
+        (isset($this->itemType[$rtype]['skill'])
+          && !in_array($this->itemType[$rtype]['skill'], $this->player['abilities'])) );
       return $rtype;
     }
     function addGroundObject($pos, $name) {
@@ -965,6 +967,8 @@ class MapController extends controller
       if($playerclass['name']=='Sorcerer') {
         $stat['strength']--;
         $stat['intelligence']++;
+        $stat['abilities'][] = "Spellcast";
+        $stat['abilities'][] = "Staff";
       }
       return $stat;
     }

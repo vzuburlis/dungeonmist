@@ -1,6 +1,7 @@
 
 *1.0.10*
 Screenshot is saved after end game
+More relevant items are spawned for the player class
 
 *1.0.9*
 Made bigger the user and minimap buttons

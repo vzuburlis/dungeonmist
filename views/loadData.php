@@ -84,7 +84,6 @@ if(canvas!==null) {
 
 var itemImgPath = [
     ['obj','objects.png'],
-    ['dungeon','dungeon.png'],
     ['shortwep','Items/ShortWep.png'],
     ['medwep','Items/MedWep.png'],
     ['rock','Items/Rock.png'],
@@ -134,8 +133,8 @@ for(let i=0;i<itemImgPath.length;i++) {
 }
 
 tileFiles = {
-  "wall":"wallnn1.png", "path":"floor2.png", "darkpath":"darkpath.png", "ups":"upstairs.png", "downs":"downstairs.png",
-  "sign":"sign.png", "water":"water.png"
+  "wall":"wallnn1.png", "ups":"upstairs.png", "downs":"downstairs.png",
+  "sign":"sign.png"
 }
 for(i in tileFiles) {
   tileImg[i] = new Image();
@@ -171,6 +170,7 @@ player = unitClass({
     dexterity: <?=($c->player['dexterity'] ?? 0)?>,
     intelligence: <?=($c->player['intelligence'] ?? 0)?>,
     abilities: <?=json_encode($c->player['abilities'] ?? [])?>,
+    resist: <?=json_encode($c->player['resist'] ?? [])?>,
     status: <?=json_encode($c->player['status'] ?? [])?>,
     inventory: <?=json_encode($c->player['inventory'] ?? [])?>,
     los: <?=($c->level<7 ? 7-$c->level : rand(0,1))?>,

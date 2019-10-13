@@ -108,23 +108,19 @@ button{
     text-align:center;
 }
 .play-btn {
-    text-transform: uppercase;
-    padding: 0.5em;
-    font-size: 1.2em;
-    font-weight: bold;
-    border-radius:0.5em;
-    border: 2px solid #ecc148;
-    background: #ecc148;
-    color: white;
-    text-decoration: none;
-    margin-bottom: 1em;
-    cursor: pointer;
-    display: inline-block;
-    min-width: 200px;
-}
-.play-btn {
-  background: #579ca2;
-  border-color:#579ca2;
+  text-transform: uppercase;
+  padding: 0.5em;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius:0.5em;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 1em;
+  cursor: pointer;
+  display: inline-block;
+  min-width: 200px;
+  background: #1b2d3b;
+  border: 2px solid #579ca2;
 }
 .play-btn:hover {
     color: white;
