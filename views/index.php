@@ -18,12 +18,23 @@ body{
 }
 #game-title{
     font-size: 4em;
-    padding: 40px 0;
+    padding: 35px 0;
 }
 
 #main {
+  padding: 5px;
+  max-width: 100%;
+}
+@media screen and (min-width: 600px) {
+  #main {
+    max-width: 250px
+  }
+}
+@media screen and (min-width: 800px) {
+  #main {
     padding: 10px;
     max-width:500px
+  }
 }
 #msgBox{ top:0;}
 #statBox { bottom:0; display:grid; grid-template-columns:1fr 1fr 1fr 1fr;font-size:24px}

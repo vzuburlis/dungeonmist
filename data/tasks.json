@@ -158,6 +158,30 @@
   ],
   [
     {
+      "name": "grass1",
+      "room_object": "Ground #1"
+    }
+  ],
+  [
+    {
+      "name": "grass2",
+      "room_object": "Ground #2"
+    }
+  ],
+  [
+    {
+      "name": "grass3",
+      "room_object": "Ground #3"
+    }
+  ],
+  [
+    {
+      "name": "grass4",
+      "room_object": "Ground #4"
+    }
+  ],
+  [
+    {
       "name": "grass",
       "room_tile":","
     }

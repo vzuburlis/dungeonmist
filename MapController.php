@@ -41,9 +41,9 @@ class MapController extends controller
     function __construct ()
     {
       include_once __DIR__."/models/Game.php";
-      view::set('style_css_path', gila::base_url().'src/'.GPACKAGE.'/style.css?v=1010');
-      view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=1010');
-      view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=1010');
+      view::set('style_css_path', gila::base_url().'src/'.GPACKAGE.'/style.css?v=1010a');
+      view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=1010a');
+      view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=1010a');
 
       //self::admin();
       $this->gameId = $_COOKIE['gameId'] ?? null;
