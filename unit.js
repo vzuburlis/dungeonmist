@@ -81,7 +81,7 @@ function unitClass (options) {
       if(that.turnsToHeal>300) {
         that.turnsToHeal=1
         that.addHP(1)
-        if(that.hassAttr('regenerate')) that.addHP(1)
+        if(that.hasAttr('regenerate')) that.addHP(1)
       }
       that.gameTurn++
     };
