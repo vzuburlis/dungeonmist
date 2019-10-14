@@ -6,6 +6,10 @@ g.get('<?=$gamedata_url?>/<?=$c->gameId?>/monsters.json', function(data) {
 })
 g.get('<?=$gamedata_url?>/<?=$c->gameId?>/items.json', function(data) {
   itemType = JSON.parse(data);
+  if(player.gameTurn==0) if(player.weapon==null) for(i in player.inventory) {
+    e = itemType[player.inventory[i].itemType]
+    if(typeof e.type!='undefined' && e.type=='weapon') player.wield('weapon', i);
+  }
   updateStats();
   assetLoaded('items');
 })

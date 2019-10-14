@@ -328,8 +328,6 @@ function renderMap() {
     console.log('in')
     if(typeof regions[r].fog!='undefined') {
       fog = regions[r].fog
-      // console.log(fog)
-      // if(inBox(player.x, player.y, regions[r].box)) 
       context.globalAlpha = 0.2
       if(inBox(player.x, player.y, regions[r].box)) {
         for (i=player.y-renderHeight; i<=player.y+renderHeight; i++) {
@@ -759,18 +757,18 @@ function keypressEquip (code) {
 
             if(_type.type=='weapon') {
               if(i==player.weapon) {
-                player.unwield('weapon')//removeWeapon()
+                player.unwield('weapon')
                 logMsg("You hand the " + getItemName(_itemType));
               } else {
-                player.wield('weapon', i)//Weapon(i)
+                player.wield('weapon', i)
                 logMsg("You wield the " + getItemName(_itemType));
               }
             } else if(_type.type=='armor') {
               if(i==player.eArmor) {
-                player.unwield('eArmor')//removeArmor()
+                player.unwield('eArmor')
                 logMsg("You take off the " + getItemName(_itemType));
               } else {
-                player.wield('eArmor', i)//equipArmor(i)
+                player.wield('eArmor', i)
                 logMsg("You wear the " + getItemName(_itemType));
               }
             } else if(_type.type=='shield') {
