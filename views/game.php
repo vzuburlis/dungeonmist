@@ -146,33 +146,22 @@ function sendFeedback(feedback, token) {
 
 itemType = <?=json_encode($c->itemType)?>;
 itemEnchantment = <?=json_encode(file_get_contents($ppath."data/itemEnchantments.json"))?>;
-
 itemImg=[];
-itemImgPath = [
-    ['obj','objects.png'],
-    ['dungeon','dungeon.png'],
-    ['shortwep','Items/ShortWep.png'],
-    ['medwep','Items/MedWep.png'],
-    ['rock','Items/Rock.png'],
-    ['armor','Items/Armor.png'],
-    ['potion','Items/Potion.png'],
-    ['scroll','Items/Scroll.png'],
-    ['door0','Objects/Door0.png'],
-    ['door1','Objects/Door1.png'],
-    ['trap','Objects/Trap1.png'],
-    ['chest0','Items/Chest0.png'],
-    ['chest1','Items/Chest1.png'],
-    ['tile','Objects/Tile.png'],
-    ['key','Items/Key.png'],
-    ['gauze','../tile/gauze.png'],
-    ['light','Items/Light.png'],
-    ['shield','Items/Shield.png'],
-    ['ammo','Items/Ammo.png'],
-    ['staff','staff.png'],
-    ['book','Items/Book.png'],
-    ['pit0','Pit0.png'],
-    ['pit1','Pit1.png'],
-    ['gold','gold.png'],
+var itemImgPath = [
+  ['shortwep','Items/ShortWep.png'],
+  ['medwep','Items/MedWep.png'],
+  ['rock','Items/Rock.png'],
+  ['armor','Items/Armor.png'],
+  ['potion','Items/Potion.png'],
+  ['scroll','Items/Scroll.png'],
+  ['key','Items/Key.png'],
+  ['gauze','../tile/gauze.png'],
+  ['light','Items/Light.png'],
+  ['shield','Items/Shield.png'],
+  ['ammo','Items/Ammo.png'],
+  ['staff','staff.png'],
+  ['book','Items/Book.png'],
+  ['gold','gold.png'],
 ]
 for(let i=0;i<itemImgPath.length;i++) {
     itemImg[itemImgPath[i][0]] = new Image();

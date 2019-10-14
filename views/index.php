@@ -6,57 +6,10 @@ $newgame_url = GPACKAGE.'/new';
 <link href="<?=$style_css_path?>" rel="stylesheet">
 <style>
 body{
-    font-family: courier new;
-    text-align: center;
-    color: white;
-    background: url(<?=gila::base_url()?>src/<?=GPACKAGE?>/images/dm-guerrero.jpg) no-repeat center center fixed;
-    background-color: black;
-    background-size: cover;
-}
-#game-title, h1, h2 ,h3 {
-  font-family: 'Berkshire Swash', cursive;
-}
-#game-title{
-    font-size: 4em;
-    padding: 35px 0;
-}
-
-#main {
-  padding: 5px;
-  max-width: 100%;
-}
-@media screen and (min-width: 600px) {
-  #main {
-    max-width: 250px
-  }
-}
-@media screen and (min-width: 800px) {
-  #main {
-    padding: 10px;
-    max-width:500px
-  }
-}
-#msgBox{ top:0;}
-#statBox { bottom:0; display:grid; grid-template-columns:1fr 1fr 1fr 1fr;font-size:24px}
-#statBox img { width: 32px; height:32px;}
-#statBox span { padding: 4px; }
-.com-table, .hof-table {
-  margin:auto; max-width:100%;
-  border-collapse: collapse;
-}
-.hof-table td {
-  text-align: center;
-}
-.com-table th, .com-table td, .hof-table td {
-  min-width: 160px;
-  border-top: 1px solid grey;
-  padding: 8px 0;
-}
-
-button{
-    font-size: 3em;
+  background: url(<?=gila::base_url()?>src/<?=GPACKAGE?>/images/dm-guerrero.jpg) no-repeat center center fixed;
 }
 </style>
+
 <head>
     <base href="<?=gila::base_url()?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -99,6 +52,23 @@ button{
             echo "<tr><td>{$game['name']}<td>{$game['level']}<td>{$game['game_time']}</tr>";
           } ?>
         </table>
+
+<?=view::script('lib/vue/vue.min.js')?>
+<?php
+view::script('src/core/assets/admin/content.js');
+view::script('src/core/lang/content/'.gila::config('language').'.js');
+?>
+
+
+<?php
+$pnk = new gTable('game');
+$t = $pnk->getTable();
+?>
+
+<div id="vue-table">
+  <g-table gtype="game" ref="gtable"></g-table>
+</div>
+
       </div>
       <div v-if="guiview=='commands'">
         <h2>Instructions</h2>
@@ -130,16 +100,7 @@ button{
       </div>
       <br>
       <br>
-      <div style="display:none">
-        <img src="<?=$tile_folder?>floor2.png">
-        <img src="<?=$tile_folder?>wall.png">
-        <img src="<?=$tile_folder?>player.png">
-        <img src="<?=$tile_folder?>upstairs.png">
-        <img src="<?=$tile_folder?>downstairs.png">
-        <img src="<?=gila::base_url()?>src/<?=GPACKAGE?>/DawnLike/Items/ShortWep.png">
-        <img src="<?=gila::base_url()?>src/<?=GPACKAGE?>/DawnLike/Items/Potion.png">
-        <img src="<?=gila::base_url()?>src/<?=GPACKAGE?>/DawnLike/Items/Armor.png">
-      </div>
+
     </div>
 </body>
 
@@ -152,27 +113,6 @@ var app = new Vue({
     guiview: null
   }
 });
-
-var itemImg = [];
-itemImgPath = [
-    ['player0','Characters/Player0.png'],
-    ['player1','Characters/Player1.png'],
-    ['pit0','Objects/Ground0.png'],
-]
-for(let i=0;i<itemImgPath.length;i++) {
-    itemImg[itemImgPath[i][0]] = new Image();
-    itemImg[itemImgPath[i][0]].src = "<?=$dl_folder?>"+itemImgPath[i][1];
-}
-
-g.get('<?=$ppath?>data/monsters.json', function(data){
-  monsterType = JSON.parse(data);
-})
-g.get('<?=$ppath?>data/items.json', function(data){
-  itemType = JSON.parse(data);
-})
-g.get('<?=$ppath?>data/objects.json', function(data){
-  objectType = JSON.parse(data);
-})
 
 </script>
 

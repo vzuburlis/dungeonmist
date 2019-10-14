@@ -65,8 +65,8 @@ function unitClass (options) {
           objects.push({x:that.x,y:that.y,type:findObjectType('Blood1')});
         }
         if(that.hp<1) {
-        logMsg("<span style='color:red'>You die from bleeding</span>");
-                document.getElementById('play-btn-container').style.display = "block"
+          logMsg("<span style='color:red'>You die from bleeding</span>");
+          document.getElementById('play-btn-container').style.display = "block"
         }
       }
       for(let i=0;i<that.status.length;i++) {

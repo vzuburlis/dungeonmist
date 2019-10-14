@@ -1,3 +1,123 @@
+/******** Load Images ********* */
+itemImg=[];
+var itemImgPath = [
+  ['obj','objects.png'],
+  ['shortwep','Items/ShortWep.png'],
+  ['medwep','Items/MedWep.png'],
+  ['rock','Items/Rock.png'],
+  ['armor','Items/Armor.png'],
+  ['potion','Items/Potion.png'],
+  ['scroll','Items/Scroll.png'],
+  ['door0','Objects/Door0.png'],
+  ['door1','Objects/Door1.png'],
+  ['trap','Objects/Trap1.png'],
+  ['chest0','Items/Chest0.png'],
+  ['chest1','Items/Chest1.png'],
+  ['floor','Objects/Floor.png'],
+  ['tile','Objects/Tile.png'],
+  ['undead0','Characters/Undead0.png'],
+  ['undead1','Characters/Undead1.png'],
+  ['player0','Characters/Player0.png'],
+  ['player1','Characters/Player1.png'],
+  ['playerR0','Characters/PlayerR0.png'],
+  ['playerR1','Characters/PlayerR1.png'],
+  ['rodent0','Characters/Rodent0.png'],
+  ['rodent1','Characters/Rodent1.png'],
+  ['pest0','Characters/Pest0.png'],
+  ['pest1','Characters/Pest1.png'],
+  ['bird0','Characters/Avian0.png'],
+  ['bird1','Characters/Avian1.png'],
+  ['decor0','Objects/Decor0.png'],
+  ['decor1','Objects/Decor1.png'],
+  ['ground0','Objects/Ground0.png'],
+  ['effect0','Objects/Effect0.png'],
+  ['effect1','Objects/Effect1.png'],
+  ['key','Items/Key.png'],
+  ['gauze','../tile/gauze.png'],
+  ['light','Items/Light.png'],
+  ['shield','Items/Shield.png'],
+  ['ammo','Items/Ammo.png'],
+  ['staff','staff.png'],
+  ['book','Items/Book.png'],
+  ['pit0','Pit0.png'],
+  ['pit1','Pit1.png'],
+  ['gold','gold.png'],
+]
+for(let i=0;i<itemImgPath.length;i++) {
+    itemImg[itemImgPath[i][0]] = new Image();
+    itemImg[itemImgPath[i][0]].src = _download_path_+itemImgPath[i][1];
+}
+
+tileFiles = {
+  "wall":"wallnn1.png", "ups":"upstairs.png", "downs":"downstairs.png",
+  "sign":"sign.png"
+}
+for(i in tileFiles) {
+  tileImg[i] = new Image();
+  tileImg[i].src = _tile_path_+tileFiles[i];
+}
+
+statusFiles = [
+  'strength', 'speed', 'bleeding', 'bless', 'curse', 'confuze', 'light', 'poison'
+]
+for(i in statusFiles) {
+  name = statusFiles[i]
+  statusImg[name] = new Image();
+  statusImg[name].src = _status_path_+name+".png";
+}
+
+/****** Game Functions ******* */
+var showMinimap = false;
+if(screen.width>800) showMinimap = true;
+function toggleMinimap() {
+  if(showMinimap) {
+    showMinimap = false
+    ctxMini.clearRect(0, 0, minicanvas.width, minicanvas.height);
+  } else {
+    showMinimap = true
+    renderMiniMap()
+  }
+}
+
+function updateStats() {
+  if(player.weapon!=null) {
+    e = player.inventory[player.weapon]
+    damage = player.meleeDamage()
+    pAttack.innerHTML = damage+' '+e.hp+'/'+itemType[e.itemType].hp;
+    if(damage>0) pAttack.innerHTML = '+'+pAttack.innerHTML
+    eWeapon.style.display = 'inline-block';
+    url = itemImg[itemType[e.itemType].sprite[0]].src
+    px = itemType[e.itemType].sprite[1]*16
+    py = itemType[e.itemType].sprite[2]*16
+    eWeaponImg.style.background = "rgba(0, 0, 0, 0) url('"+url+"') repeat scroll -"+px+"px -"+py+"px"
+  } else eWeapon.style.display = 'none';
+
+  if(player.eArmor!=null) {
+    e = player.inventory[player.eArmor]
+    pArmor.innerHTML = '['+player.armor+' '+e.hp+'/'+itemType[e.itemType].hp;
+    eArmor.style.display = 'inline-block';
+    url = itemImg[itemType[e.itemType].sprite[0]].src
+    px = itemType[e.itemType].sprite[1]*16
+    py = itemType[e.itemType].sprite[2]*16
+    eArmorImg.style.background = "rgba(0, 0, 0, 0) url('"+url+"') repeat scroll -"+px+"px -"+py+"px"
+  } else eArmor.style.display = 'none';
+
+  if(player.eShield!=null) {
+    e = player.inventory[player.eShield]
+    pShield.innerHTML = '( '+e.hp+'/'+itemType[e.itemType].hp;
+    eShield.style.display = 'inline-block';
+    url = itemImg[itemType[e.itemType].sprite[0]].src
+    px = itemType[e.itemType].sprite[1]*16
+    py = itemType[e.itemType].sprite[2]*16
+    eShieldImg.style.background = "rgba(0, 0, 0, 0) url('"+url+"') repeat scroll -"+px+"px -"+py+"px"
+  } else eShield.style.display = 'none';
+
+  pArrows.innerHTML = player.arrows;
+  pGold.innerHTML = player.gold;
+  if(player.arrows>0) btnArrows.style.display='inline-block'; else btnArrows.style.display='none';
+  if(mapItems.includes('key')) document.getElementById("pKey").style.display = 'inline-block'
+  if(mapItems.includes('chest_key')) document.getElementById("pChestKey").style.display = 'inline-block'
+}
 
 function updateIlluminateMap() {
   for (i=0; i< mapHeight; i++) {
@@ -58,7 +178,7 @@ function renderMap() {
   context.globalAlpha = 1;
   context.fillStyle="#000000";
   context.fillRect(0, 0, canvas.width, canvas.height);
-  //context.clearRect(0, 0, canvas.width, canvas.height);
+
   for (i=0; i< mapHeight; i++) {
     for (j=0; j< mapWidth; j++) {
       if (mapRev[j][i]>1) {

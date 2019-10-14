@@ -1,18 +1,19 @@
 <script>
 var gameStatus = 'loading'
-g.get('<?=$gamedata_url?>/<?=$c->gameId?>/monsters.json', function(data){
+g.get('<?=$gamedata_url?>/<?=$c->gameId?>/monsters.json', function(data) {
   monsterType = JSON.parse(data);
   assetLoaded('monsters');
 })
-itemType = <?=json_encode($c->itemType)?>;
-g.get('<?=$gamedata_url?>/<?=$c->gameId?>/items.json', function(data){
+g.get('<?=$gamedata_url?>/<?=$c->gameId?>/items.json', function(data) {
+  itemType = JSON.parse(data);
+  updateStats();
   assetLoaded('items');
 })
-g.get('<?=$ppath?>data/itemEnchantments.json?v=1010a', function(data){
+g.get('<?=$ppath?>data/itemEnchantments.json?v=1011', function(data) {
   itemEnchantment = JSON.parse(data);
   assetLoaded('itemEnchantments');
 })
-g.get('<?=$ppath?>data/objects.json?v=1010a', function(data){
+g.get('<?=$ppath?>data/objects.json?v=1011', function(data) {
   objectType = JSON.parse(data);
   assetLoaded('objects');
 })
@@ -30,13 +31,11 @@ function assetLoaded(asset) {
 
 var mapWidth = <?=$c->columns?>;
 var mapHeight = <?=$c->rows?>;
-//mapGen = mapClass();
-//mapGen.createDungeon();
-//var map = mapGen.map;
-var map = <?=json_encode($c->map)?>;;
+var lightmap = [];
+var map = <?=json_encode($c->map)?>;
+
 var mapRev = <?=json_encode($c->mapRev)?>;
 var mapItems = <?=json_encode($c->mapItems ?? [])?>;
-var lightmap = [];
 var logMessages = [];
 for(i=0;i<mapWidth;i++) lightmap.push([]);
 var regions = <?=json_encode($c->region)?>;
@@ -52,7 +51,7 @@ addedKey = false
 
 
 for (let i=0; i<monsters_data.length; i++) {
-    monsters.push(unitClass(monsters_data[i]));
+  monsters.push(unitClass(monsters_data[i]));
 }
 
 var startpoint = <?=json_encode($c->startPos)?>;
@@ -78,77 +77,8 @@ if(canvas!==null) {
   context = canvas.getContext("2d");
   context.imageSmoothingEnabled = false;
   ctxMini = minicanvas.getContext("2d");
-  //context.translate(0.5, 0.5);
-  //context.scale(2,2);
 }
 
-var itemImgPath = [
-    ['obj','objects.png'],
-    ['shortwep','Items/ShortWep.png'],
-    ['medwep','Items/MedWep.png'],
-    ['rock','Items/Rock.png'],
-    ['armor','Items/Armor.png'],
-    ['potion','Items/Potion.png'],
-    ['scroll','Items/Scroll.png'],
-    ['door0','Objects/Door0.png'],
-    ['door1','Objects/Door1.png'],
-    ['trap','Objects/Trap1.png'],
-    ['chest0','Items/Chest0.png'],
-    ['chest1','Items/Chest1.png'],
-    //['tree','Objects/Tree0.png'],
-    ['floor','Objects/Floor.png'],
-    //['hills','Objects/Hill0.png'],
-    ['tile','Objects/Tile.png'],
-    ['undead0','Characters/Undead0.png'],
-    ['undead1','Characters/Undead1.png'],
-    ['player0','Characters/Player0.png'],
-    ['player1','Characters/Player1.png'],
-    ['playerR0','Characters/PlayerR0.png'],
-    ['playerR1','Characters/PlayerR1.png'],
-    ['rodent0','Characters/Rodent0.png'],
-    ['rodent1','Characters/Rodent1.png'],
-    ['pest0','Characters/Pest0.png'],
-    ['pest1','Characters/Pest1.png'],
-    ['bird0','Characters/Avian0.png'],
-    ['bird1','Characters/Avian1.png'],
-    ['decor0','Objects/Decor0.png'],
-    ['decor1','Objects/Decor1.png'],
-    ['ground0','Objects/Ground0.png'],
-    ['effect0','Objects/Effect0.png'],
-    ['effect1','Objects/Effect1.png'],
-    ['key','Items/Key.png'],
-    ['gauze','../tile/gauze.png'],
-    ['light','Items/Light.png'],
-    ['shield','Items/Shield.png'],
-    ['ammo','Items/Ammo.png'],
-    ['staff','staff.png'],
-    ['book','Items/Book.png'],
-    ['pit0','Pit0.png'],
-    ['pit1','Pit1.png'],
-    ['gold','gold.png'],
-]
-for(let i=0;i<itemImgPath.length;i++) {
-    itemImg[itemImgPath[i][0]] = new Image();
-    itemImg[itemImgPath[i][0]].src = "<?=$dl_folder?>"+itemImgPath[i][1];
-}
-
-tileFiles = {
-  "wall":"wallnn1.png", "ups":"upstairs.png", "downs":"downstairs.png",
-  "sign":"sign.png"
-}
-for(i in tileFiles) {
-  tileImg[i] = new Image();
-  tileImg[i].src = "<?=$tile_folder?>"+tileFiles[i];
-}
-
-statusFiles = [
-  'strength', 'speed', 'bleeding', 'bless', 'curse', 'confuze', 'light', 'poison'
-]
-for(i in statusFiles) {
-  name = statusFiles[i]
-  statusImg[name] = new Image();
-  statusImg[name].src = "<?=$ppath?>status/"+name+".png";
-}
 
 var timeBit = 0;
 

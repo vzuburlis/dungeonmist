@@ -82,7 +82,6 @@ function dataToUpdate() {
   mapSize = [mapWidth, mapHeight]
 
   fm.append('levelMap', JSON.stringify({
-    //map: map,
     mapString: mapString,
     mapSize: mapSize,
     mapRev: mapRev,
@@ -116,52 +115,9 @@ function permaDeath() {
   })
 }
 
-var showMinimap = false;
-if(screen.width>800) showMinimap = true;
-function toggleMinimap() {
-  if(showMinimap) {
-    showMinimap = false
-    ctxMini.clearRect(0, 0, minicanvas.width, minicanvas.height);
-  } else {
-    showMinimap = true
-    renderMiniMap()
-  }
-}
-
-function updateStats() {
-  if(player.weapon!=null) {
-    e = player.inventory[player.weapon]
-    damage = player.meleeDamage()
-    pAttack.innerHTML = damage+' '+e.hp+'/'+itemType[e.itemType].hp;
-    if(damage>0) pAttack.innerHTML = '+'+pAttack.innerHTML
-    eWeapon.style.display = 'inline-block';
-    url = itemImg[itemType[e.itemType].sprite[0]].src
-    console.log(url)
-    px = itemType[e.itemType].sprite[1]*16
-    py = itemType[e.itemType].sprite[2]*16
-    //eWeapon.style.background = "background: rgba(0, 0, 0, 0) url('"+url+"') repeat scroll -"+px+"px -"+py+"px"
-  } else eWeapon.style.display = 'none';
-
-  if(player.eArmor!=null) {
-    e = player.inventory[player.eArmor]
-    pArmor.innerHTML = '['+player.armor+' '+e.hp+'/'+itemType[e.itemType].hp;
-    eArmor.style.display = 'inline-block';
-  } else eArmor.style.display = 'none';
-
-  if(player.eShield!=null) {
-    e = player.inventory[player.eShield]
-    pShield.innerHTML = '( '+e.hp+'/'+itemType[e.itemType].hp;
-    eShield.style.display = 'inline-block';
-  } else eShield.style.display = 'none';
-
-  pArrows.innerHTML = player.arrows;
-  pGold.innerHTML = player.gold;
-  if(player.arrows>0) btnArrows.style.display='inline-block'; else btnArrows.style.display='none';
-  if(mapItems.includes('key')) document.getElementById("pKey").style.display = 'inline-block'
-  if(mapItems.includes('chest_key')) document.getElementById("pChestKey").style.display = 'inline-block'
-}
-updateStats();
-
+var _download_path_ = "<?=$dl_folder?>";
+var _tile_path_ = "<?=$tile_folder?>";
+var _status_path_ = "<?=$ppath?>status/";
 </script>
 
 <?=view::script($game_js_path)?>

@@ -1,4 +1,7 @@
 
+*1.0.11*
+Faster loads, cache json, no preload images
+
 *1.0.10*
 Screenshot is saved after end game
 More relevant items are spawned for the player class

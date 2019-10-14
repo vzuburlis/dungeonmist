@@ -41,9 +41,9 @@ class MapController extends controller
     function __construct ()
     {
       include_once __DIR__."/models/Game.php";
-      view::set('style_css_path', gila::base_url().'src/'.GPACKAGE.'/style.css?v=1010a');
-      view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=1010a');
-      view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=1010a');
+      view::set('style_css_path', gila::base_url().'src/'.GPACKAGE.'/style.css?v=1011');
+      view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=1011');
+      view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=1011');
 
       //self::admin();
       $this->gameId = $_COOKIE['gameId'] ?? null;
@@ -133,6 +133,8 @@ class MapController extends controller
 
     function gamedataAction($gid, $file)
     {
+      header("Pragma: cache");
+      header("Cache-Control: max-age=36000");
       echo file_get_contents($this->gamePath($gid).$file);
     }
 
@@ -151,6 +153,10 @@ class MapController extends controller
       $game = $pnk->getRow(['id'=>$gameId]);
       $pnk = new gTable('playerclass');
       $playerclass = $pnk->getRow(['id'=>$game['class_id']]);
+      if(!file_exists( LOG_PATH.'/games/'.$gameId.'/@.json')) {
+        view::renderFile('index.php',GPACKAGE);
+        return;
+      }
       view::set('game', $game);
       view::set('playerclass', $playerclass);
       $this->itemType = json_decode(file_get_contents($this->gamePath($gameId).'items.json'),true);
@@ -225,8 +231,9 @@ class MapController extends controller
       if(!file_exists($file)) return false;
       $levelMap = json_decode(file_get_contents($file), true);
       $this->map = [];
+      $this->mapString = $levelMap['mapString'];
       for($i=0; $i<$levelMap['mapSize'][0]; $i++) {
-          $this->map[$i] = [];
+        $this->map[$i] = [];
         for($j=0; $j<$levelMap['mapSize'][1]; $j++) {
             $this->map[$i][$j] = $levelMap['mapString'][$i*$levelMap['mapSize'][0] + $j];
         }

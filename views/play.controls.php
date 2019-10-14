@@ -1,7 +1,5 @@
 <div id="controls" style="width:10em;height:10em">
   <svg width="100%" height="100%" viewBox="0 0 120 120" >
-    <!--path d="M0 40 L40 40 L40 0 L80 0 L80 40 L120 40 L120 80 L80 80 L80 120 L40 120 L40 80 L0 80 L0 40 A"
-    style="stroke:#929292;stroke-width:1;stroke-opacity:0.5" fill="none" /-->
     <path d="M0 47 L4 43 L43 43 L43 4 L47 0 L73 0 L77 4 L77 43 L116 43 L120 47 L120 73 L116 77 L77 77 L77 116 L73 120 L47 120 L43 116 L43 77 L4 77 L0 73 L0 47 A"
     style="stroke:#929292;stroke-width:2;stroke-opacity:0.5" fill="none" />
     <path d="M11 60 L32 60 A"
@@ -49,18 +47,21 @@
     <?=$c->player['name']?>
   </div>
  </div>
- <br><div style="display:flex; flex-direction:column;">
-  <div><div style="background: rgba(0, 0, 0, 0)
-        url('src/dungeonrl/DawnLike/gold.png') repeat scroll -0px -0px;
-        width: 16px; height: 16px; transform: scale(2); vertical-align:middle;
-        margin-left: 8px"
-        style="vertical-align:middle"></div> <span id="pGold"></span></div>
-  <div id="eWeapon">
-    <img src="<?=$tile_folder?>attack.png">
-    <span id="pAttack">0<span>
+ <br><div id="statBoxStats" style="display:flex; flex-direction:column;">
+  <div>
+    <div class="stat--img" style="background: rgba(0, 0, 0, 0)
+        url('src/dungeonrl/DawnLike/gold.png') repeat scroll -0px -0px;">
+    </div> <span id="pGold"></span>
   </div>
-  <div id="eShield"><img src="<?=$tile_folder?>shield.png"><span id="pShield">0<span></div>
-  <div id="eArmor"><img src="<?=$tile_folder?>armor.png"><span id="pArmor">0<span></div>
+  <div id="eWeapon">
+    <div id="eWeaponImg" class="stat--img"></div> <span id="pAttack">0<span>
+  </div>
+  <div id="eShield">
+    <div id="eShieldImg" class="stat--img"></div> <span id="pShield">0<span>
+  </div>
+  <div id="eArmor">
+    <div id="eArmorImg" class="stat--img"></div> <span id="pArmor">0<span>
+  </div>
  </div>
 </div>
 
@@ -163,39 +164,3 @@
     <p>Find your way to the next level, you dont have to fight every monster. On deadends search for hidden doors. Use candle or lamp to light the path in the darkest levels.</p>
   </div>
 </div>
-
-<?php
-
-/*
-  <table>
-  <tr>
-    <td>
-    <td>
-      <svg class="dir-btn" viewBox="0 0 28 28" onclick="keyPress(38)">
-        <line x1="4" y1="19" x2="15" y2="8" style="stroke:#929292;stroke-width:3"></line>
-        <line x1="24" y1="19" x2="14" y2="8" style="stroke:#929292;stroke-width:3"></line>
-      </svg>
-    <td>
-  <tr>
-    <td>
-      <svg class="dir-btn" viewBox="0 0 28 28" onclick="keyPress(37)">
-        <line y1="4" x1="19" y2="15" x2="8" style="stroke:#929292;stroke-width:3"></line>
-        <line y1="24" x1="19" y2="14" x2="8" style="stroke:#929292;stroke-width:3"></line>
-      </svg>
-    <td>
-    <td>
-      <svg class="dir-btn" viewBox="0 0 28 28" onclick="keyPress(39)">
-        <line y1="4" x1="9" y2="15" x2="20" style="stroke:#929292;stroke-width:3"></line>
-        <line y1="24" x1="9" y2="14" x2="20" style="stroke:#929292;stroke-width:3"></line>
-      </svg>
-  <tr>
-    <td>
-    <td>
-      <svg class="dir-btn" viewBox="0 0 28 28" onclick="keyPress(40)">
-        <line x1="4" y1="9" x2="15" y2="20" style="stroke:#929292;stroke-width:3"></line>
-        <line x1="24" y1="9" x2="14" y2="20" style="stroke:#929292;stroke-width:3"></line>
-      </svg>
-    <td>
-  </table>
-
-*/

@@ -75,6 +75,16 @@ body{
 #statBox div, #levelBox div { display:inline-block; z-index:1}
 #statBox img, #levelBox img { width: 32px; height:32px; vertical-align:middle}
 #statBox span { padding: 4px; }
+#statBoxStats>div {
+  height:32px;
+}
+.stat--img {
+  width: 16px; height: 16px;
+  transform: scale(2);
+  vertical-align:middle;
+  margin-left: 8px;
+  image-rendering: crisp-edges;
+}
 #pKey, #pChestKey{display:none}
 #map,#use-menu,#action-menu,#equip-menu,#help-menu{
     position:absolute;
@@ -206,4 +216,53 @@ button{
 
 .green {
     color:green
+}
+
+
+/******** Index *********/
+body{
+  font-family: courier new;
+  text-align: center;
+  color: white;
+  background-color: black;
+  background-size: cover;
+}
+#game-title, h1, h2 ,h3 {
+font-family: 'Berkshire Swash', cursive;
+}
+#game-title{
+  font-size: 4em;
+  padding: 35px 0;
+}
+#main {
+  padding: 5px;
+  max-width: 100%;
+}
+@media screen and (min-width: 600px) {
+  #main {
+    max-width: 250px
+  }
+}
+@media screen and (min-width: 800px) {
+  #main {
+    padding: 10px;
+    max-width:500px
+  }
+}
+
+.com-table, .hof-table {
+  margin:auto; max-width:100%;
+  border-collapse: collapse;
+}
+.hof-table td {
+  text-align: center;
+}
+.com-table th, .com-table td, .hof-table td {
+  min-width: 160px;
+  border-top: 1px solid grey;
+  padding: 8px 0;
+}
+
+button{
+  font-size: 3em;
 }
