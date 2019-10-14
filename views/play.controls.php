@@ -53,13 +53,13 @@
         url('src/dungeonrl/DawnLike/gold.png') repeat scroll -0px -0px;">
     </div> <span id="pGold"></span>
   </div>
-  <div id="eWeapon">
+  <div id="eWeapon" style="display:none">
     <div id="eWeaponImg" class="stat--img"></div> <span id="pAttack">0<span>
   </div>
-  <div id="eShield">
+  <div id="eShield" style="display:none">
     <div id="eShieldImg" class="stat--img"></div> <span id="pShield">0<span>
   </div>
-  <div id="eArmor">
+  <div id="eArmor" style="display:none">
     <div id="eArmorImg" class="stat--img"></div> <span id="pArmor">0<span>
   </div>
  </div>

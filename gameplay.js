@@ -323,16 +323,37 @@ function renderMap() {
       drawSprite(x,y, itemImg[_sprite+'1'], _x, _y);
     }
   }
-/*
-  context.globalAlpha = 0.2
-  for (i=player.y-renderHeight; i<=player.y+renderHeight; i++) {
-    for (j=player.x-renderWidth; j<=player.x+renderWidth; j++) {
-      if (inMap(j,i)) if (mapRev[j][i]>1) {
-        drawSprite(j, i, itemImg['pit0'], 4, 4);
+
+  for(r in regions) {
+    console.log('in')
+    if(typeof regions[r].fog!='undefined') {
+      fog = regions[r].fog
+      // console.log(fog)
+      // if(inBox(player.x, player.y, regions[r].box)) 
+      context.globalAlpha = 0.2
+      if(inBox(player.x, player.y, regions[r].box)) {
+        for (i=player.y-renderHeight; i<=player.y+renderHeight; i++) {
+          for (j=player.x-renderWidth; j<=player.x+renderWidth; j++) {
+            if (inMap(j,i)) if (mapRev[j][i]>1) {
+              drawSprite(j, i, itemImg[fog[0]], fog[1], fog[2]);
+            }
+          }
+        }
+      } else {
+        for (i=player.y-renderHeight; i<=player.y+renderHeight; i++) {
+          for (j=player.x-renderWidth; j<=player.x+renderWidth; j++) {
+            if (inMap(j,i)) if (mapRev[j][i]>1) {
+              if(inBox(j, i, regions[r].box)) {
+                drawSprite(j, i, itemImg[fog[0]], fog[1], fog[2]);
+              }
+            }
+          }
+        }
       }
+
     }
   }
-*/
+
   context.globalAlpha = 1;
   player.render();
   if (map[player.x][player.y]=='=') drawImageB(player.x,player.y, itemImg['pit0'], 3, 0);

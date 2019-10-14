@@ -88,6 +88,7 @@ function dataToUpdate() {
     mapItems: mapItems,
     monsters: monsters,
     items: items,
+    region: regions,
     groundObjects: groundObjects,
     objects: objects,
     turns: levelTurns

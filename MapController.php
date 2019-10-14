@@ -243,6 +243,7 @@ class MapController extends controller
       $this->monsters = $levelMap['monsters'];
       $this->items = $levelMap['items'];
       $this->objects = $levelMap['objects'];
+      $this->region = $levelMap['region'];
       $this->levelTurns = $levelMap['turns'];
       $this->groundObjects = $levelMap['groundObjects'];
       $this->mapItems = $levelMap['mapItems'] ?? [];
@@ -438,7 +439,9 @@ class MapController extends controller
           if($res==false) return; // cancel if switch is not added
         }
         if(isset($step['room_desc'])) {
-          $this->region[] = ['box'=>$room, 'description'=>$step['room_desc']];
+          $_region = ['box'=>$room, 'description'=>$step['room_desc']];
+          if(isset($step['room_fog'])) $_region['fog'] = $step['room_fog'];
+          $this->region[] = $_region;
         }
       }
     }

@@ -344,7 +344,6 @@ function unitClass (options) {
         }
 
         if(!obj) for(i in regions) if(inBox(that.x,that.y,regions[i].box)) {
-          //console.log(regions[i])
           if(typeof regions[i].entered=='undefined' || regions[i].entered==0) {
             regions[i].entered=1;
             if(typeof regions[i].description!='undefined') logMsg(regions[i].description, true);

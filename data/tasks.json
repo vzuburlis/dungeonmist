@@ -207,8 +207,16 @@
   ],
   [
     {
+      "name": "mist",
+      "room_desc": "The mist dont let you see very clear.",
+      "room_fog": ["pit0", 4, 3],
+      "level": 6
+    }
+  ],
+  [
+    {
       "name": "lava",
-      "room_tile":"l",
+      "room_tile": "l",
       "level":2
     }
   ],
