@@ -6,7 +6,12 @@ $newgame_url = GPACKAGE.'/new';
 <link href="<?=$style_css_path?>" rel="stylesheet">
 <style>
 body{
+  font-family: courier new;
+  text-align: center;
+  color: white;
   background: url(<?=gila::base_url()?>src/<?=GPACKAGE?>/images/dm-guerrero.jpg) no-repeat center center fixed;
+  background-color: black;
+  background-size: cover;
 }
 </style>
 

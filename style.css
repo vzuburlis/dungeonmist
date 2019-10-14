@@ -220,15 +220,8 @@ button{
 
 
 /******** Index *********/
-body{
-  font-family: courier new;
-  text-align: center;
-  color: white;
-  background-color: black;
-  background-size: cover;
-}
 #game-title, h1, h2 ,h3 {
-font-family: 'Berkshire Swash', cursive;
+  font-family: 'Berkshire Swash', cursive;
 }
 #game-title{
   font-size: 4em;
