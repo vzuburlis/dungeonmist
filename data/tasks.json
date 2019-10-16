@@ -103,10 +103,17 @@
     {
       "name": "chest",
       "block_object":["Small Chest","Chest"],
-      "object_item":["Scroll of Map", "Scroll of Blink","Scroll of Sucrifice","Scroll of Curse"]
+      "object_item":["Scroll of Map", "5 Gold", "Scroll of Blink","Scroll of Sucrifice","Scroll of Curse"]
     },
     {
       "spawn":1
+    }
+  ],
+  [
+    {
+      "name": "goldchest",
+      "block_object":["Small Chest"],
+      "object_item":["Gold","Gold","Gold", "3 Gold"]
     }
   ],
   [
@@ -121,13 +128,13 @@
     {
       "name": "barrel",
       "block_object":["Barrel","Elf Barrel"],
-      "object_item":["Arrow", null]
+      "object_item":["Arrow", "Gold", null]
     }
   ],
   [
     {
       "name": "broken_barrel",
-      "block_object":["Broken Barrel","Broken Barrel"]
+      "block_object":["Broken Barrel","Broken Elf Barrel"]
     }
   ],
   [
@@ -227,6 +234,20 @@
       "room_desc": "You sniff the smell of the fresh blood.",
       "chance": 10,
       "level":2
+    }
+  ],
+  [
+    {
+      "name": "rocks",
+      "ground_objects": ["Rocks #1","Rocks #1","Rocks #1","Rocks #1"],
+      "chance": 10
+    }
+  ],
+  [
+    {
+      "name": "floors2",
+      "ground_objects": ["Floors #2","Floors #2","Floors #2","Floors #2"],
+      "chance": 10
     }
   ],
   [

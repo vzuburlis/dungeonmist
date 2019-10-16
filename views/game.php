@@ -50,15 +50,6 @@ button{
     font-size: 3em;
 }
 
-
-.class-card {
-  margin:1em;
-  padding: 8px;
-  border: 2px solid transparent;
-  display: inline-block;
-  width: 64px;
-  height: 64px;
-}
 .class-selected {
   border: 2px solid aliceblue;
 }

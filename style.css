@@ -3,6 +3,9 @@ body{
     text-align: center;
     color: white;
     touch-action: manipulation;
+    max-height: 100vh;
+    max-width: 100vw;
+    padding:20px;
 }
 
 #controls {
@@ -125,7 +128,7 @@ button{
   border-radius:0.5em;
   color: white;
   text-decoration: none;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   cursor: pointer;
   display: inline-block;
   min-width: 200px;
@@ -220,26 +223,52 @@ button{
 
 
 /******** Index *********/
-#game-title, h1, h2 ,h3 {
+#game-title, #newgame-title, h1, h2 ,h3 {
   font-family: 'Berkshire Swash', cursive;
 }
-#game-title{
-  font-size: 4em;
-  padding: 35px 0;
+#game-title {
+  font-size: 3em;
+  padding: 0;
+}
+#newgame-title {
+  font-size: 2em;
+  padding: 0;
 }
 #main {
-  padding: 5px;
+  padding: 20px;
   max-width: 100%;
 }
 @media screen and (min-width: 600px) {
   #main {
     max-width: 250px
   }
+  #game-title {
+    font-size: 4em;
+    padding: 20px 0;
+    width:50%;
+    float:right;
+  }
 }
 @media screen and (min-width: 800px) {
   #main {
+    padding: 5px;
+  }
+  #main {
     padding: 10px;
     max-width:500px
+  }
+  #newgame-title {
+    font-size: 3em;
+    padding: 30px 0;
+  }
+  #game-title {
+    font-size: 4em;
+    padding: 35px 0;
+    float:none;
+    width:auto;
+  }
+  .play-btn {
+    margin-bottom: 1em;
   }
 }
 
@@ -259,3 +288,34 @@ button{
 button{
   font-size: 3em;
 }
+
+
+/******* New Game   *****/
+.class-card {
+  margin:0;
+  padding: 8px;
+  border: 2px solid transparent;
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+}
+@media screen and (min-width: 800px) {
+  .class-card {
+    margin:1em;
+  }
+}
+.class-selected {
+  border: 2px solid #579ca2;
+}
+.class-avatar {
+  transform: scale(3);
+  margin: 15px;
+  image-rendering: crisp-edges;
+}
+.class-panel {
+  padding:0 2em;
+  background: black;
+  border-radius:0.5em;
+  border: 2px solid #1b2d3b;
+}
+

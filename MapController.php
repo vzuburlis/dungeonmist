@@ -41,7 +41,7 @@ class MapController extends controller
     function __construct ()
     {
       include_once __DIR__."/models/Game.php";
-      view::set('style_css_path', gila::base_url().'src/'.GPACKAGE.'/style.css?v=1011');
+      view::set('style_css_path', gila::base_url().'src/'.GPACKAGE.'/style.css?v=1011a');
       view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=1011');
       view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=1011');
 
@@ -338,9 +338,8 @@ class MapController extends controller
       //if($this->level==1) $this->addItemByType($this->randPos(), explode(',',$this->playerItem)[0]);
       $this->addItemByName($this->randPos(), ['Gold','3 Gold','5 Gold']);
       $this->addItemByName($this->randPos(), ['Gold','3 Gold','5 Gold']);
-      $this->addItemByName($this->randPos(), ['Gold','3 Gold','5 Gold']);
 
-      for($i=0;$i<3-$this->levelTask['spawnedItems'];$i++) if(count($this->player['inventory'])<5) {
+      for($i=0;$i<2-$this->levelTask['spawnedItems'];$i++) if(count($this->player['inventory'])<7) {
         $this->addRandomItem();
         $this->spawnMonster($this->randPos());
       }
@@ -417,9 +416,9 @@ class MapController extends controller
           $objType = $this->findObjectType($objName);
           $args = [];
           if(isset($step['object_item'])) {
-            if($itemName = $this->fromList($step['object_item'])) if(count($this->player['inventory'])<5) {
-              //$this->levelTask['spawnedItems']++;
-              $args = ['item'=>$itemName];
+            if($itemName = $this->fromList($step['object_item'])) if(count($this->player['inventory'])<7 || rand(0,1)==0) {
+              $this->levelTask['spawnedItems']++;
+              $args['item'] = $itemName;
             }
           }
           $res = $this->addBlockObject($room, $objType, $args);
@@ -493,7 +492,11 @@ class MapController extends controller
 
     function fromList($list)
     {
-      return is_array($list) ? $list[rand(0,count($list)-1)]: $list;
+      $rtype = $list;
+      if(is_array($list)) {
+        $rtype = $list[rand(0,count($list)-1)];
+      }while($this->itemCanBeSpawned($rtype)==false);
+      return $rtype;
     }
 
     function cave ()
@@ -839,12 +842,18 @@ class MapController extends controller
     function randomItemType() {
       do {
         $rtype = rand(0, $this->itemTypeN-1);
-      } while($this->itemType[$rtype]['name'][0]=='+' ||
+      } while($this->itemCanBeSpawned($rtype)==false);
+      return $rtype;
+    }
+    function itemCanBeSpawned($rtype) {
+      if($this->itemType[$rtype]['name'][0]=='+' ||
         (isset($this->itemType[$rtype]['level']) 
           && $this->itemType[$rtype]['level']>$this->level) ||
         (isset($this->itemType[$rtype]['skill'])
-          && !in_array($this->itemType[$rtype]['skill'], $this->player['abilities'])) );
-      return $rtype;
+          && !in_array($this->itemType[$rtype]['skill'], $this->player['abilities']))) {
+        return false;
+      }
+      return true;
     }
     function addGroundObject($pos, $name) {
       $type = 0;
@@ -949,15 +958,18 @@ class MapController extends controller
           $stat['dexterity']+=2;
           $stat['abilities'][] = "DetectTraps";
           //$stat['abilities'][] = "LockPick";
-      }
+          $stat['abilities'][] = 'Daggers';
+        }
       if($playerclass['name']=='Ranger') {
         $stat['arrows'] = 6;
         $stat['abilities'][] = 'Archery';
+        $stat['abilities'][] = 'Daggers';
       }
       if($playerclass['name']=='Soldier') {
         $stat['arrows'] = 6;
         $stat['abilities'][] = 'Shield';
         $stat['abilities'][] = 'Archery';
+        $stat['abilities'][] = 'Blades';
       }
       if($playerclass['name']=='Orc') {
         $stat['strength']++;
@@ -966,6 +978,7 @@ class MapController extends controller
         $stat['resist'][] = "poison";
         $stat['resist'][] = "disease";
         $stat['abilities'][] = 'Shield';
+        $stat['abilities'][] = 'Blades';
       }
       if($playerclass['name']=='Dwarf') {
         $stat['strength']++;
@@ -973,6 +986,7 @@ class MapController extends controller
         $stat['abilities'][] = "Darkvision";
         $stat['resist'][] = "poison";
         $stat['abilities'][] = 'Shield';
+        $stat['abilities'][] = 'Blades';
       }
       if($playerclass['name']=='Sorcerer') {
         $stat['strength']--;

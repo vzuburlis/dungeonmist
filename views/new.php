@@ -14,11 +14,6 @@ body{
     background-color: black;
     background-size: cover;
 }
-#game-title{
-    font-family: 'Berkshire Swash', cursive;
-    font-size: 3em;
-    padding: 30px 0;
-}
 .form-label {
   font-family: 'Berkshire Swash', cursive;
   font-size: 1.5em;
@@ -33,28 +28,6 @@ body{
     height:100%;
 }
 
-.class-card {
-  margin:1em;
-  padding: 8px;
-  border: 2px solid transparent;
-  display: inline-block;
-  width: 64px;
-  height: 64px;
-}
-.class-selected {
-  border: 2px solid #579ca2;
-}
-.class-avatar {
-  transform: scale(3);
-  margin: 15px;
-  image-rendering: crisp-edges;
-}
-.class-panel {
-  padding:0 2em;
-  background: black;
-  border-radius:0.5em;
-  border: 2px solid #1b2d3b;
-}
 </style>
 <head>
     <base href="<?=gila::base_url()?>">
@@ -67,7 +40,7 @@ body{
 
 <body>
   <div id="main">
-    <div id="game-title">Character Creation</div>
+    <div id="newgame-title">Character Creation</div>
     <div class="row">
       <div class="gm-8 class-panel">
         <div id="class-selection" style="text-align:center">
@@ -85,7 +58,6 @@ body{
         <label class="g-form form-label">Character name:</label>
         <input class="g-input" v-model="name"><br><br>
         <button @click="rollName()" class="play-btn"><b>Roll Name</b></button>
-        <br><br><br>
         <a href="<?=gila::url('dungeonrl')?>" class="play-btn">Main Menu</a>
         <button @click="startgame()" class="play-btn" :disabled="name==''"><b>Start Game</b></button>
       </div>

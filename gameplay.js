@@ -810,8 +810,18 @@ function keypressUse (code) {
             if(_type.sprite[0]=='potion') {
               _idf = player.identify('items',_itemType)
               logMsg("You drink the " + getItemName(_itemType), _idf);
-              if(_type.effect_time>0) player.addStatus(_type.effect, _type.effect_time)
-              player.addEffect(_type.effect)
+              if(_type.effect_time>0) {
+                player.addStatus(_type.effect, _type.effect_time)
+                player.addEffect(_type.effect)
+              }
+              player.spellEffect(_type.effect, _type)
+            } else if(_type.sprite[0]=='scroll'){
+              _idf = player.identify('items',_itemType)
+              logMsg("You read the " + getItemName(_itemType), _idf);
+              if(_type.effect_time>0 && _type.target=='self') {
+                player.addStatus(_type.effect, _type.effect_time)
+                player.addEffect(_type.effect)
+              }
               player.spellEffect(_type.effect, _type)
             } else if(_type.sprite[0]=='book') {
               if(player.intelligence<1
@@ -831,14 +841,6 @@ function keypressUse (code) {
             } else if(_type.sprite[0]=='light') {
               logMsg("You light the " + getItemName(_itemType));
               if(_type.effect_time>0) player.addStatus(_type.effect, _type.effect_time)
-            } else if(_type.sprite[0]=='scroll'){
-              _idf = player.identify('items',_itemType)
-              logMsg("You read the " + getItemName(_itemType), _idf);
-              if(_type.effect_time>0 && _type.target=='self') {
-                player.addStatus(_type.effect, _type.effect_time)
-                player.addEffect(_type.effect)
-              }
-              player.spellEffect(_type.effect, _type)
             } else {
               logMsg("You use the " + getItemName(_itemType));
               player.addEffect(_type.effect)
