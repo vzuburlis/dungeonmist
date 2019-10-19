@@ -126,94 +126,6 @@ function unitClass (options) {
 
         mapRev[that.x+dx][that.y+dy]=1;
 
-        obj = getObject(that.x+dx,that.y+dy)
-        if(obj!=null) {
-          objType = objectType[obj.type]
-          if(objType.block==true && gameStatus=='wait'
-            && (targetx!=that.x+dx || targety!=that.y+dy)) {
-            setGameStatus('play')
-            targetx=null
-            targety=null
-            renderMap();
-            return false;
-          }
-            if(typeof objType.open_to!='undefined') {
-                obj.type = findObjectType(objType.open_to, obj.type);
-                opendoorAudio.play()
-
-                logMsg("You open the "+objType.name.toLowerCase());
-                if(typeof obj.item!='undefined') if(obj.item!==null) {
-                  logMsg('You find a '+getItemName(obj.item))
-                  items.push([that.x, that.y, obj.item]);
-                  that.pickItem(items.length-1)
-                  obj.item=null;
-                }
-                if(typeof obj.open_object!='undefined' && obj.open_object!==null) {
-                  gateType = objectType[objects[obj.open_object].type]
-                  if(typeof gateType.switch_to=='undefined') {
-                    console.error('object does not have switch_to')
-                  } else {
-                    objects[obj.open_object].type = findObjectType(gateType.switch_to)
-                  }
-                }
-                
-                setGameStatus('play');
-            }
-            if(typeof objType.switch_to!='undefined') {
-              logMsg("You cannot open the gate. There must be a switch somewhere.");
-            }
-            if(typeof objType.unlock_to!='undefined') {
-              if(mapItems.includes('key')) {
-                  opendoorAudio.play()
-                  obj.type = findObjectType(objType.unlock_to, obj.type);
-                  logMsg("You unlock the door");
-              } else {
-                  logMsg("The door is locked. You need a key");
-              }
-            }
-            if(typeof objType.chest_unlock_to!='undefined') {
-              if(mapItems.includes('chest_key')) {
-                  opendoorAudio.play()
-                  obj.type = findObjectType(objType.chest_unlock_to, obj.type);
-                  logMsg("You unlock the chest");
-              } else {
-                  logMsg("The chest is locked. You need a key");
-              }
-          }
-          if(typeof objType.activate_to!='undefined') if(typeof obj.detected=='undefined') {
-            obj.detected=true
-            if(that.hasAbility('DetectTraps') && Math.floor(Math.random() * 2)==0) {
-              logMsg("You detect a "+objType.activate_to, true);
-              renderMap();
-              return false
-            } else {
-              obj.type = findObjectType(objType.activate_to, obj.type);
-              swingAudio.play()
-              _trap = objType.activate_to
-              logMsg("You step in the "+objType.activate_to);
-              if(that.hp>8) that.addHP(-8,_trap); else that.addHP(-4,_trap);
-            }
-          }
-          if(typeof objType.reveal_to!='undefined') if(typeof obj.detected=='undefined') {
-            obj.detected=true
-            obj.type = findObjectType(objType.reveal_to, obj.type);
-            logMsg("You find a "+objType.name);
-            renderMap();
-          }
-          if(objType.block==true) {
-            if(typeof objType.close_to!='undefined') {
-              obj.type = findObjectType(objType.close_to, obj.type);
-              opendoorAudio.play()
-              logMsg("You close the "+objectType[obj.type].name.toLowerCase());
-            }
-            setGameStatus('play')
-            targetx=null
-            targety=null
-            renderMap();
-            return false;
-          }
-        }
-
         mi = getMonster(that.x+dx,that.y+dy);
         if(mi > -1) {
           attack_points = 6 + Math.floor(Math.random() * 5) + that.meleeDamage();
@@ -284,6 +196,112 @@ function unitClass (options) {
             turnPlayed = true;
             return false;
         }
+
+        obj = getObject(that.x+dx,that.y+dy)
+        if(obj!=null) {
+          objType = objectType[obj.type]
+          if(objType.block==true && gameStatus=='wait'
+            && (targetx!=that.x+dx || targety!=that.y+dy)) {
+            setGameStatus('play')
+            targetx=null
+            targety=null
+            renderMap();
+            return false;
+          }
+            if(typeof objType.open_to!='undefined') {
+                obj.type = findObjectType(objType.open_to, obj.type);
+
+                if(typeof obj.trap!='undefined') if(obj.trap!==null) {
+                  return;
+                }
+                if(typeof obj.hiddenMonster!='undefined' && obj.hiddenMonster!==null) {
+                  console.log(obj.hiddenMonster)
+                  _name = monsterType[obj.hiddenMonster].name
+                  logMsg("A "+_name+" jumps out from the "+objType.name.toLowerCase());
+                  monsters.push(unitClass({
+                    "x": that.x+dx, "y": that.y+dy, "type": obj.hiddenMonster,
+                    "hp": obj.hiddenMonsterMaxHP, "maxhp": obj.hiddenMonsterMaxHP,
+                    "turnTime": 0, "seen": 1
+                  }));
+                  delete obj.hiddenMonster
+                  renderMap();
+                  setGameStatus('play');
+                  return;
+                }
+                if(typeof obj.open_object!='undefined' && obj.open_object!==null) {
+                  opendoorAudio.play()
+                  logMsg("You open the "+objType.name.toLowerCase());
+                  gateType = objectType[objects[obj.open_object].type]
+                  if(typeof gateType.switch_to=='undefined') {
+                    console.error('object does not have switch_to')
+                  } else {
+                    objects[obj.open_object].type = findObjectType(gateType.switch_to)
+                  }
+                }
+                if(typeof obj.item!='undefined') if(obj.item!==null) {
+                  logMsg('You find a '+getItemName(obj.item))
+                  items.push([that.x, that.y, obj.item]);
+                  that.pickItem(items.length-1)
+                  obj.item=null;
+                }
+
+                setGameStatus('play');
+            }
+            if(typeof objType.switch_to!='undefined') {
+              logMsg("You cannot open the gate. There must be a switch somewhere.");
+            }
+            if(typeof objType.unlock_to!='undefined') {
+              if(mapItems.includes('key')) {
+                  opendoorAudio.play()
+                  obj.type = findObjectType(objType.unlock_to, obj.type);
+                  logMsg("You unlock the door");
+              } else {
+                  logMsg("The door is locked. You need a key");
+              }
+            }
+            if(typeof objType.chest_unlock_to!='undefined') {
+              if(mapItems.includes('chest_key')) {
+                  opendoorAudio.play()
+                  obj.type = findObjectType(objType.chest_unlock_to, obj.type);
+                  logMsg("You unlock the chest");
+              } else {
+                  logMsg("The chest is locked. You need a key");
+              }
+          }
+          if(typeof objType.activate_to!='undefined') if(typeof obj.detected=='undefined') {
+            obj.detected=true
+            if(that.hasAbility('DetectTraps') && Math.floor(Math.random() * 2)==0) {
+              logMsg("You detect a "+objType.activate_to, true);
+              renderMap();
+              return false
+            } else {
+              obj.type = findObjectType(objType.activate_to, obj.type);
+              swingAudio.play()
+              _trap = objType.activate_to
+              logMsg("You step in the "+objType.activate_to);
+              if(that.hp>8) that.addHP(-8,_trap); else that.addHP(-4,_trap);
+            }
+          }
+          if(typeof objType.reveal_to!='undefined') if(typeof obj.detected=='undefined') {
+            obj.detected=true
+            obj.type = findObjectType(objType.reveal_to, obj.type);
+            logMsg("You find a "+objType.name);
+            renderMap();
+          }
+          if(objType.block==true) {
+            if(typeof objType.close_to!='undefined') {
+              obj.type = findObjectType(objType.close_to, obj.type);
+              opendoorAudio.play()
+              logMsg("You close the "+objectType[obj.type].name.toLowerCase());
+            }
+            setGameStatus('play')
+            targetx=null
+            targety=null
+            renderMap();
+            return false;
+          }
+        }
+
         iti = getItem(that.x+dx,that.y+dy);
         if(iti>-1) {
           that.pickItem(iti)

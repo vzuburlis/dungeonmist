@@ -45,7 +45,6 @@ class MapController extends controller
       view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=1011');
       view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=1011');
 
-      //self::admin();
       $this->gameId = $_COOKIE['gameId'] ?? null;
 
       if($this->gameId!==null) {
@@ -190,6 +189,7 @@ class MapController extends controller
 
     function playAction ($gameId=null)
     {
+      self::admin();
       $this->gameId = $_COOKIE['gameId'];
       if($this->gameId === null) {
         view::renderFile('index.php',GPACKAGE);
@@ -257,6 +257,7 @@ class MapController extends controller
 
     function newAction ()
     {
+      self::admin();
       view::renderFile('new.php',GPACKAGE);
     }
 
@@ -415,12 +416,18 @@ class MapController extends controller
           $objName = $this->fromList($step['block_object']);
           $objType = $this->findObjectType($objName);
           $args = [];
-          if(isset($step['object_item'])) {
+          
+          if(isset($step['hidden_monster'])) if(rand(0,30)==0){
+            if($monsterName = $this->fromMonsterList($step['hidden_monster'])) {
+              $args['hidden_monster'] = $monsterName;
+            }
+          } else if(isset($step['object_item'])) {
             if($itemName = $this->fromList($step['object_item'])) if(count($this->player['inventory'])<7 || rand(0,1)==0) {
               $this->levelTask['spawnedItems']++;
               $args['item'] = $itemName;
             }
           }
+          
           $res = $this->addBlockObject($room, $objType, $args);
           if($res==false) return; // cancel if switch is not added
         }
@@ -493,10 +500,20 @@ class MapController extends controller
     function fromList($list)
     {
       $rtype = $list;
-      if(is_array($list)) {
+      $tries = 0;
+      if(is_array($list)) do{
         $rtype = $list[rand(0,count($list)-1)];
-      }while($this->itemCanBeSpawned($rtype)==false);
+        $tries++;
+      } while($this->itemCanBeSpawned($rtype)==false && $tries<10);
       return $rtype;
+    }
+
+    function fromMonsterList($list)
+    {
+      $rtype = $list;
+      if(is_array($list)) {
+        return $list[rand(0,count($list)-1)];
+      }
     }
 
     function cave ()
@@ -733,6 +750,12 @@ class MapController extends controller
           $newobj = ["x"=>$pos[0], "y"=>$pos[1], "type"=>$type];
           if(isset($args['item'])) {
             $newobj['item'] = $this->findItemType($args['item']);
+          }
+          if(isset($args['hidden_monster'])) {
+            $newobj['hiddenMonster'] = $this->findMonsterType($args['hidden_monster']);
+            $level = $this->monsterType[$newobj['hiddenMonster']]['level'] ?? 5;
+            $maxhp = $level<8 ? 16+$level*2 : MAX_HP;
+            $newobj['hiddenMonsterMaxHP'] = $maxhp;
           }
           $this->objects[] = $newobj;
           return true;

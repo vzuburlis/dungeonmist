@@ -1,20 +1,15 @@
-body{
-    font-family: courier new;
-    text-align: center;
-    color: white;
-    touch-action: manipulation;
-    max-height: 100vh;
-    max-width: 100vw;
-    padding:20px;
+body {
+  font-family: courier new;
+  text-align: center;
+  color: white;
+  touch-action: manipulation;
 }
 
 #controls {
-    overflow: visible;
-    position:absolute;
-    left:1em;
-    bottom:1em;
-    /*border: 1px solid grey;
-    border-radius: 50%;*/
+  overflow: visible;
+  position:absolute;
+  left:1em;
+  bottom:1em;
 }
 #controls-commands {
   display:none;
@@ -24,8 +19,8 @@ body{
   width:100%;
 }
 .dir-btn {
-    width: 3em; height:3em;
-    display:block;
+  width: 3em; height:3em;
+  display:block;
 }
 .response-btn {
   font-size: 1em;
@@ -33,12 +28,12 @@ body{
   pointer-events:all;
 }
 #commands {
-    overflow: visible;
-    position:absolute;
-    right:1em;
-    bottom:1em;
-    display: flex;
-    flex-direction: column-reverse;
+  overflow: visible;
+  position:absolute;
+  right:1em;
+  bottom:1em;
+  display: flex;
+  flex-direction: column-reverse;
 }
 #statBox .com-btn {
   margin: 3px 12px;
@@ -52,23 +47,23 @@ body{
 }
 .com-down{display:none}
 #msgBox {
-    position:absolute;
-    text-align: center;
-    right:0;
-    left:0;
-    top:20px;
-    font-size:0.8em;
+  position:absolute;
+  text-align: center;
+  right:0;
+  left:0;
+  top:20px;
+  font-size:0.8em;
 }
 #msgBox>span{ background: black; }
 #msgBox, #minimap{
-    pointer-events : none;
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none;
+  pointer-events : none;
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
 }
 #show-u-command{display:none}
 #playerName, #levelBox {
-    font-family: 'Berkshire Swash', cursive; font-size:24px;
+  font-family: 'Berkshire Swash', cursive; font-size:24px;
 }
 #statBox {
   margin:0;
@@ -89,36 +84,38 @@ body{
   image-rendering: crisp-edges;
 }
 #pKey, #pChestKey{display:none}
-#map,#use-menu,#action-menu,#equip-menu,#help-menu{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
+#map,#use-menu,#action-menu,#equip-menu,#help-menu,
+.game-menu {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
 }
 #minimap{
   position:absolute;
   right:3em;
   top:3em;
 }
-#use-menu,#action-menu,#equip-menu,#help-menu,.menu {
-    background:rgba(0,0,0,0.85);
-    visibility:hidden;
-    border: 2px solid #613214;
-    padding: 8px;
-    max-height:100%;
-    max-height: 100vh;
-    overflow-y: scroll;
+#use-menu,#action-menu,#equip-menu,#help-menu,.menu,
+.game-menu {
+  background:rgba(0,0,0,0.85);
+  visibility:hidden;
+  border: 2px solid #613214;
+  padding: 8px;
+  max-height:100%;
+  max-height: 100vh;
+  overflow-y: scroll;
 }
 button{
-    font-size: 3em;
+  font-size: 3em;
 }
 #play-btn-container{
-    display:none;
-    position: absolute;
-    top:55%;
-    left:0;
-    right:0;
-    text-align:center;
+  display:none;
+  position: absolute;
+  top:55%;
+  left:0;
+  right:0;
+  text-align:center;
 }
 .play-btn {
   text-transform: uppercase;
@@ -136,26 +133,30 @@ button{
   border: 2px solid #579ca2;
 }
 .play-btn:hover {
-    color: white;
-    background: #579ca2;
-  }
-#use-menu--title, #equip-menu--title, #action-menu--title, #help-menu--title, .menu--title{
-    font-family: 'Berkshire Swash', cursive;
-    font-size: 2em;
-    text-align:center;
-    min-width:300px;
+  color: white;
+  background: #579ca2;
 }
-#use-menu--list, #equip-menu--list, #action-menu--list, #help-menu--list, .menu--list {
-    text-align:left;
+#use-menu--title, #equip-menu--title, #action-menu--title, #help-menu--title,
+.menu--title {
+  font-family: 'Berkshire Swash', cursive;
+  font-size: 2em;
+  text-align:center;
+  min-width:300px;
 }
-#use-menu .close img,#equip-menu .close img,#action-menu .close img, #help-menu .close img, .menu .close img {
+#use-menu--list, #equip-menu--list, #action-menu--list, #help-menu--list,
+.menu--list {
+  text-align:left;
+}
+#use-menu .close img,#equip-menu .close img,#action-menu .close img, #help-menu .close img,
+.menu .close img {
   cursor: pointer;
   width:1em;
   vertical-align: middle;
   float: right;
   opacity:0.3;
 }
-#use-menu .close img:hover, #equip-menu .close img:hover, #action-menu .close img:hover, #help-menu .close img:hover {
+#use-menu .close img:hover, #equip-menu .close img:hover, #action-menu .close img:hover, #help-menu .close img:hover.play-btn,
+.menu .close img:hover {
   opacity:1;
 }
 .menu-item {
@@ -218,7 +219,7 @@ button{
 
 
 .green {
-    color:green
+  color:green
 }
 
 
@@ -228,7 +229,7 @@ button{
 }
 #game-title {
   font-size: 3em;
-  padding: 0;
+  padding: 20px 0;
 }
 #newgame-title {
   font-size: 2em;
@@ -318,4 +319,3 @@ button{
   border-radius:0.5em;
   border: 2px solid #1b2d3b;
 }
-

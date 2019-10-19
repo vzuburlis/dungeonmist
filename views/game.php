@@ -81,16 +81,18 @@ button{
 
 
 <body>
-  <div id="main">
-    <div id="game-title">R.I.P.</div>
+  <div id="main" style="display:block">
+    <div id="game-title" style="width: 100%">R.I.P.</div>
     <div class="form-label"><?=$description?></div>
     <div class="form-label">Turns Played: <?=floor($game['game_turns']/10)?></div>
     <div class="form-label">Gold found: <?=$gold?></div>
 
     <br>
-    <a href="https://www.facebook.com/sharer.php?u=<?=$this_url?>" class="g-btn bw">Share on Facebook</a>
-    <a href="http://twitter.com/intent/tweet/?url=<?=$this_url?>" class="g-btn bw">Share on Twitter</a>
-    <br><br><br>
+    <div style="">
+      <a href="https://www.facebook.com/sharer.php?u=<?=$this_url?>" class="g-btn bw">Share on Facebook</a>
+      <a href="http://twitter.com/intent/tweet/?text=<?=$description?>&url=<?=$this_url?>" class="g-btn bw">Share on Twitter</a>
+    </div>
+    <br><br>
     <div id="">
       <a href="<?=$new_url?>" class="play-btn">New Game</a>
       <br>

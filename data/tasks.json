@@ -133,6 +133,14 @@
   ],
   [
     {
+      "name": "barrel",
+      "block_object":["Barrel"],
+      "hidden_monster":["rat", "skeleton", "small larva"],
+      "object_item":["Arrow"]
+    }
+  ],
+  [
+    {
       "name": "broken_barrel",
       "block_object":["Broken Barrel","Broken Elf Barrel"]
     }
@@ -239,14 +247,14 @@
   [
     {
       "name": "rocks",
-      "ground_objects": ["Rocks #1","Rocks #1","Rocks #1","Rocks #1"],
+      "ground_objects": ["Rocks #1","Rocks #1","Rocks #1"],
       "chance": 10
     }
   ],
   [
     {
       "name": "floors2",
-      "ground_objects": ["Floors #2","Floors #2","Floors #2","Floors #2"],
+      "ground_objects": ["Floors #2","Floors #2"],
       "chance": 10
     }
   ],
