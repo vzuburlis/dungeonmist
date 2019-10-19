@@ -189,7 +189,7 @@ class MapController extends controller
 
     function playAction ($gameId=null)
     {
-      self::admin();
+      //self::admin();
       $this->gameId = $_COOKIE['gameId'];
       if($this->gameId === null) {
         view::renderFile('index.php',GPACKAGE);
@@ -257,7 +257,7 @@ class MapController extends controller
 
     function newAction ()
     {
-      self::admin();
+      //self::admin();
       view::renderFile('new.php',GPACKAGE);
     }
 

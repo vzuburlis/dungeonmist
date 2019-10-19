@@ -8,3 +8,4 @@ gila::content('monster','dungeonrl/tables/monster.php');
 gila::content('item','dungeonrl/tables/item.php');
 
 view::setViewFile('login.php', 'dungeonrl');
+view::setViewFile('login-register.php', 'dungeonrl');
