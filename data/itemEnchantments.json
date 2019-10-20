@@ -2,11 +2,15 @@
   ["of Critical Damage", "critical", "Your hit is more powerful than usual"],
   ["of Pain","critical", "The ememy screams of pain"],
   ["of Cursing", "curse", "A shadow covers the enemy"],
+  ["of the Evil Eye", "curse", "A shadow covers the enemy"],
   ["of Confuzion", "confuze", "The enemy looks confuzed"],
+  ["of Bewilderment", "confuze", "The enemy looks confuzed"],
   ["of Blessed", "holy", "A light repels the undead"],
   ["of the Living", "holy", "A light repels the undead"],
   ["of Fire", "fire"],
   ["of Flames", "fire"],
   ["of Shocks", "shock"],
-  ["of the Vampire", "draw-life", "You draw the life from enemy"]
+  ["of Sparks", "shock"],
+  ["of the Vampire", "draw-life", "You draw the life from enemy"],
+  ["of Absorption", "draw-life", "You draw the life from enemy"]
 ]

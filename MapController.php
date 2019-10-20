@@ -41,9 +41,9 @@ class MapController extends controller
     function __construct ()
     {
       include_once __DIR__."/models/Game.php";
-      view::set('style_css_path', gila::base_url().'src/'.GPACKAGE.'/style.css?v=1011a');
-      view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=1011');
-      view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=1011');
+      view::set('style_css_path', gila::base_url().'src/'.GPACKAGE.'/style.css?v=1012');
+      view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=1012');
+      view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=1012');
 
       $this->gameId = $_COOKIE['gameId'] ?? null;
 
@@ -189,7 +189,7 @@ class MapController extends controller
 
     function playAction ($gameId=null)
     {
-      //self::admin();
+      self::admin();
       $this->gameId = $_COOKIE['gameId'];
       if($this->gameId === null) {
         view::renderFile('index.php',GPACKAGE);
@@ -257,7 +257,7 @@ class MapController extends controller
 
     function newAction ()
     {
-      //self::admin();
+      self::admin();
       view::renderFile('new.php',GPACKAGE);
     }
 

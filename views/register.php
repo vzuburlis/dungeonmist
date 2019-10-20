@@ -25,19 +25,18 @@ body{
   background-color: black;
   background-size: cover;
 }
+label {color:#000}
 </style>
 
 <body>
     <?php view::alerts()?>
-    <div class="gl-4 centered">
+    <div id="game-title">Dungeon Mist</div>
+      <div class="gl-4 wrapper" style="float:left">
         <div class="border-buttom-main_ text-align-center">
-            <div style="width:16%;display:inline-block">
-                <img src="<?=gila::config('admin_logo')?:'assets/gila-logo.png'?>">
-            </div>
             <h3><?=__('Register')?></h3>
         </div>
 
-        <form role="form" method="post" action="" class="g-form wrapper g-card">
+        <form role="form" method="post" action="" class="g-form wrapper g-card bg-white">
             <label><?=__('Name')?></label>
             <div class="form-group">
                 <input class="form-control fullwidth" name="name" autofocus required>

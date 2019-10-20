@@ -91,21 +91,26 @@
   "sprite": ["shortwep", 3, 0],
   "name": "Glass Dagger",
   "type": "weapon", "hp":32,
-  "attack": [1,2], "attackMod": "dexterity"
+  "attack": [1,2],
+  "attackMod": "dexterity",
+  "skill": "Daggers"
 },
 {
   "level":2,
   "sprite": ["shortwep", 1, 1],
   "name": "Dagger",
   "type": "weapon", "hp":32,
-  "attack": [1,2], "attackMod": "dexterity"
+  "attack": [1,2],
+  "attackMod": "dexterity",
+  "skill": "Daggers"
 },
 {
   "level":2,
   "sprite": ["shortwep", 7, 0],
   "name": "Elven Dagger",
   "type": "weapon", "hp":32,
-  "attack": [1,2], "attackMod": "dexterity"
+  "attack": [1,2],
+  "attackMod": "dexterity"
 },
 {
   "level":2,
@@ -119,70 +124,85 @@
   "sprite": ["medwep", 0, 1],
   "name": "Axe",
   "type": "weapon", "hp":32,
-  "attack": [2,3], "attackMod": "strength"
+  "attack": [2,3],
+  "attackMod": "strength",
+  "skill": "Blades"
 },
 {
   "level":2,
   "sprite": ["medwep", 1, 1],
   "name": "Double Axe",
   "type": "weapon", "hp":32,
-  "attack": [2,3], "attackMod": "strength"
+  "attack": [2,3],
+  "attackMod": "strength",
+  "skill": "Blades"
 },
 {
   "level":2,
   "sprite": ["shield", 0, 0],
   "name": "Shield",
   "type": "shield", "hp":2,
-  "effect": "+block", "skill": "Shield"
+  "effect": "+block",
+  "skill": "Shield"
 },
 {
   "level":4,
   "sprite": ["shield", 1, 0],
   "name": "Shield",
   "type": "shield", "hp":3,
-  "effect": "+block", "skill": "Shield"
+  "effect": "+block",
+  "skill": "Shield"
 },
 {
   "level":6,
   "sprite": ["shield", 2, 0],
   "name": "Shield",
   "type": "shield", "hp":4,
-  "effect": "+block", "skill": "Shield"
+  "effect": "+block",
+  "skill": "Shield"
 },
 {
   "level":8,
   "sprite": ["shield", 3, 0],
   "name": "Shield",
   "type": "shield", "hp":5,
-  "effect": "+block", "skill": "Shield"
+  "effect": "+block",
+  "skill": "Shield"
 },
 {
   "level":10,
   "sprite": ["shield", 4, 0],
   "name": "Shield",
   "type": "shield", "hp":6,
-  "effect": "+block", "skill": "Shield"
+  "effect": "+block",
+  "skill": "Shield"
 },
 {
   "level":2,
   "sprite": ["staff", 0, 1],
   "name": "Staff",
   "type": "weapon", "hp":20,
-  "effect": "+attack", "attackMod": "intelligence"
+  "effect": "+attack",
+  "attackMod": "intelligence",
+  "skill": "Staff"
 },
 {
   "level":2,
   "sprite": ["staff", 2, 0],
   "name": "Wizzard Scepter",
   "type": "weapon", "hp":15,
-  "effect": "+attack", "attackMod": "intelligence"
+  "effect": "+attack",
+  "attackMod": "intelligence",
+  "skill": "Staff"
 },
 {
   "level":2,
   "sprite": ["staff", 4, 0],
   "name": "Green Staff",
   "type": "weapon", "hp":20,
-  "effect": "+attack", "attackMod": "intelligence"
+  "effect": "+attack",
+  "attackMod": "intelligence",
+  "skill": "Staff"
 },
 {
   "level":2,

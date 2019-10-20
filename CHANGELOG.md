@@ -1,4 +1,7 @@
 
+*1.0.12*
+Monsters may be hidden in barrels
+
 *1.0.11*
 Faster loads, cache json, no preload images
 
