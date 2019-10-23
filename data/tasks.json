@@ -92,7 +92,7 @@
     {
       "name": "keyChest",
       "item": "Chest Key",
-      "level": 2
+      "level": 3
     },
     {
       "block_object":"Locked Chest",
@@ -103,7 +103,9 @@
     {
       "name": "chest",
       "block_object":["Small Chest","Chest"],
-      "object_item":["Scroll of Map", "5 Gold", "Scroll of Blink","Scroll of Sucrifice","Scroll of Curse"]
+      "object_item":["Scroll of Map", "5 Gold", "Scroll of Blink","Scroll of Sucrifice","Scroll of Curse"],
+      "object_trap":["fire"],
+      "level":3
     },
     {
       "spawn":1
@@ -113,7 +115,18 @@
     {
       "name": "goldchest",
       "block_object":["Small Chest"],
-      "object_item":["Gold","Gold","Gold", "3 Gold"]
+      "object_item":["Gold","Gold","Gold", "3 Gold"],
+      "object_trap":["fire"],
+      "level":2
+    }
+  ],
+  [
+    {
+      "name": "goldchest",
+      "block_object":["Small Chest"],
+      "object_item":["Gold","3 Gold","3 Gold", "5 Gold"],
+      "object_trap":["fire"],
+      "level": 20
     }
   ],
   [
@@ -136,7 +149,7 @@
       "name": "barrel",
       "block_object":["Barrel"],
       "hidden_monster":["rat", "skeleton", "small larva"],
-      "object_item":["Arrow"]
+      "object_item":["Arrow", "Gold", null, null]
     }
   ],
   [
@@ -253,6 +266,13 @@
   ],
   [
     {
+      "name": "rocks2",
+      "ground_objects": ["Rocks #2","Rocks #2","Rocks #2","Rocks #2","Rocks #2"],
+      "chance": 10
+    }
+  ],
+  [
+    {
       "name": "floors2",
       "ground_objects": ["Floors #2","Floors #2"],
       "chance": 10
@@ -264,7 +284,15 @@
       "room_object": "Spikes Trap (Armed)",
       "room_desc": "You sense a danger in your way.",
       "chance": 50,
-      "level":3
+      "level": 2
+    }
+  ],
+  [
+    {
+      "name": "fire_trap",
+      "room_object": "Fire Trap",
+      "room_desc": "You sense a danger in your way.",
+      "level": 6
     }
   ]
 ]

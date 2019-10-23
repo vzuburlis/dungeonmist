@@ -11,7 +11,7 @@
 
     <link href="lib/gila.min.css" rel="stylesheet">
     <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="src/dungeonrl/style.css" rel="stylesheet">
+    <link href="<?=gila::base_url('src/dungeonrl/style.css?v=1012')?>" rel="stylesheet">
 </head>
 <style>
 body{
@@ -26,7 +26,7 @@ body{
 
 <body>
   <div id="game-title">Dungeon Mist</div>
-    <div class="gl-4 wrapper" style="float:left">
+    <div class="gl-4 gm-6 wrapper" style="float:left">
         <div class="border-buttom-main_ text-align-center">
             <h3><?=__('Log In')?></h3>
         </div>

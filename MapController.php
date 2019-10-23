@@ -41,7 +41,7 @@ class MapController extends controller
     function __construct ()
     {
       include_once __DIR__."/models/Game.php";
-      view::set('style_css_path', gila::base_url().'src/'.GPACKAGE.'/style.css?v=1012');
+      view::set('style_css_path', gila::base_url('src/'.GPACKAGE.'/style.css?v=1012'));
       view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=1012');
       view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=1012');
 
@@ -118,7 +118,10 @@ class MapController extends controller
         Game::moveLevel($this->gameId, $newLevel, $playerData['gameTurn']);
         $file = $this->gamePath().'level'.$this->level.'.json';
 
-        file_put_contents($file, $_REQUEST['levelMap']);
+        $levelMap = json_decode($_REQUEST['levelMap'],true);
+        $contents = file_get_contents($file);
+        $levelMap['mapString'] = json_decode($contents, true)['mapString'];
+        file_put_contents($file, json_encode($levelMap));
         file_put_contents($this->gamePath().'@.json', json_encode($playerData));
         echo '{"msg":"ok","level":"'.$newLevel.'"}'; 
       }
@@ -189,7 +192,7 @@ class MapController extends controller
 
     function playAction ($gameId=null)
     {
-      self::admin();
+      //self::admin();
       $this->gameId = $_COOKIE['gameId'];
       if($this->gameId === null) {
         view::renderFile('index.php',GPACKAGE);
@@ -208,6 +211,8 @@ class MapController extends controller
         $this->dungeon();
         $this->player['x'] = $this->startPos[0];
         $this->player['y'] = $this->startPos[1];
+        $this->saveLevel();
+        file_put_contents($this->gamePath().'@.json', json_encode($this->player));
       }
       //$this->cave ();
       view::renderFile('play.php',GPACKAGE);
@@ -223,6 +228,32 @@ class MapController extends controller
       return $this->randPos();
     }
 
+    function saveLevel($gameId = null, $level=null) {
+      if($gameId==null) $gameId = $this->gameId;
+      if($level==null) $level = $this->level;
+      $file = LOG_PATH.'/games/'.$gameId.'/level'.$level.'.json';
+
+      $levelMap = [];
+      $levelMap['mapSize'] = [$this->columns, $this->rows];
+      for($i=0; $i<$levelMap['mapSize'][0]; $i++) {
+        for($j=0; $j<$levelMap['mapSize'][1]; $j++) {
+          $mapString .= $this->map[$i][$j];
+        }
+      }
+
+      $levelMap['mapString'] = $mapString;
+      $levelMap['mapRev'] = $this->mapRev;
+      $levelMap['monsters'] = $this->monsters;
+      $levelMap['items'] = $this->items;
+      $levelMap['objects'] = $this->objects;
+      $levelMap['region'] = $this->region;
+      $levelMap['turns'] = $this->levelTurns;
+      $levelMap['groundObjects'] = $this->groundObjects;
+      $levelMap['mapItems'] = $this->mapItems ?? [];
+
+      file_put_contents($file, json_encode($levelMap));
+    }
+
     function loadLevel($gameId = null, $level=null) {
       if($gameId==null) $gameId = $this->gameId;
       if($level==null) $level = $this->level;
@@ -231,12 +262,16 @@ class MapController extends controller
       if(!file_exists($file)) return false;
       $levelMap = json_decode(file_get_contents($file), true);
       $this->map = [];
-      $this->mapString = $levelMap['mapString'];
-      for($i=0; $i<$levelMap['mapSize'][0]; $i++) {
-        $this->map[$i] = [];
-        for($j=0; $j<$levelMap['mapSize'][1]; $j++) {
-            $this->map[$i][$j] = $levelMap['mapString'][$i*$levelMap['mapSize'][0] + $j];
+      $this->mapString = $levelMap['mapString'] ?? null;
+      if($this->mapString) {
+        for($i=0; $i<$levelMap['mapSize'][0]; $i++) {
+          $this->map[$i] = [];
+          for($j=0; $j<$levelMap['mapSize'][1]; $j++) {
+              $this->map[$i][$j] = $levelMap['mapString'][$i*$levelMap['mapSize'][0] + $j];
+          }
         }
+      } else {
+        $this->map = $levelMap['map'];
       }
 
       $this->mapRev = $levelMap['mapRev'];
@@ -257,7 +292,7 @@ class MapController extends controller
 
     function newAction ()
     {
-      self::admin();
+      //self::admin();
       view::renderFile('new.php',GPACKAGE);
     }
 
@@ -416,7 +451,7 @@ class MapController extends controller
           $objName = $this->fromList($step['block_object']);
           $objType = $this->findObjectType($objName);
           $args = [];
-          
+
           if(isset($step['hidden_monster'])) if(rand(0,30)==0){
             if($monsterName = $this->fromMonsterList($step['hidden_monster'])) {
               $args['hidden_monster'] = $monsterName;
@@ -427,7 +462,12 @@ class MapController extends controller
               $args['item'] = $itemName;
             }
           }
-          
+          if(isset($step['object_trap'])) if(rand(0,15)==0) {
+            $n = count($step['object_trap']);
+            $trap = $step['object_trap'][rand(0, $n-1)];
+            $args['trap'] = $trap;
+          }
+
           $res = $this->addBlockObject($room, $objType, $args);
           if($res==false) return; // cancel if switch is not added
         }
@@ -757,6 +797,9 @@ class MapController extends controller
             $maxhp = $level<8 ? 16+$level*2 : MAX_HP;
             $newobj['hiddenMonsterMaxHP'] = $maxhp;
           }
+          if(isset($args['trap'])) {
+            $newobj['trap'] = $args['trap'];
+          }
           $this->objects[] = $newobj;
           return true;
         }
@@ -887,7 +930,10 @@ class MapController extends controller
         $name = $name[$i];
       }
       foreach($this->objectType as $i=>$ot) {
-          if($ot['name'] == $name) $type = $i;
+        if($ot['name'] == $name) $type = $i;
+      }
+      foreach($this->groundObjects as $i=>$go) {
+        if($go['type'] == $type && $go['x']==$pos[0] && $go['y']==$pos[1]) return;
       }
       $this->groundObjects[] = ['x'=>$pos[0], 'y'=>$pos[1], 'type'=>$type];
     }

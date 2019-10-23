@@ -39,8 +39,12 @@ body{
 
 
 <body>
-  <div id="main">
+  <div id="maindiv">
     <div id="newgame-title">Character Creation</div>
+    <?php if(session::user_id()==0){ ?>
+    <div class="alert">In order to save your game you have to 
+      <a href="<?=gila::base_url("login")?>">login with your account</a></div>
+    <?php } ?>
     <div class="row">
       <div class="gm-8 class-panel">
         <div id="class-selection" style="text-align:center">
@@ -75,7 +79,7 @@ var nameFr = [
 ]
 
 var app = new Vue({
-  el: '#main',
+  el: '#maindiv',
   data: {
     classes: <?=json_encode($classes)?>,
     name: '',

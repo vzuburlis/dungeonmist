@@ -48,7 +48,7 @@ function unitClass (options) {
     that.weapon = null;
     that.eArmor = null;
     that.eShield = null
-    that.los = 5;
+    that.los = 7;
     that.audio = [];
     that.status = [];
     that.attack = 0;
@@ -138,6 +138,7 @@ function unitClass (options) {
             monsters[mi].hp-=attack_points;
             if(monsters[mi].hp<0) monsters[mi].hp==0;
             _logMsg = "You hit the "+monsters[mi].typeName()+' dealing '+attack_points+' damage'
+            animatePop(monsters[mi].x, monsters[mi].y,'-'+attack_points, 'red')
             logMsg(_logMsg);
             //animateEffect(that.x+dx, that.y+dy, itemImg['effect0'], 4, 21, 2);
 
@@ -208,78 +209,98 @@ function unitClass (options) {
             renderMap();
             return false;
           }
-            if(typeof objType.open_to!='undefined') {
-                obj.type = findObjectType(objType.open_to, obj.type);
-
-                if(typeof obj.trap!='undefined') if(obj.trap!==null) {
-                  return;
-                }
-                if(typeof obj.hiddenMonster!='undefined' && obj.hiddenMonster!==null) {
-                  console.log(obj.hiddenMonster)
-                  _name = monsterType[obj.hiddenMonster].name
-                  logMsg("A "+_name+" jumps out from the "+objType.name.toLowerCase());
-                  monsters.push(unitClass({
-                    "x": that.x+dx, "y": that.y+dy, "type": obj.hiddenMonster,
-                    "hp": obj.hiddenMonsterMaxHP, "maxhp": obj.hiddenMonsterMaxHP,
-                    "turnTime": 0, "seen": 1
-                  }));
-                  delete obj.hiddenMonster
-                  renderMap();
-                  setGameStatus('play');
-                  return;
-                }
-                if(typeof obj.open_object!='undefined' && obj.open_object!==null) {
-                  opendoorAudio.play()
-                  logMsg("You open the "+objType.name.toLowerCase());
-                  gateType = objectType[objects[obj.open_object].type]
-                  if(typeof gateType.switch_to=='undefined') {
-                    console.error('object does not have switch_to')
-                  } else {
-                    objects[obj.open_object].type = findObjectType(gateType.switch_to)
-                  }
-                }
-                if(typeof obj.item!='undefined') if(obj.item!==null) {
-                  logMsg('You find a '+getItemName(obj.item))
-                  items.push([that.x, that.y, obj.item]);
-                  that.pickItem(items.length-1)
-                  obj.item=null;
-                }
-
-                setGameStatus('play');
+          if(typeof objType.open_to!='undefined') {
+            opendoorAudio.play()
+            logMsg("You open the "+objType.name.toLowerCase());
+            obj.type = findObjectType(objType.open_to, obj.type);
+            if(typeof obj.hiddenMonster!='undefined' && obj.hiddenMonster!==null) {
+              console.log(obj.hiddenMonster)
+              _name = monsterType[obj.hiddenMonster].name
+              logMsg("A "+_name+" jumps out from the "+objType.name.toLowerCase());
+              monsters.push(unitClass({
+                "x": that.x+dx, "y": that.y+dy, "type": obj.hiddenMonster,
+                "hp": obj.hiddenMonsterMaxHP, "maxhp": obj.hiddenMonsterMaxHP,
+                "turnTime": 0, "seen": 1
+              }));
+              delete obj.hiddenMonster
+              renderMap();
+              setGameStatus('play');
+              return;
             }
-            if(typeof objType.switch_to!='undefined') {
-              logMsg("You cannot open the gate. There must be a switch somewhere.");
-            }
-            if(typeof objType.unlock_to!='undefined') {
-              if(mapItems.includes('key')) {
-                  opendoorAudio.play()
-                  obj.type = findObjectType(objType.unlock_to, obj.type);
-                  logMsg("You unlock the door");
+            if(typeof obj.open_object!='undefined' && obj.open_object!==null) {
+              opendoorAudio.play()
+              logMsg("You open the "+objType.name.toLowerCase());
+              gateType = objectType[objects[obj.open_object].type]
+              if(typeof gateType.switch_to=='undefined') {
+                console.error('object does not have switch_to')
               } else {
-                  logMsg("The door is locked. You need a key");
+                objects[obj.open_object].type = findObjectType(gateType.switch_to)
               }
             }
-            if(typeof objType.chest_unlock_to!='undefined') {
-              if(mapItems.includes('chest_key')) {
-                  opendoorAudio.play()
-                  obj.type = findObjectType(objType.chest_unlock_to, obj.type);
-                  logMsg("You unlock the chest");
-              } else {
-                  logMsg("The chest is locked. You need a key");
-              }
+            if(typeof obj.item!='undefined') if(obj.item!==null) {
+              logMsg('You find a '+getItemName(obj.item))
+              items.push([that.x, that.y, obj.item]);
+              that.pickItem(items.length-1)
+              obj.item=null;
+            }
+            setGameStatus('play');
           }
-          if(typeof objType.activate_to!='undefined') if(typeof obj.detected=='undefined') {
+          if(typeof objType.switch_to!='undefined') {
+            logMsg("You cannot open the gate. There must be a switch somewhere.");
+          }
+          if(typeof objType.unlock_to!='undefined') {
+            if(mapItems.includes('key')) {
+                opendoorAudio.play()
+                obj.type = findObjectType(objType.unlock_to, obj.type);
+                logMsg("You unlock the door");
+            } else {
+                logMsg("The door is locked. You need a key");
+            }
+          }
+          if(typeof objType.chest_unlock_to!='undefined') {
+            if(mapItems.includes('chest_key')) {
+                opendoorAudio.play()
+                obj.type = findObjectType(objType.chest_unlock_to, obj.type);
+                logMsg("You unlock the chest");
+            } else {
+                logMsg("The chest is locked. You need a key");
+            }
+          }
+          if(typeof objType.trap!='undefined'
+              || typeof obj.trap!='undefined') if(typeof obj.detected=='undefined') {
             obj.detected=true
             if(that.hasAbility('DetectTraps') && Math.floor(Math.random() * 2)==0) {
-              logMsg("You detect a "+objType.activate_to, true);
+              if(typeof objType.activate_to!='undefined') {
+                logMsg("You detect a "+objType.activate_to, true);
+              }
               renderMap();
               return false
             } else {
-              obj.type = findObjectType(objType.activate_to, obj.type);
-              swingAudio.play()
-              _trap = objType.activate_to
-              logMsg("You step in the "+objType.activate_to);
-              if(that.hp>8) that.addHP(-8,_trap); else that.addHP(-4,_trap);
+              if(typeof objType.activate_to!='undefined') {
+                swingAudio.play()
+                obj.type = findObjectType(objType.activate_to, obj.type);
+                logMsg("You step in the "+objType.activate_to);
+                _trap = objType.activate_to
+                if(that.hp>8) that.addHP(-6,_trap); else that.addHP(-3,_trap);
+              } else {
+                if(typeof objType.trap!='undefined') {
+                  _trap = objType.trap
+                } else {
+                  _trap = obj.trap
+                }
+                logMsg("You activate a "+_trap+" trap");
+                if(typeof objType.block!='undefined' && objType.block==true) {
+                  trapx = that.x; trapy = that.y;
+                } else {
+                  trapx = that.x+dx; trapy = that.y+dy;
+                }
+                if(_trap=="fire") {
+                  setGameStatus('wait')
+                  fireballAudio.play()
+                  if(that.hp>8) that.addHP(-6,_trap); else that.addHP(-3,_trap);
+                  animateEffect(trapx, trapy, itemImg['effect0'], 0, 21, 2);
+                }
+              }
             }
           }
           if(typeof objType.reveal_to!='undefined') if(typeof obj.detected=='undefined') {
@@ -771,15 +792,6 @@ function unitClass (options) {
       dy = dir[selectDirection][1]
       turnPlayed = true
 
-      obj = getObject(that.x+dx,that.y+dy)
-      if(obj!=null) {
-        objType = objectType[obj.type]
-        logMsg('You kick the '+objType.name)
-        if(typeof objType.kick_to!='undefined') {
-            obj.type = findObjectType(objType.kick_to, obj.type);
-            swingAudio.play()
-        }
-      }
       mi = getMonster(that.x+dx,that.y+dy);
       if(mi > -1) {
         attack_points = 4 + Math.floor(Math.random() * 4) + that.strength;
@@ -800,12 +812,23 @@ function unitClass (options) {
             }
           }
           that.turnTime -= 50;
-          turnPlayed = true;
-      }
-      else {
-        logMsg('You kick on the air')
+          setGameStatus('play')
+          return
       }
 
+      obj = getObject(that.x+dx,that.y+dy)
+      if(obj!=null) {
+        objType = objectType[obj.type]
+        if(typeof objType.kick_to!='undefined') {
+          logMsg('You kick the '+objType.name)
+          obj.type = findObjectType(objType.kick_to, obj.type);
+          swingAudio.play()
+          setGameStatus('play')
+          return
+        }
+      }
+
+      logMsg('You kick on the air')
       setGameStatus('play')
     }
 
@@ -953,6 +976,7 @@ function unitClass (options) {
             log_msg = "The "+that.typeName()+' hits you for '+attack_points+' damage'
             dmsg = "<span style='color:red'>The "+that.typeName()+' kills you</span>'
             player.addHP(-attack_points, that.typeName(), dmsg);
+            animatePop(player.x, player.y, '-'+attack_points, 'red')
             if(player.hp>0) {
               if(Math.floor(Math.random() * 8)==0) {
                 if(typeof _mt['specialAttack']!='undefined') {
@@ -969,6 +993,7 @@ function unitClass (options) {
                   if(_mt['specialAttack']=='critical') {
                     log_msg = "The "+that.typeName()+' hits you with critical attack'
                     player.addHP(-attack_points, that.typeName(), dmsg);
+                    animatePop(player.x, player.y, '-'+attack_points, 'red')
                   }
                 }
               }
@@ -1021,17 +1046,17 @@ function unitClass (options) {
 
     }
 
-    that.view = function () {
-        _x = Math.floor(that.x)
-        _y = Math.floor(that.y)
+    that.view = function (_x=null,_y=null) {
+        if(_x==null) _x = Math.floor(that.x)
+        if(_y==null) _y = Math.floor(that.y)
         _los = that.los+1
-        if(_los<5 && that.hasStatus('light')) _los=5
-        if(_los<3 && that.hasAbility('Darkvision')) _los=3
+        if(_los<6 && that.hasStatus('light')) _los = 6
+        if(_los<3 && that.hasAbility('Darkvision')) _los = 3
         if(that.hasStatus('blind')) return
 
         mapRev[_x][_y] = 4;
-        for(i=_x-6; i<_x+7; i++) {
-            for(j=_y-6; j<_y+7; j++) {
+        for(i=_x-8; i<_x+9; i++) {
+            for(j=_y-8; j<_y+9; j++) {
                 diffx = i-_x;
                 diffy = j-_y;
 

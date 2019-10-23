@@ -81,7 +81,7 @@ button{
 
 
 <body>
-  <div id="main" style="display:block">
+  <div id="" style="display:block">
     <div id="game-title" style="width: 100%">R.I.P.</div>
     <div class="form-label"><?=$description?></div>
     <div class="form-label">Turns Played: <?=floor($game['game_turns']/10)?></div>

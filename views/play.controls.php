@@ -117,21 +117,28 @@
   <img src="<?=$tile_folder?>../images/check-mark.svg" style="width:100%">
 </div>
 
-<div id="use-menu">
+<div id="description-menu" class="menu">
+  <div id="use-menu--title"><span onclick="keyPress(27)" class="close">
+    <img src="<?=$tile_folder?>../images/close.svg">
+  </span></div>
+  <div id="description-menu--list" style="text-align:left"></div>
+</div>
+
+<div id="use-menu" class="menu">
   <div id="use-menu--title">Use Item <span onclick="keypressUse(27)" class="close">
     <img src="<?=$tile_folder?>../images/close.svg">
   </span></div>
   <div id="use-menu--list"></div>
 </div>
 
-<div id="equip-menu">
+<div id="equip-menu" class="menu">
   <div id="equip-menu--title">Equipment <span onclick="keypressEquip(27)" class="close">
     <img src="<?=$tile_folder?>../images/close.svg">
   </span></div>
   <div id="equip-menu--list"></div>
 </div>
 
-<div id="action-menu">
+<div id="action-menu" class="menu">
   <div id="action-menu--title">Actions <span onclick="closeActionMenu();" class="close">
     <img src="<?=$tile_folder?>../images/close.svg">
   </span></div>

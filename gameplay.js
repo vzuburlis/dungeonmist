@@ -174,12 +174,12 @@ function illuminateMap(n, x, y, d, source=false) {
 function renderMap2() {
     renderMap()
 }
-function renderMap() {
+function renderMap(view=true) {
   context.globalAlpha = 1;
   context.fillStyle="#000000";
   context.fillRect(0, 0, canvas.width, canvas.height);
 
-  for (i=0; i< mapHeight; i++) {
+  if(view) for (i=0; i< mapHeight; i++) {
     for (j=0; j< mapWidth; j++) {
       if (mapRev[j][i]>1) {
         mapRev[j][i] = 1;
@@ -187,7 +187,7 @@ function renderMap() {
     }
   }
 
-  player.view();
+  if(view) player.view();
 
 
   for (i=player.y-renderHeight; i<=player.y+renderHeight; i++) {
@@ -325,7 +325,6 @@ function renderMap() {
   }
 
   for(r in regions) {
-    console.log('in')
     if(typeof regions[r].fog!='undefined') {
       fog = regions[r].fog
       context.globalAlpha = 0.2
@@ -643,10 +642,12 @@ function setGameStatus(v) {
     equipMenu=document.getElementById("equip-menu")
     actionMenu=document.getElementById("action-menu")
     helpMenu=document.getElementById("help-menu")
+    descriptionMenu=document.getElementById("description-menu")
     useMenu.style.display = 'inline-block'
     equipMenu.style.display = 'inline-block'
     actionMenu.style.display = 'inline-block'
     helpMenu.style.display = 'inline-block'
+    descriptionMenu.style.display = 'inline-block'
     if(v=='play') {
       btnAction.style.display = 'inline-block'
       btnUse.style.display = 'inline-block'
@@ -659,11 +660,12 @@ function setGameStatus(v) {
         equipMenu.style.display = 'none'
         actionMenu.style.display = 'none'
         helpMenu.style.display = 'none'
+        descriptionMenu.style.display = 'none'
     }
     if(v=='select-direction') {
       btnCancelD.style.display = 'inline-block'
     }
-    if(v=='help-menu'||v=='equip-menu'||v=='action-menu'||v=='use-menu') {
+    if(v=='help-menu'||v=='equip-menu'||v=='action-menu'||v=='use-menu'||v=='description-menu') {
       btnCancelM.style.display = 'inline-block'
     }
 }
@@ -717,6 +719,13 @@ function keyPress (e) {
       popup = document.getElementById("help-menu")
       popup.style.visibility = 'hidden'
       setGameStatus('play');
+    }
+  }
+  if (value == 'description-menu') {
+    if(code==27 || code==88) {
+      popup = document.getElementById("description-menu")
+      popup.style.visibility = 'hidden'
+      setGameStatus('target');
     }
   }
 
@@ -933,6 +942,8 @@ function keypressDirection (code) {
     if(selectTarget.action()) {
       delete selectTarget.action;
       gameStatus='play'
+    } else {
+      return
     }
   }
 
@@ -949,26 +960,66 @@ function drawSelectRect() {
   context.strokeStyle = "#ffffaa";
   if(gameStatus=='target') {
     context.strokeStyle = "#aaffaa";
-    mi = getMonster(x,y)
-    if(obj = getObject(x,y)) {
-      x = objectType[obj.type].name
-    } else if(mi >-1) {
-      x = monsterType[monsters[mi].type].name;
-    } else 
-    switch(map[x][y]) {
-      case '.': x='path';break;
-      case '#': x='Wall';break;
-      case ' ': x='Wall';break;
-      case 'l': x='Lava';break;
-      case '=': x='Water';break;
-      case ';': x='Ant sand';break;
-    }
+    x = getTargetName(x,y)+' [select]'
     document.getElementById("msgBox").innerHTML = x//'<span>'+x+'</span>';
   }
   x = targetx-player.x+renderWidth
   y = targety-player.y+renderHeight
   context.rect(x*32, y*32, 32, 32);
   context.stroke();
+}
+
+function getTargetName(x,y) {
+  mi = getMonster(x,y)
+  if(obj = getObject(x,y)) {
+    x = objectType[obj.type].name
+  } else if(mi >-1) {
+    x = monsterType[monsters[mi].type].name;
+  } else 
+  switch(map[x][y]) {
+    case '.': x='Path';break;
+    case '#': x='Wall';break;
+    case ' ': x='Void';break;
+    case 'l': x='Lava';break;
+    case '=': x='Water';break;
+    case ';': x='Ant sand';break;
+  }
+  return x
+}
+
+function getTargetDesriptions(x,y) {
+  desc = []
+  mi = getMonster(x,y)
+  if(mi >-1) {
+    monster = monsterType[monsters[mi].type]
+    desc.push({
+      name: monster.name,
+      sprite: monster.sprite,
+      description: monster.description
+    })
+  }
+  if(obj = getObject(x,y)) {
+    object = objectType[obj.type]
+    desc.push({
+      name: object.name,
+      sprite: object.sprite,
+      description: object.description
+    })
+  }
+  name=null
+  switch(map[x][y]) {
+    case '.': name='Path';d='A solid ground wheere you can move';break;
+    case '#': name='Wall';d='A wall build with rocks, its unbreakable.';break;
+    case ' ': name='Void';d='The darkness of the dungeon does not let you see the of bottom of these big holes';break;
+    case 'l': name='Lava';d='The magma of heavy materials. You can walk on it but it burns your feet';break;
+    case '=': name='Water';d='You can swim on water but very slow';break;
+    case ';': name='Ant sand';d='Ants have brought this sand from very log distances. It emits its own light';break;
+  }
+  if(name!=null) desc.push({
+    name: name, description: d
+  })
+
+  return desc
 }
 
 function moveTarget(dx, dy) {
@@ -1048,6 +1099,34 @@ function keypressPlay (code) {
       selectTarget.action = player.jump;
       renderMap()
     }
+    else if (code == 'V') { // V
+      closeActionMenu();
+      setGameStatus('select-direction');
+      selectDirection = null
+      if(targetx==null) {
+        targetx=player.x
+        targety=player.y
+      }
+      logMsg('Select a direction');
+      selectTarget.action = function() {
+        dir = [[0,-1],[1,0],[0,1],[-1,0]]
+        dx = dir[selectDirection][0]
+        dy = dir[selectDirection][1]
+        if(blockedPos(player.x+dx,player.y+dy)) {
+          logMsg('Cannot see from there')
+          return false
+        }
+        runTurn()
+        player.view(player.x+dx, player.y+dy)
+        renderMap(false)
+        setTimeout(function(){
+          setGameStatus('play')
+        }, 100)
+        delete selectTarget.action
+        return false;
+      }
+      renderMap()
+    }
     else if (code == '75' || code=='k') { // k
       closeActionMenu();
       setGameStatus("select-direction")
@@ -1066,6 +1145,21 @@ function keypressPlay (code) {
       if(targetx==null) {
         targetx=player.x
         targety=player.y
+      }
+      selectTarget.action = function(){
+        desc = getTargetDesriptions(targetx, targety)
+        popup = document.getElementById("description-menu")
+        list = document.getElementById("description-menu--list")
+        list.innerHTML = ""
+        for(i in desc) {
+          if(typeof desc[i].description!='undefined') {
+            description = '<br>'+desc[i].description
+          } else description = ''
+          list.innerHTML += '<p>'+desc[i].name+description+'</p>'
+        }
+        popup.style.visibility = "visible"
+        setGameStatus('description-menu');
+        return false
       }
       logMsg('Select target');
       renderMap()
@@ -1283,7 +1377,7 @@ setInterval(function() {
 }, 500);
 
 activeGame = true;
-autoSave()
+
 setInterval(function() {
   if(activeGame==true) {
     autoSave()
@@ -1332,10 +1426,12 @@ function randomPos() {
   return {x:x,y:y}
 }
 function blockedPos(x,y) {
-  if(map[x][y]!='.' || map[x][y]!=':') return true;
+  if(map[x][y]!='.') return true;
+  console.log('monsters')
   for(let i=0; i<monsters.length; i++) {
       if(x==monsters[i].x && y==monsters[i].y) return true;
   }
+  console.log('objects')
   for(let i=0; i<objects.length; i++) {
       if(x==objects[i].x && y==objects[i].y) return true;
   }
@@ -1362,3 +1458,43 @@ function getItemFullName(_itemType, enchantment) {
   }
   return name
 }
+
+popValues = Array()
+
+function animatePop(x,y,value,color="yellow") {
+  setGameStatus('wait')
+  x = (x-player.x+renderWidth)*32+16
+  y = (y-player.y+renderHeight)*32
+  ctx = context
+  ctx.font = "bold 11pt Monospace";
+  ctx.textAlign = "center";
+  ctx.fillStyle = '#440000';
+  ctx.fillText(value, x+1, y+1);
+  ctx.fillStyle = color;
+  ctx.fillText(value, x, y);
+  for(let i=1;i<3;i++) {
+    setTimeout(function(){
+      ctx.font = "bold 11pt Monospace";
+      ctx.fillStyle = '#440000';
+      ctx.fillText(value, x+1, y+1);
+      ctx.fillStyle = color;
+      ctx.fillText(value, x, y);
+    }, i*90);
+    setTimeout(function(){
+      renderMap()
+      setGameStatus('play')
+    }, 270);
+  }
+}
+
+
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
