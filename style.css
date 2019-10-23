@@ -237,7 +237,7 @@ button{
 }
 #main {
   padding: 20px;
-  max-width: 100%;
+  width: 100%;
   padding: 10px;
   height: 100%;
   position: absolute;

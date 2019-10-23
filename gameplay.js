@@ -1462,7 +1462,7 @@ function getItemFullName(_itemType, enchantment) {
 popValues = Array()
 
 function animatePop(x,y,value,color="yellow") {
-  setGameStatus('wait')
+  setGameStatus('animatePop')
   x = (x-player.x+renderWidth)*32+16
   y = (y-player.y+renderHeight)*32
   ctx = context
@@ -1482,7 +1482,7 @@ function animatePop(x,y,value,color="yellow") {
     }, i*90);
     setTimeout(function(){
       renderMap()
-      setGameStatus('play')
+      if(gameStatus=='animatePop') setGameStatus('play')
     }, 270);
   }
 }
