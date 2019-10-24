@@ -212,9 +212,16 @@
   "armor": [1, 3]
 },
 {
-  "level":4,
+  "level":3,
   "sprite": ["armor", 1, 0],
   "name": "Bronze Armor",
+  "type": "armor", "hp":32,
+  "armor": [1, 3]
+},
+{
+  "level":4,
+  "sprite": ["armor", 3, 0],
+  "name": "Green Armor",
   "type": "armor", "hp":32,
   "armor": [1, 3]
 },
@@ -391,6 +398,7 @@
 {
   "sprite": ["ammo", 5, 2],
   "name": "Arrow",
+  "type": "missile",
   "autopick": true,
   "effect": "+arrows",
   "skill": "Archery"

@@ -405,6 +405,15 @@ function unitClass (options) {
       }
       return that.attack+extra;
     }
+    that.throwDamage = function (i) {
+      extra = 0
+      _type = that.inventory[i].itemType
+      if(typeof itemType[_type].attackMod!='undefined') {
+        mod = itemType[_type].attackMod
+        extra += that[mod]
+      }
+      return that.attack+extra;
+    }
 
     that.arrowDamage = function () {
       return 5+Math.floor(Math.random() * 9)
@@ -478,7 +487,9 @@ function unitClass (options) {
     that.pickItem = function (iti) {
       let _type = items[iti][2]
       _name = itemType[_type].name
-      _data = {itemType:_type,stock:1}
+      _data = items[iti]
+      _data.itemType = _type
+      _data.stock = 1
       __type = itemType[_type].type
       if(typeof items[iti][3]!='undefined') _data.hp = items[iti][3]
       if(typeof items[iti].attack!='undefined') _data.attack = items[iti].attack
@@ -757,16 +768,14 @@ function unitClass (options) {
               }
               if(monster !== null) {
                 monster.hp -= that.arrowDamage()
-              } else {
-                if(player.hasAbility('Archery') && player.arrows<12) {
-                  if(map[targetx][targety]=='#' || map[targetx][targety]=='C' || Math.floor(Math.random()*6)==0) {
-                    logMsg('The arrow breaks')
-                  } else {
-                    items.push([targetx,targety,findItemType('Arrow')]);
-                  }
+              }
+              if(player.hasAbility('Archery') && player.arrows<12) {
+                if(map[targetx][targety]=='#' || map[targetx][targety]=='C') {
+                  logMsg('The arrow breaks')
+                } else if(Math.floor(Math.random()*2)==0) {
+                  items.push([targetx,targety,findItemType('Arrow')]);
                 }
               }
-              //if(!that.hasAbility('Archery')) player.turnTime -= 100
               setGameStatus('play')
               runTurn()
               renderMap()
@@ -777,6 +786,53 @@ function unitClass (options) {
             that.addHP(16)+that.intelligence*2
         }
         updateStats()
+    }
+
+    that.throwItem = function (targetx, targety, thrownItem) {
+      document.body.style.cursor = 'default'
+      setGameStatus('wait')
+      arrowAudio.play()
+      if(that.weapon==thrownItem) that.unwield('weapon')
+      dx =targetx-that.x
+      dy =targety-that.y
+      d = Math.round(Math.sqrt(dx*dx+dy*dy))
+      for(let i=0;i<d;i++) {
+        setTimeout(function(){
+          renderMap()
+          drawSpin(that.x, that.y, targetx, targety, i/d,i%2)
+        }, i*60);
+      }
+      setTimeout(function(){
+        monster = null
+        for (let i=0; i<monsters.length; i++) if(monsters[i].hp>0) {
+          x = monsters[i].x
+          y = monsters[i].y
+          if(mapRev[x][y]>1 && x==targetx && y==targety) {
+            monster = monsters[i]
+          }
+        }
+        if(monster !== null) {
+          attack_points = that.throwDamage(thrownItem)
+          monster.hp -= attack_points
+        }
+        if(that.inventory[thrownItem].hp>2) {
+          that.inventory[thrownItem].hp-=3
+          data = that.inventory[thrownItem]
+          data[0] = targetx
+          data[1] = targety
+          data[2] = that.inventory[thrownItem].itemType
+          data[3] = that.inventory[thrownItem].hp
+          that.deleteFromInv(thrownItem)
+          items.push(data)
+        } else {
+          that.addItemHP(thrownItem, -3)
+        }
+        if(!that.hasAbility('Throwing')) player.turnTime -= 50
+        updateStats()
+        setGameStatus('play')
+        runTurn()
+        renderMap()
+      }, 60*d);
     }
 
     that.deleteFromInv = function (i) {
@@ -1171,6 +1227,13 @@ function drawArrow(sx, sy, ex, ey, step) {
   context.moveTo((mx+dx*step)*32+16, (my+dy*step)*32+16);
   context.lineTo((mx+dx*step+stepx)*32+16, (my+dy*step+stepy)*32+16);
   context.stroke(); 
+}
+
+function drawSpin(sx, sy, ex, ey, step, rot=0) {
+  dx =ex-sx
+  dy =ey-sy
+  //let d = Math.sqrt(dx*dx+dy*dy)
+  drawSprite(sx+dx*step,sy+dy*step, itemImg['effect'+rot], 0, 25);
 }
 
 function animateEffect(x, y, img, sx, sy, f, step=100) {

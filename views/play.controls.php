@@ -118,10 +118,17 @@
 </div>
 
 <div id="description-menu" class="menu">
-  <div id="use-menu--title"><span onclick="keyPress(27)" class="close">
+  <div class="menu--title"><span onclick="keyPress(27)" class="close">
     <img src="<?=$tile_folder?>../images/close.svg">
   </span></div>
   <div id="description-menu--list" style="text-align:left"></div>
+</div>
+
+<div id="throw-menu" class="menu">
+  <div class="menu--title">Throw Item<span onclick="keyPress(27)" class="close">
+    <img src="<?=$tile_folder?>../images/close.svg">
+  </span></div>
+  <div id="throw-menu--list" style="text-align:left"></div>
 </div>
 
 <div id="use-menu" class="menu">
@@ -147,7 +154,9 @@
   <div class="menu-item" onclick="keypressPlay('Z')">Z <span class="item-name">Rest</span></div>
   <div class="menu-item" onclick="keypressPlay('j')">j <span class="item-name">Jump</span></div>
   <div class="menu-item" onclick="keypressPlay('k')">k <span class="item-name">Kick</span></div>
-  <div class="menu-item" onclick="keypressPlay('t')">t <span class="item-name">Target</span></div>
+  <div class="menu-item" onclick="keypressPlay('t')">t <span class="item-name">Throw weapon</span></div>
+  <div class="menu-item" onclick="keypressPlay('l')">l <span class="item-name">Look around</span></div>
+  <div class="menu-item" onclick="keypressPlay('V')">V <span class="item-name">View from next tile</span></div>
   </div>
 </div>
 
@@ -165,6 +174,9 @@
       <tr><td>j&nbsp;<td>Jump
       <tr><td>k&nbsp;<td>Kick
       <tr><td>f&nbsp;<td>Fire arrow
+      <tr><td>t&nbsp;<td>Throw weapon
+      <tr><td>l&nbsp;<td>Look around
+      <tr><td>V&nbsp;<td>View from next tile
     </table>
   </div>
   <div class="menu--title">Game Tips</div>

@@ -643,11 +643,13 @@ function setGameStatus(v) {
     actionMenu=document.getElementById("action-menu")
     helpMenu=document.getElementById("help-menu")
     descriptionMenu=document.getElementById("description-menu")
+    throwMenu=document.getElementById("throw-menu")
     useMenu.style.display = 'inline-block'
     equipMenu.style.display = 'inline-block'
     actionMenu.style.display = 'inline-block'
     helpMenu.style.display = 'inline-block'
     descriptionMenu.style.display = 'inline-block'
+    throwMenu.style.display = 'inline-block'
     if(v=='play') {
       btnAction.style.display = 'inline-block'
       btnUse.style.display = 'inline-block'
@@ -661,11 +663,12 @@ function setGameStatus(v) {
         actionMenu.style.display = 'none'
         helpMenu.style.display = 'none'
         descriptionMenu.style.display = 'none'
+        throwMenu.style.display = 'none'
     }
     if(v=='select-direction') {
       btnCancelD.style.display = 'inline-block'
     }
-    if(v=='help-menu'||v=='equip-menu'||v=='action-menu'||v=='use-menu'||v=='description-menu') {
+    if(v=='help-menu'||v=='equip-menu'||v=='action-menu'||v=='use-menu'||v=='description-menu'||v=='throw-menu') {
       btnCancelM.style.display = 'inline-block'
     }
 }
@@ -706,6 +709,7 @@ function keyPress (e) {
   if (value == 'play') keypressPlay(code);
   if (value == 'target') keypressTarget(code);
   if (value == 'use-menu') keypressUse(code);
+  if (value == 'throw-menu') keypressThrow(code);
   if (value == 'equip-menu') keypressEquip(code);
   if (value == 'action-menu') keypressAction(code);
   if (value == 'select-target') keypressTarget(code);
@@ -862,6 +866,47 @@ function keypressUse (code) {
             turnPlayed = true;
         }
     }
+}
+
+function keypressThrow (code) {
+  if(code==27 || code==88) {
+      popup = document.getElementById("throw-menu")
+      popup.style.visibility = 'hidden'
+      setGameStatus('play');
+      return
+  }
+  if(code>64 && code<81) {
+      let i = comToItem[code]
+      if(i < player.inventory.length) {
+        setGameStatus('play');
+        _itemType = player.inventory[i].itemType
+        _type = itemType[_itemType]
+        if(_type.type!='weapon' && _type.type!='shield' && _type.type!='armor' && _type.type!='spellbook') {
+          player.inventory[i].stock--
+          if(player.inventory[i].stock==0) player.deleteFromInv(i);
+        }
+
+        if(_type.type!='weapon' && _type.type!='missile') {
+          alert('you  shouldnt be able to choose that')
+        }
+        //_idf = player.identify('items',_itemType)
+        //logMsg("You throw the " + getItemName(_itemType), _idf);
+        setGameStatus('select-target')
+        document.body.style.cursor = 'crosshair'
+        targetx=player.x
+        targety=player.y
+        renderMap()
+        logMsg('Select a target to fire');
+        selectMissile = i
+        selectTarget.action = function() {
+          player.throwItem(targetx, targety, selectMissile)
+        }
+
+        popup = document.getElementById("throw-menu")
+        popup.style.visibility = 'hidden'
+        turnPlayed = true;
+      }
+  }
 }
 
 function keypressTarget (code) {
@@ -1038,7 +1083,7 @@ function keypressAction (code) {
     setGameStatus('play')
     return
   }
-  if(code=='h'||code=='j'||code=='k'||code=='t'||code=='r'||code=='Z') {
+  if(code=='h'||code=='j'||code=='k'||code=='l'||code=='t'||code=='r'||code=='Z'||code=='V') {
     keypressPlay (code)
   }
 }
@@ -1139,7 +1184,7 @@ function keypressPlay (code) {
       //setGameStatus('play')
       renderMap()
     }
-    else if (code == '84' || code=='t') { // t
+    else if (code == '76' || code=='l') { // l
       closeActionMenu();
       setGameStatus('target');
       if(targetx==null) {
@@ -1202,6 +1247,44 @@ function keypressPlay (code) {
       popup.style.visibility = "visible"
       setGameStatus('use-menu')
     }
+    else if (code == '84' || code=='t') { // t
+      popup = document.getElementById("throw-menu")
+      list = document.getElementById("throw-menu--list")
+      list.innerHTML = ""
+      com = 65
+      comToItem = []
+      for(i=0; i<player.inventory.length; i++) {
+        if(typeof player.inventory[i].itemType=='undefined') continue
+        _itemType = player.inventory[i].itemType
+        if(typeof itemType[_itemType]=='undefined') continue
+        _type = itemType[_itemType]
+        src = itemImg[_type.sprite[0]].src
+        sx = _type.sprite[1]*16+'px'
+        sy = _type.sprite[2]*16+'px'
+        if(_type.type!='weapon' && _type.type!='missile') continue;
+        comToItem[com] = i
+
+        if(typeof _type.hp!='undefined') {
+          hp=' '+player.inventory[i].hp+'/'+_type.hp
+        } else hp=''
+        _nx = ''
+        if(typeof player.inventory[i].stock!='undefined') {
+          if(player.inventory[i].stock>1) _nx = ' x'+player.inventory[i].stock
+        }
+        if(_nx!='' && hp!='') console.error(getItemName(_itemType)+' uses hp and stock')
+
+        if(player.weapon==i || player.eArmor==i || player.eShield==i) itemClass=' green'; else itemClass='';
+        if(typeof _type.hp!='undefined') {
+          hp=' '+player.inventory[i].hp+'/'+_type.hp+''
+        } else hp=''
+        _enc = null
+        if(typeof player.inventory[i].enchantment!='undefined') _enc = player.inventory[i].enchantment
+        list.innerHTML += '<div class="menu-item" onclick="keypressThrow('+(com)+')">&#'+(com+32)+'; <div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div> <span class="item-name'+itemClass+'">'+getItemName(_itemType)+hp+_nx+'</span></div>'
+        com++
+      }
+      popup.style.visibility = "visible"
+      setGameStatus('throw-menu')
+    }
     else if (code == '72' || code == 'h') { // h
       closeActionMenu();
       logMsg('You are searching around.')
@@ -1238,7 +1321,7 @@ function keypressPlay (code) {
         } else hp=''
         _enc = null
         if(typeof player.inventory[i].enchantment!='undefined') _enc = player.inventory[i].enchantment
-        list.innerHTML += '<div class="menu-item" onclick="keypressEquip('+(com)+')">&#'+(com+32)+'; <div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div> <span class="item-name'+itemClass+'">'+getItemFullName(_itemType,_enc)+hp+'</span></div>'
+        list.innerHTML += '<div class="menu-item" onclick="keypressEquip('+(com)+')">&#'+(com+32)+'; <div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div> <span class="item-name'+itemClass+'">'+getItemFullName(player.inventory[i], _enc)+hp+'</span></div>'
         com++;
       }
       popup.style.visibility = "visible"
@@ -1451,11 +1534,14 @@ function getItemName(_itemType) {
   return _type.name
 }
 
-function getItemFullName(_itemType, enchantment) {
+function getItemFullName(_item, enchantment) {
+  _itemType = player.inventory[i].itemType
   name = getItemName(_itemType)
   if(typeof enchantment!='undefined') if(player.identified('enchantment',enchantment)) {
     return name+' '+itemEnchantment[enchantment][0];
   }
+  if(typeof _item.attack!='undefined') name+=' +'+_item.attack
+  if(typeof _item.armor!='undefined') name+=' ['+_item.armor
   return name
 }
 
