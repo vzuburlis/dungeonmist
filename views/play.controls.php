@@ -131,6 +131,13 @@
   <div id="throw-menu--list" class="menu--list"></div>
 </div>
 
+<div id="game-menu" class="menu">
+  <div class="menu--title"><span onclick="keyPress(27)" class="close">
+    <img src="<?=$tile_folder?>../images/close.svg">
+  </span></div>
+  <div id="game-menu--list" class="menu--list"></div>
+</div>
+
 <div id="use-menu" class="menu">
   <div id="use-menu--title" class="menu--title">Use Item <span onclick="keypressUse(27)" class="close">
     <img src="<?=$tile_folder?>../images/close.svg">

@@ -861,13 +861,14 @@ function unitClass (options) {
           if(!isBlocked(monsters[mi].x+dx, monsters[mi].y+dy)) {
             monsters[mi].x +=dx
             monsters[mi].y +=dy
-            monsters[mi].turnTime -=50
+            if(monsters[mi].hasAttr('size',1)) monsters[mi].turnTime -= 20
+            monsters[mi].turnTime -= Math.floor(Math.random()*20)
             if(map[monsters[mi].x][monsters[mi].y]==' ') {
               logMsg('The '+monsters[mi].typeName()+' falls in the dark')
               monsters.splice(mi,1)
             }
           }
-          that.turnTime -= 50;
+          //that.turnTime -= 10;
           setGameStatus('play')
           return
       }
@@ -893,10 +894,12 @@ function unitClass (options) {
       let dx = dir[selectDirection][0]
       let dy = dir[selectDirection][1]
       msg = 'You jump two steps'
-      if(map[that.x+dx][that.y+dy]=='#' || map[that.x+dx][that.y+dy]=='C') {
+      if(map[that.x+dx][that.y+dy]=='#' || map[that.x+dx][that.y+dy]=='C'
+        ||  map[that.x+dx+dx][that.y+dy+dy]=='#' || map[that.x+dx+dx][that.y+dy+dy]=='C' || map[that.x+dx+dx][that.y+dy+dy]==' ') {
         logMsg('You cannot jump to this direction')
         return false
       }
+
       mi = getMonster(that.x+dx, that.y+dy)
       if(mi>-1) if(monsters[mi].hasAttr('size',1)) {
         msg = 'You jump over the '+monsterType[monsters[mi].type].name
@@ -905,11 +908,7 @@ function unitClass (options) {
         return false
       }
 
-      if(map[that.x+dx+dx][that.y+dy+dy]=='#' || map[that.x+dx+dx][that.y+dy+dy]=='C' || map[that.x+dx+dx][that.y+dy+dy]==' ') {
-        logMsg('You cannot jump to this direction')
-        return false
-      }
-
+      that.turnTime -= 100;
       runTurn()
       setGameStatus('play')
       logMsg(msg)
@@ -934,6 +933,15 @@ function unitClass (options) {
         that.status.push({timeleft:_effect_time*100,effect:_effect})
     }
 
+    that.getAttr = function (attr) {
+      if(typeof that[attr]!='undefined') {
+        return that[attr];
+      }
+      if(typeof monsterType[that.type]!='undefined') if(typeof monsterType[that.type][attr]!='undefined') {
+          return monsterType[that.type][attr];
+      }
+      return null;
+    }
     that.hasAttr = function (attr, v=true) {
       if(typeof that[attr]!='undefined') {
         if(that[attr].includes(v)) return true;

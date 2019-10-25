@@ -6,38 +6,6 @@
   "size": 1
 },
 {
-  "name": "snake",
-  "sprite": ["reptile", 0, 4],
-  "level": 3,
-  "specialAttack": "poison",
-  "size": 1
-},
-{
-  "name": "viper",
-  "sprite": ["reptile", 1, 4],
-  "level": 6,
-  "specialAttack": "poison"
-},
-{
-  "name": "mamba",
-  "sprite": ["reptile", 3, 4],
-  "level": 9,
-  "specialAttack": "poison",
-  "size": 1
-},
-{
-  "name": "Platino",
-  "sprite": ["reptile", 3, 12],
-  "level": 50
-},
-{
-  "name": "squirrel",
-  "sprite": ["rodent", 1, 0],
-  "level": 2,
-  "size": 1,
-  "specialAttack": "confuze"
-},
-{
   "name": "zebra rat",
   "sprite": ["rodent", 0, 1],
   "size": 1,
@@ -87,6 +55,14 @@
   "sounds":["clicking sounds"]
 },
 {
+  "name": "squirrel",
+  "sprite": ["rodent", 1, 0],
+  "level": 2,
+  "size": 1,
+  "specialAttack": "confuze",
+  "unique":true
+},
+{
   "name": "bat",
   "sprite": ["bird", 1, 11],
   "flying": true,
@@ -119,6 +95,32 @@
   "level": 3,
   "size": 1,
   "specialAttack": "bleeding"
+},
+{
+  "name": "snake",
+  "sprite": ["reptile", 0, 4],
+  "level": 3,
+  "specialAttack": "poison",
+  "size": 1
+},
+{
+  "name": "viper",
+  "sprite": ["reptile", 1, 4],
+  "level": 6,
+  "specialAttack": "poison"
+},
+{
+  "name": "mamba",
+  "sprite": ["reptile", 3, 4],
+  "level": 9,
+  "specialAttack": "poison",
+  "size": 1
+},
+{
+  "name": "Platino",
+  "sprite": ["reptile", 3, 12],
+  "level": 50,
+  "unique": true
 },
 {
   "name": "ice crow",

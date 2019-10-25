@@ -646,10 +646,12 @@ function setGameStatus(v) {
     helpMenu=document.getElementById("help-menu")
     descriptionMenu=document.getElementById("description-menu")
     throwMenu=document.getElementById("throw-menu")
+    gameMenu=document.getElementById("game-menu")
     useMenu.style.display = 'inline-block'
     equipMenu.style.display = 'inline-block'
     actionMenu.style.display = 'inline-block'
     helpMenu.style.display = 'inline-block'
+    gameMenu.style.display = 'inline-block'
     descriptionMenu.style.display = 'inline-block'
     throwMenu.style.display = 'inline-block'
     if(v=='play') {
@@ -664,13 +666,15 @@ function setGameStatus(v) {
         equipMenu.style.display = 'none'
         actionMenu.style.display = 'none'
         helpMenu.style.display = 'none'
+        gameMenu.style.display = 'none'
         descriptionMenu.style.display = 'none'
         throwMenu.style.display = 'none'
     }
     if(v=='select-direction') {
       btnCancelD.style.display = 'inline-block'
     }
-    if(v=='help-menu'||v=='equip-menu'||v=='action-menu'||v=='use-menu'||v=='description-menu'||v=='throw-menu') {
+    if(v=='help-menu'||v=='equip-menu'||v=='action-menu'||v=='use-menu'
+    ||v=='description-menu'||v=='throw-menu'||v=='game-menu') {
       btnCancelM.style.display = 'inline-block'
     }
 }
@@ -723,6 +727,13 @@ function keyPress (e) {
   if (value == 'help-menu') {
     if(code==27 || code==88) {
       popup = document.getElementById("help-menu")
+      popup.style.visibility = 'hidden'
+      setGameStatus('play');
+    }
+  }
+  if (value == 'game-menu') {
+    if(code==27 || code==88) {
+      popup = document.getElementById("game-menu")
       popup.style.visibility = 'hidden'
       setGameStatus('play');
     }
@@ -1039,11 +1050,23 @@ function getTargetDesriptions(x,y) {
   desc = []
   mi = getMonster(x,y)
   if(mi >-1) {
+    d=[]
     monster = monsterType[monsters[mi].type]
+    if(monsters[mi].hasAttr('size',1)) d.push("is small")
+    if(monsters[mi].hasAttr('flying')) d.push("is flying")
+    if(monsters[mi].hasAttr('resist','fire')) d.push("resists fire")
+    if(monsters[mi].hasAttr('resist','shock')) d.push("resists shock")
+    if(monsters[mi].hasAttr('specialAttack', 'poison')) d.push("is venomus")
+    if(monsters[mi].hasAttr('specialAttack', 'bleeding')) d.push("with sharp teeth")
+    if(monsters[mi].hasAttr('specialAttack', 'curse')) d.push("brings bad luck")
+    if(d.length>0) {
+      d='It '+d.join();
+    } else d='';
+    if(typeof monster.description!='undefined') d=monster.description+'<br>'+d
     desc.push({
       name: monster.name,
       sprite: monster.sprite,
-      description: monster.description
+      description: d
     })
   }
   if(obj = getObject(x,y)) {
@@ -1185,7 +1208,6 @@ function keypressPlay (code) {
       }
       logMsg('Select a direction to kick');
       selectTarget.action = player.kick;
-      //setGameStatus('play')
       renderMap()
     }
     else if (code == '76' || code=='l') { // l
@@ -1252,6 +1274,7 @@ function keypressPlay (code) {
       setGameStatus('use-menu')
     }
     else if (code == '84' || code=='t') { // t
+      closeActionMenu();
       popup = document.getElementById("throw-menu")
       list = document.getElementById("throw-menu--list")
       list.innerHTML = ""
@@ -1335,6 +1358,26 @@ function keypressPlay (code) {
       popup = document.getElementById("action-menu")
       popup.style.visibility = "visible"
       setGameStatus('action-menu')
+    }
+    else if (code == '76' || code=='L') { // \
+      popup = document.getElementById("game-menu")
+      list = document.getElementById("game-menu--list")
+      sounds = []
+      for (i=0; i<monsters.length; i++) if(monsters[i].hp>0){
+        x = monsters[i].x
+        y = monsters[i].y
+        //if(mapRev[x][y]>1 || monsters[i].hasStatus('tracked')) vm.push(i);
+        msound = monsters[i].getAttr('sounds')
+        if(msound!==null) sounds.push(msound[0])
+      }
+    
+      if(sounds.length==0) {
+        list.innerHTML = "This level is too quiet"
+      } else {
+        list.innerHTML = "You listen to " + sounds.join()
+      }
+      popup.style.visibility = "visible"
+      setGameStatus('game-menu')
     }
     else if (code == '191' || code == '?') { // ? help
       popup = document.getElementById("help-menu")

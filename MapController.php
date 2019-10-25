@@ -707,8 +707,12 @@ class MapController extends controller
       do{
         $type = rand(0,$this->monsterTypeN-1);
         $minLevel--;
-      } while($this->monsterType[$type]['level'] > $this->level);
-//        || $this->monsterType[$type]['level'] < $minLevel);
+      } while($this->monsterType[$type]['level'] > $this->level ||
+        in_array($type, $this->player['uniqueMonsters']));
+      if(isset($this->monsterType[$type]['unique'])) {
+        $this->player['uniqueMonsters'][] = $type;
+      }
+
       return $this->newMonster($pos,$type);
     }
     function newMonster($pos, $type) {
