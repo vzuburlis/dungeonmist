@@ -1,3 +1,8 @@
+*1.0.13*
+Throw weapons with 't' key
+Look target description with 'l' key
+View from next tile with 'V' key
+Chests can be trapped
 
 *1.0.12*
 Monsters may be hidden in barrels

@@ -93,9 +93,9 @@ body {
   transform:translate(-50%, -50%);
 }
 .menu {
-/*  width:100%;
-  height:100%;
-  z-index:1000;*/
+  width:100%;
+  min-height:100%;
+  z-index:1000;
 }
 #minimap{
   position:absolute;
@@ -104,7 +104,7 @@ body {
 }
 #use-menu,#action-menu,#equip-menu,#help-menu,.menu,
 .game-menu {
-  background:rgba(0,0,0,0.85);
+  background:rgba(0,0,0,0.9);
   visibility:hidden;
   border: 2px solid #613214;
   padding: 8px;
@@ -142,18 +142,18 @@ button{
   color: white;
   background: #579ca2;
 }
-#use-menu--title, #equip-menu--title, #action-menu--title, #help-menu--title,
+
 .menu--title {
   font-family: 'Berkshire Swash', cursive;
   font-size: 2em;
   text-align:center;
   min-width:300px;
 }
-#use-menu--list, #equip-menu--list, #action-menu--list, #help-menu--list,
+
 .menu--list {
   text-align:left;
 }
-#use-menu .close img,#equip-menu .close img,#action-menu .close img, #help-menu .close img,
+
 .menu .close img {
   cursor: pointer;
   width:1em;
@@ -161,7 +161,7 @@ button{
   float: right;
   opacity:0.3;
 }
-#use-menu .close img:hover, #equip-menu .close img:hover, #action-menu .close img:hover, #help-menu .close img:hover.play-btn,
+
 .menu .close img:hover {
   opacity:1;
 }
@@ -187,18 +187,22 @@ button{
   font-size: 1.3em;
 }
 
-@media screen and (min-width: 400px) {
-  .menu {
-    width: auto;
-    height: auto;
+@media screen and (min-width: 400px) and (max-width: 680px) {
+  .menu--list {
+    margin:0 6em;
   }
 }
-@media screen and (min-width: 680px) {
+
+@media screen and (min-width: 681px) {
   #show-u-command {
     display: inline-block;
   }
   #statBox {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+  .menu {
+    width: auto;
+    min-height: auto;
   }
 }
 @media screen and (min-width: 1100px) {

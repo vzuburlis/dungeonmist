@@ -812,7 +812,7 @@ function unitClass (options) {
           }
         }
         if(monster !== null) {
-          attack_points = that.throwDamage(thrownItem)
+          attack_points = 6 + Math.floor(Math.random() * 5) + that.throwDamage(thrownItem)
           monster.hp -= attack_points
         }
         if(that.inventory[thrownItem].hp>2) {

@@ -25,6 +25,8 @@ var itemImgPath = [
   ['rodent1','Characters/Rodent1.png'],
   ['pest0','Characters/Pest0.png'],
   ['pest1','Characters/Pest1.png'],
+  ['reptile0','Characters/Reptile0.png'],
+  ['reptile1','Characters/Reptile1.png'],
   ['bird0','Characters/Avian0.png'],
   ['bird1','Characters/Avian1.png'],
   ['decor0','Objects/Decor0.png'],
@@ -931,8 +933,9 @@ function keypressTarget (code) {
     setGameStatus('play');
   } else if (code == '32' || code == '13') { // space
     if(typeof selectTarget.action != 'undefined') {
-      selectTarget.action();
-      delete selectTarget.action;
+      if(selectTarget.action()!==true) {
+        delete selectTarget.action;
+      }
     } else {
       targetx=null
       targety=null
@@ -1084,6 +1087,7 @@ function keypressAction (code) {
     return
   }
   if(code=='h'||code=='j'||code=='k'||code=='l'||code=='t'||code=='r'||code=='Z'||code=='V') {
+    closeActionMenu();
     keypressPlay (code)
   }
 }
@@ -1204,7 +1208,7 @@ function keypressPlay (code) {
         }
         popup.style.visibility = "visible"
         setGameStatus('description-menu');
-        return false
+        return true
       }
       logMsg('Select target');
       renderMap()
@@ -1372,8 +1376,9 @@ function clickOnMap(e, canva) {
     startPlayerWalk();
   } else {
     if(typeof selectTarget.action != 'undefined') {
-      selectTarget.action();
-      delete selectTarget.action;
+      if(selectTarget.action()!==true) {
+        delete selectTarget.action;
+      }
     } else {
       setGameStatus('play');
     }
@@ -1548,6 +1553,7 @@ function getItemFullName(_item, enchantment) {
 popValues = Array()
 
 function animatePop(x,y,value,color="yellow") {
+  return;
   setGameStatus('animatePop')
   x = (x-player.x+renderWidth)*32+16
   y = (y-player.y+renderHeight)*32

@@ -121,35 +121,42 @@
   <div class="menu--title"><span onclick="keyPress(27)" class="close">
     <img src="<?=$tile_folder?>../images/close.svg">
   </span></div>
-  <div id="description-menu--list" style="text-align:left"></div>
+  <div id="description-menu--list" class="menu--list"></div>
 </div>
 
 <div id="throw-menu" class="menu">
   <div class="menu--title">Throw Item<span onclick="keyPress(27)" class="close">
     <img src="<?=$tile_folder?>../images/close.svg">
   </span></div>
-  <div id="throw-menu--list" style="text-align:left"></div>
+  <div id="throw-menu--list" class="menu--list"></div>
 </div>
 
 <div id="use-menu" class="menu">
-  <div id="use-menu--title">Use Item <span onclick="keypressUse(27)" class="close">
+  <div id="use-menu--title" class="menu--title">Use Item <span onclick="keypressUse(27)" class="close">
     <img src="<?=$tile_folder?>../images/close.svg">
   </span></div>
-  <div id="use-menu--list"></div>
+  <div id="use-menu--list" class="menu--list"></div>
+</div>
+
+<div id="pick-menu" class="menu">
+  <div id="pick-menu--title" class="menu--title">Pick Item <span onclick="keypressPick(27)" class="close">
+    <img src="<?=$tile_folder?>../images/close.svg">
+  </span></div>
+  <div id="pick-menu--list" class="menu--list"></div>
 </div>
 
 <div id="equip-menu" class="menu">
-  <div id="equip-menu--title">Equipment <span onclick="keypressEquip(27)" class="close">
+  <div id="equip-menu--title" class="menu--title">Equipment <span onclick="keypressEquip(27)" class="close">
     <img src="<?=$tile_folder?>../images/close.svg">
   </span></div>
-  <div id="equip-menu--list"></div>
+  <div id="equip-menu--list" class="menu--list"></div>
 </div>
 
 <div id="action-menu" class="menu">
-  <div id="action-menu--title">Actions <span onclick="closeActionMenu();" class="close">
+  <div id="action-menu--title" class="menu--title">Actions <span onclick="closeActionMenu();" class="close">
     <img src="<?=$tile_folder?>../images/close.svg">
   </span></div>
-  <div id="action-menu--list">
+  <div id="action-menu--list" class="menu--list">
   <div class="menu-item" onclick="keypressPlay('h')">h <span class="item-name">Search</span></div>
   <div class="menu-item" onclick="keypressPlay('Z')">Z <span class="item-name">Rest</span></div>
   <div class="menu-item" onclick="keypressPlay('j')">j <span class="item-name">Jump</span></div>

@@ -14,7 +14,7 @@
     <link href="lib/gila.min.css" rel="stylesheet">
     <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <?php event::fire('register.head')?>
-    <link href="<?=gila::base_url('src/dungeonrl/style.css?v=1012')?>" rel="stylesheet">
+    <link href="<?=gila::base_url('src/dungeonrl/style.css?v=1013')?>" rel="stylesheet">
 </head>
 <style>
 body{

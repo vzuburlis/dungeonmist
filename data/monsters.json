@@ -1,9 +1,34 @@
 [
-  {
+{
   "name": "squirrel",
   "sprite": ["rodent", 0, 0],
   "level": 1,
   "size": 1
+},
+{
+  "name": "snake",
+  "sprite": ["reptile", 0, 4],
+  "level": 3,
+  "specialAttack": "poison",
+  "size": 1
+},
+{
+  "name": "viper",
+  "sprite": ["reptile", 1, 4],
+  "level": 6,
+  "specialAttack": "poison"
+},
+{
+  "name": "mamba",
+  "sprite": ["reptile", 3, 4],
+  "level": 9,
+  "specialAttack": "poison",
+  "size": 1
+},
+{
+  "name": "Platino",
+  "sprite": ["reptile", 3, 12],
+  "level": 50
 },
 {
   "name": "squirrel",
