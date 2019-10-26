@@ -123,6 +123,21 @@
   "unique": true
 },
 {
+  "name": "Zesonurth",
+  "sprite": ["reptile", 1, 2],
+  "level": 40,
+  "specialAttack": "critical",
+  "resist": ["fire","shock"],
+  "unique": true
+},
+{
+  "name": "fire drake",
+  "sprite": ["reptile", 6, 0],
+  "level": 15,
+  "specialAttack": "fire",
+  "resist": ["fire"]
+},
+{
   "name": "ice crow",
   "sprite": ["bird", 0, 2],
   "flying": true,

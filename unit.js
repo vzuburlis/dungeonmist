@@ -486,11 +486,12 @@ function unitClass (options) {
 
     that.pickItem = function (iti) {
       let _type = items[iti][2]
+      __type = itemType[_type].type
       _name = itemType[_type].name
-      _data = items[iti]
+      _data = {}
+      for(i in items[iti]) if(!isNaN(i)) _data[i] = items[iti][i]
       _data.itemType = _type
       _data.stock = 1
-      __type = itemType[_type].type
       if(typeof items[iti][3]!='undefined') _data.hp = items[iti][3]
       if(typeof items[iti].attack!='undefined') _data.attack = items[iti].attack
       if(typeof items[iti].armor!='undefined') _data.armor = items[iti].armor
@@ -1050,6 +1051,10 @@ function unitClass (options) {
                   if(_mt['specialAttack']=='curse') player.addStatus('curse',6+_mt.level)
                   if(_mt['specialAttack']=='blind') player.addStatus('blind',6+_mt.level)
                   if(_mt['specialAttack']=='poison') player.addStatus('poison',_effect_time*2)
+                  if(_mt['specialAttack']=='fire') {
+                    player.addHP(-3, that.typeName());
+                    animateEffect(player.x, player.y, itemImg['effect0'], 0, 21, 2);
+                  }
                 }
               }
               if(Math.floor(Math.random() * 10)==0) {

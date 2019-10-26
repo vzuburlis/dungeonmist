@@ -119,4 +119,7 @@ player = unitClass({
     className: '<?=$c->player['className'] ?>'
 });
 window.focus();
+/**
+<?=json_encode($c->player['inventory'])?>
+ */
 </script>
