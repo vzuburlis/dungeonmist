@@ -155,6 +155,9 @@ class MapController extends controller
 
     function gameAction($gameId = null)
     {
+      if(!isset($_COOKIE['ref'])) {
+        setcookie('ref', htmlentities('game-'.$gameId), time() + (86400 * 30), "/");
+      }
       $pnk = new gTable('game');
       $game = $pnk->getRow(['id'=>$gameId]);
       $pnk = new gTable('playerclass');
