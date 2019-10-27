@@ -447,10 +447,9 @@ function unitClass (options) {
     that.removeItem = function(i) {
       if(i!=null) {
         item = that.inventory[i]
-        that.removeEffect(itemType[item.itemType].effect)
-        if(that.weapon==i) that.weapon = null
-        if(that.eArmor==i) that.eArmor = null
-        if(that.eShield==i) that.eShield = null
+        if(that.weapon==i) that.unwield('weapon')
+        if(that.eArmor==i) that.unwield('eArmor')
+        if(that.eShield==i) that.unwield('eShield')
       }
     }
 
@@ -584,7 +583,7 @@ function unitClass (options) {
       updateStats()
     }
 
-    that.spellEffect = function (_effect,_type) {
+    that.spellEffect = function (_effect,_type=null) {
         if(_effect=="map-reveal") {
             revealMap()
         }
@@ -684,7 +683,7 @@ function unitClass (options) {
             mtype = monsterType[monsters[mi].type]
             if(typeof _type.class!='undefined')
             if(typeof mtype.class=='undefined' || mtype.class!=_type.class) continue;
-            monsters[mi].hp -= 5+that.intelligence
+            monsters[mi].hp -= 5+that.intelligence*2
           }
           renderMap()
           setGameStatus('play')
@@ -742,7 +741,11 @@ function unitClass (options) {
           targety=player.y
           renderMap()
           logMsg('Select a target to fire');
+          if(_type==null) {
+            selectAmmo = true
+          } else selectAmmo = false
           selectTarget.action = function() {
+            if(selectAmmo) player.arrows--;
             document.body.style.cursor = 'default'
             setGameStatus('wait')
             arrowAudio.play()

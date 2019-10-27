@@ -44,6 +44,7 @@ var itemImgPath = [
   ['pit0','Pit0.png'],
   ['pit1','Pit1.png'],
   ['gold','gold.png'],
+  ['status','status.png']
 ]
 for(let i=0;i<itemImgPath.length;i++) {
     itemImg[itemImgPath[i][0]] = new Image();
@@ -59,14 +60,24 @@ for(i in tileFiles) {
   tileImg[i].src = _tile_path_+tileFiles[i];
 }
 
-statusFiles = [
-  'strength', 'speed', 'bleeding', 'bless', 'curse', 'confuze', 'light', 'poison'
-]
-for(i in statusFiles) {
-  name = statusFiles[i]
-  statusImg[name] = new Image();
-  statusImg[name].src = _status_path_+name+".png";
+var statusSprite = {
+  'strength':[7,0],
+  'speed':[3,0],
+  'bleeding':[0,0],
+  'bless':[1,0],
+  'curse':[5,0],
+  'confuze':[2,0],
+  'light':[4,0],
+  'poison':[6,0]
 }
+//statusFiles = [
+//  'strength', 'speed', 'bleeding', 'bless', 'curse', 'confuze', 'light', 'poison'
+//]
+//for(i in statusFiles) {
+//  name = statusFiles[i]
+//  statusImg[name] = new Image();
+//  statusImg[name].src = _status_path_+name+".png";
+//}
 
 /****** Game Functions ******* */
 var showMinimap = false;
@@ -477,13 +488,14 @@ function drawStatus(unit) {
     let x = (unit.x-player.x+renderWidth)*32+16-unit.status.length*8
     let y = (unit.y-player.y+renderHeight)*32-16
     for(let i=0; i<unit.status.length; i++) {
-      if(typeof statusImg[unit.status[i].effect]!='undefined') {
+      if(typeof statusSprite[unit.status[i].effect]!='undefined') {
         context.drawImage(
-           statusImg[unit.status[i].effect],
-           0, 0,
-           32, 32,
-           x + i*16, y,
-           16, 16);
+          itemImg['status'],
+          statusSprite[unit.status[i].effect][0]*16,
+          statusSprite[unit.status[i].effect][1]*16,
+          16, 16,
+          x + i*16, y,
+          16, 16);
       }
     }
 }
@@ -636,6 +648,7 @@ function setGameStatus(v) {
     btnCancel.style.display = 'none'
     btnCancelD.style.display = 'none'
     btnCancelM.style.display = 'none'
+    btnTabsM.style.display = 'none'
     btnCheck.style.display = 'none'
     btnAction.style.display = 'none'
     btnUse.style.display = 'none'
@@ -676,6 +689,7 @@ function setGameStatus(v) {
     if(v=='help-menu'||v=='equip-menu'||v=='action-menu'||v=='use-menu'
     ||v=='description-menu'||v=='throw-menu'||v=='game-menu') {
       btnCancelM.style.display = 'inline-block'
+      btnTabsM.style.display = 'flex'
     }
 }
 
@@ -750,6 +764,25 @@ function keyPress (e) {
     runTurn();
     renderMap();
   }
+}
+
+function setGameMenuKey (code) {
+  useMenu=document.getElementById("use-menu")
+  equipMenu=document.getElementById("equip-menu")
+  actionMenu=document.getElementById("action-menu")
+  helpMenu=document.getElementById("help-menu")
+  descriptionMenu=document.getElementById("description-menu")
+  throwMenu=document.getElementById("throw-menu")
+  gameMenu=document.getElementById("game-menu")
+  useMenu.style.visibility = 'hidden'
+  equipMenu.style.visibility = 'hidden'
+  actionMenu.style.visibility = 'hidden'
+  helpMenu.style.visibility = 'hidden'
+  gameMenu.style.visibility = 'hidden'
+  descriptionMenu.style.visibility = 'hidden'
+  throwMenu.style.visibility = 'hidden'
+  setGameStatus('play')
+  keypressPlay(code)
 }
 
 function closeActionMenu() {
@@ -1571,7 +1604,6 @@ function blockedPos(x,y) {
 
 function throwArrow() {
   if(player.arrows>0) {
-    player.arrows--;
     player.spellEffect('arrow')
   }
 }

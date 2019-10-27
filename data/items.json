@@ -4,6 +4,13 @@
     "effect": "heal"
 },
 {
+  "sprite": ["scroll", 4, 0],
+  "name": "Scroll of Holy Words",
+  "effect": "damage",
+  "target": "enemies",
+  "class": "z"
+},
+{
   "sprite": ["potion", 3, 3],
   "type":"potion", "name": "Potion of Holy Water", "lorem": "Golden Potion",
   "effect": "bless",
@@ -396,7 +403,7 @@
   "target": "direction"
 },
 {
-  "sprite": ["ammo", 5, 2],
+  "sprite": ["ammo", 0, 2],
   "name": "Arrow",
   "type": "missile",
   "autopick": true,

@@ -107,10 +107,17 @@ body {
   background:rgba(0,0,0,0.9);
   visibility:hidden;
   border: 2px solid #613214;
-  padding: 8px;
   max-height:100%;
   max-height: 100vh;
   overflow-y: scroll;
+}
+#btnTabsM {
+  visibility:hidden;
+  position:absolute;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  display:none;
 }
 button{
   font-size: 3em;
@@ -189,7 +196,13 @@ button{
 
 @media screen and (min-width: 400px) and (max-width: 680px) {
   .menu--list {
-    margin:0 6em;
+    margin: 0 6em;
+  }
+  .menu--title {
+    margin: 10px;
+  }
+  #btnTabsM {
+    visibility:visible;
   }
 }
 
@@ -210,7 +223,7 @@ button{
     display:none;
   }
   .mobi-btn {
-    display:none;
+    display:none!important;
   }
   #controls-commands {
     display:inline-block;
@@ -230,8 +243,8 @@ button{
 }
 #pArrows, .pSpan {
   position: absolute;
-  right: 6px;
-  bottom: 6px;
+  right: 22px;
+  bottom: 26px;
 }
 
 

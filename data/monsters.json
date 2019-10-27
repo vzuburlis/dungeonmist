@@ -36,7 +36,7 @@
   "name": "kobold zombie",
   "sprite": ["undead", 0, 0],
   "class":"z",
-  "level": 2,
+  "level": 3,
   "specialAttack": "confuze"
 },
 {
@@ -74,7 +74,9 @@
   "sprite": ["pest", 1, 1],
   "flying": true,
   "level": 3,
-  "weak": ["shock"]
+  "weak": ["shock"],
+  "specialAttack": "critical",
+  "sounds":["buzzing"]
 },
 {
   "name": "giant ant",
@@ -128,6 +130,17 @@
   "level": 40,
   "specialAttack": "critical",
   "resist": ["fire","shock"],
+  "unique": true
+},
+{
+  "name": "gila",
+  "sprite": ["reptile", 2, 10],
+  "level": 10
+},
+{
+  "name": "ghost lizzard",
+  "sprite": ["reptile", 1, 10],
+  "level": 10,
   "unique": true
 },
 {
@@ -220,7 +233,8 @@
   "sprite": ["undead", 5, 0],
   "class": "z",
   "level": 6,
-  "sounds":["crawling feet"]
+  "sounds":["crawling feet"],
+  "weak": ["fire"]
 },
 {
   "name": "orc",
@@ -255,17 +269,9 @@
   "sounds":["crawling feet"]
 },
 {
-  "name": "vampire",
-  "sprite": ["undead", 0, 3],
-  "level": 7,
-  "class": "z",
-  "special-attack": "bleeding",
-  "abilities": ["regenerate"]
-},
-{
   "name": "orc swordman",
   "sprite": ["player", 2, 12],
-  "class": "z",
+  "specialAttack": "bleeding",
   "level": 8
 },
 {
@@ -277,10 +283,19 @@
   "weak": ["fire"]
 },
 {
+  "name": "vampire",
+  "sprite": ["undead", 0, 3],
+  "level": 9,
+  "class": "z",
+  "specialAttack": "bleeding",
+  "abilities": ["regenerate"]
+},
+{
   "name": "orc mummy",
   "sprite": ["undead", 2, 1],
   "class": "z",
-  "level": 8
+  "level": 9,
+  "weak": ["fire"]
 },
 {
   "name": "barrow wight",

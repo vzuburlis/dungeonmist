@@ -41,7 +41,7 @@
   url('src/dungeonrl/DawnLike/Characters/Player0.png') repeat scroll
   -<?=$c->player['sprite'][1]*16?>px -<?=$c->player['sprite'][2]*16?>px;
   width: 16px; height: 16px; transform: scale(3); vertical-align:middle;
-  margin: 16px 32px 32px 16px"
+  margin: 16px 32px 32px 16px;"
   onclick="keypressPlay('e')"></div>
   <div id="playerName">
     <?=$c->player['name']?>
@@ -81,6 +81,33 @@
   </div>
 </div>
 
+<div id="btnTabsM" style="z-index:1001;display:none">
+  <div class="com-btn" style="background: rgba(0, 0, 0, 0)
+    url('src/dungeonrl/DawnLike/Characters/Player0.png') repeat scroll
+    -<?=$c->player['sprite'][1]*16?>px -<?=$c->player['sprite'][2]*16?>px;
+    width: 16px; height: 16px; transform: scale(3); vertical-align:middle;
+    margin: 32px 32px 16px 32px;"
+    onclick="setGameMenuKey('e')"></div>
+  <div class="com-btn" style="background: rgba(0, 0, 0, 0)
+    url('src/dungeonrl/DawnLike/Items/Chest0.png') repeat scroll
+    -0px -32px;
+    width: 16px; height: 16px; transform: scale(3); vertical-align:middle;
+    margin: 32px 32px 16px 32px;"
+    onclick="setGameMenuKey('u')"></div>
+  <div class="com-btn" style="background: rgba(0, 0, 0, 0)
+    url('src/dungeonrl/DawnLike/Objects/Effect0.png') repeat scroll
+    -0px -400px;
+    width: 16px; height: 16px; transform: scale(3); vertical-align:middle;
+    margin: 32px 32px 16px 32px;"
+    onclick="setGameMenuKey('t')"></div>
+  <div class="com-btn" style="background: rgba(0, 0, 0, 0)
+    url('src/dungeonrl/DawnLike/status.png') repeat scroll
+    -48px -0px;
+    width: 16px; height: 16px; transform: scale(3); vertical-align:middle;
+    margin: 32px 32px 16px 32px;"
+    onclick="setGameMenuKey('\\')"></div>
+</div>
+
 <div id="play-btn-container">
   <a href="<?=$game_url?>/<?=$c->gameId?>" class="play-btn">Continue</a>
 </div>
@@ -98,13 +125,31 @@
   </div>
   </div>
   <div id="btnUse">
-    <img src="<?=$tile_folder?>potion.png" class="com-btn" onclick="keypressPlay('u')">
+    <div class="com-btn" style="background: rgba(0, 0, 0, 0)
+    url('src/dungeonrl/DawnLike/Items/Chest0.png') repeat scroll
+    -0px -32px;
+    width: 16px; height: 16px; transform: scale(4); vertical-align:middle;
+    margin: 16px 32px 32px 16px;"
+    onclick="keypressPlay('u')"></div>
+    <!--img src="<?=$tile_folder?>potion.png" class="com-btn" onclick="keypressPlay('u')"-->
   </div>
   <div id="btnAction">
-    <img src="<?=$status_folder?>speed.png" class="com-btn" onclick="keypressPlay('\\')">
+    <div class="com-btn" style="background: rgba(0, 0, 0, 0)
+    url('src/dungeonrl/DawnLike/status.png') repeat scroll
+    -48px -0px;
+    width: 16px; height: 16px; transform: scale(4); vertical-align:middle;
+    margin: 16px 32px 48px 16px;"
+    onclick="keypressPlay('\\')"></div>
+    <!--img src="<?=$status_folder?>speed.png" class="com-btn" onclick="keypressPlay('\\')"-->
   </div>
-    <div class="div-com" id="btnArrows">
-    <img src="<?=$tile_folder?>arrow.png" class="com-btn" onclick="throwArrow()">
+  <div class="div-com" id="btnArrows">
+    <div class="com-btn" style="background: rgba(0, 0, 0, 0)
+    url('src/dungeonrl/DawnLike/Items/Ammo.png') repeat scroll
+    -0px -32px;
+    width: 16px; height: 16px; transform: scale(4); vertical-align:middle;
+    margin: 16px 32px 48px 16px;"
+    onclick="throwArrow()"></div>
+    <!--img src="<?=$tile_folder?>arrow.png" class="com-btn" onclick="throwArrow()"-->
     <span id="pArrows" class="pSpan"><span>
   </div>
 </div>
@@ -112,8 +157,8 @@
 <img src="<?=$tile_folder?>downstairs.png" class="com-btn com-down"
   style="display: none; position: absolute; right: 6em; bottom: 1em;"
   onclick="keypressPlay(' ')">
-<div class="div-com com-btn" onclick="keypressTarget(32)"
-  id="btnCheck" style="display: none; position: absolute; right: 6em; bottom: 1em; background:lightgreen;display:none">
+<div class="div-com com-btn mobi-btn" onclick="keypressTarget(32)"
+  id="btnCheck" style="display: none; position: absolute; right: 6em; bottom: 1em; background:lightgreen;">
   <img src="<?=$tile_folder?>../images/check-mark.svg" style="width:100%">
 </div>
 

@@ -1021,9 +1021,16 @@ class MapController extends controller
           ['itemType'=>$type, 'stock'=>1],
           $this->createItem($type)
         );
+        if(isset($itemData['attack']) && is_array($itemData['attack'])) {
+          $itemData['attack'] = $itemData['attack'][0];
+        }
         $stat['inventory'][] = $itemData;
       }
-      
+      // test item
+      $stat['inventory'][] = [
+        'itemType'=> 1, 'stock'=>1
+      ];
+
       if($playerclass['name']=='Hobbit') {
           $stat['strength']-=1;
           $stat['hp']-=6;
