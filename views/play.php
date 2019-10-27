@@ -39,11 +39,7 @@ $permadeath_url = GPACKAGE.'/permadeath';
    <!-- The applixir SDK file has all required CSS and JavaScript resources (use current version)-->
    <script type='text/javascript' src="https://cdn.applixir.com/applixir.sdk3.0m.js"></script>
    <script type="application/javascript">
-   var options = {
-   zoneId: 2679, // The zone ID from the Applixir "Games" page (required)
-   };
-   // Call the following function when you want to present a video ad to your user
-   invokeApplixirVideoUnit(options);
+   invokeApplixirVideoUnit({zoneId: 2679});
    </script>
   <?php } ?>
 </body>
