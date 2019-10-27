@@ -689,6 +689,9 @@ function setGameStatus(v) {
     if(v=='help-menu'||v=='equip-menu'||v=='action-menu'||v=='use-menu'
     ||v=='description-menu'||v=='throw-menu'||v=='game-menu') {
       btnCancelM.style.display = 'inline-block'
+    }
+    if(v=='equip-menu'||v=='action-menu'||v=='use-menu'
+    ||v=='throw-menu') {
       btnTabsM.style.display = 'flex'
     }
 }

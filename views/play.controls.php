@@ -28,8 +28,6 @@
     <td><div ontouchstart="keyPress(40)"></div>
     <td><div onclick="event.preventDefault()"></div>
   </table>
-<?php }else{ ?>
-  e Equip &nbsp;&nbsp;u Use&nbsp;&nbsp;? Help
 <?php } ?>
 </div>
 
