@@ -51,8 +51,7 @@ return [
       'list'=>false
     ],
     'feedback'=>[
-      'qtype'=>'VARCHAR(500)',
-      'list'=>false
+      'qtype'=>'VARCHAR(500)'
     ]
   ]
 ];

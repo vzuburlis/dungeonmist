@@ -1,4 +1,5 @@
 <div id="controls" style="width:10em;height:10em">
+<?php if(!isset($_COOKIE['ref']) || $_COOKIE['ref']!=='kongregate') { ?>
   <svg width="100%" height="100%" viewBox="0 0 120 120" >
     <path d="M0 47 L4 43 L43 43 L43 4 L47 0 L73 0 L77 4 L77 43 L116 43 L120 47 L120 73 L116 77 L77 77 L77 116 L73 120 L47 120 L43 116 L43 77 L4 77 L0 73 L0 47 A"
     style="stroke:#929292;stroke-width:2;stroke-opacity:0.5" fill="none" />
@@ -11,7 +12,6 @@
     <path d="M60 109 L60 86 A"
     style="stroke:#929292;stroke-width:2;stroke-opacity:0.5" fill="none" />
   </svg>
-
 
   <table style="width:100%;height:100%;position:absolute;top:0;left:0"
     onclick="event.preventDefault()">
@@ -28,7 +28,11 @@
     <td><div ontouchstart="keyPress(40)"></div>
     <td><div onclick="event.preventDefault()"></div>
   </table>
+<?php }else{ ?>
+  e Equip &nbsp;&nbsp;u Use&nbsp;&nbsp;? Help
+<?php } ?>
 </div>
+
 <div id="controls-commands">
   e Equip &nbsp;&nbsp;u Use&nbsp;&nbsp;? Help
 </div>

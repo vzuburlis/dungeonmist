@@ -63,6 +63,10 @@ class MapController extends controller
         $this->taskType = json_decode(file_get_contents('src/'.GPACKAGE.'/data/tasks.json'),true);
         $this->taskTypeN = count($this->taskType);
 
+        if(isset($_GET['ref'])) {
+          setcookie('ref', htmlentities($_GET['ref']), time() + (86400 * 30), "/");
+        }
+
         if(isset($_REQUEST['level'])) {
             usleep(300000);
         }

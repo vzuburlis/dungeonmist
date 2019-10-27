@@ -32,7 +32,7 @@ $permadeath_url = GPACKAGE.'/permadeath';
    onclick="clickOnMap(event,this)"></canvas>
   <canvas id="minimap"></canvas>
   <?php include_once(__DIR__.'/play.controls.php')?>
-  <?php if(session::user_id()==1) { ?>
+  <?php if(session::user_id()==1 && false) { ?>
    <!-- Insert the V3-Snippet.txt file here -->
    <div id="applixir_vanishing_div" hidden><iframe id="applixir_parent allow=autoplay"></iframe>
    </div>

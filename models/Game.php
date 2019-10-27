@@ -9,9 +9,9 @@ class Game {
 
   static function create($name, $class) {
     global $db;
-    $db->query('INSERT INTO rlgame(`user_id`, `name`, `class_id`, `level`, `start_time`)
-      VALUES(?,?,?,1,?);', [
-      session::user_id(), $name, $class, time()
+    $db->query('INSERT INTO rlgame(`user_id`, `name`, `class_id`, `level`, `start_time`,`feedback`)
+      VALUES(?,?,?,1,?,?);', [
+      session::user_id(), $name, $class, time(), $_COOKIE['ref']??''
     ]);
     $gameId = $db->insert_id;
     $monsterType = json_decode(file_get_contents('src/'.GPACKAGE.'/data/monsters.json'),true);
