@@ -135,15 +135,15 @@
 },
 {
   "sprite": ["pit", 1, 3], "name": "Firecamp",
-  "animated": true, "illuminate": 10
+  "animated": true, "illuminate": 22
 },
 {
   "sprite": ["decor", 0, 8], "name": "Wall Candle",
-  "animated": true, "illuminate": 5
+  "animated": true, "illuminate": 8
 },
 {
   "sprite": ["decor", 1, 8], "name": "Wall Candles",
-  "animated": true, "illuminate": 10
+  "animated": true, "illuminate": 16
 },
 {
   "sprite": ["decor0", 0, 3], "name": "Wall Cracks"

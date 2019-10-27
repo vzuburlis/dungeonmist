@@ -1027,9 +1027,9 @@ class MapController extends controller
         $stat['inventory'][] = $itemData;
       }
       // test item
-      $stat['inventory'][] = [
-        'itemType'=> 1, 'stock'=>1
-      ];
+      //$stat['inventory'][] = [
+      //  'itemType'=> 1, 'stock'=>1
+      //];
 
       if($playerclass['name']=='Hobbit') {
           $stat['strength']-=1;

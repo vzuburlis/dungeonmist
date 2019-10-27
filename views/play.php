@@ -32,6 +32,20 @@ $permadeath_url = GPACKAGE.'/permadeath';
    onclick="clickOnMap(event,this)"></canvas>
   <canvas id="minimap"></canvas>
   <?php include_once(__DIR__.'/play.controls.php')?>
+  <?php if(session::user_id()==1) { ?>
+   <!-- Insert the V3-Snippet.txt file here -->
+   <div id="applixir_vanishing_div" hidden><iframe id="applixir_parent allow=autoplay"></iframe>
+   </div>
+   <!-- The applixir SDK file has all required CSS and JavaScript resources (use current version)-->
+   <script type='text/javascript' src="https://cdn.applixir.com/applixir.sdk3.0m.js"></script>
+   <script type="application/javascript">
+   var options = {
+   zoneId: 2679, // The zone ID from the Applixir "Games" page (required)
+   };
+   // Call the following function when you want to present a video ad to your user
+   invokeApplixirVideoUnit(options);
+   </script>
+  <?php } ?>
 </body>
 
 

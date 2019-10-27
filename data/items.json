@@ -4,13 +4,6 @@
     "effect": "heal"
 },
 {
-  "sprite": ["scroll", 4, 0],
-  "name": "Scroll of Holy Words",
-  "effect": "damage",
-  "target": "enemies",
-  "class": "z"
-},
-{
   "sprite": ["potion", 3, 3],
   "type":"potion", "name": "Potion of Holy Water", "lorem": "Golden Potion",
   "effect": "bless",
