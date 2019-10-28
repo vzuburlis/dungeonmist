@@ -723,7 +723,6 @@ function unitClass (options) {
           document.body.style.cursor = 'crosshair'
           targetx=that.x
           targety=that.y
-          //drawSelectRect()
           renderMap()
           logMsg('Select a target to teleport');
           selectTarget.unit = this
@@ -746,6 +745,7 @@ function unitClass (options) {
           } else selectAmmo = false
           selectTarget.action = function() {
             if(selectAmmo) player.arrows--;
+            updateStats()
             document.body.style.cursor = 'default'
             setGameStatus('wait')
             arrowAudio.play()
@@ -1041,6 +1041,9 @@ function unitClass (options) {
               return
             }
 
+            if(gameLevel<4 && attack_points>2 && player.hp<player.maxhp/2) {
+              attack_points = Math.ceil(attack_points/2)
+            }
             log_msg = "The "+that.typeName()+' hits you for '+attack_points+' damage'
             dmsg = "<span style='color:red'>The "+that.typeName()+' kills you</span>'
             player.addHP(-attack_points, that.typeName(), dmsg);

@@ -15,8 +15,6 @@ var itemImgPath = [
   ['chest1','Items/Chest1.png'],
   ['floor','Objects/Floor.png'],
   ['tile','Objects/Tile.png'],
-  ['undead0','Characters/Undead0.png'],
-  ['undead1','Characters/Undead1.png'],
   ['player0','Characters/Player0.png'],
   ['player1','Characters/Player1.png'],
   ['playerR0','Characters/PlayerR0.png'],
@@ -25,10 +23,6 @@ var itemImgPath = [
   ['rodent1','Characters/Rodent1.png'],
   ['pest0','Characters/Pest0.png'],
   ['pest1','Characters/Pest1.png'],
-  ['reptile0','Characters/Reptile0.png'],
-  ['reptile1','Characters/Reptile1.png'],
-  ['bird0','Characters/Avian0.png'],
-  ['bird1','Characters/Avian1.png'],
   ['decor0','Objects/Decor0.png'],
   ['decor1','Objects/Decor1.png'],
   ['ground0','Objects/Ground0.png'],
@@ -44,7 +38,13 @@ var itemImgPath = [
   ['pit0','Pit0.png'],
   ['pit1','Pit1.png'],
   ['gold','gold.png'],
-  ['status','status.png']
+  ['status','status.png'],
+  ['undead0','Characters/Undead0.png'],
+  ['undead1','Characters/Undead1.png'],
+  ['reptile0','Characters/Reptile0.png'],
+  ['reptile1','Characters/Reptile1.png'],
+  ['bird0','Characters/Avian0.png'],
+  ['bird1','Characters/Avian1.png']
 ]
 for(let i=0;i<itemImgPath.length;i++) {
     itemImg[itemImgPath[i][0]] = new Image();
@@ -70,18 +70,10 @@ var statusSprite = {
   'light':[4,0],
   'poison':[6,0]
 }
-//statusFiles = [
-//  'strength', 'speed', 'bleeding', 'bless', 'curse', 'confuze', 'light', 'poison'
-//]
-//for(i in statusFiles) {
-//  name = statusFiles[i]
-//  statusImg[name] = new Image();
-//  statusImg[name].src = _status_path_+name+".png";
-//}
 
 /****** Game Functions ******* */
 var showMinimap = false;
-if(screen.width>800) showMinimap = true;
+if(document.body.clientWidth>800) showMinimap = true;
 function toggleMinimap() {
   if(showMinimap) {
     showMinimap = false
@@ -1402,7 +1394,6 @@ function keypressPlay (code) {
       for (i=0; i<monsters.length; i++) if(monsters[i].hp>0){
         x = monsters[i].x
         y = monsters[i].y
-        //if(mapRev[x][y]>1 || monsters[i].hasStatus('tracked')) vm.push(i);
         msound = monsters[i].getAttr('sounds')
         if(msound!==null) sounds.push(msound[0])
       }
