@@ -35,7 +35,16 @@ body{
     <?=view::css("lib/gila.min.css")?>
     <?=view::script("lib/gila.min.js")?>
     <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
-</head>
+    <?php if($_COOKIE['applixir']=='true') { ?>
+    <!-- Insert the V3-Snippet.txt file here -->
+    <div id="applixir_vanishing_div" hidden><iframe id="applixir_parent allow=autoplay"></iframe>
+    </div>
+    <!-- The applixir SDK file has all required CSS and JavaScript resources (use current version)-->
+    <script type='text/javascript' src="https://cdn.applixir.com/applixir.sdk3.0m.js"></script>
+    <script type="application/javascript">
+    invokeApplixirVideoUnit({zoneId: 2679});
+    </script>
+<?php } ?></head>
 
 
 <body>

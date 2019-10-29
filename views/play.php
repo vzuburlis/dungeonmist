@@ -32,7 +32,7 @@ $permadeath_url = GPACKAGE.'/permadeath';
    onclick="clickOnMap(event,this)"></canvas>
   <canvas id="minimap"></canvas>
   <?php include_once(__DIR__.'/play.controls.php')?>
-  <?php if(session::user_id()==1 && false) { ?>
+  <?php if($_COOKIE['applixir']=='true') { ?>
    <!-- Insert the V3-Snippet.txt file here -->
    <div id="applixir_vanishing_div" hidden><iframe id="applixir_parent allow=autoplay"></iframe>
    </div>
@@ -49,6 +49,9 @@ $permadeath_url = GPACKAGE.'/permadeath';
 <script>
 canvas.focus();
 var gameLevel = <?=$c->level?>;
+//window.frameElement
+//  ? 'embedded in iframe or object'
+//  : 'not embedded or cross-origin'
 
 function moveLevel(direction=null) {
   fm = dataToUpdate()
@@ -86,12 +89,9 @@ function dataToUpdate() {
   let fm=new FormData()
   fm.append('player', JSON.stringify(player));
   fm.append('level', <?=$c->level?>);
-  //mapString = ''
-  //for(i=0;i<mapWidth;i++) for(j=0;j<mapHeight;j++) mapString += map[i][j]
   mapSize = [mapWidth, mapHeight]
 
   fm.append('levelMap', JSON.stringify({
-    //mapString: mapString,
     mapSize: mapSize,
     mapRev: mapRev,
     mapItems: mapItems,
