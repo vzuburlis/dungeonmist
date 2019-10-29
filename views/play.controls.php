@@ -1,15 +1,15 @@
 <div id="controls" style="width:10em;height:10em">
 <?php if(!isset($_COOKIE['ref']) || $_COOKIE['ref']!=='kongregate') { ?>
   <svg width="100%" height="100%" viewBox="0 0 120 120" >
-    <path d="M0 47 L4 43 L43 43 L43 4 L47 0 L73 0 L77 4 L77 43 L116 43 L120 47 L120 73 L116 77 L77 77 L77 116 L73 120 L47 120 L43 116 L43 77 L4 77 L0 73 L0 47 A"
+    <path d="M0 47 L4 43 L43 43 L43 4 L47 0 L73 0 L77 4 L77 43 L116 43 L120 47 L120 73 L116 77 L77 77 L77 116 L73 120 L47 120 L43 116 L43 77 L4 77 L0 73 L0 47"
     style="stroke:#929292;stroke-width:2;stroke-opacity:0.5" fill="none" />
-    <path d="M11 60 L32 60 A"
+    <path d="M11 60 L32 60"
     style="stroke:#929292;stroke-width:2;stroke-opacity:0.5" fill="none" />
-    <path d="M109 60 L86 60 A"
+    <path d="M109 60 L86 60"
     style="stroke:#929292;stroke-width:2;stroke-opacity:0.5" fill="none" />
-    <path d="M60 11 L60 32 A"
+    <path d="M60 11 L60 32"
     style="stroke:#929292;stroke-width:2;stroke-opacity:0.5" fill="none" />
-    <path d="M60 109 L60 86 A"
+    <path d="M60 109 L60 86"
     style="stroke:#929292;stroke-width:2;stroke-opacity:0.5" fill="none" />
   </svg>
 
@@ -91,8 +91,8 @@
     margin: 32px 32px 16px 32px;"
     onclick="setGameMenuKey('e')"></div>
   <div class="com-btn" style="background: rgba(0, 0, 0, 0)
-    url('src/dungeonrl/DawnLike/Items/Chest0.png') repeat scroll
-    -0px -32px;
+    url('src/dungeonrl/DawnLike/Basic.png') repeat scroll
+    -0px -64px;
     width: 16px; height: 16px; transform: scale(3); vertical-align:middle;
     margin: 32px 32px 16px 32px;"
     onclick="setGameMenuKey('u')"></div>

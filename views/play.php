@@ -47,6 +47,7 @@ $permadeath_url = GPACKAGE.'/permadeath';
 
 <?php include __DIR__.'/loadData.php'?>
 <script>
+canvas.focus();
 var gameLevel = <?=$c->level?>;
 
 function moveLevel(direction=null) {

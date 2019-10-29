@@ -1,14 +1,14 @@
 [
 {
-  "sprite": ["door0", 0, 0], "name": "Door",
+  "sprite": ["door", 0, 0], "name": "Door",
   "block": true, "blocksight": true, "open_to": "Opened Door", "kick_to": "Opened Door"
 },
 {
-  "sprite": ["door0", 0, 1], "name": "Iron Door",
+  "sprite": ["door", 0, 1], "name": "Iron Door",
   "block": true, "blocksight": true, "open_to": "Opened Iron Door"
 },
 {
-  "sprite": ["door0", 0, 3], "name": "Gate",
+  "sprite": ["door", 0, 3], "name": "Gate",
   "block": true, "switch_to": "Opened Gate"
 },
 {
@@ -16,97 +16,93 @@
   "block": true, "blocksight": true, "reveal_to": "Door", "tile":"#"
 },
 {
-  "sprite": ["door0", 0, 2], "name": "Iron Bars",
+  "sprite": ["door", 0, 2], "name": "Iron Bars",
   "block": true, "open_to": "Opened Iron Bars"
 },
 {
-  "sprite": ["door0", 0, 3], "name": "Gold Bars",
+  "sprite": ["door", 0, 3], "name": "Gold Bars",
   "block": true, "open_to": "Opened Gold Bars"
 },
 {
-  "sprite": ["chest0", 0, 0], "name": "Small Chest",
+  "sprite": ["basic", 0, 2], "name": "Small Chest",
   "block": true, "open_to": "Opened Small Chest"
 },
 {
-  "sprite": ["chest0", 1, 0], "name": "Chest",
+  "sprite": ["basic", 1, 2], "name": "Chest",
   "block": true, "open_to": "Opened Chest"
 },
 {
-  "sprite": ["chest0", 3, 0], "name": "Metal Box",
+  "sprite": ["basic", 3, 2], "name": "Metal Box",
   "block": true, "open_to": "Opened Metal Box"
 },
 {
-  "sprite": ["chest0", 4, 0], "name": "Metal Vault",
+  "sprite": ["basic", 4, 2], "name": "Metal Vault",
   "block": true, "open_to": "Opened Metal Vault"
 },
 {
-  "sprite": ["chest0", 0, 1], "name": "Barrel",
+  "sprite": ["basic", 0, 3], "name": "Barrel",
   "block": true, "open_to": "Opened Barrel", "kick_to": "Broken Barrel"
 },
 {
-  "sprite": ["chest0", 1, 1], "name": "Elf Barrel",
+  "sprite": ["basic", 1, 3], "name": "Elf Barrel",
   "block": true, "open_to": "Opened Elf Barrel", "kick_to": "Broken Elf Barrel"
 },
 {
-  "sprite": ["door1", 0, 0], "name": "Opened Door"
+  "sprite": ["door", 1, 0], "name": "Opened Door"
 },
 {
-  "sprite": ["door1", 0, 1], "name": "Opened Iron Door",
+  "sprite": ["door", 1, 1], "name": "Opened Iron Door",
   "close_to": "Iron Door"
 },
 {
-  "sprite": ["door1", 0, 2], "name": "Opened Iron Bars",
+  "sprite": ["door", 1, 2], "name": "Opened Iron Bars",
   "close_to": "Iron Bars"
 },
 {
-  "sprite": ["door1", 0, 2], "name": "Opened Iron Bars",
-  "close_to": "Iron Bars"
+  "sprite": ["door", 1, 3], "name": "Opened Gate"
 },
 {
-  "sprite": ["door1", 0, 3], "name": "Opened Gate"
-},
-{
-  "sprite": ["door1", 0, 3], "name": "Opened Gold Bars",
+  "sprite": ["door", 1, 3], "name": "Opened Gold Bars",
   "close_to": "Gold Bars"
 },
 {
-  "sprite": ["chest1", 0, 0], "name": "Opened Small Chest",
+  "sprite": ["basic", 4, 3], "name": "Opened Small Chest",
   "block": true, "close_to": "Small Chest"
 },
 {
-  "sprite": ["chest1", 1, 0], "name": "Opened Chest",
+  "sprite": ["basic", 5, 3], "name": "Opened Chest",
   "block": true, "close_to": "Chest"
 },
 {
-  "sprite": ["chest1", 3, 0], "name": "Opened Metal Box",
+  "sprite": ["basic", 6, 3], "name": "Opened Metal Box",
   "block": true, "close_to": "Metal Box"
 },
 {
-  "sprite": ["chest1", 4, 0], "name": "Opened Metal Vault",
+  "sprite": ["basic", 7, 3], "name": "Opened Metal Vault",
   "block": true, "close_to": "Metal Vault"
 },
 {
-  "sprite": ["chest1", 0, 1], "name": "Opened Barrel",
+  "sprite": ["basic", 4, 4], "name": "Opened Barrel",
   "block": true, "close_to": "Barrel", "kick_to": "Broken Barrel"
 },
 {
-  "sprite": ["chest1", 1, 1], "name": "Opened Elf Barrel",
+  "sprite": ["basic", 5, 4], "name": "Opened Elf Barrel",
   "block": true, "close_to": "Elf Barrel", "kick_to": "Broken Elf Barrel"
 },
 {
-  "sprite": ["chest0", 2, 1], "name": "Broken Barrel",
+  "sprite": ["basic", 2, 3], "name": "Broken Barrel",
   "block": true
 },
 {
-  "sprite": ["chest0", 3, 1], "name": "Broken Elf Barrel",
+  "sprite": ["basic", 3, 3], "name": "Broken Elf Barrel",
   "block": true
 },
 {
-  "sprite": ["door0", 2, 0], "name": "Locked Door",
+  "sprite": ["door", 2, 0], "name": "Locked Door",
   "block": true, "blocksight": true, "unlock_to": "Opened Door"
 },
 {
-  "sprite": ["door0", 2, 2], "name": "Locked Bars",
+  "sprite": ["door", 2, 2], "name": "Locked Bars",
   "block": true, "unlock_to": "Opened Iron Bars"
 },
 {
@@ -114,15 +110,15 @@
   "block": true, "chest_unlock_to": "Opened Chest"
 },
 {
-  "sprite": ["trap", 1, 3], "name": "Spikes Trap (Armed)",
+  "sprite": ["basic", 1, 8], "name": "Spikes Trap (Armed)",
   "trap":"spikes", "activate_to": "Spikes Trap", "hidden": true
 },
 {
-  "sprite": ["trap", 0, 3], "name": "Spikes Trap",
+  "sprite": ["basic", 0, 8], "name": "Spikes Trap",
   "trap_to": "Spikes Trap (Armed)"
 },
 {
-  "sprite": ["trap", 6, 0], "name": "Fire Trap",
+  "sprite": ["basic", 6, 5], "name": "Fire Trap",
   "trap":"fire", "hidden": true
 },
 {
@@ -147,10 +143,6 @@
 },
 {
   "sprite": ["decor0", 0, 3], "name": "Wall Cracks"
-},
-{
-  "sprite": ["door", 0, 0], "name": "Hidden Door",
-  "hidden": true
 },
 {
   "sprite": ["decor0", 0, 2], "name": "Rune #1"

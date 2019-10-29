@@ -1,6 +1,8 @@
 /******** Load Images ********* */
 itemImg=[];
 var itemImgPath = [
+  ['basic','Basic.png'],
+  ['door','Door.png'],
   ['obj','objects.png'],
   ['shortwep','Items/ShortWep.png'],
   ['medwep','Items/MedWep.png'],
@@ -8,11 +10,6 @@ var itemImgPath = [
   ['armor','Items/Armor.png'],
   ['potion','Items/Potion.png'],
   ['scroll','Items/Scroll.png'],
-  ['door0','Objects/Door0.png'],
-  ['door1','Objects/Door1.png'],
-  ['trap','Objects/Trap1.png'],
-  ['chest0','Items/Chest0.png'],
-  ['chest1','Items/Chest1.png'],
   ['floor','Objects/Floor.png'],
   ['tile','Objects/Tile.png'],
   ['player0','Characters/Player0.png'],
@@ -37,7 +34,12 @@ var itemImgPath = [
   ['book','Items/Book.png'],
   ['pit0','Pit0.png'],
   ['pit1','Pit1.png'],
-  ['gold','gold.png'],
+  ['gold','gold.png'],//
+  ['door0','Objects/Door0.png'],//
+  ['door1','Objects/Door1.png'],//
+  ['trap','Objects/Trap1.png'],//
+  ['chest0','Items/Chest0.png'],//
+  ['chest1','Items/Chest1.png'],//
   ['status','status.png'],
   ['undead0','Characters/Undead0.png'],
   ['undead1','Characters/Undead1.png'],
@@ -1415,6 +1417,45 @@ function keypressPlay (code) {
 }
 
 selectTarget = [];
+
+function createSellMenu(){
+  closeActionMenu();
+  popup = document.getElementById("game-menu")
+  list = document.getElementById("game-menu--list")
+  list.innerHTML = ""
+  com = 65
+  comToItem = []
+  for(i=0; i<player.inventory.length; i++) {
+    if(typeof player.inventory[i].itemType=='undefined') continue
+    _itemType = player.inventory[i].itemType
+    if(typeof itemType[_itemType]=='undefined') continue
+    _type = itemType[_itemType]
+    src = itemImg[_type.sprite[0]].src
+    sx = _type.sprite[1]*16+'px'
+    sy = _type.sprite[2]*16+'px'
+    comToItem[com] = i
+
+    if(typeof _type.hp!='undefined') {
+      hp=' '+player.inventory[i].hp+'/'+_type.hp
+    } else hp=''
+    _nx = ''
+    if(typeof player.inventory[i].stock!='undefined') {
+      if(player.inventory[i].stock>1) _nx = ' x'+player.inventory[i].stock
+    }
+    if(_nx!='' && hp!='') console.error(getItemName(_itemType)+' uses hp and stock')
+
+    if(player.weapon==i || player.eArmor==i || player.eShield==i) itemClass=' green'; else itemClass='';
+    if(typeof _type.hp!='undefined') {
+      hp=' '+player.inventory[i].hp+'/'+_type.hp+''
+    } else hp=''
+    _enc = null
+    if(typeof player.inventory[i].enchantment!='undefined') _enc = player.inventory[i].enchantment
+    list.innerHTML += '<div class="menu-item" onclick="keypressSell('+(com)+')">&#'+(com+32)+'; <div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div> <span class="item-name'+itemClass+'">'+getItemName(_itemType)+hp+_nx+'</span></div>'
+    com++
+  }
+  popup.style.visibility = "visible"
+  setGameStatus('game-menu')
+}
 
 function mousemoveOnMap(e, canva) {
   if(player.hp<0) return
