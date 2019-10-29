@@ -45,6 +45,7 @@ body {
   border-radius: 50%;
   margin: 3px;
   image-rendering: crisp-edges;
+  image-rendering: pixelated;
 }
 .com-down{display:none}
 #msgBox {
@@ -83,6 +84,7 @@ body {
   vertical-align:middle;
   margin-left: 8px;
   image-rendering: crisp-edges;
+  image-rendering: pixelated;
 }
 #pKey, #pChestKey{display:none}
 #map,#use-menu,#action-menu,#equip-menu,#help-menu,.menu,
@@ -189,6 +191,7 @@ button{
   display:inline-block;
   vertical-align: middle;
   image-rendering: crisp-edges;
+  image-rendering: pixelated;
 }
 .item-name{
   font-size: 1.3em;
@@ -344,7 +347,7 @@ button{
 }
 @media screen and (min-width: 800px) {
   .class-card {
-    margin:1em;
+    margin:0.8em;
   }
 }
 .class-selected {
@@ -354,6 +357,7 @@ button{
   transform: scale(3);
   margin: 15px;
   image-rendering: crisp-edges;
+  image-rendering: pixelated;
 }
 .class-panel {
   padding:0 2em;

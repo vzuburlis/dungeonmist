@@ -35,7 +35,7 @@ body{
     <?=view::css("lib/gila.min.css")?>
     <?=view::script("lib/gila.min.js")?>
     <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
-    <?php if($_COOKIE['applixir']=='true') { ?>
+    <?php if(isset($_GET['applixir']) || $_COOKIE['applixir']=='true') { ?>
     <!-- Insert the V3-Snippet.txt file here -->
     <div id="applixir_vanishing_div" hidden><iframe id="applixir_parent allow=autoplay"></iframe>
     </div>
