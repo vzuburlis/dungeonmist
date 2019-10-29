@@ -139,6 +139,7 @@ function unitClass (options) {
             if(monsters[mi].hp<0) monsters[mi].hp==0;
             _logMsg = "You hit the "+monsters[mi].typeName()+' dealing '+attack_points+' damage'
             animatePop(monsters[mi].x, monsters[mi].y,'-'+attack_points, 'red')
+            //animateEffect(monsters[mi].x, monsters[mi].y, itemImg['sparks'], 0, 0, 2);
             logMsg(_logMsg);
             //animateEffect(that.x+dx, that.y+dy, itemImg['effect0'], 4, 21, 2);
 
@@ -191,7 +192,7 @@ function unitClass (options) {
                 }
               }
             }
-
+            animateEffect(monsters[mi].x, monsters[mi].y, itemImg['effect0'], 6, 22, 2);
             that.removeStatus('invisible')
             swingAudio.play();
             turnPlayed = true;
@@ -1048,6 +1049,7 @@ function unitClass (options) {
             dmsg = "<span style='color:red'>The "+that.typeName()+' kills you</span>'
             player.addHP(-attack_points, that.typeName(), dmsg);
             animatePop(player.x, player.y, '-'+attack_points, 'red')
+            //animateEffect(player.x, player.y, itemImg['sparks'], 0, 0, 2);
             if(player.hp>0) {
               if(Math.floor(Math.random() * 8)==0) {
                 if(typeof _mt['specialAttack']!='undefined') {
@@ -1255,20 +1257,24 @@ function drawSpin(sx, sy, ex, ey, step, rot=0) {
   drawSprite(sx+dx*step,sy+dy*step, itemImg['effect'+rot], 0, 25);
 }
 
+var animateEffectTime = 0
 function animateEffect(x, y, img, sx, sy, f, step=100) {
   let _x = x
   let _y = y
   let _img = img
+  setGameStatus('wait')
   for(let i=0;i<f;i++) {
     setTimeout(function() {
       renderMap()
       drawSprite(_x, _y, _img, sx+i, sy)
-    }, i*step);
+      animateEffectTime-=step
+    }, i*step+animateEffectTime);
   }
+  if(animateEffectTime<200) animateEffectTime += f*step
   setTimeout(function() {
     renderMap()
     setGameStatus('play')
-  }, f*step);
+  }, animateEffectTime);
 }
 
 function isBlocked(x, y) {

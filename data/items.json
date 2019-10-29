@@ -404,14 +404,14 @@
   "skill": "Archery"
 },
 {
-  "sprite": ["basic", 0, 2],
+  "sprite": ["basic", 2, 0],
   "name": "Gold",
   "autopick": true,
   "effect": "+gold",
   "gold": 1
 },
 {
-  "sprite": ["basic", 0, 1],
+  "sprite": ["basic", 1, 0],
   "name": "3 Gold",
   "autopick": true,
   "effect": "+gold",
