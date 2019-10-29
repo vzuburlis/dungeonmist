@@ -192,7 +192,6 @@ function unitClass (options) {
                 }
               }
             }
-            animateEffect(monsters[mi].x, monsters[mi].y, itemImg['effect0'], 6, 22, 2);
             that.removeStatus('invisible')
             swingAudio.play();
             turnPlayed = true;
