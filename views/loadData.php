@@ -95,6 +95,7 @@ player = unitClass({
     hp: <?=$c->player['hp']?>,
     maxhp: <?=$c->player['maxhp']?>,
     xp: <?=($c->player['xp'] ?? 0)?>,
+    level: <?=($c->player['level'] ?? 0)?>,
     gold: <?=($c->player['gold'] ?? 0)?>,
     attack: <?=($c->player['attack'] ?? 0)?>,
     armor: <?=$c->player['armor']?>,

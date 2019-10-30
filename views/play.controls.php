@@ -48,6 +48,7 @@
   <div id="playerName">
     <?=$c->player['name']?>
   </div>
+  
  </div>
  <br><div id="statBoxStats" style="display:flex; flex-direction:column;">
   <div>

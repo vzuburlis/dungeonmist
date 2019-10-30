@@ -44,6 +44,26 @@ $permadeath_url = GPACKAGE.'/permadeath';
   <?php } ?>
 </body>
 
+<?php if(session::user_id()==1) { ?>
+<div style="position:absolute;right:0;left:0;top:0;bottom:0;background:rgba(0,0,0,0.8);
+  text-align:center" id="admenu">
+  <div class="centered">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- Basic GC -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-7045956467160546"
+       data-ad-slot="3404883614"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+  <br>
+  <span onclick="admenu.style.display='none';setGameStatus('play')" class="play-btn">Continue</span>
+  </div>
+</div>
+<?php } ?>
 
 <?php include __DIR__.'/loadData.php'?>
 <script>

@@ -136,10 +136,14 @@ function unitClass (options) {
             } else that.addItemHP(that.weapon, -1)
 
             monsters[mi].hp-=attack_points;
-            if(monsters[mi].hp<0) monsters[mi].hp==0;
+            if(monsters[mi].hp<0) {
+              monsters[mi].hp==0;
+              that.addXP(monsters[mi].getLevel())
+            } else {
+              animatePop(monsters[mi].x, monsters[mi].y,'-'+attack_points, 'red')
+              animateHit(monsters[mi].x, monsters[mi].y);
+            }
             _logMsg = "You hit the "+monsters[mi].typeName()+' dealing '+attack_points+' damage'
-            animatePop(monsters[mi].x, monsters[mi].y,'-'+attack_points, 'red')
-            animateHit(monsters[mi].x, monsters[mi].y);
             logMsg(_logMsg);
 
             if(that.weapon!=null) if(typeof that.inventory[that.weapon].enchantment!='undefined') {
@@ -538,6 +542,24 @@ function unitClass (options) {
         that.deathCause = cause
         permaDeath()
       }
+    }
+
+    that.addXP = function (x) {
+      that.xp += x  
+      if(that.xp > that.levelXP()) {
+        that.xp -= that.levelXP()
+        that.level++
+      }
+      updateStats()
+    }
+
+    that.levelXP = function () {
+      return that.level*6
+    }
+
+    that.getLevel = function () {
+      if(typeof that.level!='undefined') return that.level;
+      return monsterType[that.type].level
     }
 
     that.addEffect = function (_effect) {
