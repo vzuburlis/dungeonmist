@@ -146,7 +146,7 @@
   </div>
   <div class="div-com" id="btnArrows">
     <div class="com-btn" style="background: rgba(0, 0, 0, 0)
-    url('src/dungeonrl/DawnLike/Items/Ammo.png') repeat scroll
+    url('src/dungeonrl/DawnLike/Items.png') repeat scroll
     -0px -32px;
     width: 16px; height: 16px; transform: scale(4); vertical-align:middle;
     margin: 16px 32px 48px 16px;"
@@ -222,7 +222,7 @@
 </div>
 
 <div id="help-menu">
-  <div id="help-menu--title">Commands <span onclick="closeHelpMenu();" class="close">
+  <div id="help-menu--title" class="menu--title">Commands <span onclick="closeHelpMenu();" class="close">
     <img src="<?=$tile_folder?>../images/close.svg">
   </span></div>
   <div id="help-menu--list">

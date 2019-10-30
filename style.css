@@ -347,7 +347,7 @@ button{
 }
 @media screen and (min-width: 800px) {
   .class-card {
-    margin:0.8em;
+    margin:0.7em;
   }
 }
 .class-selected {

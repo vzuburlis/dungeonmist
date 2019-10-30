@@ -1,40 +1,40 @@
 [{
-    "sprite": ["potion", 0, 0],
+    "sprite": ["items", 0, 15],
     "type":"potion", "name": "Potion of Healing", "lorem": "Red Potion",
     "effect": "heal"
 },
 {
-  "sprite": ["potion", 3, 3],
+  "sprite": ["items", 3, 18],
   "type":"potion", "name": "Potion of Holy Water", "lorem": "Golden Potion",
   "effect": "bless",
   "effect_time": 48
 },
 {
-  "sprite": ["potion", 2, 0],
+  "sprite": ["items", 2, 15],
   "type":"potion", "name": "Potion of Strength", "lorem": "Orange Potion",
   "effect": "strength",
   "effect_time": 24
 },
 {
-  "sprite": ["potion", 1, 0],
+  "sprite": ["items", 1, 15],
   "type":"potion", "name": "Potion of Speed", "lorem": "Pink Potion",
   "effect": "speed",
   "effect_time": 24
 },
 {
-  "sprite": ["potion", 3, 0],
+  "sprite": ["items", 3, 15],
   "type":"potion", "name": "Potion of Antidote", "lorem": "Yellow Potion",
   "effect": "stop-poison"
 },
 {
-  "sprite": ["potion", 3, 1],
+  "sprite": ["items", 3, 16],
   "type":"potion", "name": "Potion of Invisiblity", "lorem": "Peach Color Potion",
   "effect": "invisible",
   "target": "self",
   "effect_time": 16
 },
 {
-  "sprite": ["potion", 4, 0],
+  "sprite": ["items", 4, 15],
   "type":"potion", "name": "Potion of Blink", "lorem": "Green Potion",
   "effect": "teleport",
   "target": "self"
@@ -43,6 +43,7 @@
   "sprite": ["light", 0, 0],
   "stock": true,
   "name": "Candle",
+  "type":"light",
   "effect": "light",
   "effect_time": 150
 },
@@ -51,6 +52,7 @@
   "sprite": ["light", 3, 0],
   "stock": true,
   "name": "Lamp",
+  "type":"light",
   "effect": "light",
   "effect_time": 250
 },
@@ -139,7 +141,7 @@
 },
 {
   "level":2,
-  "sprite": ["shield", 0, 0],
+  "sprite": ["items", 0, 29],
   "name": "Shield",
   "type": "shield", "hp":2,
   "effect": "+block",
@@ -147,7 +149,7 @@
 },
 {
   "level":4,
-  "sprite": ["shield", 1, 0],
+  "sprite": ["items", 1, 29],
   "name": "Shield",
   "type": "shield", "hp":3,
   "effect": "+block",
@@ -155,7 +157,7 @@
 },
 {
   "level":6,
-  "sprite": ["shield", 2, 0],
+  "sprite": ["items", 2, 29],
   "name": "Shield",
   "type": "shield", "hp":4,
   "effect": "+block",
@@ -163,7 +165,7 @@
 },
 {
   "level":8,
-  "sprite": ["shield", 3, 0],
+  "sprite": ["items", 3, 29],
   "name": "Shield",
   "type": "shield", "hp":5,
   "effect": "+block",
@@ -171,7 +173,7 @@
 },
 {
   "level":10,
-  "sprite": ["shield", 4, 0],
+  "sprite": ["items", 4, 29],
   "name": "Shield",
   "type": "shield", "hp":6,
   "effect": "+block",
@@ -245,35 +247,35 @@
   "mapItem": "chest_key"
 },
 {
-  "sprite": ["book", 2, 0],
+  "sprite": ["items", 2, 6],
   "name": "Magic Missile",
   "type": "spellbook", "hp":10, "skill": "Spellcast",
   "effect": "arrow",
   "target": "select"
 },
 {
-  "sprite": ["book", 4, 1],
+  "sprite": ["items", 4, 7],
   "name": "Burning Hands",
   "type": "spellbook", "hp":10, "skill": "Spellcast",
   "effect": "burn",
   "target": "direction"
 },
 {
-  "sprite": ["book", 4, 1],
+  "sprite": ["items", 4, 7],
   "name": "Shocking Grasp",
   "type": "spellbook", "hp":10, "skill": "Spellcast",
   "effect": "shock",
   "target": "direction"
 },
 {
-  "sprite": ["book", 3, 0],
+  "sprite": ["items", 3, 6],
   "name": "Lightning",
   "type": "spellbook", "hp":10, "skill": "Spellcast",
   "effect": "lightning-strike",
   "target": "enemies"
 },
 {
-  "sprite": ["book", 0, 0],
+  "sprite": ["items", 0, 6],
   "name": "Confuze Enemies",
   "type": "spellbook", "hp":10, "skill": "Spellcast",
   "effect": "confuze",
@@ -281,14 +283,14 @@
   "effect_time": 10
 },
 {
-  "sprite": ["book", 1, 0],
+  "sprite": ["items", 1, 6],
   "name": "Blink",
   "type": "spellbook", "hp":10, "skill": "Spellcast",
   "effect": "teleport",
   "target": "select"
 },
 {
-  "sprite": ["book", 4, 0],
+  "sprite": ["items", 4, 6],
   "name": "Invisibility",
   "type": "spellbook", "hp":10, "skill": "Spellcast",
   "effect": "invisible",
@@ -296,72 +298,72 @@
   "effect_time": 24
 },
 {
-  "sprite": ["book", 5, 0],
+  "sprite": ["items", 5, 6],
   "name": "Healing Wounds",
   "type": "spellbook", "hp":10, "skill": "Spellcast",
   "target": "self",
   "effect": "heal"
 },
 {
-  "sprite": ["scroll", 0, 0],
-  "name": "Scroll of Map",
+  "sprite": ["items", 0, 23],
+  "type":"scroll","name": "Scroll of Map",
   "effect": "map-reveal"
 },
 {
-    "sprite": ["scroll", 1, 0],
-    "name": "Scroll of Invisibility",
+    "sprite": ["items", 1, 23],
+    "type":"scroll","name": "Scroll of Invisibility",
     "effect": "invisible",
     "target": "self",
     "effect_time": 24
 },
 {
-    "sprite": ["scroll", 2, 0],
-    "name": "Scroll of Sucrifice",
+    "sprite": ["items", 2, 23],
+    "type":"scroll","name": "Scroll of Sucrifice",
     "effect": "sucrifice-rnd"
 },
 {
-    "sprite": ["scroll", 3, 0],
-    "name": "Scroll of Tracking",
+    "sprite": ["items", 3, 23],
+    "type":"scroll","name": "Scroll of Tracking",
     "effect": "track-all",
     "effect_time": 100
 },
 {
-  "sprite": ["scroll", 4, 0],
-  "name": "Scroll of Holy Words",
+  "sprite": ["items", 4, 23],
+  "type":"scroll","name": "Scroll of Holy Words",
   "effect": "damage",
   "target": "enemies",
   "class": "z"
 },
 {
-  "sprite": ["scroll", 4, 0],
-  "name": "Scroll of Bless",
+  "sprite": ["items", 4, 23],
+  "type":"scroll","name": "Scroll of Bless",
   "effect": "bless",
   "target": "self",
   "effect_time": 100
 },
 {
-    "sprite": ["scroll", 5, 0],
-    "name": "Scroll of Curse",
+    "sprite": ["items", 5, 23],
+    "type":"scroll","name": "Scroll of Curse",
     "effect": "curse",
     "target": "enemies",
     "effect_time": 48
 },
 {
-    "sprite": ["scroll", 5, 0],
-    "name": "Scroll of Confuze",
+    "sprite": ["items", 5, 23],
+    "type":"scroll","name": "Scroll of Confuze",
     "effect": "confuze",
     "target": "enemies",
     "effect_time": 10
 },
 {
-    "sprite": ["scroll", 6, 0],
-    "name": "Scroll of Healing",
+    "sprite": ["items", 6, 23],
+    "type":"scroll","name": "Scroll of Healing",
     "target": "self",
     "effect": "heal"
 },
 {
-  "sprite": ["scroll", 0, 2],
-  "name": "Scroll of Blink",
+  "sprite": ["items", 0, 25],
+  "type":"scroll","name": "Scroll of Blink",
   "effect": "teleport",
   "target": "select"
 },
@@ -371,32 +373,32 @@
     "effect": "stop-bleeding"
 },
 {
-  "sprite": ["scroll", 6, 0],
-  "name": "Scroll of Lightning",
+  "sprite": ["items", 6, 23],
+  "type":"scroll","name": "Scroll of Lightning",
   "effect": "lightning-strike",
   "target": "enemies"
 },
 {
-  "sprite": ["scroll", 4, 2],
-  "name": "Scroll of Magic Missile",
+  "sprite": ["items", 4, 25],
+  "type":"scroll","name": "Scroll of Magic Missile",
   "autopick": true,
   "effect": "arrow",
   "target": "select"
 },
 {
-  "sprite": ["scroll", 6, 2],
-  "name": "Scroll of Burning Hands",
+  "sprite": ["items", 6, 25],
+  "type":"scroll","name": "Scroll of Burning Hands",
   "effect": "burn",
   "target": "direction"
 },
 {
-  "sprite": ["scroll", 6, 3],
-  "name": "Scroll of Shocking Grasp",
+  "sprite": ["items", 6, 26],
+  "type":"scroll","name": "Scroll of Shocking Grasp",
   "effect": "shock",
   "target": "direction"
 },
 {
-  "sprite": ["ammo", 0, 2],
+  "sprite": ["items", 0, 2],
   "name": "Arrow",
   "type": "missile",
   "autopick": true,

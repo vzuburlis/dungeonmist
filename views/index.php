@@ -29,7 +29,7 @@ body{
     <div id="main">
       <div v-if="!guiview">
         <?=($gameId ? '<a href="'.$playgame_url.'" class="play-btn">Continue</a><br>' : '')?>
-        <a href="<?=$newgame_url?>" class="play-btn">New Game</a><br>
+        <a href="<?=$newgame_url?>" class="play-btn" id="newgamebtn">New Game</a><br>
         <span @click="guiview='hof'" class="play-btn">Hall of Fame</span><br>
         <span @click="guiview='commands'" class="play-btn">Commands</span><br>
         <span @click="guiview='credits'" class="play-btn">Credits</span><br>
@@ -124,6 +124,7 @@ var app = new Vue({
 <?php if(gila::base_url()!='http://localhost/gilacms/') { ?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130027935-1"></script>
 <script>
+  if(window.self !== window.top) newgamebtn.href += '?ref='+document.domain
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());

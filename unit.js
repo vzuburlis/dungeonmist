@@ -139,9 +139,8 @@ function unitClass (options) {
             if(monsters[mi].hp<0) monsters[mi].hp==0;
             _logMsg = "You hit the "+monsters[mi].typeName()+' dealing '+attack_points+' damage'
             animatePop(monsters[mi].x, monsters[mi].y,'-'+attack_points, 'red')
-            //animateEffect(monsters[mi].x, monsters[mi].y, itemImg['sparks'], 0, 0, 2);
+            animateHit(monsters[mi].x, monsters[mi].y);
             logMsg(_logMsg);
-            //animateEffect(that.x+dx, that.y+dy, itemImg['effect0'], 4, 21, 2);
 
             if(that.weapon!=null) if(typeof that.inventory[that.weapon].enchantment!='undefined') {
               if(Math.floor(Math.random()*4)==0) {
@@ -1048,7 +1047,7 @@ function unitClass (options) {
             dmsg = "<span style='color:red'>The "+that.typeName()+' kills you</span>'
             player.addHP(-attack_points, that.typeName(), dmsg);
             animatePop(player.x, player.y, '-'+attack_points, 'red')
-            //animateEffect(player.x, player.y, itemImg['sparks'], 0, 0, 2);
+            animateHit(player.x, player.y);
             if(player.hp>0) {
               if(Math.floor(Math.random() * 8)==0) {
                 if(typeof _mt['specialAttack']!='undefined') {
@@ -1269,11 +1268,18 @@ function animateEffect(x, y, img, sx, sy, f, step=100) {
       animateEffectTime-=step
     }, i*step+animateEffectTime);
   }
-  if(animateEffectTime<200) animateEffectTime += f*step
+  if(animateEffectTime<600) animateEffectTime += f*step
   setTimeout(function() {
     renderMap()
     setGameStatus('play')
   }, animateEffectTime);
+}
+
+function animateHit(x, y) {
+  sx = 0; n = 3;
+  if(Math.floor(Math.random()*2)==0) sx=5
+  //if(Math.floor(Math.random()*1)==0) {sx=3;n=2}
+  animateEffect(x, y, itemImg['sparks'], sx, 0, n, 45);
 }
 
 function isBlocked(x, y) {

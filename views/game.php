@@ -141,6 +141,7 @@ itemType = <?=json_encode($c->itemType)?>;
 itemEnchantment = <?=json_encode(file_get_contents($ppath."data/itemEnchantments.json"))?>;
 itemImg=[];
 var itemImgPath = [
+  ['items','Items.png'],
   ['shortwep','Items/ShortWep.png'],
   ['medwep','Items/MedWep.png'],
   ['rock','Items/Rock.png'],

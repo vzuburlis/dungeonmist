@@ -4,12 +4,14 @@ var itemImgPath = [
   ['basic','Basic.png'],
   ['door','Door.png'],
   ['obj','objects.png'],
+  ['sparks','sparks.png'],
+  ['items','Items.png'],
   ['shortwep','Items/ShortWep.png'],
   ['medwep','Items/MedWep.png'],
   ['rock','Items/Rock.png'],
   ['armor','Items/Armor.png'],
-  ['potion','Items/Potion.png'],
-  ['scroll','Items/Scroll.png'],
+  ['potion','Items/Potion.png'],//
+  ['scroll','Items/Scroll.png'],//
   ['floor','Objects/Floor.png'],
   ['tile','Objects/Tile.png'],
   ['player0','Characters/Player0.png'],
@@ -27,11 +29,11 @@ var itemImgPath = [
   ['effect1','Objects/Effect1.png'],
   ['key','Items/Key.png'],
   ['gauze','../tile/gauze.png'],
-  ['light','Items/Light.png'],
-  ['shield','Items/Shield.png'],
-  ['ammo','Items/Ammo.png'],
+  ['light','Items/Light.png'],//
+  ['shield','Items/Shield.png'],//
+  ['ammo','Items/Ammo.png'],//
   ['staff','staff.png'],
-  ['book','Items/Book.png'],
+  ['book','Items/Book.png'],//
   ['pit0','Pit0.png'],
   ['pit1','Pit1.png'],
   ['gold','gold.png'],//
@@ -863,7 +865,7 @@ function keypressUse (code) {
               if(player.inventory[i].stock==0) player.deleteFromInv(i);
             }
 
-            if(_type.sprite[0]=='potion') {
+            if(_type.type=='potion') {
               _idf = player.identify('items',_itemType)
               logMsg("You drink the " + getItemName(_itemType), _idf);
               if(_type.effect_time>0) {
@@ -871,7 +873,7 @@ function keypressUse (code) {
                 player.addEffect(_type.effect)
               }
               player.spellEffect(_type.effect, _type)
-            } else if(_type.sprite[0]=='scroll'){
+            } else if(_type.type=='scroll'){
               _idf = player.identify('items',_itemType)
               logMsg("You read the " + getItemName(_itemType), _idf);
               if(_type.effect_time>0 && _type.target=='self') {
@@ -879,7 +881,7 @@ function keypressUse (code) {
                 player.addEffect(_type.effect)
               }
               player.spellEffect(_type.effect, _type)
-            } else if(_type.sprite[0]=='book') {
+            } else if(_type.type=='book') {
               if(player.intelligence<1
                   && Math.floor(Math.random()*(3-player.intelligence))<1) {
                 logMsg("You fail to spell the " + getItemName(_itemType), true);
@@ -894,7 +896,7 @@ function keypressUse (code) {
               player.inventory[i].hp--
               if(player.inventory[i].hp==0) player.inventory[i].stock--
               if(player.inventory[i].stock==0) player.deleteFromInv(i);
-            } else if(_type.sprite[0]=='light') {
+            } else if(_type.type=='light') {
               logMsg("You light the " + getItemName(_itemType));
               if(_type.effect_time>0) player.addStatus(_type.effect, _type.effect_time)
             } else {
@@ -1152,17 +1154,17 @@ function keypressPlay (code) {
   targetx=null;
   targety=null;
 
-
-    if (code == 'ArrowUp' || code == '38' || code == '87') { // up arrow
+console.log(code)
+    if (code == 'ArrowUp' || code == '38' || code == '87' || code == 'w') { // up arrow
         player.move(0,-1);
     }
-    else if (code == 'ArrowDown' || code == '40' || code == '83') { // down arrow
+    else if (code == 'ArrowDown' || code == '40' || code == '83' || code == 's') { // down arrow
         player.move(0,1);
     }
-    else if (code == 'ArrowLeft' || code == '37' || code == '65') { // left arrow
+    else if (code == 'ArrowLeft' || code == '37' || code == '65' || code == 'a') { // left arrow
        player.move(-1,0);
     }
-    else if (code == 'ArrowRight' || code == '39' || code == '68') { // right arrow
+    else if (code == 'ArrowRight' || code == '39' || code == '68' || code == 'd') { // right arrow
        player.move(1,0);
     }
     else if (code == '82' || code=='Z' || code=='r') { // rest
