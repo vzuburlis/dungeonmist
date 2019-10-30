@@ -881,7 +881,7 @@ function keypressUse (code) {
                 player.addEffect(_type.effect)
               }
               player.spellEffect(_type.effect, _type)
-            } else if(_type.type=='book') {
+            } else if(_type.type=='spellbook') {
               if(player.intelligence<1
                   && Math.floor(Math.random()*(3-player.intelligence))<1) {
                 logMsg("You fail to spell the " + getItemName(_itemType), true);
@@ -1154,7 +1154,6 @@ function keypressPlay (code) {
   targetx=null;
   targety=null;
 
-console.log(code)
     if (code == 'ArrowUp' || code == '38' || code == '87' || code == 'w') { // up arrow
         player.move(0,-1);
     }
@@ -1628,11 +1627,11 @@ function randomPos() {
 }
 function blockedPos(x,y) {
   if(map[x][y]!='.') return true;
-  console.log('monsters')
+
   for(let i=0; i<monsters.length; i++) {
       if(x==monsters[i].x && y==monsters[i].y) return true;
   }
-  console.log('objects')
+
   for(let i=0; i<objects.length; i++) {
       if(x==objects[i].x && y==objects[i].y) return true;
   }

@@ -332,7 +332,11 @@ function unitClass (options) {
           return false;
         }
         if(map[that.x+dx][that.y+dy]==' ') {
-          logMsg("You dont want to fall in the void");
+          if(map[that.x+dx+dx][that.y+dy+dy]=='.') {
+            logMsg("You can jump to the other side with [j]");
+          } else {
+            logMsg("You dont want to fall in the void");
+          }
           return false;
         }
         if(map[that.x+dx][that.y+dy]=='l') {
