@@ -46,7 +46,7 @@
   margin: 16px 32px 32px 16px;"
   onclick="keypressPlay('e')"></div>
   <div id="playerName">
-    <?=$c->player['name']?><br><span id="pXP" style="font-family:'Retro Gaming';"></span>
+    <?=$c->player['name']?><br><span id="pXP" style="font-family:'Retro Gaming';display:none"></span>
   </div>
   
  </div>
