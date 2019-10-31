@@ -69,6 +69,9 @@ class MapController extends controller
         if(isset($_GET['applixir'])) {
           setcookie('applixir', 'true', time() + (86400 * 30), "/");
         }
+        if(isset($_GET['amads'])) {
+          setcookie('amads', 'true', time() + (86400 * 30), "/");
+        }
 
         if(isset($_REQUEST['level'])) {
             usleep(300000);

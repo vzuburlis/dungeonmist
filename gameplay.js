@@ -37,8 +37,6 @@ var itemImgPath = [
   ['pit0','Pit0.png'],
   ['pit1','Pit1.png'],
   ['gold','gold.png'],//
-  ['door0','Objects/Door0.png'],//
-  ['door1','Objects/Door1.png'],//
   ['trap','Objects/Trap1.png'],//
   ['chest0','Items/Chest0.png'],//
   ['chest1','Items/Chest1.png'],//
