@@ -1,6 +1,6 @@
 <script>
 var gameStatus = 'loading'
-g.get('<?=$gamedata_url?>/<?=$c->gameId?>/monsters.json', function(data) {
+g.get('<?=$ppath?>/data/monsters.json', function(data) {
   monsterType = JSON.parse(data);
   assetLoaded('monsters');
 })
@@ -119,7 +119,7 @@ player = unitClass({
     name: '<?=$c->player['name'] ?>',
     className: '<?=$c->player['className'] ?>'
 });
-window.focus();
+//window.focus();
 /**
 <?=json_encode($c->player['inventory'])?>
  */

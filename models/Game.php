@@ -20,7 +20,7 @@ class Game {
     $itemType = self::shuffleItems($itemType, "potion", true);
     $itemType = self::nameLoremItems($itemType, "Scroll of ");
     $path = gila::dir(LOG_PATH.'/games/'.$gameId.'/');
-    file_put_contents($path.'monsters.json', json_encode($monsterType));
+    //file_put_contents($path.'monsters.json', json_encode($monsterType));
     file_put_contents($path.'items.json', json_encode($itemType));
 
     return $gameId;

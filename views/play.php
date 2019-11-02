@@ -44,17 +44,7 @@ $permadeath_url = GPACKAGE.'/permadeath';
   <?php } ?>
 </body>
 
-<?php if($_COOKIE['amads']=='true' || $_COOKIE['ref']=='') { ?>
-<div style="position:absolute;right:0;left:0;top:0;bottom:0;background:rgba(0,0,0,0.8);
-  text-align:center" id="admenu">
-  <div class="centered">
-  <div id="amzn-assoc-ad-18fde7bd-012f-4d52-9b3f-adf64d4c48bf"></div>
-  <script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=18fde7bd-012f-4d52-9b3f-adf64d4c48bf"></script>
-  <br>
-  <span onclick="admenu.style.display='none';setGameStatus('play')" class="play-btn">Continue</span>
-  </div>
-</div>
-<?php } ?>
+<?php include_once(__DIR__.'/adpopup.php') ?>
 
 <?php include __DIR__.'/loadData.php'?>
 <script>

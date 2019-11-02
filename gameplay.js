@@ -3,21 +3,20 @@ itemImg=[];
 var itemImgPath = [
   ['basic','Basic.png'],
   ['door','Door.png'],
-  ['obj','objects.png'],
-  ['sparks','sparks.png'],
   ['items','Items.png'],
   ['shortwep','Items/ShortWep.png'],
   ['medwep','Items/MedWep.png'],
-  ['rock','Items/Rock.png'],
+  ['staff','staff.png'],
   ['armor','Items/Armor.png'],
-  ['potion','Items/Potion.png'],//
-  ['scroll','Items/Scroll.png'],//
   ['floor','Objects/Floor.png'],
   ['tile','Objects/Tile.png'],
   ['player0','Characters/Player0.png'],
   ['player1','Characters/Player1.png'],
   ['playerR0','Characters/PlayerR0.png'],
   ['playerR1','Characters/PlayerR1.png'],
+  ['pit0','Pit0.png'],
+  ['pit1','Pit1.png'],
+  ['sparks','sparks.png'],
   ['rodent0','Characters/Rodent0.png'],
   ['rodent1','Characters/Rodent1.png'],
   ['pest0','Characters/Pest0.png'],
@@ -29,24 +28,16 @@ var itemImgPath = [
   ['effect1','Objects/Effect1.png'],
   ['key','Items/Key.png'],
   ['gauze','../tile/gauze.png'],
-  ['light','Items/Light.png'],//
-  ['shield','Items/Shield.png'],//
-  ['ammo','Items/Ammo.png'],//
-  ['staff','staff.png'],
-  ['book','Items/Book.png'],//
-  ['pit0','Pit0.png'],
-  ['pit1','Pit1.png'],
-  ['gold','gold.png'],//
-  ['trap','Objects/Trap1.png'],//
-  ['chest0','Items/Chest0.png'],//
-  ['chest1','Items/Chest1.png'],//
+  ['light','Items/Light.png'],
   ['status','status.png'],
   ['undead0','Characters/Undead0.png'],
   ['undead1','Characters/Undead1.png'],
+  ['obj','objects.png'],
   ['reptile0','Characters/Reptile0.png'],
   ['reptile1','Characters/Reptile1.png'],
   ['bird0','Characters/Avian0.png'],
   ['bird1','Characters/Avian1.png']
+  //['rock','Items/Rock.png'],
 ]
 for(let i=0;i<itemImgPath.length;i++) {
     itemImg[itemImgPath[i][0]] = new Image();
