@@ -302,5 +302,9 @@
 },
 {
   "sprite": ["pest", 2, 0], "name": "rice bug", "animated":true
+},
+{
+  "sprite": ["player", 6, 4], "name": "merchant", "animated":true,
+  "block": true, "store": true
 }
 ]

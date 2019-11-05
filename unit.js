@@ -312,6 +312,10 @@ function unitClass (options) {
             logMsg("You find a "+objType.name);
             renderMap();
           }
+          if(objType.store==true) {
+            createSellMenu()
+            return false;
+          }
           if(objType.block==true) {
             if(typeof objType.close_to!='undefined') {
               obj.type = findObjectType(objType.close_to, obj.type);
@@ -545,10 +549,11 @@ function unitClass (options) {
     }
 
     that.addXP = function (x) {
-      that.xp += x  
+      that.xp += x*6 
       if(that.xp > that.levelXP()) {
         that.xp -= that.levelXP()
         that.level++
+        that.skillPoints++
       }
       updateStats()
     }
@@ -673,6 +678,7 @@ function unitClass (options) {
                 logMsg('The '+monsters[mi].typeName()+' is vulnerable to fire')
               }
               monsters[mi].hp -= damage
+              if(monsters[mi].hp<0) that.addXP(monsters[mi].getLevel())
             }
           }
         }
@@ -690,7 +696,7 @@ function unitClass (options) {
             if(mi > -1) {
               damage = 5+Math.floor(Math.random()*(5+that.intelligence))
               if(monsters[mi].hasAttr('resist','shock')) {
-                logMsg('The '+monsters[mi].typeName()+' is resists to shock')
+                logMsg('The '+monsters[mi].typeName()+' resists to shock')
                 damage -= 5
               }
               if(monsters[mi].hasAttr('weak','shock')) {
@@ -699,6 +705,7 @@ function unitClass (options) {
               }
               monsters[mi].hp -= damage
               monsters[mi].turnTime -= 50
+              if(monsters[mi].hp<0) that.addXP(monsters[mi].getLevel())
             }
           }
         }
@@ -709,6 +716,7 @@ function unitClass (options) {
             if(typeof _type.class!='undefined')
             if(typeof mtype.class=='undefined' || mtype.class!=_type.class) continue;
             monsters[mi].hp -= 5+that.intelligence*2
+            if(monsters[mi].hp<0) that.addXP(monsters[mi].getLevel())
           }
           renderMap()
           setGameStatus('play')
@@ -737,7 +745,8 @@ function unitClass (options) {
                 }
                 setTimeout(function(){
                     for(let mi=0;mi<lightMonsters.length;mi++) {
-                        lightMonsters[mi].hp -= 5+that.intelligence
+                      lightMonsters[mi].hp -= 5+that.intelligence
+                      if(lightMonsters[mi].hp<0) that.addXP(lightMonsters[mi].getLevel())
                     }
                     setGameStatus('play')
                 }, 1000);
@@ -797,6 +806,7 @@ function unitClass (options) {
               }
               if(monster !== null) {
                 monster.hp -= that.arrowDamage()
+                if(monster.hp<0) that.addXP(monster.getLevel())
               }
               if(player.hasAbility('Archery') && player.arrows<12) {
                 if(map[targetx][targety]=='#' || map[targetx][targety]=='C') {
@@ -843,6 +853,7 @@ function unitClass (options) {
         if(monster !== null) {
           attack_points = 6 + Math.floor(Math.random() * 5) + that.throwDamage(thrownItem)
           monster.hp -= attack_points
+          if(monster.hp<0) that.addXP(monster.getLevel())
         }
         if(that.inventory[thrownItem].hp>2) {
           that.inventory[thrownItem].hp-=3
@@ -882,7 +893,10 @@ function unitClass (options) {
         attack_points = 4 + Math.floor(Math.random() * 4) + that.strength;
           if(attack_points<0) attack_points = 0
           monsters[mi].hp-=attack_points;
-          if(monsters[mi].hp<0) monsters[mi].hp==0;
+          if(monsters[mi].hp<0) {
+            monsters[mi].hp==0;
+            that.addXP(monsters[mi].getLevel())
+          }
           logMsg("You kick the "+monsters[mi].typeName()+' dealing '+attack_points+' damage');
           that.removeStatus('invisible')
           swingAudio.play();

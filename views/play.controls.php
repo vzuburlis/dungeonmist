@@ -45,10 +45,17 @@
   width: 16px; height: 16px; transform: scale(3); vertical-align:middle;
   margin: 16px 32px 32px 16px;"
   onclick="keypressPlay('e')"></div>
-  <div id="playerName">
-    <?=$c->player['name']?><br><span id="pXP" style="font-family:'Retro Gaming';display:none"></span>
+  <div>
+    <div id="playerName"><?=$c->player['name']?></div>
+    <br><span id="pXP" style="display:none"></span>
   </div>
-  
+  <!--div class="com-btn" id="skillPoint" style="background: rgba(0, 0, 0, 0)
+  url('src/dungeonrl/DawnLike/Basic.png') repeat scroll
+  -112px -112px; 
+  width: 16px; height: 16px; transform: scale(3); vertical-align:middle;
+  margin: 16px 32px 32px 16px;"
+  onclick="keypressPlay('K')"></div-->
+
  </div>
  <br><div id="statBoxStats" style="display:flex; flex-direction:column;">
   <div>
@@ -180,9 +187,12 @@
 </div>
 
 <div id="game-menu" class="menu">
-  <div class="menu--title"><span onclick="keyPress(27)" class="close">
-    <img src="<?=$tile_folder?>../images/close.svg">
-  </span></div>
+  <div class="menu--title">
+    <span id="game-menu--title"></span>
+    <span onclick="keyPress(27)" class="close">
+      <img src="<?=$tile_folder?>../images/close.svg">
+    </span>
+  </div>
   <div id="game-menu--list" class="menu--list"></div>
 </div>
 
@@ -245,3 +255,17 @@
     <p>Find your way to the next level, you dont have to fight every monster. On deadends search for hidden doors. Use candle or lamp to light the path in the darkest levels.</p>
   </div>
 </div>
+
+<?php
+/* if($_COOKIE['applixir']=='true') { ?>
+   <!-- Insert the V3-Snippet.txt file here -->
+   <div id="applixir_vanishing_div" hidden><iframe id="applixir_parent allow=autoplay"></iframe>
+   </div>
+   <!-- The applixir SDK file has all required CSS and JavaScript resources (use current version)-->
+   <script type='text/javascript' src="https://cdn.applixir.com/applixir.sdk3.0m.js"></script>
+   <script type="application/javascript">
+   invokeApplixirVideoUnit({zoneId: 2679});
+   </script>
+  <?php }
+  
+*/ ?>

@@ -112,7 +112,12 @@ function updateStats() {
 
   pArrows.innerHTML = player.arrows;
   pGold.innerHTML = player.gold
-  pXP.innerHTML = player.level+' '+player.xp+'/'+player.levelXP();
+  //if(player.skillPoints>0) {
+  //  skillPoint.style.display = 'inline-block'
+  //} else {
+  //  skillPoint.style.display = 'none'
+  //}
+  //pXP.innerHTML = 'Level '+player.level+' ('+player.xp+'/'+player.levelXP()+')';
   if(player.arrows>0) btnArrows.style.display='inline-block'; else btnArrows.style.display='none';
   if(mapItems.includes('key')) document.getElementById("pKey").style.display = 'inline-block'
   if(mapItems.includes('chest_key')) document.getElementById("pChestKey").style.display = 'inline-block'
@@ -673,7 +678,7 @@ function setGameStatus(v) {
       btnCancelD.style.display = 'inline-block'
     }
     if(v=='help-menu'||v=='equip-menu'||v=='action-menu'||v=='use-menu'
-    ||v=='description-menu'||v=='throw-menu'||v=='game-menu') {
+    ||v=='description-menu'||v=='throw-menu'||v=='game-menu'||v=='sell-menu') {
       btnCancelM.style.display = 'inline-block'
     }
     if(v=='equip-menu'||v=='action-menu'||v=='use-menu'
@@ -718,6 +723,7 @@ function keyPress (e) {
   if (value == 'play') keypressPlay(code);
   if (value == 'target') keypressTarget(code);
   if (value == 'use-menu') keypressUse(code);
+  if (value == 'sell-menu') keypressSell(code);
   if (value == 'throw-menu') keypressThrow(code);
   if (value == 'equip-menu') keypressEquip(code);
   if (value == 'action-menu') keypressAction(code);
@@ -783,6 +789,28 @@ function closeHelpMenu() {
   popup = document.getElementById("help-menu")
   popup.style.visibility = 'hidden'
   setGameStatus('play')
+}
+
+function keypressSell (code) {
+  if(code==27 || code==88) {
+    popup = document.getElementById("game-menu")
+    popup.style.visibility = 'hidden'
+    setGameStatus('play');
+    return
+  }
+  if(code>64 && code<81) {
+    let i = comToItem[code]
+    if(i < player.inventory.length) {
+        setGameStatus('play');
+        _itemType = player.inventory[i].itemType
+        _type = itemType[_itemType]
+        _price = 1
+        logMsg("You sold the " + getItemName(_itemType) + ' for ' + _price + ' gold');
+        popup = document.getElementById("game-menu")
+        popup.style.visibility = 'hidden'
+        turnPlayed = true;
+    }
+  }
 }
 
 function keypressEquip (code) {
@@ -1411,6 +1439,7 @@ selectTarget = [];
 
 function createSellMenu(){
   closeActionMenu();
+  document.getElementById("game-menu--title").innerHTML = 'Sell'
   popup = document.getElementById("game-menu")
   list = document.getElementById("game-menu--list")
   list.innerHTML = ""
@@ -1441,11 +1470,12 @@ function createSellMenu(){
     } else hp=''
     _enc = null
     if(typeof player.inventory[i].enchantment!='undefined') _enc = player.inventory[i].enchantment
-    list.innerHTML += '<div class="menu-item" onclick="keypressSell('+(com)+')">&#'+(com+32)+'; <div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div> <span class="item-name'+itemClass+'">'+getItemName(_itemType)+hp+_nx+'</span></div>'
+    list.innerHTML += '<div class="menu-item" onclick="keypressSell('+(com)+')">&#'+(com+32)+'; <div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div> <span class="item-name'+itemClass+'">'+getItemName(_itemType)+hp+_nx
+    list.innerHTML += '<br>$$</span></div>'
     com++
   }
   popup.style.visibility = "visible"
-  setGameStatus('game-menu')
+  setGameStatus('sell-menu')
 }
 
 function mousemoveOnMap(e, canva) {

@@ -217,6 +217,7 @@ class MapController extends controller
       $game = $pnk->getRow(['id'=>$this->gameId]);
       $pnk = new gTable('playerclass');
       $class = $pnk->getRow(['id'=>$game['class_id']]);
+      view::set('playerclass', $class);
       $this->playerItem = $class['item'] ? explode(',',$class['item']) : null;
       $this->player["sprite"] = ['player', (int)$class['spriteX'], (int)$class['spriteY']];
       $this->player["gameTurn"] = $game['game_turns'];
@@ -1022,6 +1023,8 @@ class MapController extends controller
           "abilities" => [],
           "inventory" => [],
           "status" => [],
+          "skillPoints" => 0,
+          "level"=>1,
           "lore" => ['items'=>[]],
           "gameTurn" => 0
       ];

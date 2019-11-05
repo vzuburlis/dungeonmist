@@ -94,6 +94,8 @@ button{
     </div>
     <br><br>
     <div id="">
+      <a href="https://www.facebook.com/dungeonmist" class="play-btn">Like on Facebook</a>
+      <br>
       <a href="<?=$new_url?>" class="play-btn">New Game</a>
       <br>
       <a href="<?=gila::base_url(GPACKAGE)?>" class="play-btn">Main Menu</a>
