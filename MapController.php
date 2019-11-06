@@ -390,7 +390,7 @@ class MapController extends controller
       $this->addItemByName($this->randPos(), ['Gold','3 Gold','5 Gold']);
       $this->addItemByName($this->randPos(), ['Gold','3 Gold','5 Gold']);
 
-      for($i=0;$i<2-$this->levelTask['spawnedItems'];$i++) if(count($this->player['inventory'])<7) {
+      for($i=0;$i<2-$this->levelTask['spawnedItems'];$i++) {
         $this->addRandomItem();
         $this->spawnMonster($this->randPos());
       }
@@ -472,7 +472,7 @@ class MapController extends controller
               $args['hidden_monster'] = $monsterName;
             }
           } else if(isset($step['object_item'])) {
-            if($itemName = $this->fromList($step['object_item'])) if(count($this->player['inventory'])<7 || rand(0,1)==0) {
+            if($itemName = $this->fromList($step['object_item'])) if(count($this->player['inventory'])<5 || rand(0,1)==0) {
               $this->levelTask['spawnedItems']++;
               $args['item'] = $itemName;
             }
@@ -491,8 +491,7 @@ class MapController extends controller
           $objType = $this->findObjectType($objName);
           $args = [];
           if(isset($step['object_item'])) {
-            if($itemName = $this->fromList($step['object_item'])) if(count($this->player['inventory'])<5) {
-              //$this->levelTask['spawnedItems']++;
+            if($itemName = $this->fromList($step['object_item'])) if(count($this->player['inventory'])<5 || rand(0,1)==0) {
               $args = ['item'=>$itemName];
             }
           }

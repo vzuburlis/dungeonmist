@@ -14,11 +14,11 @@ $permadeath_url = GPACKAGE.'/permadeath';
 <head>
     <base href="<?=gila::base_url()?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> 
-    <meta property="og:url"         content="https://caveofcenbeald.com/dungeonrl/play/" />
+    <meta property="og:url"         content="https://dungeonmist.com/play/" />
     <meta property="og:type"        content="website" />
-    <meta property="og:title"       content="Dungeon Roguelike" />
+    <meta property="og:title"       content="Dungeon Mist" />
     <meta property="og:description" content="A free roguelike browser game" />
-    <meta property="og:image"       content="https://caveofcenbeald.com/src/dungeonrl/images/bg.png" />
+    <meta property="og:image"       content="https://dungeonmist.com/src/dungeonrl/images/bg.png" />
     <?=view::script("lib/gila.min.js")?>
     <?=view::script($unit_js_path)?>
     <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">

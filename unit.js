@@ -496,6 +496,10 @@ function unitClass (options) {
 
     that.pickItem = function (iti) {
       let _type = items[iti][2]
+      if(typeof itemType[_type].autopick=='undefined' && that.inventory.length>14) {
+        logMsg("You cannot carry any more items");
+        return
+      }
       __type = itemType[_type].type
       _name = itemType[_type].name
       _data = {}

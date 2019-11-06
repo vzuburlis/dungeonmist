@@ -17,6 +17,12 @@ body{
 
 <head>
     <base href="<?=gila::base_url()?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> 
+    <meta property="og:url"         content="https://dungeonmist.com/play/" />
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content="Dungeon Mist" />
+    <meta property="og:description" content="A free roguelike browser game" />
+    <meta property="og:image"       content="https://dungeonmist.com/src/dungeonrl/images/bg.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?=view::css("lib/gila.min.css")?>
     <?=view::script("lib/gila.min.js")?>

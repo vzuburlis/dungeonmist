@@ -223,11 +223,13 @@
   </span></div>
   <div id="action-menu--list" class="menu--list">
   <div class="menu-item" onclick="keypressPlay('h')">h <span class="item-name">Search</span></div>
+  <div class="menu-item" onclick="keypressPlay('t')">t <span class="item-name">Throw weapon</span></div>
   <div class="menu-item" onclick="keypressPlay('Z')">Z <span class="item-name">Rest</span></div>
   <div class="menu-item" onclick="keypressPlay('j')">j <span class="item-name">Jump</span></div>
   <div class="menu-item" onclick="keypressPlay('k')">k <span class="item-name">Kick</span></div>
-  <div class="menu-item" onclick="keypressPlay('t')">t <span class="item-name">Throw weapon</span></div>
   <div class="menu-item" onclick="keypressPlay('l')">l <span class="item-name">Look around</span></div>
+  <div class="menu-item" onclick="keypressPlay('D')">D <span class="item-name">Destroy item</span></div>
+  <div class="menu-item" onclick="keypressPlay('L')">D <span class="item-name">Listen</span></div>
   <div class="menu-item" onclick="keypressPlay('V')">V <span class="item-name">View from next tile</span></div>
   </div>
 </div>

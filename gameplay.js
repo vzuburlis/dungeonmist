@@ -723,6 +723,7 @@ function keyPress (e) {
   if (value == 'play') keypressPlay(code);
   if (value == 'target') keypressTarget(code);
   if (value == 'use-menu') keypressUse(code);
+  if (value == 'destroy-menu') keypressDestroyItem(code);
   if (value == 'sell-menu') keypressSell(code);
   if (value == 'throw-menu') keypressThrow(code);
   if (value == 'equip-menu') keypressEquip(code);
@@ -863,6 +864,29 @@ function keypressEquip (code) {
             turnPlayed = true;
         }
     }
+}
+
+function keypressDestroyItem (code) {
+  if(code==27 || code==88) {
+    popup = document.getElementById("game-menu")
+    popup.style.visibility = 'hidden'
+    setGameStatus('play');
+    return
+  }
+  if(code>64 && code<81) {
+    let i = comToItem[code]
+    if(i < player.inventory.length) {
+        setGameStatus('play');
+        _itemType = player.inventory[i].itemType
+        _type = itemType[_itemType]
+        _price = 1
+        logMsg("You destroyed the " + getItemName(_itemType));
+        player.deleteFromInv(i);
+        popup = document.getElementById("game-menu")
+        popup.style.visibility = 'hidden'
+        turnPlayed = true;
+    }
+  }
 }
 
 function keypressUse (code) {
@@ -1266,6 +1290,7 @@ function keypressPlay (code) {
         targetx=player.x
         targety=player.y
       }
+      renderMap();
       selectTarget.action = function(){
         desc = getTargetDesriptions(targetx, targety)
         popup = document.getElementById("description-menu")
@@ -1289,6 +1314,39 @@ function keypressPlay (code) {
     }
     else if (code == ' ' || code == '32') { // space
        player.moveLevel();
+    }
+    else if (code=='D') { // D
+      popup = document.getElementById("game-menu")
+      list = document.getElementById("game-menu--list")
+      list.innerHTML = ""
+      title = document.getElementById("game-menu--title")
+      title.innerHTML = "Destroy Item"
+      com = 65
+      comToItem = []
+      for(i=0; i<player.inventory.length; i++) {
+        if(typeof player.inventory[i].itemType=='undefined') continue
+        _itemType = player.inventory[i].itemType
+        if(typeof itemType[_itemType]=='undefined') continue
+        _type = itemType[_itemType]
+        src = itemImg[_type.sprite[0]].src
+        sx = _type.sprite[1]*16+'px'
+        sy = _type.sprite[2]*16+'px'
+        if(player.weapon==i || player.eShield==i || player.eArmor==i) continue;
+        comToItem[com] = i
+
+        if(typeof _type.hp!='undefined') {
+          hp=' '+player.inventory[i].hp+'/'+_type.hp
+        } else hp=''
+        _nx = ''
+        if(typeof player.inventory[i].stock!='undefined') {
+          if(player.inventory[i].stock>1) _nx = ' x'+player.inventory[i].stock
+        }
+        if(_nx!='' && hp!='') console.error(getItemName(_itemType)+' uses hp and stock')
+        list.innerHTML += '<div class="menu-item" onclick="keypressDestroyItem('+(com)+')">&#'+(com+32)+'; <div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div> <span class="item-name">'+getItemName(_itemType)+hp+_nx+'</span></div>'
+        com++
+      }
+      popup.style.visibility = "visible"
+      setGameStatus('destroy-menu')
     }
     else if (code == '85' || code=='u') { // u
       // i 73

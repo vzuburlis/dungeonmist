@@ -1,3 +1,6 @@
+*1.0.14*
+Destroy items with 'D' key
+
 *1.0.13*
 Throw weapons with 't' key
 Look target description with 'l' key
