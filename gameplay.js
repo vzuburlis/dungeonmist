@@ -1513,8 +1513,10 @@ function keypressPlay (code) {
       setGameStatus('action-menu')
     }
     else if (code == '76' || code=='L') { // \
+      closeActionMenu();
       popup = document.getElementById("game-menu")
       list = document.getElementById("game-menu--list")
+      document.getElementById("game-menu--title").innerHTML = ''
       sounds = []
       for (i=0; i<monsters.length; i++) if(monsters[i].hp>0){
         x = monsters[i].x
