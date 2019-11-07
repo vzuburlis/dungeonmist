@@ -13,11 +13,11 @@ g.get('<?=$gamedata_url?>/<?=$c->gameId?>/items.json', function(data) {
   updateStats();
   assetLoaded('items');
 })
-g.get('<?=$ppath?>data/itemEnchantments.json?v=1013', function(data) {
+g.get('<?=$ppath?>data/itemEnchantments.json?v=1014', function(data) {
   itemEnchantment = JSON.parse(data);
   assetLoaded('itemEnchantments');
 })
-g.get('<?=$ppath?>data/objects.json?v=1013', function(data) {
+g.get('<?=$ppath?>data/objects.json?v=1014', function(data) {
   objectType = JSON.parse(data);
   assetLoaded('objects');
 })
@@ -115,6 +115,7 @@ player = unitClass({
     eArmor: <?=$c->player['eArmor'] ?? 'null'?>,
     eShield: <?=$c->player['eShield'] ?? 'null'?>,
     lore: <?=json_encode($c->player['lore'] ?? ['items'=>[]])?>,
+    uniqueMonsters: <?=json_encode($c->player['uniqueMonsters'] ?? [])?>,
     gameTurn: <?=$c->player['gameTurn'] ?? '0'?>,
     turnsToRest: <?=$c->player['turnsToRest'] ?? '0'?>,
     name: '<?=$c->player['name'] ?>',

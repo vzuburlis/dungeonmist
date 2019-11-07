@@ -1,6 +1,13 @@
 [
   [
     {
+      "name": "merchant",
+      "block_object":"merchant",
+      "level": 8
+    }
+  ],
+  [
+    {
       "name": "keyDoor",
       "item":"Key"
     },
@@ -96,7 +103,7 @@
     },
     {
       "block_object":"Locked Chest",
-      "object_item":["Scroll of Lighting", "Potion of Strength", "Arrow", "Scroll of Blink"]
+      "object_random_item": true
     }
   ],
   [
@@ -133,8 +140,8 @@
     {
       "name": "scroll_of_map",
       "block_object":"Small Chest",
-      "object_item":["Scroll of Map", "Potion of Health"],
-      "level":3
+      "object_item":["Scroll of Map", "Potion of Healing"],
+      "level":2
     }
   ],
   [

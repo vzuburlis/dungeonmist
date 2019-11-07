@@ -1,5 +1,5 @@
-<?php /*
-if($c->level%2==0 && $c->level<10) { //if($_COOKIE['amads']=='true') { ?>
+<?php 
+if($c->level%3==0 && $c->level<10) { //if($_COOKIE['amads']=='true') { ?>
 <div style="position:absolute;right:0;left:0;top:0;bottom:0;background:rgba(0,0,0,0.95);
   text-align:center;z-index: 1100;padding: 0;overflow-y: scroll;" id="admenu">
   <div class="centered" style="max-height:100%;overflow-y: scroll;">
@@ -10,7 +10,7 @@ if($c->level%2==0 && $c->level<10) { //if($_COOKIE['amads']=='true') { ?>
     <span onclick="admenu.style.display='none';setGameStatus('play')" class="play-btn">Continue</span>
   </div>
 </div>
-<?php } */ ?>
+<?php } ?>
 
 <?php
 if($c->level==1 && $c->player['level']==1) { ?>

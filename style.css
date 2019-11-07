@@ -376,3 +376,8 @@ button{
   top:50%;
   transform:translate(-50%, -50%);
 }
+
+.css-bg {
+  width: 16px; height: 16px; transform: scale(3); vertical-align:middle;
+  margin: 16px 32px 32px 16px;
+}

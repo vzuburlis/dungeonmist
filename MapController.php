@@ -41,9 +41,9 @@ class MapController extends controller
     function __construct ()
     {
       include_once __DIR__."/models/Game.php";
-      view::set('style_css_path', gila::base_url('src/'.GPACKAGE.'/style.css?v=1013'));
-      view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=1013');
-      view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=1013');
+      view::set('style_css_path', gila::base_url('src/'.GPACKAGE.'/style.css?v=1014'));
+      view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=1014');
+      view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=1014');
 
       $this->gameId = $_COOKIE['gameId'] ?? null;
 
@@ -467,15 +467,19 @@ class MapController extends controller
           $objType = $this->findObjectType($objName);
           $args = [];
 
-          if(isset($step['hidden_monster'])) if(rand(0,30)==0){
+          if(isset($step['hidden_monster']) && rand(0,30)==0){
             if($monsterName = $this->fromMonsterList($step['hidden_monster'])) {
               $args['hidden_monster'] = $monsterName;
             }
-          } else if(isset($step['object_item'])) {
-            if($itemName = $this->fromList($step['object_item'])) if(count($this->player['inventory'])<5 || rand(0,1)==0) {
+          } else if(isset($step['object_item']) && rand(0,4)>0) {
+            if($itemName = $this->fromList($step['object_item'])) {
+              //if(count($this->player['inventory'])<5 || rand(0,1)==0) {
               $this->levelTask['spawnedItems']++;
               $args['item'] = $itemName;
             }
+          } else if(isset($step['object_random_item']) && rand(0,4)>0) {
+            $this->levelTask['spawnedItems']++;
+            $args['item'] = $this->randomItemType();
           }
           if(isset($step['object_trap'])) if(rand(0,15)==0) {
             $n = count($step['object_trap']);
@@ -1025,6 +1029,7 @@ class MapController extends controller
           "skillPoints" => 0,
           "level"=>1,
           "lore" => ['items'=>[]],
+          "uniqueMonsters"=>[],
           "gameTurn" => 0
       ];
 

@@ -1,3 +1,38 @@
+<p id="msgBox"></p>
+<div id="statBox">
+ <div style="display:inline-flex">
+  <div class="com-btn css-bg" style="background: rgba(0, 0, 0, 0)
+  url('src/dungeonrl/DawnLike/Characters/Player0.png') repeat scroll
+  -<?=$c->player['sprite'][1]*16?>px -<?=$c->player['sprite'][2]*16?>px;
+  margin: 16px 32px 32px 16px"
+  onclick="keypressPlay('e')"></div>
+  <div>
+    <div id="playerName"><?=$c->player['name']?></div>
+    <br><span id="pXP" style="display:none"></span>
+  </div><?php /*
+  <!--div class="com-btn css-bg" id="skillPoint" style="background: rgba(0, 0, 0, 0)
+  url('src/dungeonrl/DawnLike/Basic.png') repeat scroll -112px -112px; "
+  onclick="keypressPlay('K')"></div--> */?>
+
+ </div>
+ <br><div id="statBoxStats" style="display:flex; flex-direction:column;">
+  <div>
+    <div class="stat--img" style="background: rgba(0, 0, 0, 0)
+        url('src/dungeonrl/DawnLike/gold.png') repeat scroll -0px -0px;">
+    </div> <span id="pGold"></span>
+  </div>
+  <div id="eWeapon" style="display:none">
+    <div id="eWeaponImg" class="stat--img"></div> <span id="pAttack">0<span>
+  </div>
+  <div id="eShield" style="display:none">
+    <div id="eShieldImg" class="stat--img"></div> <span id="pShield">0<span>
+  </div>
+  <div id="eArmor" style="display:none">
+    <div id="eArmorImg" class="stat--img"></div> <span id="pArmor">0<span>
+  </div>
+ </div>
+</div>
+
 <div id="controls" style="width:10em;height:10em">
 <?php if(!isset($_COOKIE['ref']) || $_COOKIE['ref']!=='kongregate') { ?>
   <svg width="100%" height="100%" viewBox="0 0 120 120" >
@@ -31,58 +66,24 @@
 <?php } ?>
 </div>
 
+<?php if(!isset($_COOKIE['ref']) && $_COOKIE['ref']=='kongregate') { ?>
+<div style="display:inline-block; overflow: visible; position:absolute; left:0; bottom:0;">
+  e Equip &nbsp;&nbsp;u Use&nbsp;&nbsp;? Help
+</div>
+<?php } else { ?>
 <div id="controls-commands">
   e Equip &nbsp;&nbsp;u Use&nbsp;&nbsp;? Help
 </div>
+<?php } ?>
 
-
-<p id="msgBox"></p>
-<div id="statBox">
- <div style="display:inline-flex">
-  <div class="com-btn" style="background: rgba(0, 0, 0, 0)
-  url('src/dungeonrl/DawnLike/Characters/Player0.png') repeat scroll
-  -<?=$c->player['sprite'][1]*16?>px -<?=$c->player['sprite'][2]*16?>px;
-  width: 16px; height: 16px; transform: scale(3); vertical-align:middle;
-  margin: 16px 32px 32px 16px;"
-  onclick="keypressPlay('e')"></div>
-  <div>
-    <div id="playerName"><?=$c->player['name']?></div>
-    <br><span id="pXP" style="display:none"></span>
-  </div>
-  <!--div class="com-btn" id="skillPoint" style="background: rgba(0, 0, 0, 0)
-  url('src/dungeonrl/DawnLike/Basic.png') repeat scroll
-  -112px -112px; 
-  width: 16px; height: 16px; transform: scale(3); vertical-align:middle;
-  margin: 16px 32px 32px 16px;"
-  onclick="keypressPlay('K')"></div-->
-
- </div>
- <br><div id="statBoxStats" style="display:flex; flex-direction:column;">
-  <div>
-    <div class="stat--img" style="background: rgba(0, 0, 0, 0)
-        url('src/dungeonrl/DawnLike/gold.png') repeat scroll -0px -0px;">
-    </div> <span id="pGold"></span>
-  </div>
-  <div id="eWeapon" style="display:none">
-    <div id="eWeaponImg" class="stat--img"></div> <span id="pAttack">0<span>
-  </div>
-  <div id="eShield" style="display:none">
-    <div id="eShieldImg" class="stat--img"></div> <span id="pShield">0<span>
-  </div>
-  <div id="eArmor" style="display:none">
-    <div id="eArmorImg" class="stat--img"></div> <span id="pArmor">0<span>
-  </div>
- </div>
-</div>
 
 <div id="levelBox" style="position:absolute; right:0; text-align:right">
   <div style="display:inline-flex">
    <div>Level <?=$c->level?></div>
-   <div class="com-btn" style="background: rgba(0, 0, 0, 0)
-   url('src/dungeonrl/tile/minimap.png') repeat scroll
-   -0px -0px; margin: 16px 24px 32px 32px;
-   width: 16px; height: 16px; transform: scale(3); vertical-align:middle"
-   onclick="toggleMinimap()" style="vertical-align:middle"></div>
+   <div class="com-btn css-bg" style="background: rgba(0, 0, 0, 0)
+   url('src/dungeonrl/tile/minimap.png') repeat scroll -0px -0px;
+   margin: 16px 24px 32px 32px;"
+   onclick="toggleMinimap()"></div>
   </div>
   <br>
   <div style="text-align: right;">
@@ -92,28 +93,24 @@
 </div>
 
 <div id="btnTabsM" style="z-index:1001;display:none">
-  <div class="com-btn" style="background: rgba(0, 0, 0, 0)
+  <div class="com-btn css-bg" style="background: rgba(0, 0, 0, 0)
     url('src/dungeonrl/DawnLike/Characters/Player0.png') repeat scroll
     -<?=$c->player['sprite'][1]*16?>px -<?=$c->player['sprite'][2]*16?>px;
-    width: 16px; height: 16px; transform: scale(3); vertical-align:middle;
     margin: 32px 32px 16px 32px;"
     onclick="setGameMenuKey('e')"></div>
-  <div class="com-btn" style="background: rgba(0, 0, 0, 0)
+  <div class="com-btn css-bg" style="background: rgba(0, 0, 0, 0)
     url('src/dungeonrl/DawnLike/Basic.png') repeat scroll
     -0px -64px;
-    width: 16px; height: 16px; transform: scale(3); vertical-align:middle;
     margin: 32px 32px 16px 32px;"
     onclick="setGameMenuKey('u')"></div>
-  <div class="com-btn" style="background: rgba(0, 0, 0, 0)
+  <div class="com-btn css-bg" style="background: rgba(0, 0, 0, 0)
     url('src/dungeonrl/DawnLike/Objects/Effect0.png') repeat scroll
     -0px -400px;
-    width: 16px; height: 16px; transform: scale(3); vertical-align:middle;
     margin: 32px 32px 16px 32px;"
     onclick="setGameMenuKey('t')"></div>
-  <div class="com-btn" style="background: rgba(0, 0, 0, 0)
+  <div class="com-btn css-bg" style="background: rgba(0, 0, 0, 0)
     url('src/dungeonrl/DawnLike/status.png') repeat scroll
     -48px -0px;
-    width: 16px; height: 16px; transform: scale(3); vertical-align:middle;
     margin: 32px 32px 16px 32px;"
     onclick="setGameMenuKey('\\')"></div>
 </div>
@@ -222,15 +219,15 @@
     <img src="<?=$tile_folder?>../images/close.svg">
   </span></div>
   <div id="action-menu--list" class="menu--list">
-  <div class="menu-item" onclick="keypressPlay('h')">h <span class="item-name">Search</span></div>
-  <div class="menu-item" onclick="keypressPlay('t')">t <span class="item-name">Throw weapon</span></div>
-  <div class="menu-item" onclick="keypressPlay('Z')">Z <span class="item-name">Rest</span></div>
-  <div class="menu-item" onclick="keypressPlay('j')">j <span class="item-name">Jump</span></div>
-  <div class="menu-item" onclick="keypressPlay('k')">k <span class="item-name">Kick</span></div>
-  <div class="menu-item" onclick="keypressPlay('l')">l <span class="item-name">Look around</span></div>
-  <div class="menu-item" onclick="keypressPlay('D')">D <span class="item-name">Destroy item</span></div>
-  <div class="menu-item" onclick="keypressPlay('L')">D <span class="item-name">Listen</span></div>
-  <div class="menu-item" onclick="keypressPlay('V')">V <span class="item-name">View from next tile</span></div>
+  <div class="menu-item" onclick="keypressPlay('h')"><span class="item-name">Search</span></div>
+  <div class="menu-item" onclick="keypressPlay('t')"><span class="item-name">Throw weapon</span></div>
+  <div class="menu-item" onclick="keypressPlay('Z')"><span class="item-name">Rest</span></div>
+  <div class="menu-item" onclick="keypressPlay('j')"><span class="item-name">Jump</span></div>
+  <div class="menu-item" onclick="keypressPlay('k')"><span class="item-name">Kick</span></div>
+  <div class="menu-item" onclick="keypressPlay('l')"><span class="item-name">Look around</span></div>
+  <div class="menu-item" onclick="keypressPlay('D')"><span class="item-name">Destroy item</span></div>
+  <div class="menu-item" onclick="keypressPlay('L')"><span class="item-name">Listen</span></div>
+  <div class="menu-item" onclick="keypressPlay('V')"><span class="item-name">View from next tile</span></div>
   </div>
 </div>
 
@@ -250,6 +247,7 @@
       <tr><td>f&nbsp;<td>Fire arrow
       <tr><td>t&nbsp;<td>Throw weapon
       <tr><td>l&nbsp;<td>Look around
+      <tr><td>D&nbsp;<td>Destroy item
       <tr><td>V&nbsp;<td>View from next tile
     </table>
   </div>

@@ -1,5 +1,6 @@
 *1.0.14*
 Destroy items with 'D' key
+Added merchant, appear from level 8
 
 *1.0.13*
 Throw weapons with 't' key

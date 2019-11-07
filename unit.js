@@ -313,7 +313,8 @@ function unitClass (options) {
             renderMap();
           }
           if(objType.store==true) {
-            createSellMenu()
+            //createSellMenu()
+            createStoreMenu()
             return false;
           }
           if(objType.block==true) {
@@ -506,6 +507,7 @@ function unitClass (options) {
       for(i in items[iti]) if(!isNaN(i)) _data[i] = items[iti][i]
       _data.itemType = _type
       _data.stock = 1
+      if(typeof itemType[_type].hp!='undefined') _data.hp = itemType[_type].hp
       if(typeof items[iti][3]!='undefined') _data.hp = items[iti][3]
       if(typeof items[iti].attack!='undefined') _data.attack = items[iti].attack
       if(typeof items[iti].armor!='undefined') _data.armor = items[iti].armor

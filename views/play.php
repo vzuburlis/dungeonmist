@@ -44,6 +44,12 @@ var gameLevel = <?=$c->level?>;
 //  ? 'embedded in iframe or object'
 //  : 'not embedded or cross-origin'
 
+merchantInventory = [
+  {itemType:9, hp:12, attack:2},
+  {itemType:0},{itemType:2},{itemType:3},{itemType:4},
+  {itemType:<?=$c->findItemType("Scroll of Map")?>}
+]
+
 function moveLevel(direction=null) {
   fm = dataToUpdate()
   if(direction!==null) {

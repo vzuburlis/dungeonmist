@@ -678,7 +678,7 @@ function setGameStatus(v) {
       btnCancelD.style.display = 'inline-block'
     }
     if(v=='help-menu'||v=='equip-menu'||v=='action-menu'||v=='use-menu'
-    ||v=='description-menu'||v=='throw-menu'||v=='game-menu'||v=='sell-menu') {
+    ||v=='description-menu'||v=='throw-menu'||v=='game-menu'||v=='sell-menu'||v=='buy-menu') {
       btnCancelM.style.display = 'inline-block'
     }
     if(v=='equip-menu'||v=='action-menu'||v=='use-menu'
@@ -725,6 +725,7 @@ function keyPress (e) {
   if (value == 'use-menu') keypressUse(code);
   if (value == 'destroy-menu') keypressDestroyItem(code);
   if (value == 'sell-menu') keypressSell(code);
+  if (value == 'buy-menu') keypressBuy(code);
   if (value == 'throw-menu') keypressThrow(code);
   if (value == 'equip-menu') keypressEquip(code);
   if (value == 'action-menu') keypressAction(code);
@@ -805,8 +806,52 @@ function keypressSell (code) {
         setGameStatus('play');
         _itemType = player.inventory[i].itemType
         _type = itemType[_itemType]
-        _price = 1
-        logMsg("You sold the " + getItemName(_itemType) + ' for ' + _price + ' gold');
+        soldPrice = getItemSellPrice(player.inventory[i])
+        if(typeof player.inventory[i].stock!='undefined') {
+          if(player.inventory[i].stock>1) _nx = ' x'+player.inventory[i].stock
+          soldPrice = soldPrice*player.inventory[i].stock
+        }
+        logMsg("You sold the " + getItemName(_itemType) + ' for ' + soldPrice + ' gold');
+        player.deleteFromInv(i)
+        player.gold += soldPrice
+        updateStats()
+        popup = document.getElementById("game-menu")
+        popup.style.visibility = 'hidden'
+        turnPlayed = true;
+    }
+  }
+}
+
+function keypressBuy (code) {
+  if(code==27 || code==88) {
+    popup = document.getElementById("game-menu")
+    popup.style.visibility = 'hidden'
+    setGameStatus('play');
+    return
+  }
+  obj = {
+    inventory: merchantInventory
+  }
+  if(code>64 && code<81) {
+    let i = comToItem[code]
+    if(i < obj.inventory.length) {
+        setGameStatus('play');
+        _itemType = obj.inventory[i].itemType
+        _type = itemType[_itemType]
+        soldPrice = getItemPrice(obj.inventory[i])
+        if(typeof obj.inventory[i].stock!='undefined') {
+          if(obj.inventory[i].stock>1) _nx = ' x'+obj.inventory[i].stock
+          soldPrice = soldPrice*obj.inventory[i].stock
+        }
+        if(player.gold<soldPrice) {
+          logMsg("You dont have enough gold for " + getItemName(_itemType))
+        } else {
+          logMsg("You buy the " + getItemName(_itemType) + ' for ' + soldPrice + ' gold');
+          player.gold -= soldPrice
+          _data = obj.inventory[i]
+          player.inventory.push(_data)
+        }
+        updateStats()
         popup = document.getElementById("game-menu")
         popup.style.visibility = 'hidden'
         turnPlayed = true;
@@ -1316,6 +1361,7 @@ function keypressPlay (code) {
        player.moveLevel();
     }
     else if (code=='D') { // D
+      closeActionMenu();
       popup = document.getElementById("game-menu")
       list = document.getElementById("game-menu--list")
       list.innerHTML = ""
@@ -1495,6 +1541,20 @@ function keypressPlay (code) {
 
 selectTarget = [];
 
+function createStoreMenu(){
+  //closeActionMenu();
+  document.getElementById("game-menu--title").innerHTML = 'Merchant'
+  popup = document.getElementById("game-menu")
+  list = document.getElementById("game-menu--list")
+  _greeting = "Hey man"
+  html = '<p>'+_greeting+" are you interested to trade?"+'</p>'
+  html += ' <span class="play-btn" onclick="createBuyMenu()">Buy</span>'
+  html += ' <span class="play-btn" onclick="createSellMenu()">Sell</span>'
+  list.innerHTML = html
+  popup.style.visibility = "visible"
+  setGameStatus('game-menu')
+}
+
 function createSellMenu(){
   closeActionMenu();
   document.getElementById("game-menu--title").innerHTML = 'Sell'
@@ -1507,6 +1567,8 @@ function createSellMenu(){
     if(typeof player.inventory[i].itemType=='undefined') continue
     _itemType = player.inventory[i].itemType
     if(typeof itemType[_itemType]=='undefined') continue
+    _price = getItemSellPrice(player.inventory[i])
+    if(_price==0) continue
     _type = itemType[_itemType]
     src = itemImg[_type.sprite[0]].src
     sx = _type.sprite[1]*16+'px'
@@ -1519,6 +1581,7 @@ function createSellMenu(){
     _nx = ''
     if(typeof player.inventory[i].stock!='undefined') {
       if(player.inventory[i].stock>1) _nx = ' x'+player.inventory[i].stock
+      _price = _price*player.inventory[i].stock
     }
     if(_nx!='' && hp!='') console.error(getItemName(_itemType)+' uses hp and stock')
 
@@ -1528,12 +1591,68 @@ function createSellMenu(){
     } else hp=''
     _enc = null
     if(typeof player.inventory[i].enchantment!='undefined') _enc = player.inventory[i].enchantment
-    list.innerHTML += '<div class="menu-item" onclick="keypressSell('+(com)+')">&#'+(com+32)+'; <div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div> <span class="item-name'+itemClass+'">'+getItemName(_itemType)+hp+_nx
-    list.innerHTML += '<br>$$</span></div>'
+    html  = '<div class="menu-item" onclick="keypressSell('+(com)+')">&#'+(com+32)+'; '
+    html += '<div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div> '
+    html += '<span class="item-name'+itemClass+'">'+getItemFullName(player.inventory[i], _enc)+hp+_nx
+    html += '</span> <span style="color:gold">$'+_price+'</span></div>'
+    list.innerHTML += html
     com++
   }
   popup.style.visibility = "visible"
   setGameStatus('sell-menu')
+}
+
+function createBuyMenu() {
+  closeActionMenu();
+  inventory = merchantInventory
+  document.getElementById("game-menu--title").innerHTML = 'Buy'
+  popup = document.getElementById("game-menu")
+  list = document.getElementById("game-menu--list")
+  list.innerHTML = ""
+
+  for(i in merchantInventory) {
+    player.identify('items', merchantInventory[i].itemType)
+  }
+
+  com = 65
+  comToItem = []
+  for(i=0; i<inventory.length; i++) {
+    if(typeof inventory[i].itemType=='undefined') continue
+    _itemType = inventory[i].itemType
+    if(typeof itemType[_itemType]=='undefined') continue
+    _price = getItemPrice(inventory[i])
+    if(_price==0) continue
+    _type = itemType[_itemType]
+    src = itemImg[_type.sprite[0]].src
+    sx = _type.sprite[1]*16+'px'
+    sy = _type.sprite[2]*16+'px'
+    comToItem[com] = i
+
+    if(typeof _type.hp!='undefined') {
+      hp=' '+inventory[i].hp+'/'+_type.hp
+    } else hp=''
+    _nx = ''
+    if(typeof inventory[i].stock!='undefined') {
+      if(inventory[i].stock>1) _nx = ' x'+inventory[i].stock
+      _price = _price*inventory[i].stock
+    }
+    if(_nx!='' && hp!='') console.error(getItemName(_itemType)+' uses hp and stock')
+
+    if(typeof _type.hp!='undefined') {
+      hp=' '+inventory[i].hp+'/'+_type.hp+''
+    } else hp=''
+    _enc = null
+    if(typeof inventory[i].enchantment!='undefined') _enc = inventory[i].enchantment
+    html  = '<div class="menu-item" onclick="keypressBuy('+(com)+')">&#'+(com+32)+'; '
+    html += '<div class="item-img" style="background: url(\''+src+'\') -'+sx+' -'+sy+';"></div> '
+    html += '<span class="item-name">'+getItemFullName(inventory[i], _enc)+hp+_nx
+    html += '</span> <span style="color:gold">$'+_price+'</span></div>'
+    list.innerHTML += html
+    com++
+  }
+
+  popup.style.visibility = "visible"
+  setGameStatus('buy-menu')
 }
 
 function mousemoveOnMap(e, canva) {
@@ -1589,20 +1708,20 @@ function startPlayerWalk() {
     if(Math.abs(dy)>Math.abs(dx)) {
         if(dy==0 || player.move(0,dy)==false) {
           if(gameStatus == 'wait') if(player.move(dx,0)==false) {
-            setGameStatus('play')
+            if(gameStatus!='game-menu') setGameStatus('play')
             clearInterval(playerWalk)
           }
         }
     } else {
         if(dx==0 || player.move(dx,0)==false) {
           if(gameStatus == 'wait') if(player.move(0,dy)==false) {
-            setGameStatus('play')
+            if(gameStatus!='game-menu') setGameStatus('play')
             clearInterval(playerWalk)
           }
         }
     }
     if(player.x==_x && player.y==_y) {
-      setGameStatus('play')
+      if(gameStatus!='game-menu') setGameStatus('play')
       clearInterval(playerWalk)
     }
     runTurn();
@@ -1729,14 +1848,31 @@ function getItemName(_itemType) {
 }
 
 function getItemFullName(_item, enchantment) {
-  _itemType = player.inventory[i].itemType
-  name = getItemName(_itemType)
+  name = getItemName(_item.itemType)
   if(typeof enchantment!='undefined') if(player.identified('enchantment',enchantment)) {
     return name+' '+itemEnchantment[enchantment][0];
   }
   if(typeof _item.attack!='undefined') name+=' +'+_item.attack
   if(typeof _item.armor!='undefined') name+=' ['+_item.armor
   return name
+}
+
+function getItemPrice(_item) {
+  __type = itemType[_item.itemType]
+  //alert(__type.type)
+  if(typeof __type.price!='undefined') return __type.price
+  if(__type.type=='potion') return 4
+  if(__type.type=='scroll') return 4
+  if(__type.type=='spellbook') return 3*_item.hp
+  if(__type.type=='weapon') return 2+_item.attack*2+_item.hp
+  return 1;
+}
+
+function getItemSellPrice(_item) {
+  _price = getItemPrice(_item)
+  if(_price<2) return 0
+  _price = Math.round(_price / 4)
+  return _price;
 }
 
 popValues = Array()
