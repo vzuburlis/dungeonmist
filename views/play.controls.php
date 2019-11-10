@@ -86,7 +86,7 @@
    onclick="toggleMinimap()"></div>
   </div>
   <br>
-  <div style="text-align: right; display: flex; flex-direction: column;">
+  <div style="text-align: right; display: inline-flex; flex-direction: column;">
     <img src="<?=$tile_folder?>key.png" id="pKey">
     <img src="<?=$tile_folder?>chest_key.png" id="pChestKey">
     <img src="<?=$tile_folder?>greenKey.png" id="pGreenKey">
@@ -232,7 +232,7 @@
   </div>
 </div>
 
-<div id="help-menu">
+<div id="help-menu" class="menu">
   <div id="help-menu--title" class="menu--title">Commands <span onclick="closeHelpMenu();" class="close">
     <img src="<?=$tile_folder?>../images/close.svg">
   </span></div>

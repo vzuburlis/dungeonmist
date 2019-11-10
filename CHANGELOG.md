@@ -1,4 +1,8 @@
 *1.0.14*
+Chests that include armor items
+Added new key (green) with chest
+
+*1.0.14*
 Destroy items with 'D' key
 Added merchant, appear from level 8
 
