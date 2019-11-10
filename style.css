@@ -87,7 +87,7 @@ body {
   image-rendering: crisp-edges;
   image-rendering: pixelated;
 }
-#pKey, #pChestKey{display:none}
+#pKey, #pChestKey, #greenKey {display:none}
 #pXP { display:none; }
 #skillPoint { display:none; }
 

@@ -26,7 +26,7 @@ var itemImgPath = [
   ['ground0','Objects/Ground0.png'],
   ['effect0','Objects/Effect0.png'],
   ['effect1','Objects/Effect1.png'],
-  ['key','Items/Key.png'],
+  ['key','Keys.png'],
   ['gauze','../tile/gauze.png'],
   ['light','Items/Light.png'],
   ['status','status.png'],
@@ -121,6 +121,7 @@ function updateStats() {
   if(player.arrows>0) btnArrows.style.display='inline-block'; else btnArrows.style.display='none';
   if(mapItems.includes('key')) document.getElementById("pKey").style.display = 'inline-block'
   if(mapItems.includes('chest_key')) document.getElementById("pChestKey").style.display = 'inline-block'
+  if(mapItems.includes('greenKey')) document.getElementById("pGreenKey").style.display = 'inline-block'
 }
 
 function updateIlluminateMap() {
@@ -285,6 +286,10 @@ function renderMap(view=true) {
           }
         } else {
           drawSprite(x,y, itemImg[_t[0]],  _t[1], _t[2]);
+        }
+        if(typeof objectType[objects[i].type].sprite2 != 'undefined') {
+          _t = objectType[objects[i].type].sprite2
+          drawSprite(x,y, itemImg[_t[0]], _t[1], _t[2]);
         }
     }
   }

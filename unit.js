@@ -242,7 +242,17 @@ function unitClass (options) {
             }
             if(typeof obj.item!='undefined') if(obj.item!==null) {
               logMsg('You find a '+getItemName(obj.item))
-              items.push([that.x, that.y, obj.item]);
+              _data = [that.x, that.y, obj.item]
+              if(itemType[obj.item].type=='weapon') {
+                _data.attack = 0
+                if(typeof itemType[obj.item].attack!='undefined') {
+                  _data.attack = itemType[obj.item].attack[0]
+                }
+              }
+              if(itemType[obj.item].type=='armor') {
+                _data.armor = itemType[obj.item].armor[0]
+              }
+              items.push(_data);
               that.pickItem(items.length-1)
               obj.item=null;
             }
@@ -252,12 +262,22 @@ function unitClass (options) {
             logMsg("You cannot open the gate. There must be a switch somewhere.");
           }
           if(typeof objType.unlock_to!='undefined') {
-            if(mapItems.includes('key')) {
+            if(typeof objType.unlock_with!='undefined') {
+              if(mapItems.includes(objType.unlock_with)) {
+                opendoorAudio.play()
+                obj.type = findObjectType(objType.unlock_to, obj.type);
+                logMsg("You unlock the "+objType.name);
+              } else {
+                logMsg("The "+objType.name+" is locked. You need a key");
+              }
+            } else {
+              if(mapItems.includes('key')) {
                 opendoorAudio.play()
                 obj.type = findObjectType(objType.unlock_to, obj.type);
                 logMsg("You unlock the door");
-            } else {
+              } else {
                 logMsg("The door is locked. You need a key");
+              }
             }
           }
           if(typeof objType.chest_unlock_to!='undefined') {

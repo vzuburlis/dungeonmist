@@ -86,9 +86,10 @@
    onclick="toggleMinimap()"></div>
   </div>
   <br>
-  <div style="text-align: right;">
+  <div style="text-align: right; display: flex; flex-direction: column;">
     <img src="<?=$tile_folder?>key.png" id="pKey">
-    <br><img src="<?=$tile_folder?>chest_key.png" id="pChestKey">
+    <img src="<?=$tile_folder?>chest_key.png" id="pChestKey">
+    <img src="<?=$tile_folder?>greenKey.png" id="pGreenKey">
   </div>
 </div>
 

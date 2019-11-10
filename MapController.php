@@ -41,9 +41,9 @@ class MapController extends controller
     function __construct ()
     {
       include_once __DIR__."/models/Game.php";
-      view::set('style_css_path', gila::base_url('src/'.GPACKAGE.'/style.css?v=1014'));
-      view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=1014');
-      view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=1014');
+      view::set('style_css_path', gila::base_url('src/'.GPACKAGE.'/style.css?v=1015'));
+      view::set('unit_js_path', gila::base_url().'src/'.GPACKAGE.'/unit.js?v=1015');
+      view::set('game_js_path', gila::base_url().'src/'.GPACKAGE.'/gameplay.js?v=1015');
 
       $this->gameId = $_COOKIE['gameId'] ?? null;
 
@@ -454,12 +454,16 @@ class MapController extends controller
         //}
         if(isset($step['room_object'])) {
           $pos = $this->randPosRoom($room);
-          $this->addObject($pos, $this->findObjectType($step['room_object']));
+          if($this->map[$pos[0]][$pos[1]]=='.') {
+            $this->addObject($pos, $this->findObjectType($step['room_object']));
+          }
         }
         if(isset($step['ground_objects'])) {
           foreach($step['ground_objects'] as $key=>$objName) {
             $pos = $this->randPosRoom($room);
-            $this->addGroundObject($pos, $objName);
+            if($this->map[$pos[0]][$pos[1]]=='.') {
+              $this->addGroundObject($pos, $objName);
+            }
           }
         }
         if(isset($step['block_object'])) {
@@ -562,7 +566,7 @@ class MapController extends controller
       if(is_array($list)) do{
         $rtype = $list[rand(0,count($list)-1)];
         $tries++;
-      } while($this->itemCanBeSpawned($rtype)==false && $tries<10);
+      } while($this->itemCanBeSpawned($rtype)==false && $tries<20);
       return $rtype;
     }
 

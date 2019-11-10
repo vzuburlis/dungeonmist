@@ -207,7 +207,7 @@
   "skill": "Staff"
 },
 {
-  "level":2,
+  "level":1,
   "sprite": ["armor", 0, 0],
   "name": "Armor",
   "type": "armor", "hp":24,
@@ -221,14 +221,14 @@
   "armor": [1, 3]
 },
 {
-  "level":4,
+  "level":6,
   "sprite": ["armor", 3, 0],
   "name": "Green Armor",
   "type": "armor", "hp":32,
   "armor": [1, 3]
 },
 {
-  "level":6,
+  "level":10,
   "sprite": ["armor", 0, 1],
   "name": "Scale Armor",
   "type": "armor", "hp":40,
@@ -245,6 +245,12 @@
   "name": "Chest Key",
   "autopick": true,
   "mapItem": "chest_key"
+},
+{
+  "sprite": ["key", 2, 0],
+  "name": "Green Key",
+  "autopick": true,
+  "mapItem": "greenKey"
 },
 {
   "sprite": ["items", 2, 6],

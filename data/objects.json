@@ -106,8 +106,12 @@
   "block": true, "unlock_to": "Opened Iron Bars"
 },
 {
-  "sprite": ["pit0", 0, 4], "name": "Locked Chest",
-  "block": true, "chest_unlock_to": "Opened Chest"
+  "sprite": ["basic", 1, 2], "sprite2": ["key", 0, 1], "name": "Locked Chest",
+  "block": true, "chest_unlock_to": "Chest"
+},
+{
+  "sprite": ["basic", 1, 2], "sprite2": ["key", 2, 1], "name": "Green Chest",
+  "block": true, "unlock_to": "Chest", "unlock_with": "greenKey"
 },
 {
   "sprite": ["basic", 1, 8], "name": "Spikes Trap (Armed)",

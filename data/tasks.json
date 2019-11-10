@@ -108,6 +108,26 @@
   ],
   [
     {
+      "name": "keyChest",
+      "item": "Green Key",
+      "level": 12
+    },
+    {
+      "block_object":"Green Chest",
+      "object_random_item": true
+    }
+  ],
+  [
+    {
+      "name": "armorChest",
+      "block_object": "Chest",
+      "object_item":["Armor", "Armor", "Armor","Green Armor", "Green Armor", "Bronze Armor","Scale Armor"],
+      "object_trap":["fire"],
+      "level":2
+    }
+  ],
+  [
+    {
       "name": "chest",
       "block_object":["Small Chest","Chest"],
       "object_item":["Scroll of Map", "5 Gold", "Scroll of Blink","Scroll of Sucrifice","Scroll of Curse"],
@@ -148,15 +168,8 @@
     {
       "name": "barrel",
       "block_object":["Barrel","Elf Barrel"],
-      "object_item":["Arrow", "Gold", null]
-    }
-  ],
-  [
-    {
-      "name": "barrel",
-      "block_object":["Barrel"],
       "hidden_monster":["rat", "skeleton", "small larva"],
-      "object_item":["Arrow", "Gold", null, null]
+      "object_item":["Arrow", "Gold", "Gold", null, null]
     }
   ],
   [
