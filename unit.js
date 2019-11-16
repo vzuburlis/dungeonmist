@@ -217,7 +217,6 @@ function unitClass (options) {
             logMsg("You open the "+objType.name.toLowerCase());
             obj.type = findObjectType(objType.open_to, obj.type);
             if(typeof obj.hiddenMonster!='undefined' && obj.hiddenMonster!==null) {
-              console.log(obj.hiddenMonster)
               _name = monsterType[obj.hiddenMonster].name
               logMsg("A "+_name+" jumps out from the "+objType.name.toLowerCase());
               monsters.push(unitClass({
@@ -1317,7 +1316,6 @@ function drawArrow(sx, sy, ex, ey, step) {
 function drawSpin(sx, sy, ex, ey, step, rot=0) {
   dx =ex-sx
   dy =ey-sy
-  //let d = Math.sqrt(dx*dx+dy*dy)
   drawSprite(sx+dx*step,sy+dy*step, itemImg['effect'+rot], 0, 25);
 }
 
@@ -1344,7 +1342,6 @@ function animateEffect(x, y, img, sx, sy, f, step=100) {
 function animateHit(x, y) {
   sx = 0; n = 3;
   if(Math.floor(Math.random()*2)==0) sx=5
-  //if(Math.floor(Math.random()*1)==0) {sx=3;n=2}
   animateEffect(x, y, itemImg['sparks'], sx, 0, n, 45);
 }
 
@@ -1363,4 +1360,3 @@ function isBlockedByTile(x, y) {
   if(map[x][y]=='#' || map[x][y]=='C') return true
   return false
 }
-

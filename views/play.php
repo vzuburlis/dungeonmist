@@ -26,7 +26,7 @@ $permadeath_url = GPACKAGE.'/permadeath';
     <link href="<?=$style_css_path?>" rel="stylesheet">
 </head>
 
-<body style="background:#000;overflow: hidden; padding:0;margin:4px">
+<body style="background:#000;overflow: hidden; padding:0;margin:4px;"  scroll="no">
   <canvas id="map" onmousemove="mousemoveOnMap(event,this)"
    ontouch="clickOnMap(event,this)"
    onclick="clickOnMap(event,this)"></canvas>

@@ -1778,6 +1778,9 @@ setInterval(function() {
   } else if(gameStatus=='game-over') {
     window.location.href = gameOverLocation;
   }
+  if(player.hp<1) {
+    permaDeath()
+  }
 }, 500);
 
 activeGame = true;
@@ -1866,7 +1869,6 @@ function getItemFullName(_item, enchantment) {
 
 function getItemPrice(_item) {
   __type = itemType[_item.itemType]
-  //alert(__type.type)
   if(typeof __type.price!='undefined') return __type.price
   if(__type.type=='potion') return 4
   if(__type.type=='scroll') return 4

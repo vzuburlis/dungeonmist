@@ -54,7 +54,6 @@ class MapController extends controller
                 $this->mapRev[$j][$i] = 0;
             }
         }
-//        $this->monsterType = json_decode(file_get_contents($this->gamePath().'monsters.json'),true);
         $this->itemType = json_decode(file_get_contents($this->gamePath().'items.json'),true);
         $this->itemTypeN = count($this->itemType);
         $this->monsterType = json_decode(file_get_contents('src/'.GPACKAGE.'/data/monsters.json'),true);
