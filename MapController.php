@@ -206,7 +206,7 @@ class MapController extends controller
     function playAction ($gameId=null)
     {
       //self::admin();
-      $this->gameId = $_COOKIE['gameId'];
+      $this->gameId = $_COOKIE['gameId'] ?? null;
       if($this->gameId === null) {
         view::renderFile('index.php',GPACKAGE);
         return;
@@ -316,6 +316,7 @@ class MapController extends controller
       $gameId = Game::create($_REQUEST['name'], $_REQUEST['classId']);
       setcookie('level', 1, time() + (86400 * 30), "/");
       setcookie('gameId', $gameId, time() + (86400 * 30), "/");
+      setcookie('finishedGame',null, time() -1000, "/");
     }
 
     function dungeon()
