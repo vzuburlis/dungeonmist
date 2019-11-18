@@ -1773,9 +1773,6 @@ setInterval(function() {
     updateIlluminateMap();
     if(timeBit == 0) timeBit = 1; else timeBit = 0;
     renderMap();
-    if(gameStatus=='play') if(player.hp<1) {
-      permaDeath()
-    }
   } else if(gameStatus=='game-over') {
     window.location.href = gameOverLocation;
   }
