@@ -253,13 +253,14 @@ class MapController extends controller
 
       $levelMap = [];
       $levelMap['mapSize'] = [$this->columns, $this->rows];
+      $mapString = '';
       for($i=0; $i<$levelMap['mapSize'][0]; $i++) {
         for($j=0; $j<$levelMap['mapSize'][1]; $j++) {
           $mapString .= $this->map[$i][$j];
         }
       }
 
-      $levelMap['mapString'] = $mapString;
+      //$levelMap['mapString'] = $mapString;
       $levelMap['mapRev'] = $this->mapRev;
       $levelMap['monsters'] = $this->monsters;
       $levelMap['items'] = $this->items;
@@ -287,7 +288,7 @@ class MapController extends controller
         for($i=0; $i<$levelMap['mapSize'][0]; $i++) {
           $this->map[$i] = [];
           for($j=0; $j<$levelMap['mapSize'][1]; $j++) {
-              $this->map[$i][$j] = $levelMap['mapString'][$i*$levelMap['mapSize'][0] + $j];
+              $this->map[$i][$j] = $this->mapString[$i*$levelMap['mapSize'][0] + $j];
           }
         }
       } else {
