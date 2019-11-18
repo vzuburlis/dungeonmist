@@ -156,7 +156,7 @@ class MapController extends controller
       if($_COOKIE['gameId']>0) {
         Game::endgame($_COOKIE['gameId']);
         //setcookie('finishedGame', $_COOKIE['gameId'], time() + (86400 * 30), "/");
-        setcookie('gameId',null, time() -1000, "/");
+        //setcookie('gameId',null, time() -1000, "/");
       }
       setcookie('player',null, time() -1000, "/");
     }
@@ -317,7 +317,7 @@ class MapController extends controller
       include_once __DIR__."/models/Game.php";
       $gameId = Game::create($_REQUEST['name'], $_REQUEST['classId']);
       setcookie('level', 1, time() + (86400 * 30), "/");
-      setcookie('gameId', $gameId, time() + (86400 * 7), "/");
+      setcookie('gameId', $gameId, time() + (86400 * 30), "/");
       //setcookie('finishedGame',null, time() -1000, "/");
     }
 

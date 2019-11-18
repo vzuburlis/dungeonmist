@@ -69,6 +69,7 @@ function moveLevel(direction=null) {
 
 function autoSave() {
   fm = dataToUpdate()
+  return
 
   g.ajax({
       url: '<?=gila::base_url()?><?=$update_url?>',
