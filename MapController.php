@@ -66,9 +66,9 @@ class MapController extends controller
         if(isset($_GET['ref'])) {
           setcookie('ref', htmlentities($_GET['ref']), time() + (86400 * 30), "/");
         }
-        if(isset($_GET['applixir'])) {
-          setcookie('applixir', 'true', time() + (86400 * 30), "/");
-        }
+        //if(isset($_GET['applixir'])) {
+        //  setcookie('applixir', 'true', time() + (86400 * 30), "/");
+        //}
         if(isset($_GET['amads'])) {
           setcookie('amads', 'true', time() + (86400 * 30), "/");
         }
@@ -319,7 +319,6 @@ class MapController extends controller
       setcookie('level', 1, time() + (86400 * 30), "/");
       setcookie('gameId', $gameId, time() + (86400 * 30), "/");
       setcookie('finishedGame',null, time() -1000, "/");
-      sleep(2);
     }
 
     function dungeon()

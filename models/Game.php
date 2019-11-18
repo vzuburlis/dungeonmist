@@ -9,9 +9,9 @@ class Game {
 
   static function create($name, $class) {
     global $db;
-    $db->query('INSERT INTO rlgame(`user_id`, `name`, `class_id`, `level`, `start_time`)
-      VALUES(?,?,?,1,?);', [
-      session::user_id(), $name, $class, time()//, $_COOKIE['ref']??''
+    $db->query('INSERT INTO rlgame(`user_id`, `name`, `class_id`, `level`, `start_time`,`feedback`)
+      VALUES(?,?,?,1,?,?);', [
+      session::user_id(), $name, $class, time(), $_COOKIE['ref']??''
     ]);
     $gameId = $db->insert_id;
     //$monsterType = json_decode(file_get_contents('src/'.GPACKAGE.'/data/monsters.json'),true);
@@ -22,7 +22,6 @@ class Game {
     $path = gila::dir(LOG_PATH.'/games/'.$gameId.'/');
     //file_put_contents($path.'monsters.json', json_encode($monsterType));
     file_put_contents($path.'items.json', json_encode($itemType));
-
     return $gameId;
   }
 
