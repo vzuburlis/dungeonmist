@@ -122,7 +122,7 @@ class MapController extends controller
           $entryType = $_REQUEST['entryType'] ?? $entryType ?? 'upstairs';
           setcookie('entryType', $entryType, time() + (86400 * 30), "/");
         } else {
-          setcookie('entryType', '0', time() -1000, "/");
+          setcookie('entryType', '0', time()-10, "/");
         }
         setcookie('level', $newLevel, time() + (86400 * 30), "/");
         Game::moveLevel($this->gameId, $newLevel, $playerData['gameTurn']);
@@ -224,7 +224,7 @@ class MapController extends controller
       $this->player["sprite"] = ['player', (int)$class['spriteX'], (int)$class['spriteY']];
       $this->player["gameTurn"] = $game['game_turns'];
 
-      if(!$this->loadLevel()) {
+      if(!$this->loadLevel($this->gameId, $this->level)) {
         $this->dungeon();
         $this->player['x'] = $this->startPos[0];
         $this->player['y'] = $this->startPos[1];
@@ -275,7 +275,7 @@ class MapController extends controller
     }
 
     function loadLevel($gameId = null, $level=null) {
-      if($gameId==null) $gameId = $this->gameId;
+      if($gameId==null) $gameId = $_COOKIE['gameId'];
       if($level==null) $level = $this->level;
       $file = LOG_PATH.'/games/'.$gameId.'/level'.$level.'.json';
       $file2 = LOG_PATH.'/games/'.$gameId.'/level'.$level.'.str';
@@ -283,11 +283,11 @@ class MapController extends controller
       if(!file_exists($file)) return false;
       $levelMap = json_decode(file_get_contents($file), true);
       $this->map = [];
-      $this->mapString = @file_get_contents($file2) ?? null;
+      $mapString = @file_get_contents($file2) ?? null;
       for($i=0; $i<$levelMap['mapSize'][0]; $i++) {
         $this->map[$i] = [];
         for($j=0; $j<$levelMap['mapSize'][1]; $j++) {
-            $this->map[$i][$j] = $this->mapString[$i*$levelMap['mapSize'][0] + $j];
+            $this->map[$i][$j] = $mapString[$i*$levelMap['mapSize'][0] + $j];
         }
       }
 
@@ -299,7 +299,7 @@ class MapController extends controller
       $this->levelTurns = $levelMap['turns'];
       $this->groundObjects = $levelMap['groundObjects'];
       $this->mapItems = $levelMap['mapItems'] ?? [];
-      if($_COOKIE['entryType']) {
+      if($_COOKIE['entryType'] && $_COOKIE['entryType']!='0') {
         $this->startPos = $this->entryPos($_COOKIE['entryType']);
         $this->player['x'] = $this->startPos[0];
         $this->player['y'] = $this->startPos[1];
