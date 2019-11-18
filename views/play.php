@@ -87,11 +87,11 @@ function dataToUpdate() {
   fm.append('player', JSON.stringify(player));
   fm.append('level', <?=$c->level?>);
   mapSize = [mapWidth, mapHeight]
-  mapString = ''
-  for(i=0;i<mapWidth;i++) for(j=0;j<mapHeight;j++) mapString += map[i][j]
+  //mapString = ''
+  //for(i=0;i<mapWidth;i++) for(j=0;j<mapHeight;j++) mapString += map[i][j]
 
   fm.append('levelMap', JSON.stringify({
-    mapString: mapString,
+    //mapString: mapString,
     mapSize: mapSize,
     mapRev: mapRev,
     mapItems: mapItems,

@@ -249,6 +249,7 @@ class MapController extends controller
       if($gameId==null) $gameId = $this->gameId;
       if($level==null) $level = $this->level;
       $file = LOG_PATH.'/games/'.$gameId.'/level'.$level.'.json';
+      $file2 = LOG_PATH.'/games/'.$gameId.'/level'.$level.'.str';
 
       $levelMap = [];
       $levelMap['mapSize'] = [$this->columns, $this->rows];
@@ -269,17 +270,19 @@ class MapController extends controller
       $levelMap['mapItems'] = $this->mapItems ?? [];
 
       file_put_contents($file, json_encode($levelMap));
+      file_put_contents($file2, $mapString);
     }
 
     function loadLevel($gameId = null, $level=null) {
       if($gameId==null) $gameId = $this->gameId;
       if($level==null) $level = $this->level;
       $file = LOG_PATH.'/games/'.$gameId.'/level'.$level.'.json';
+      $file2 = LOG_PATH.'/games/'.$gameId.'/level'.$level.'.str';
 
       if(!file_exists($file)) return false;
       $levelMap = json_decode(file_get_contents($file), true);
       $this->map = [];
-      $this->mapString = $levelMap['mapString'] ?? null;
+      $this->mapString = @file_get_contents($file2) ?? null;
       if($this->mapString) {
         for($i=0; $i<$levelMap['mapSize'][0]; $i++) {
           $this->map[$i] = [];
