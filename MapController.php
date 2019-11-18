@@ -122,7 +122,7 @@ class MapController extends controller
           $entryType = $_REQUEST['entryType'] ?? $entryType ?? 'upstairs';
           setcookie('entryType', $entryType, time() + (86400 * 30), "/");
         } else {
-          setcookie('entryType', null, time() -1000, "/");
+          setcookie('entryType', '0', time() -1000, "/");
         }
         setcookie('level', $newLevel, time() + (86400 * 30), "/");
         Game::moveLevel($this->gameId, $newLevel, $playerData['gameTurn']);
