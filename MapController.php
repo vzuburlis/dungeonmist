@@ -127,11 +127,6 @@ class MapController extends controller
         setcookie('level', $newLevel, time() + (86400 * 30), "/");
         Game::moveLevel($this->gameId, $newLevel, $playerData['gameTurn']);
         $file = $this->gamePath().'level'.$this->level.'.json';
-
-        //$levelMap = json_decode($_REQUEST['levelMap'],true);
-        //$contents = file_get_contents($file);
-        //$levelMap['mapString'] = json_decode($contents, true)['mapString'];
-        //file_put_contents($file, json_encode($levelMap));
         file_put_contents($file, $_REQUEST['levelMap']);
         file_put_contents($this->gamePath().'@.json', json_encode($playerData));
         echo '{"msg":"ok","level":"'.$newLevel.'"}'; 
@@ -224,7 +219,7 @@ class MapController extends controller
       $this->player["sprite"] = ['player', (int)$class['spriteX'], (int)$class['spriteY']];
       $this->player["gameTurn"] = $game['game_turns'];
 
-      if(!$this->loadLevel($this->gameId, $this->level)) {
+      if($this->loadLevel($this->gameId, $this->level)===false) {
         $this->dungeon();
         $this->player['x'] = $this->startPos[0];
         $this->player['y'] = $this->startPos[1];
@@ -254,13 +249,12 @@ class MapController extends controller
       $levelMap = [];
       $levelMap['mapSize'] = [$this->columns, $this->rows];
       $mapString = '';
-      for($i=0; $i<$levelMap['mapSize'][0]; $i++) {
-        for($j=0; $j<$levelMap['mapSize'][1]; $j++) {
+      for($i=0; $i<$this->columns; $i++) {
+        for($j=0; $j<$this->rows; $j++) {
           $mapString .= $this->map[$i][$j];
         }
       }
 
-      //$levelMap['mapString'] = $mapString;
       $levelMap['mapRev'] = $this->mapRev;
       $levelMap['monsters'] = $this->monsters;
       $levelMap['items'] = $this->items;
@@ -275,19 +269,20 @@ class MapController extends controller
     }
 
     function loadLevel($gameId = null, $level=null) {
-      if($gameId==null) $gameId = $_COOKIE['gameId'];
-      if($level==null) $level = $this->level;
+      if($gameId===null) $gameId = $_COOKIE['gameId'];
+      if($level===null) $level = $this->level;
       $file = LOG_PATH.'/games/'.$gameId.'/level'.$level.'.json';
       $file2 = LOG_PATH.'/games/'.$gameId.'/level'.$level.'.str';
 
       if(!file_exists($file)) return false;
       $levelMap = json_decode(file_get_contents($file), true);
       $this->map = [];
-      $mapString = @file_get_contents($file2) ?? null;
-      for($i=0; $i<$levelMap['mapSize'][0]; $i++) {
+      $mapString = file_get_contents($file2);
+      $columns = (int)$levelMap['mapSize'][0];
+      for($i=0; $i<$columns; $i++) {
         $this->map[$i] = [];
         for($j=0; $j<$levelMap['mapSize'][1]; $j++) {
-            $this->map[$i][$j] = $mapString[$i*$levelMap['mapSize'][0] + $j];
+            $this->map[$i][$j] = $mapString[$i*$columns + $j];
         }
       }
 
