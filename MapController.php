@@ -128,10 +128,11 @@ class MapController extends controller
         Game::moveLevel($this->gameId, $newLevel, $playerData['gameTurn']);
         $file = $this->gamePath().'level'.$this->level.'.json';
 
-        $levelMap = json_decode($_REQUEST['levelMap'],true);
-        $contents = file_get_contents($file);
-        $levelMap['mapString'] = json_decode($contents, true)['mapString'];
-        file_put_contents($file, json_encode($levelMap));
+        //$levelMap = json_decode($_REQUEST['levelMap'],true);
+        //$contents = file_get_contents($file);
+        //$levelMap['mapString'] = json_decode($contents, true)['mapString'];
+        //file_put_contents($file, json_encode($levelMap));
+        file_put_contents($file, $levelMap);
         file_put_contents($this->gamePath().'@.json', json_encode($playerData));
         echo '{"msg":"ok","level":"'.$newLevel.'"}'; 
       }
