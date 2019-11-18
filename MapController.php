@@ -132,7 +132,7 @@ class MapController extends controller
         //$contents = file_get_contents($file);
         //$levelMap['mapString'] = json_decode($contents, true)['mapString'];
         //file_put_contents($file, json_encode($levelMap));
-        file_put_contents($file, $levelMap);
+        file_put_contents($file, $_REQUEST['levelMap']);
         file_put_contents($this->gamePath().'@.json', json_encode($playerData));
         echo '{"msg":"ok","level":"'.$newLevel.'"}'; 
       }
