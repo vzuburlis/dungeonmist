@@ -317,8 +317,8 @@ class MapController extends controller
       include_once __DIR__."/models/Game.php";
       $gameId = Game::create($_REQUEST['name'], $_REQUEST['classId']);
       setcookie('level', 1, time() + (86400 * 30), "/");
-      setcookie('gameId', $gameId, time() + (86400 * 30), "/");
-      setcookie('finishedGame',null, time() -1000, "/");
+      setcookie('gameId', $gameId, time() + (86400 * 7), "/");
+      //setcookie('finishedGame',null, time() -1000, "/");
     }
 
     function dungeon()
