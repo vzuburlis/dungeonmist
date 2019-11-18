@@ -1775,11 +1775,12 @@ setInterval(function() {
     updateIlluminateMap();
     if(timeBit == 0) timeBit = 1; else timeBit = 0;
     renderMap();
+    //if(player.hp<1) {
+    //  gameStatus='wait'
+    //  permaDeath()
+    //}
   } else if(gameStatus=='game-over') {
     window.location.href = gameOverLocation;
-  }
-  if(player.hp<1) {
-    permaDeath()
   }
 }, 500);
 

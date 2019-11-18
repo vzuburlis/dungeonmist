@@ -155,8 +155,8 @@ class MapController extends controller
       $this->updateAction();
       Game::endgame($_COOKIE['gameId']);
       setcookie('finishedGame', $_COOKIE['gameId'], time() + (86400 * 30), "/");
-      //setcookie('gameId',null, time() -1000, "/");
-      //setcookie('player',null, time() -1000, "/");
+      setcookie('gameId',null, time() -1000, "/");
+      setcookie('player',null, time() -1000, "/");
     }
 
     function gameAction($gameId = null)
@@ -317,6 +317,7 @@ class MapController extends controller
       setcookie('level', 1, time() + (86400 * 30), "/");
       setcookie('gameId', $gameId, time() + (86400 * 30), "/");
       setcookie('finishedGame',null, time() -1000, "/");
+      sleep(2);
     }
 
     function dungeon()
