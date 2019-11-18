@@ -9,7 +9,7 @@ class Game {
 
   static function create($name, $class) {
     global $db;
-    $db->query('INSERT INTO rlgame(`user_id`, `name`, `class_id`, `level`, `start_time`,`feedback`)
+    $db->query('INSERT INTO rlgame(`user_id`, `name`, `class_id`, `level`, `start_time`)
       VALUES(?,?,?,1,?);', [
       session::user_id(), $name, $class, time()//, $_COOKIE['ref']??''
     ]);
