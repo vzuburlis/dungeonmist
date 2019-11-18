@@ -108,15 +108,15 @@ button{
     <br><br><br>
 
     <?php
-    if(session::key('finishedGame')==$game['id']) {
-      echo '<br><br><div style="max-width:800px;padding:5px;border:1px solid #444;text-align:left;margin:auto">';
-      echo "<p>Comments (What did you enjoy most in the game, what could be approved or what more you love to see)";
-      echo '<textarea class="g-input fullwidth"></textarea>';
-      echo '<button class="g-btn" onclick="sendFeedback(this.value,\'';
-      echo gForm::getToken('feedback');
-      echo '\')">Send Feedback</button>';
-      echo '</div>';
-    }
+    //if(session::key('finishedGame')==$game['id']) {
+    //  echo '<br><br><div style="max-width:800px;padding:5px;border:1px solid #444;text-align:left;margin:auto">';
+    //  echo "<p>Comments (What did you enjoy most in the game, what could be approved or what more you love to see)";
+    //  echo '<textarea class="g-input fullwidth"></textarea>';
+    //  echo '<button class="g-btn" onclick="sendFeedback(this.value,\'';
+    //  echo gForm::getToken('feedback');
+    //  echo '\')">Send Feedback</button>';
+    //  echo '</div>';
+    //}
     ?>
 </body>
 

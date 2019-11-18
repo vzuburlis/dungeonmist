@@ -25,4 +25,15 @@ if($c->level==1 && $c->player['level']==1) { ?>
     <span onclick="admenu.style.display='none';setGameStatus('play')" class="play-btn">Continue</span>
   </div>
 </div>
-<?php } ?>
+<?php }
+
+/*
+    <div id="applixir_vanishing_div" hidden><iframe id="applixir_parent allow=autoplay"></iframe>
+    </div>
+    <!-- The applixir SDK file has all required CSS and JavaScript resources (use current version)-->
+    <script type='text/javascript' src="https://cdn.applixir.com/applixir.sdk3.0m.js"></script>
+    <script type="application/javascript">
+    invokeApplixirVideoUnit({zoneId: 2679});
+    </script>
+ */
+?>
