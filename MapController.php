@@ -153,9 +153,11 @@ class MapController extends controller
     function permadeathAction()
     {
       $this->updateAction();
-      Game::endgame($_COOKIE['gameId']);
-      setcookie('finishedGame', $_COOKIE['gameId'], time() + (86400 * 30), "/");
-      //setcookie('gameId',null, time() -1000, "/");
+      if($_COOKIE['gameId']>0) {
+        Game::endgame($_COOKIE['gameId']);
+        setcookie('finishedGame', $_COOKIE['gameId'], time() + (86400 * 30), "/");
+        setcookie('gameId',null, time() -1000, "/");
+      }
       setcookie('player',null, time() -1000, "/");
     }
 
