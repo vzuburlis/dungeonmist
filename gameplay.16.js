@@ -380,11 +380,9 @@ function renderMap(view=true) {
 }
 
 function renderGroundObjects() {
-    return
-
-  for (i=0; i<objects.length; i++) if(objectType[objects[i].type].ground==true) {
-      renderObject(i)
-  }
+  //for (i=0; i<objects.length; i++) if(objectType[objects[i].type].ground==true) {
+  //    renderObject(i)
+  //}
 }
 
 function renderObject(i) {
@@ -1887,30 +1885,29 @@ function getItemSellPrice(_item) {
 popValues = Array()
 
 function animatePop(x,y,value,color="yellow") {
-  return;
-  setGameStatus('animatePop')
-  x = (x-player.x+renderWidth)*32+16
-  y = (y-player.y+renderHeight)*32
-  ctx = context
-  ctx.font = "bold 11pt Monospace";
-  ctx.textAlign = "center";
-  ctx.fillStyle = '#440000';
-  ctx.fillText(value, x+1, y+1);
-  ctx.fillStyle = color;
-  ctx.fillText(value, x, y);
-  for(let i=1;i<3;i++) {
-    setTimeout(function(){
-      ctx.font = "bold 11pt Monospace";
-      ctx.fillStyle = '#440000';
-      ctx.fillText(value, x+1, y+1);
-      ctx.fillStyle = color;
-      ctx.fillText(value, x, y);
-    }, i*90);
-    setTimeout(function(){
-      renderMap()
-      if(gameStatus=='animatePop') setGameStatus('play')
-    }, 270);
-  }
+  //setGameStatus('animatePop')
+  //x = (x-player.x+renderWidth)*32+16
+  //y = (y-player.y+renderHeight)*32
+  //ctx = context
+  //ctx.font = "bold 11pt Monospace";
+  //ctx.textAlign = "center";
+  //ctx.fillStyle = '#440000';
+  //ctx.fillText(value, x+1, y+1);
+  //ctx.fillStyle = color;
+  //ctx.fillText(value, x, y);
+  //for(let i=1;i<3;i++) {
+  //  setTimeout(function(){
+  //    ctx.font = "bold 11pt Monospace";
+  //    ctx.fillStyle = '#440000';
+  //    ctx.fillText(value, x+1, y+1);
+  //    ctx.fillStyle = color;
+  //    ctx.fillText(value, x, y);
+  //  }, i*90);
+  //  setTimeout(function(){
+  //    renderMap()
+  //    if(gameStatus=='animatePop') setGameStatus('play')
+  //  }, 270);
+  //}
 }
 
 

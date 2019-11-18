@@ -284,15 +284,11 @@ class MapController extends controller
       $levelMap = json_decode(file_get_contents($file), true);
       $this->map = [];
       $this->mapString = @file_get_contents($file2) ?? null;
-      if($this->mapString) {
-        for($i=0; $i<$levelMap['mapSize'][0]; $i++) {
-          $this->map[$i] = [];
-          for($j=0; $j<$levelMap['mapSize'][1]; $j++) {
-              $this->map[$i][$j] = $this->mapString[$i*$levelMap['mapSize'][0] + $j];
-          }
+      for($i=0; $i<$levelMap['mapSize'][0]; $i++) {
+        $this->map[$i] = [];
+        for($j=0; $j<$levelMap['mapSize'][1]; $j++) {
+            $this->map[$i][$j] = $this->mapString[$i*$levelMap['mapSize'][0] + $j];
         }
-      } else {
-        $this->map = $levelMap['map'];
       }
 
       $this->mapRev = $levelMap['mapRev'];
