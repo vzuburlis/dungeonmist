@@ -37,6 +37,12 @@ class MapController extends controller
     public $door = [];
     public $playerItem = null;
     private $gamePath;
+    public $taskLevel = [
+      4=> ['merchant'],
+      9=> ['merchant'],
+      16=> ['merchant'],
+      23=> ['merchant']
+    ];
 
     function __construct ()
     {
@@ -92,7 +98,9 @@ class MapController extends controller
       if($this->player == null && $this->gameId!==null) {
         $this->player = $this->newPlayer($this->gameId);
       }
-      if($this->player['hp']>$this->player['maxhp']) $this->player['hp']=$this->player['maxhp'];
+      if(@$this->player['hp'] > @$this->player['maxhp']) {
+        $this->player['hp'] = $this->player['maxhp'];
+      }
     }
 
     function share()
@@ -371,8 +379,18 @@ class MapController extends controller
       }
 
       $this->levelTask['room'] = [];
+      foreach($this->taskLevel[$this->level] as $taskName) {
+        $taskIndex = $this->findTaskIndex($taskName);
+        if($taskIndex === null) continue;
+        do {
+          $roomIndex = rand(0, $roomN-1);
+          $steps = $this->canAddTaskAtRoom($taskIndex, $roomIndex, $roomN, false);
+        } while($steps===false);
+        $this->addTask($taskIndex, $steps);
+      }
+
       for($i=0; $i<$roomN; $i++) if(!isset($this->levelTask['room'][$i])) {
-        do{
+        do {
           $taskIndex = rand(0, $this->taskTypeN-1);
           $steps = $this->canAddTaskAtRoom($taskIndex, $i, $roomN);
         } while($steps===false);
@@ -392,11 +410,6 @@ class MapController extends controller
         $this->addRandomItem();
         $this->spawnMonster($this->randPos());
       }
-
-      //foreach($this->taskType as $k=>$task) if($k<1) if(rand(0,1)<2) {
-      //foreach($this->roomask[taskType as $k=>$task) if($k<1) if(rand(0,1)<2) {
-      //    $stepRoomX=0;
-      //}
 
     }
 
@@ -519,10 +532,11 @@ class MapController extends controller
       return false;
     }
 
-    function canAddTaskAtRoom($taskIndex, $roomIndex, $roomN) {
+    function canAddTaskAtRoom($taskIndex, $roomIndex, $roomN, $levelCheck=true) {
       $stepRoomX = [];
       if(isset($this->taskType[$taskIndex][0]['level'])) {
-        if($this->taskType[$taskIndex][0]['level']>$this->level) return false;
+        $taskLevel = $this->taskType[$taskIndex][0]['level'];
+        if($levelCheck) if($taskLevel > $this->level) return false;
       }
       $_tasks = count($this->taskType[$taskIndex]);
 
@@ -875,6 +889,16 @@ class MapController extends controller
       }
       return null;
     }
+    function findTaskIndex($name) {
+      if(is_numeric($name)) return $name;
+      foreach($this->taskType as $i=>$im) {
+          if($im[0]['name'] == $name) {
+            return $i;
+          }
+      }
+      return null;
+    }
+
     function addItem($pos, $type) {
       $data = array_merge([$pos[0], $pos[1], $type], $this->createItem($type));
       $this->items[] = $data;

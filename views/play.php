@@ -34,7 +34,7 @@ $permadeath_url = GPACKAGE.'/permadeath';
   <?php include_once(__DIR__.'/play.controls.php')?>
 </body>
 
-<?php include_once(__DIR__.'/adpopup.php') ?>
+<?php //include_once(__DIR__.'/adpopup.php') ?>
 
 <?php include __DIR__.'/loadData.php'?>
 <script>

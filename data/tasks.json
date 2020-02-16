@@ -1,9 +1,14 @@
 [
   [
     {
+      "name": "none"
+    }
+  ],
+  [
+    {
       "name": "merchant",
       "block_object":"merchant",
-      "level": 8
+      "level": 100
     }
   ],
   [
