@@ -2,7 +2,7 @@
 $ppath = gila::base_url().'src/'.GPACKAGE.'/';
 $play_url = GPACKAGE.'/play';
 $pnk = new gTable('playerclass');
-$classes = $pnk->getRows();
+$classes = $pnk->getRows(null);
 ?>
 <link href="<?=$style_css_path?>" rel="stylesheet">
 <style>
