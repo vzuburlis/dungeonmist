@@ -212,7 +212,7 @@ class MapController extends controller
     function playAction ($gameId=null)
     {
       //self::admin();
-      $this->gameId = $_COOKIE['gameId'] ?? ($gameId??null);
+      $this->gameId = $_COOKIE['gameId'] ?? null;
       if($this->gameId === null) {
         view::renderFile('index.php',GPACKAGE);
         return;
@@ -222,7 +222,7 @@ class MapController extends controller
       do{
         sleep(0.1);
         $game = $pnk->getRow(['id'=>$this->gameId]);
-      }while($game==null);
+      }while($game===null);
       $pnk = new gTable('playerclass');
       $class = $pnk->getRow(['id'=>$game['class_id']]);
       view::set('playerclass', $class);
