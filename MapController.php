@@ -219,10 +219,7 @@ class MapController extends controller
       }
 
       $pnk = new gTable('game');
-      do{
-        sleep(0.1);
-        $game = $pnk->getRow(['id'=>$this->gameId]);
-      }while($game===null);
+      $game = $pnk->getRow(['id'=>$this->gameId]);
       $pnk = new gTable('playerclass');
       $class = $pnk->getRow(['id'=>$game['class_id']]);
       view::set('playerclass', $class);
