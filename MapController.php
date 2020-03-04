@@ -316,6 +316,9 @@ class MapController extends controller
     function newAction ()
     {
       //self::admin();
+      $pnk = new gTable('playerclass');
+      $classes = $pnk->getAllRows();
+      view::set('classes',$classes);
       view::renderFile('new.php',GPACKAGE);
     }
 

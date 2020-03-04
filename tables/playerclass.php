@@ -7,6 +7,7 @@ return [
   'tools'=>['add','csv'],
   'commands'=> ['edit','delete'],
   'permissions'=>[
+    'read'=>true,
     'create'=>['admin'],
     'update'=>['admin'],
     'delete'=>['admin']
