@@ -322,6 +322,7 @@ class MapController extends controller
       $gameId = Game::create($_REQUEST['name'], $_REQUEST['classId']);
       setcookie('level', 1, time() + (86400 * 30), "/");
       setcookie('gameId', $gameId, time() + (86400 * 30), "/");
+      sleep(0.5); // wait for the write to sql
       //setcookie('finishedGame',null, time() -1000, "/");
     }
 

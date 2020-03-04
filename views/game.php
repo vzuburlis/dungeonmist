@@ -16,7 +16,7 @@ if(file_exists(SITE_PATH.'assets/endshot/'.$game['id'].'.png')) {
 
 $description = $game['name']." reached level ".$game['level']." in the dungeons.";
 if($deathCause) {
-  $description = $game['name']." died from ".$deathCause." at level ".$game['level'].".";
+  $description = $game['name']." died from ".$deathCause." at level ".$game['level']." #dungeonmist #roguelike";
 }
 ?>
 
