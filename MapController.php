@@ -224,7 +224,9 @@ class MapController extends controller
       $class = $pnk->getRow(['id'=>$game['class_id']]);
       view::set('playerclass', $class);
       $this->playerItem = $class['item'] ? explode(',',$class['item']) : null;
-      $this->player["sprite"] = ['player', (int)$class['spriteX'], (int)$class['spriteY']];
+      if(!isset($this->player["sprite"])) {
+        $this->player["sprite"] = ['player', (int)$class['spriteX'], (int)$class['spriteY']];
+      }
       $this->player["gameTurn"] = $game['game_turns'];
 
       if($this->loadLevel($this->gameId, $this->level)===false) {
@@ -1060,7 +1062,8 @@ class MapController extends controller
           "level"=>1,
           "lore" => ['items'=>[]],
           "uniqueMonsters"=>[],
-          "gameTurn" => 0
+          "gameTurn" => 0,
+          "sprite" => ['player', (int)$playerclass['spriteX'], (int)$playerclass['spriteY']]
       ];
 
       $playerItems = $playerclass['item'] ? explode(',',$playerclass['item']) : [];
