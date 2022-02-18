@@ -45,7 +45,7 @@ function unitClass (options) {
     for(i in options) {
       that[i] = options[i]
     }
-    
+
     that.turn = function () {
       if(that.hasStatus('bleeding')) {
         if(Math.floor(Math.random() * 80) == 0) {
@@ -94,11 +94,11 @@ function unitClass (options) {
         if(that.hasStatus('confuze')) if(Math.floor(Math.random() * 4)==0) {
             if(dx==0) {
                 dy=0;
-                if(Math.floor(Math.random() * 2)==0) dx=-1; else dx=1; 
+                if(Math.floor(Math.random() * 2)==0) dx=-1; else dx=1;
             }
             if(dy==0) {
                 dx=0;
-                if(Math.floor(Math.random() * 2)==0) dx=-1; else dx=1; 
+                if(Math.floor(Math.random() * 2)==0) dx=-1; else dx=1;
             }
         }
 
