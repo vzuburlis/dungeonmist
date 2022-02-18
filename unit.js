@@ -4,20 +4,8 @@ var opendoorAudio = new Audio('src/dungeonrl/sfx/open_door.mp3');
 var arrowAudio = new Audio('src/dungeonrl/sfx/arrow.mp3');
 var fireballAudio = new Audio('src/dungeonrl/sfx/fireball.mp3');
 
-//var bgAudio = new Audio('src/dungeonrl/loop.mp3');
-//bgAudio.loop=true
-//bgAudio.volume=0.1
-//bgAudio.play()
 focused = true
 document.addEventListener("visibilitychange", onchange);
-//function onchange (evt) {
-//  focused = !focused;
-//   if (!focused) {
-//    bgAudio.pause()
-//   } else {
-//    bgAudio.play()
-//  }
-//}
 
 var effectUserStats = {
   "speed": {"speed":5},
